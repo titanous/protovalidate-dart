@@ -108,22 +108,12 @@ class EvaluatorBuilder {
         
       case PbFieldType.O3:
       case PbFieldType.P3:
-      case PbFieldType.OS3:
-      case PbFieldType.PS3:
-      case PbFieldType.OSF3:
-      case PbFieldType.PSF3:
         return Int32Evaluator();
         
       case PbFieldType.O6:
       case PbFieldType.P6:
-      case PbFieldType.OS6:
-      case PbFieldType.PS6:
-      case PbFieldType.OSF6:
-      case PbFieldType.PSF6:
         return Int64Evaluator();
         
-      case PbFieldType.OU3:
-      case PbFieldType.PU3:
       case PbFieldType.OU3:
       case PbFieldType.PU3:
         return UInt32Evaluator();
@@ -132,6 +122,30 @@ class EvaluatorBuilder {
       case PbFieldType.PU6:
         return UInt64Evaluator();
         
+      case PbFieldType.OS3:
+      case PbFieldType.PS3:
+        return SInt32Evaluator();
+        
+      case PbFieldType.OS6:
+      case PbFieldType.PS6:
+        return SInt64Evaluator();
+        
+      case PbFieldType.OSF3:
+      case PbFieldType.PSF3:
+        return SFixed32Evaluator();
+        
+      case PbFieldType.OSF6:
+      case PbFieldType.PSF6:
+        return SFixed64Evaluator();
+        
+      case PbFieldType.OF3:
+      case PbFieldType.PF3:
+        return Fixed32Evaluator();
+        
+      case PbFieldType.OF6:
+      case PbFieldType.PF6:
+        return Fixed64Evaluator();
+        
       case PbFieldType.OF:
       case PbFieldType.PF:
         return FloatEvaluator();
@@ -139,6 +153,14 @@ class EvaluatorBuilder {
       case PbFieldType.OD:
       case PbFieldType.PD:
         return DoubleEvaluator();
+        
+      case PbFieldType.OS:
+      case PbFieldType.PS:
+        return StringRulesEvaluator();
+        
+      case PbFieldType.OY:
+      case PbFieldType.PY:
+        return BytesEvaluator();
         
       default:
         return null;
@@ -163,11 +185,35 @@ class EvaluatorBuilder {
     if (rules.hasUint64()) {
       return _buildUInt64Evaluator(rules.uint64);
     }
+    if (rules.hasSint32()) {
+      return _buildSInt32Evaluator(rules.sint32);
+    }
+    if (rules.hasSint64()) {
+      return _buildSInt64Evaluator(rules.sint64);
+    }
+    if (rules.hasFixed32()) {
+      return _buildFixed32Evaluator(rules.fixed32);
+    }
+    if (rules.hasFixed64()) {
+      return _buildFixed64Evaluator(rules.fixed64);
+    }
+    if (rules.hasSfixed32()) {
+      return _buildSFixed32Evaluator(rules.sfixed32);
+    }
+    if (rules.hasSfixed64()) {
+      return _buildSFixed64Evaluator(rules.sfixed64);
+    }
     if (rules.hasFloat()) {
       return _buildFloatEvaluator(rules.float);
     }
     if (rules.hasDouble_2()) {
       return _buildDoubleEvaluator(rules.double_2);
+    }
+    if (rules.hasString()) {
+      return _buildStringEvaluator(rules.string);
+    }
+    if (rules.hasBytes()) {
+      return _buildBytesEvaluator(rules.bytes);
     }
     
     return null;
@@ -250,6 +296,124 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
       finite: rules.hasFinite() ? rules.finite : null,
+    );
+  }
+  
+  Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
+    return SInt32Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
+    return SInt64Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
+    return Fixed32Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
+    return Fixed64Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
+    return SFixed32Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
+    return SFixed64Evaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      lt: rules.hasLt() ? rules.lt : null,
+      lte: rules.hasLte() ? rules.lte : null,
+      gt: rules.hasGt() ? rules.gt : null,
+      gte: rules.hasGte() ? rules.gte : null,
+      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+    );
+  }
+  
+  Evaluator _buildStringEvaluator(StringRules rules) {
+    return StringRulesEvaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      len: rules.hasLen() ? rules.len.toInt() : null,
+      minLen: rules.hasMinLen() ? rules.minLen.toInt() : null,
+      maxLen: rules.hasMaxLen() ? rules.maxLen.toInt() : null,
+      minBytes: rules.hasMinBytes() ? rules.minBytes.toInt() : null,
+      maxBytes: rules.hasMaxBytes() ? rules.maxBytes.toInt() : null,
+      pattern: rules.hasPattern() ? rules.pattern : null,
+      prefix: rules.hasPrefix() ? rules.prefix : null,
+      suffix: rules.hasSuffix() ? rules.suffix : null,
+      contains: rules.hasContains() ? rules.contains : null,
+      notContains: rules.hasNotContains() ? rules.notContains : null,
+      inValues: rules.in_10.isNotEmpty ? rules.in_10 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      email: rules.hasEmail() ? rules.email : null,
+      hostname: rules.hasHostname() ? rules.hostname : null,
+      ip: rules.hasIp() ? rules.ip : null,
+      ipv4: rules.hasIpv4() ? rules.ipv4 : null,
+      ipv6: rules.hasIpv6() ? rules.ipv6 : null,
+      uri: rules.hasUri() ? rules.uri : null,
+      uriRef: rules.hasUriRef() ? rules.uriRef : null,
+      address: rules.hasAddress() ? rules.address : null,
+      uuid: rules.hasUuid() ? rules.uuid : null,
+      wellKnownRegex: rules.hasWellKnownRegex() ? (rules.wellKnownRegex.value > 0) : null,
+    );
+  }
+  
+  Evaluator _buildBytesEvaluator(BytesRules rules) {
+    return BytesEvaluator(
+      constValue: rules.hasConst_1() ? rules.const_1 : null,
+      len: rules.hasLen() ? rules.len.toInt() : null,
+      minLen: rules.hasMinLen() ? rules.minLen.toInt() : null,
+      maxLen: rules.hasMaxLen() ? rules.maxLen.toInt() : null,
+      pattern: rules.hasPattern() ? rules.pattern : null,
+      prefix: rules.hasPrefix() ? rules.prefix : null,
+      suffix: rules.hasSuffix() ? rules.suffix : null,
+      contains: rules.hasContains() ? rules.contains : null,
+      inValues: rules.in_8.isNotEmpty ? rules.in_8 : null,
+      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      ip: rules.hasIp() ? rules.ip : null,
+      ipv4: rules.hasIpv4() ? rules.ipv4 : null,
+      ipv6: rules.hasIpv6() ? rules.ipv6 : null,
     );
   }
 }

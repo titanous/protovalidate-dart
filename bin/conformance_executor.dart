@@ -146,6 +146,183 @@ GeneratedMessage _deserializeAny($1.Any any) {
     case 'buf.validate.conformance.cases.StringConst':
       message = StringConst();
       break;
+    case 'buf.validate.conformance.cases.StringIn':
+      message = StringIn();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIn':
+      message = StringNotIn();
+      break;
+    case 'buf.validate.conformance.cases.StringLen':
+      message = StringLen();
+      break;
+    case 'buf.validate.conformance.cases.StringMinLen':
+      message = StringMinLen();
+      break;
+    case 'buf.validate.conformance.cases.StringMaxLen':
+      message = StringMaxLen();
+      break;
+    case 'buf.validate.conformance.cases.StringMinMaxLen':
+      message = StringMinMaxLen();
+      break;
+    case 'buf.validate.conformance.cases.StringEqualMinMaxLen':
+      message = StringEqualMinMaxLen();
+      break;
+    case 'buf.validate.conformance.cases.StringLenBytes':
+      message = StringLenBytes();
+      break;
+    case 'buf.validate.conformance.cases.StringMinBytes':
+      message = StringMinBytes();
+      break;
+    case 'buf.validate.conformance.cases.StringMaxBytes':
+      message = StringMaxBytes();
+      break;
+    case 'buf.validate.conformance.cases.StringMinMaxBytes':
+      message = StringMinMaxBytes();
+      break;
+    case 'buf.validate.conformance.cases.StringEqualMinMaxBytes':
+      message = StringEqualMinMaxBytes();
+      break;
+    case 'buf.validate.conformance.cases.StringPattern':
+      message = StringPattern();
+      break;
+    case 'buf.validate.conformance.cases.StringPatternEscapes':
+      message = StringPatternEscapes();
+      break;
+    case 'buf.validate.conformance.cases.StringPrefix':
+      message = StringPrefix();
+      break;
+    case 'buf.validate.conformance.cases.StringContains':
+      message = StringContains();
+      break;
+    case 'buf.validate.conformance.cases.StringNotContains':
+      message = StringNotContains();
+      break;
+    case 'buf.validate.conformance.cases.StringSuffix':
+      message = StringSuffix();
+      break;
+    case 'buf.validate.conformance.cases.StringEmail':
+      message = StringEmail();
+      break;
+    case 'buf.validate.conformance.cases.StringNotEmail':
+      message = StringNotEmail();
+      break;
+    case 'buf.validate.conformance.cases.StringAddress':
+      message = StringAddress();
+      break;
+    case 'buf.validate.conformance.cases.StringNotAddress':
+      message = StringNotAddress();
+      break;
+    case 'buf.validate.conformance.cases.StringHostname':
+      message = StringHostname();
+      break;
+    case 'buf.validate.conformance.cases.StringNotHostname':
+      message = StringNotHostname();
+      break;
+    case 'buf.validate.conformance.cases.StringIP':
+      message = StringIP();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIP':
+      message = StringNotIP();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv4':
+      message = StringIPv4();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv4':
+      message = StringNotIPv4();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv6':
+      message = StringIPv6();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv6':
+      message = StringNotIPv6();
+      break;
+    case 'buf.validate.conformance.cases.StringIPWithPrefixLen':
+      message = StringIPWithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPWithPrefixLen':
+      message = StringNotIPWithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv4WithPrefixLen':
+      message = StringIPv4WithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv4WithPrefixLen':
+      message = StringNotIPv4WithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv6WithPrefixLen':
+      message = StringIPv6WithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv6WithPrefixLen':
+      message = StringNotIPv6WithPrefixLen();
+      break;
+    case 'buf.validate.conformance.cases.StringIPPrefix':
+      message = StringIPPrefix();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPPrefix':
+      message = StringNotIPPrefix();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv4Prefix':
+      message = StringIPv4Prefix();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv4Prefix':
+      message = StringNotIPv4Prefix();
+      break;
+    case 'buf.validate.conformance.cases.StringIPv6Prefix':
+      message = StringIPv6Prefix();
+      break;
+    case 'buf.validate.conformance.cases.StringNotIPv6Prefix':
+      message = StringNotIPv6Prefix();
+      break;
+    case 'buf.validate.conformance.cases.StringURI':
+      message = StringURI();
+      break;
+    case 'buf.validate.conformance.cases.StringNotURI':
+      message = StringNotURI();
+      break;
+    case 'buf.validate.conformance.cases.StringURIRef':
+      message = StringURIRef();
+      break;
+    case 'buf.validate.conformance.cases.StringNotURIRef':
+      message = StringNotURIRef();
+      break;
+    case 'buf.validate.conformance.cases.StringUUID':
+      message = StringUUID();
+      break;
+    case 'buf.validate.conformance.cases.StringNotUUID':
+      message = StringNotUUID();
+      break;
+    case 'buf.validate.conformance.cases.StringTUUID':
+      message = StringTUUID();
+      break;
+    case 'buf.validate.conformance.cases.StringNotTUUID':
+      message = StringNotTUUID();
+      break;
+    case 'buf.validate.conformance.cases.StringHttpHeaderName':
+      message = StringHttpHeaderName();
+      break;
+    case 'buf.validate.conformance.cases.StringHttpHeaderValue':
+      message = StringHttpHeaderValue();
+      break;
+    case 'buf.validate.conformance.cases.StringHttpHeaderNameLoose':
+      message = StringHttpHeaderNameLoose();
+      break;
+    case 'buf.validate.conformance.cases.StringHttpHeaderValueLoose':
+      message = StringHttpHeaderValueLoose();
+      break;
+    case 'buf.validate.conformance.cases.StringUUIDIgnore':
+      message = StringUUIDIgnore();
+      break;
+    case 'buf.validate.conformance.cases.StringInOneof':
+      message = StringInOneof();
+      break;
+    case 'buf.validate.conformance.cases.StringHostAndPort':
+      message = StringHostAndPort();
+      break;
+    case 'buf.validate.conformance.cases.StringHostAndOptionalPort':
+      message = StringHostAndOptionalPort();
+      break;
+    case 'buf.validate.conformance.cases.StringExample':
+      message = StringExample();
+      break;
       
     // Add more cases as needed
     default:
