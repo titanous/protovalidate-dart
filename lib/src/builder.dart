@@ -1,11 +1,16 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
+import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart' as pb_duration;
+import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart' as pb_timestamp;
+import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
+import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
 import 'rules/scalar.dart';
 import 'rules/enum.dart';
 import 'rules/message.dart';
+import 'rules/wkt.dart';
 import 'error.dart';
 import 'cursor.dart';
 
@@ -251,6 +256,16 @@ class EvaluatorBuilder {
     }
     if (rules.hasMap()) {
       return _buildMapEvaluator(rules.map);
+    }
+    // Handle WKT types
+    if (rules.hasDuration()) {
+      return _buildDurationEvaluator(rules.duration);
+    }
+    if (rules.hasTimestamp()) {
+      return _buildTimestampEvaluator(rules.timestamp);
+    }
+    if (rules.hasAny()) {
+      return _buildAnyEvaluator(rules.any);
     }
     
     return null;
@@ -499,6 +514,54 @@ class EvaluatorBuilder {
       minPairs: rules.hasMinPairs() ? rules.minPairs.toInt() : null,
       maxPairs: rules.hasMaxPairs() ? rules.maxPairs.toInt() : null,
     );
+  }
+  
+  Evaluator _buildDurationEvaluator(DurationRules rules) {
+    return DurationEvaluator(rules: rules);
+  }
+  
+  Evaluator _buildTimestampEvaluator(TimestampRules rules) {
+    return TimestampEvaluator(rules: rules);
+  }
+  
+  Evaluator _buildAnyEvaluator(AnyRules rules) {
+    return AnyEvaluator(rules: rules);
+  }
+  
+  /// Checks if a message type is a well-known type and builds appropriate evaluator.
+  Evaluator? buildWKTEvaluator(GeneratedMessage message, FieldRules? fieldRules) {
+    final typeName = message.info_.messageName;
+    
+    // Check for wrapper types
+    if (message is BoolValue) {
+      return BoolValueEvaluator(rules: fieldRules?.bool_13);
+    } else if (message is BytesValue) {
+      return BytesValueEvaluator(rules: fieldRules?.bytes);
+    } else if (message is DoubleValue) {
+      return DoubleValueEvaluator(rules: fieldRules?.double_2);
+    } else if (message is FloatValue) {
+      return FloatValueEvaluator(rules: fieldRules?.float);
+    } else if (message is Int32Value) {
+      return Int32ValueEvaluator(rules: fieldRules?.int32);
+    } else if (message is Int64Value) {
+      return Int64ValueEvaluator(rules: fieldRules?.int64);
+    } else if (message is StringValue) {
+      return StringValueEvaluator(rules: fieldRules?.string);
+    } else if (message is UInt32Value) {
+      return UInt32ValueEvaluator(rules: fieldRules?.uint32);
+    } else if (message is UInt64Value) {
+      return UInt64ValueEvaluator(rules: fieldRules?.uint64);
+    }
+    // Check for other WKT types
+    else if (message is pb_duration.Duration) {
+      return DurationEvaluator(rules: fieldRules?.duration ?? DurationRules());
+    } else if (message is pb_timestamp.Timestamp) {
+      return TimestampEvaluator(rules: fieldRules?.timestamp ?? TimestampRules());
+    } else if (message is pb_any.Any) {
+      return AnyEvaluator(rules: fieldRules?.any ?? AnyRules());
+    }
+    
+    return null;
   }
 }
 

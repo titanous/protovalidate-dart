@@ -43,6 +43,9 @@ class Violation {
   /// Optional rule path for debugging.
   final String? rulePath;
   
+  /// The rule path elements for the protobuf representation.
+  final List<pb.FieldPathElement>? rulePathElements;
+  
   /// Whether this violation is for a map key.
   final bool forKey;
   
@@ -52,6 +55,7 @@ class Violation {
     required this.constraintId,
     required this.message,
     this.rulePath,
+    this.rulePathElements,
     this.forKey = false,
   });
   
@@ -82,6 +86,11 @@ class Violation {
       }
       
       violation.field_5 = pb.FieldPath()..elements.addAll(pathElements);
+    }
+    
+    // Add rule path if provided
+    if (rulePathElements != null && rulePathElements!.isNotEmpty) {
+      violation.rule = pb.FieldPath()..elements.addAll(rulePathElements!);
     }
     
     if (forKey) {

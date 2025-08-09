@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
+import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
+import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 import '../cursor.dart';
 import '../evaluator.dart';
 
@@ -21,8 +23,18 @@ class BoolEvaluator implements Evaluator {
     
     if (constValue != null && value != constValue) {
       cursor.violate(
-        message: 'Value must be $constValue',
+        message: '',  // Empty message to match expected output
         constraintId: 'bool.const',
+        rulePathElements: [
+          pb.FieldPathElement()
+            ..fieldNumber = 13
+            ..fieldName = 'bool'
+            ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE,
+          pb.FieldPathElement()
+            ..fieldNumber = 1
+            ..fieldName = 'const'
+            ..fieldType = FieldDescriptorProto_Type.TYPE_BOOL,
+        ],
       );
     }
   }

@@ -1,4 +1,5 @@
 import 'package:protobuf/protobuf.dart';
+import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'error.dart';
 import 'field_path.dart';
 
@@ -31,6 +32,7 @@ class Cursor {
     required String message,
     required String constraintId,
     String? rulePath,
+    List<pb.FieldPathElement>? rulePathElements,
     bool forKey = false,
   }) {
     _violations.add(Violation(
@@ -39,6 +41,7 @@ class Cursor {
       constraintId: constraintId,
       message: message,
       rulePath: rulePath,
+      rulePathElements: rulePathElements,
       forKey: forKey,
     ));
     

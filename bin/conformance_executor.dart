@@ -395,6 +395,169 @@ GeneratedMessage _deserializeAny($1.Any any) {
       message = RepeatedDuration();
       break;
       
+    // WKT Any cases
+    case 'buf.validate.conformance.cases.AnyNone':
+      message = AnyNone();
+      break;
+    case 'buf.validate.conformance.cases.AnyRequired':
+      message = AnyRequired();
+      break;
+    case 'buf.validate.conformance.cases.AnyIn':
+      message = AnyIn();
+      break;
+    case 'buf.validate.conformance.cases.AnyNotIn':
+      message = AnyNotIn();
+      break;
+      
+    // WKT Duration cases
+    case 'buf.validate.conformance.cases.DurationNone':
+      message = DurationNone();
+      break;
+    case 'buf.validate.conformance.cases.DurationRequired':
+      message = DurationRequired();
+      break;
+    case 'buf.validate.conformance.cases.DurationConst':
+      message = DurationConst();
+      break;
+    case 'buf.validate.conformance.cases.DurationIn':
+      message = DurationIn();
+      break;
+    case 'buf.validate.conformance.cases.DurationNotIn':
+      message = DurationNotIn();
+      break;
+    case 'buf.validate.conformance.cases.DurationLT':
+      message = DurationLT();
+      break;
+    case 'buf.validate.conformance.cases.DurationLTE':
+      message = DurationLTE();
+      break;
+    case 'buf.validate.conformance.cases.DurationGT':
+      message = DurationGT();
+      break;
+    case 'buf.validate.conformance.cases.DurationGTE':
+      message = DurationGTE();
+      break;
+    case 'buf.validate.conformance.cases.DurationGTLT':
+      message = DurationGTLT();
+      break;
+    case 'buf.validate.conformance.cases.DurationExLTGT':
+      message = DurationExLTGT();
+      break;
+    case 'buf.validate.conformance.cases.DurationGTELTE':
+      message = DurationGTELTE();
+      break;
+    case 'buf.validate.conformance.cases.DurationExGTELTE':
+      message = DurationExGTELTE();
+      break;
+    case 'buf.validate.conformance.cases.DurationFieldWithOtherFields':
+      message = DurationFieldWithOtherFields();
+      break;
+    case 'buf.validate.conformance.cases.DurationExample':
+      message = DurationExample();
+      break;
+      
+    // WKT Timestamp cases
+    case 'buf.validate.conformance.cases.TimestampNone':
+      message = TimestampNone();
+      break;
+    case 'buf.validate.conformance.cases.TimestampRequired':
+      message = TimestampRequired();
+      break;
+    case 'buf.validate.conformance.cases.TimestampConst':
+      message = TimestampConst();
+      break;
+    case 'buf.validate.conformance.cases.TimestampLT':
+      message = TimestampLT();
+      break;
+    case 'buf.validate.conformance.cases.TimestampLTE':
+      message = TimestampLTE();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGT':
+      message = TimestampGT();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGTE':
+      message = TimestampGTE();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGTLT':
+      message = TimestampGTLT();
+      break;
+    case 'buf.validate.conformance.cases.TimestampExLTGT':
+      message = TimestampExLTGT();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGTELTE':
+      message = TimestampGTELTE();
+      break;
+    case 'buf.validate.conformance.cases.TimestampExGTELTE':
+      message = TimestampExGTELTE();
+      break;
+    case 'buf.validate.conformance.cases.TimestampLTNow':
+      message = TimestampLTNow();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGTNow':
+      message = TimestampGTNow();
+      break;
+    case 'buf.validate.conformance.cases.TimestampWithin':
+      message = TimestampWithin();
+      break;
+    case 'buf.validate.conformance.cases.TimestampLTNowWithin':
+      message = TimestampLTNowWithin();
+      break;
+    case 'buf.validate.conformance.cases.TimestampGTNowWithin':
+      message = TimestampGTNowWithin();
+      break;
+    case 'buf.validate.conformance.cases.TimestampExample':
+      message = TimestampExample();
+      break;
+      
+    // WKT Wrapper cases
+    case 'buf.validate.conformance.cases.WrapperNone':
+      message = WrapperNone();
+      break;
+    case 'buf.validate.conformance.cases.WrapperFloat':
+      message = WrapperFloat();
+      break;
+    case 'buf.validate.conformance.cases.WrapperDouble':
+      message = WrapperDouble();
+      break;
+    case 'buf.validate.conformance.cases.WrapperInt64':
+      message = WrapperInt64();
+      break;
+    case 'buf.validate.conformance.cases.WrapperInt32':
+      message = WrapperInt32();
+      break;
+    case 'buf.validate.conformance.cases.WrapperUInt64':
+      message = WrapperUInt64();
+      break;
+    case 'buf.validate.conformance.cases.WrapperUInt32':
+      message = WrapperUInt32();
+      break;
+    case 'buf.validate.conformance.cases.WrapperBool':
+      message = WrapperBool();
+      break;
+    case 'buf.validate.conformance.cases.WrapperString':
+      message = WrapperString();
+      break;
+    case 'buf.validate.conformance.cases.WrapperBytes':
+      message = WrapperBytes();
+      break;
+    case 'buf.validate.conformance.cases.WrapperRequiredString':
+      message = WrapperRequiredString();
+      break;
+    case 'buf.validate.conformance.cases.WrapperRequiredEmptyString':
+      message = WrapperRequiredEmptyString();
+      break;
+    case 'buf.validate.conformance.cases.WrapperOptionalUuidString':
+      message = WrapperOptionalUuidString();
+      break;
+    case 'buf.validate.conformance.cases.WrapperRequiredFloat':
+      message = WrapperRequiredFloat();
+      break;
+      
+    // WKT Nested cases
+    case 'buf.validate.conformance.cases.WktLevelOne':
+      message = WktLevelOne();
+      break;
+      
     // Add more cases as needed
     default:
       // For now, return a compilation error for unknown types
