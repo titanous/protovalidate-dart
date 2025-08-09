@@ -4,6 +4,7 @@ import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
 import 'builder.dart';
 import 'cursor.dart';
+import 'descriptor_rules.dart';
 import 'evaluator.dart';
 
 /// Options for creating a validator.
@@ -31,6 +32,7 @@ class ValidatorOptions {
 class Validator {
   final ValidatorOptions _options;
   final FileDescriptorSet? _fileDescriptorSet;
+  final DescriptorRules? _descriptorRules;
   final EvaluatorBuilder _builder;
   
   Validator({
@@ -38,7 +40,14 @@ class Validator {
     FileDescriptorSet? fileDescriptorSet,
   }) : _options = options ?? const ValidatorOptions(),
        _fileDescriptorSet = fileDescriptorSet,
-       _builder = EvaluatorBuilder();
+       _descriptorRules = fileDescriptorSet != null 
+         ? DescriptorRules(fileDescriptorSet, extensionRegistry: options?.extensionRegistry)
+         : null,
+       _builder = EvaluatorBuilder(
+         descriptorRules: fileDescriptorSet != null 
+           ? DescriptorRules(fileDescriptorSet, extensionRegistry: options?.extensionRegistry)
+           : null,
+       );
   
   /// Validate the given message and return the result.
   ValidationResult validate(GeneratedMessage message) {

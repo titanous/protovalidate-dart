@@ -31,6 +31,9 @@ class Violation {
   /// The path to the field that caused the violation.
   final String fieldPath;
   
+  /// The field path elements for the protobuf representation.
+  final List<pb.FieldPathElement>? fieldPathElements;
+  
   /// The constraint ID that was violated.
   final String constraintId;
   
@@ -45,6 +48,7 @@ class Violation {
   
   const Violation({
     required this.fieldPath,
+    this.fieldPathElements,
     required this.constraintId,
     required this.message,
     this.rulePath,
@@ -57,8 +61,11 @@ class Violation {
       ..ruleId = constraintId
       ..message = message;
     
-    if (fieldPath.isNotEmpty) {
-      // Parse field path and create FieldPathElements
+    // Use provided field path elements if available
+    if (fieldPathElements != null && fieldPathElements!.isNotEmpty) {
+      violation.field_5 = pb.FieldPath()..elements.addAll(fieldPathElements!);
+    } else if (fieldPath.isNotEmpty) {
+      // Fallback to parsing field path string
       final pathElements = <pb.FieldPathElement>[];
       final parts = fieldPath.split(RegExp(r'[.\[\]]'));
       

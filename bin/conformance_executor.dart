@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/protovalidate.dart';
+import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/buf/validate/conformance/harness/harness.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as $1;
 
@@ -30,11 +31,17 @@ void main() async {
     input.addAll(chunk);
   }
   
-  final request = TestConformanceRequest()..mergeFromBuffer(input);
+  // Create extension registry and register validation extensions
+  final registry = ExtensionRegistry();
+  Validate.registerAllExtensions(registry);
+  
+  final request = TestConformanceRequest()..mergeFromBuffer(input, registry);
   final response = TestConformanceResponse();
   
-  // Create validator
-  final validator = Validator();
+  // Create validator with FileDescriptorSet if provided
+  final validator = Validator(
+    fileDescriptorSet: request.hasFdset() ? request.fdset : null,
+  );
   
   // Process each test case
   for (final entry in request.cases.entries) {

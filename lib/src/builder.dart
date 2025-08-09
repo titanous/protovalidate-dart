@@ -1,6 +1,7 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
+import 'descriptor_rules.dart';
 import 'evaluator.dart';
 import 'rules/scalar.dart';
 import 'error.dart';
@@ -10,6 +11,11 @@ import 'cursor.dart';
 class EvaluatorBuilder {
   /// Cache of compiled evaluators by message type.
   final Map<Type, Evaluator> _cache = {};
+  
+  /// Optional descriptor rules for extracting validation rules from FileDescriptorSet.
+  final DescriptorRules? descriptorRules;
+  
+  EvaluatorBuilder({this.descriptorRules});
   
   /// Builds an evaluator for the given message type.
   Evaluator buildForMessage(GeneratedMessage message) {
@@ -48,9 +54,22 @@ class EvaluatorBuilder {
   
   /// Builds a field evaluator.
   Evaluator? _buildFieldEvaluator(FieldInfo field, GeneratedMessage message) {
-    // Try to get field rules from the field descriptor
-    // For now, we'll create basic evaluators based on field type
+    // Try to get field rules from the descriptor if available
+    FieldRules? fieldRules;
+    if (descriptorRules != null) {
+      final messageTypeName = descriptorRules!.getFullTypeName(message);
+      fieldRules = descriptorRules!.getFieldRules(messageTypeName, field.name);
+    }
     
+    // If we have field rules, build evaluator from them
+    if (fieldRules != null) {
+      final evaluator = buildFromFieldRules(fieldRules);
+      if (evaluator != null) {
+        return FieldValidatorWrapper(field, evaluator, rules: fieldRules);
+      }
+    }
+    
+    // Fall back to basic type validation
     // Handle repeated fields
     if (field.isRepeated && !field.isMapField) {
       final itemEvaluator = _buildScalarEvaluator(field);
@@ -239,8 +258,9 @@ class EvaluatorBuilder {
 class FieldValidatorWrapper implements Evaluator {
   final FieldInfo field;
   final Evaluator evaluator;
+  final FieldRules? rules;
   
-  FieldValidatorWrapper(this.field, this.evaluator);
+  FieldValidatorWrapper(this.field, this.evaluator, {this.rules});
   
   @override
   void evaluate(dynamic value, Cursor cursor) {
@@ -251,8 +271,16 @@ class FieldValidatorWrapper implements Evaluator {
     final message = value as GeneratedMessage;
     final fieldValue = message.getField(field.tagNumber);
     
-    // Skip if field is not set (for optional fields)
-    if (!message.hasField(field.tagNumber)) {
+    // Check if we should skip validation based on ignore rules
+    // For proto3, if field is not set and doesn't have const or required rules, skip
+    final hasField = message.hasField(field.tagNumber);
+    
+    // Always validate if there's a const rule or required rule
+    final hasConstRule = rules?.hasBool_13() == true && rules!.bool_13.hasConst_1();
+    final hasRequiredRule = rules?.hasRequired() == true && rules!.required;
+    
+    if (!hasField && !hasConstRule && !hasRequiredRule) {
+      // Skip validation for unset fields without const/required rules
       return;
     }
     

@@ -35,6 +35,7 @@ class Cursor {
   }) {
     _violations.add(Violation(
       fieldPath: _path.toFieldPathString(),
+      fieldPathElements: _path.toProtoElements(),
       constraintId: constraintId,
       message: message,
       rulePath: rulePath,
