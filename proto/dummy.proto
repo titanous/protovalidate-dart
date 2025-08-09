@@ -1,0 +1,4 @@
+// Dummy file to satisfy buf requirements
+syntax = "proto3";
+
+package protovalidate.dummy;

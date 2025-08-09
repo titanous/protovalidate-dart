@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      protoc_plugin:
+        generate_for:
+          include:
+            - proto/**
