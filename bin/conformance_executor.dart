@@ -100,6 +100,9 @@ GeneratedMessage _deserializeAny($1.Any any) {
     case 'buf.validate.conformance.cases.BoolConstFalse':
       message = BoolConstFalse();
       break;
+    case 'buf.validate.conformance.cases.BoolExample':
+      message = BoolExample();
+      break;
       
     // Bytes cases
     case 'buf.validate.conformance.cases.BytesNone':

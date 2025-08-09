@@ -1,7 +1,10 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/error.dart';
-import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
+import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
+import 'builder.dart';
+import 'cursor.dart';
+import 'evaluator.dart';
 
 /// Options for creating a validator.
 class ValidatorOptions {
@@ -28,21 +31,44 @@ class ValidatorOptions {
 class Validator {
   final ValidatorOptions _options;
   final FileDescriptorSet? _fileDescriptorSet;
+  final EvaluatorBuilder _builder;
   
   Validator({
     ValidatorOptions? options,
     FileDescriptorSet? fileDescriptorSet,
   }) : _options = options ?? const ValidatorOptions(),
-       _fileDescriptorSet = fileDescriptorSet;
+       _fileDescriptorSet = fileDescriptorSet,
+       _builder = EvaluatorBuilder();
   
   /// Validate the given message and return the result.
   ValidationResult validate(GeneratedMessage message) {
     try {
-      // For now, return a compilation error to indicate not implemented
-      return ValidationResult.compilationError(
-        CompilationError('Validation not yet implemented'),
-      );
+      // Create a cursor for tracking violations
+      final cursor = Cursor.create(failFast: _options.failFast);
+      
+      // Build evaluator for this message type
+      final evaluator = _builder.buildForMessage(message);
+      
+      // Run validation
+      evaluator.evaluate(message, cursor);
+      
+      // Check for violations
+      if (cursor.violated) {
+        final validationError = ValidationError(cursor.violations);
+        return ValidationResult.invalid(validationError.toProto());
+      }
+      
+      return ValidationResult.valid();
     } catch (e) {
+      if (e is CompilationError) {
+        return ValidationResult.compilationError(e);
+      }
+      if (e is RuntimeError) {
+        return ValidationResult.runtimeError(e);
+      }
+      if (e is ValidationError) {
+        return ValidationResult.invalid(e.toProto());
+      }
       return ValidationResult.runtimeError(
         RuntimeError('Unexpected error: $e'),
       );
@@ -56,7 +82,7 @@ class ValidationResult {
   final bool isInvalid;
   final bool isCompilationError;
   final bool isRuntimeError;
-  final Violations? violations;
+  final pb.Violations? violations;
   final ProtovalidateError? error;
   
   const ValidationResult._({
@@ -79,7 +105,7 @@ class ValidationResult {
   }
   
   /// Creates an invalid result with violations.
-  factory ValidationResult.invalid(Violations violations) {
+  factory ValidationResult.invalid(pb.Violations violations) {
     return ValidationResult._(
       isValid: false,
       isInvalid: true,
