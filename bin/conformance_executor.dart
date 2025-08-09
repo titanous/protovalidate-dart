@@ -324,6 +324,77 @@ GeneratedMessage _deserializeAny($1.Any any) {
       message = StringExample();
       break;
       
+    // Repeated message types
+    case 'buf.validate.conformance.cases.RepeatedNone':
+      message = RepeatedNone();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEmbedNone':
+      message = RepeatedEmbedNone();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEmbedCrossPackageNone':
+      message = RepeatedEmbedCrossPackageNone();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedMin':
+      message = RepeatedMin();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedMax':
+      message = RepeatedMax();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedMinMax':
+      message = RepeatedMinMax();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedExact':
+      message = RepeatedExact();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedUnique':
+      message = RepeatedUnique();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedNotUnique':
+      message = RepeatedNotUnique();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedMultipleUnique':
+      message = RepeatedMultipleUnique();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedItemRule':
+      message = RepeatedItemRule();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedItemPattern':
+      message = RepeatedItemPattern();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEmbedSkip':
+      message = RepeatedEmbedSkip();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedItemIn':
+      message = RepeatedItemIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedItemNotIn':
+      message = RepeatedItemNotIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEnumIn':
+      message = RepeatedEnumIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEnumNotIn':
+      message = RepeatedEnumNotIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEmbeddedEnumIn':
+      message = RepeatedEmbeddedEnumIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedEmbeddedEnumNotIn':
+      message = RepeatedEmbeddedEnumNotIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedAnyIn':
+      message = RepeatedAnyIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedAnyNotIn':
+      message = RepeatedAnyNotIn();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedMinAndMaxItemLen':
+      message = RepeatedMinAndMaxItemLen();
+      break;
+    case 'buf.validate.conformance.cases.RepeatedDuration':
+      message = RepeatedDuration();
+      break;
+      
     // Add more cases as needed
     default:
       // For now, return a compilation error for unknown types

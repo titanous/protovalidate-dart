@@ -189,3 +189,11 @@ class CompositeEvaluator implements Evaluator {
     }
   }
 }
+
+/// No-op evaluator that does nothing.
+class NoOpEvaluator implements Evaluator {
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    // Does nothing
+  }
+}

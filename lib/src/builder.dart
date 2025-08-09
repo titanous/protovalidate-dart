@@ -4,6 +4,8 @@ import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
 import 'rules/scalar.dart';
+import 'rules/enum.dart';
+import 'rules/message.dart';
 import 'error.dart';
 import 'cursor.dart';
 
@@ -83,8 +85,34 @@ class EvaluatorBuilder {
     
     // Handle map fields
     if (field.isMapField) {
-      // For now, skip map validation
+      // For map fields, we need map rules from fieldRules
+      if (fieldRules?.hasMap() == true) {
+        final mapEvaluator = _buildMapEvaluator(fieldRules!.map);
+        return FieldValidatorWrapper(field, mapEvaluator, rules: fieldRules);
+      }
       return null;
+    }
+    
+    // Handle message fields
+    if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
+      // For message fields, check for required/ignore rules
+      final messageEvaluator = MessageFieldEvaluator(
+        required: fieldRules?.required ?? false,
+        ignore: fieldRules?.hasIgnore() == true ? fieldRules!.ignore : null,
+        nestedEvaluator: null, // Would need to recursively build for the nested type
+      );
+      return FieldValidatorWrapper(field, messageEvaluator, rules: fieldRules);
+    }
+    
+    // Handle enum fields
+    if (field.type == PbFieldType.OE || field.type == PbFieldType.PE) {
+      if (fieldRules?.hasEnum_16() == true) {
+        final enumEvaluator = _buildEnumEvaluator(fieldRules!.enum_16);
+        return FieldValidatorWrapper(field, enumEvaluator, rules: fieldRules);
+      } else {
+        // Basic enum evaluator
+        return FieldValidatorWrapper(field, EnumEvaluator());
+      }
     }
     
     // Handle scalar fields
@@ -214,6 +242,15 @@ class EvaluatorBuilder {
     }
     if (rules.hasBytes()) {
       return _buildBytesEvaluator(rules.bytes);
+    }
+    if (rules.hasEnum_16()) {
+      return _buildEnumEvaluator(rules.enum_16);
+    }
+    if (rules.hasRepeated()) {
+      return _buildRepeatedEvaluator(rules.repeated);
+    }
+    if (rules.hasMap()) {
+      return _buildMapEvaluator(rules.map);
     }
     
     return null;
@@ -414,6 +451,53 @@ class EvaluatorBuilder {
       ip: rules.hasIp() ? rules.ip : null,
       ipv4: rules.hasIpv4() ? rules.ipv4 : null,
       ipv6: rules.hasIpv6() ? rules.ipv6 : null,
+    );
+  }
+  
+  Evaluator _buildEnumEvaluator(EnumRules rules) {
+    // TODO: Need to get enum value names from the field descriptor
+    // For now, just return the basic enum rules evaluator
+    return EnumRulesEvaluator(
+      rules: rules,
+      enumValueNames: null, // Would need to be populated from field descriptor
+    );
+  }
+  
+  Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
+    // Build item evaluator from rules.items if present
+    Evaluator? itemEvaluator;
+    if (rules.hasItems()) {
+      itemEvaluator = buildFromFieldRules(rules.items);
+    }
+    
+    // If no item evaluator, use a no-op
+    itemEvaluator ??= NoOpEvaluator();
+    
+    return RepeatedFieldEvaluator(
+      itemEvaluator: itemEvaluator,
+      minItems: rules.hasMinItems() ? rules.minItems.toInt() : null,
+      maxItems: rules.hasMaxItems() ? rules.maxItems.toInt() : null,
+      unique: rules.hasUnique() ? rules.unique : null,
+    );
+  }
+  
+  Evaluator _buildMapEvaluator(MapRules rules) {
+    // Build key and value evaluators from rules if present
+    Evaluator? keyEvaluator;
+    if (rules.hasKeys()) {
+      keyEvaluator = buildFromFieldRules(rules.keys);
+    }
+    
+    Evaluator? valueEvaluator;
+    if (rules.hasValues()) {
+      valueEvaluator = buildFromFieldRules(rules.values);
+    }
+    
+    return MapFieldEvaluator(
+      keyEvaluator: keyEvaluator,
+      valueEvaluator: valueEvaluator,
+      minPairs: rules.hasMinPairs() ? rules.minPairs.toInt() : null,
+      maxPairs: rules.hasMaxPairs() ? rules.maxPairs.toInt() : null,
     );
   }
 }
