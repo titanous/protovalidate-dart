@@ -922,6 +922,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid email address',
         constraintId: 'string.email',
+        rulePath: RulePathBuilder.stringConstraint('email'),
       );
     }
     
@@ -930,6 +931,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid hostname',
         constraintId: 'string.hostname',
+        rulePath: RulePathBuilder.stringConstraint('hostname'),
       );
     }
     
@@ -938,6 +940,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid IP address',
         constraintId: 'string.ip',
+        rulePath: RulePathBuilder.stringConstraint('ip'),
       );
     }
     
@@ -946,6 +949,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid IPv4 address',
         constraintId: 'string.ipv4',
+        rulePath: RulePathBuilder.stringConstraint('ipv4'),
       );
     }
     
@@ -954,6 +958,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid IPv6 address',
         constraintId: 'string.ipv6',
+        rulePath: RulePathBuilder.stringConstraint('ipv6'),
       );
     }
     
@@ -962,6 +967,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid URI',
         constraintId: 'string.uri',
+        rulePath: RulePathBuilder.stringConstraint('uri'),
       );
     }
     
@@ -970,6 +976,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid URI reference',
         constraintId: 'string.uri_ref',
+        rulePath: RulePathBuilder.stringConstraint('uri_ref'),
       );
     }
     
@@ -978,6 +985,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be a valid UUID',
         constraintId: 'string.uuid',
+        rulePath: RulePathBuilder.stringConstraint('uuid'),
       );
     }
   }
