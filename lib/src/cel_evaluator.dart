@@ -9,6 +9,7 @@ import 'gen/buf/validate/validate.pb.dart';
 import 'gen/google/protobuf/descriptor.pb.dart';
 import 'gen/google/protobuf/timestamp.pb.dart';
 import 'gen/google/protobuf/duration.pb.dart';
+// import 'cel/library.dart'; // Commented out - CEL library not yet available
 
 /// CEL evaluator for custom expression rules
 class CELEvaluator extends Evaluator {
@@ -97,9 +98,15 @@ class CompiledExpression {
     // Add 'now' - current timestamp
     activation['now'] = Timestamp.fromDateTime(DateTime.now());
     
-    // TODO: Add other standard variables as needed:
-    // - 'rules' - the validation rules
-    // - 'rule' - the current rule being evaluated
+    // Add 'rules' - the validation rules (if available)
+    // This is typically the entire rules structure for the field
+    // It's used for cross-referencing other rules in CEL expressions
+    if (source.hasMessage()) {
+      activation['rules'] = source;
+    }
+    
+    // Add 'rule' - the current rule being evaluated
+    activation['rule'] = source;
     
     return activation;
   }
@@ -163,9 +170,15 @@ class CELCompiler {
   }
 
   static cel.Environment _createDefaultEnvironment() {
-    // Create a CEL environment with protobuf support
-    // This will be enhanced as we add more CEL functions
-    return cel.Environment.standard();
+    // Create a CEL environment with protobuf support and validation functions
+    final env = cel.Environment.standard();
+    
+    // TODO: Apply the ProtovalidateLibrary to add custom validation functions
+    // when CEL library support is available
+    // final library = ProtovalidateLibrary();
+    // library.toEnvironmentOption()(env);
+    
+    return env;
   }
 }
 
