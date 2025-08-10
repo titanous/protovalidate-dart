@@ -62,6 +62,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
   
   String get typeName;
   String get constraintPrefix;
+  int get ruleFieldNumber;
   
   bool isValidType(dynamic value);
   T toTypedValue(dynamic value);
@@ -70,7 +71,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
   void evaluate(dynamic value, Cursor cursor) {
     if (!isValidType(value)) {
       cursor.violate(
-        message: 'Expected $typeName, got ${value.runtimeType}',
+        message: '',
         constraintId: '$constraintPrefix.type',
       );
       return;
@@ -78,60 +79,217 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     
     final typedValue = toTypedValue(value);
     
-    // Check const
+    // Check const first
     if (constValue != null && typedValue != constValue) {
       cursor.violate(
-        message: 'Value must be $constValue',
+        message: '',
         constraintId: '$constraintPrefix.const',
+        rulePathElements: _buildRulePath('const', 1),
       );
+      return; // If const fails, don't check other rules
     }
     
-    // Check lt
-    if (lt != null && typedValue.compareTo(lt!) >= 0) {
-      cursor.violate(
-        message: 'Value must be less than $lt',
-        constraintId: '$constraintPrefix.lt',
-      );
-    }
-    
-    // Check lte
-    if (lte != null && typedValue.compareTo(lte!) > 0) {
-      cursor.violate(
-        message: 'Value must be less than or equal to $lte',
-        constraintId: '$constraintPrefix.lte',
-      );
-    }
-    
-    // Check gt
-    if (gt != null && typedValue.compareTo(gt!) <= 0) {
-      cursor.violate(
-        message: 'Value must be greater than $gt',
-        constraintId: '$constraintPrefix.gt',
-      );
-    }
-    
-    // Check gte
-    if (gte != null && typedValue.compareTo(gte!) < 0) {
-      cursor.violate(
-        message: 'Value must be greater than or equal to $gte',
-        constraintId: '$constraintPrefix.gte',
-      );
-    }
-    
-    // Check in
+    // Check in/not_in
     if (inValues != null && !inValues!.contains(typedValue)) {
       cursor.violate(
-        message: 'Value must be one of $inValues',
+        message: '',
         constraintId: '$constraintPrefix.in',
+        rulePathElements: _buildRulePath('in', 6),
+      );
+      return;
+    }
+    
+    if (notInValues != null && notInValues!.contains(typedValue)) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.not_in',
+        rulePathElements: _buildRulePath('not_in', 7),
+      );
+      return;
+    }
+    
+    // Handle range constraints with proper combination logic
+    _evaluateRangeConstraints(typedValue, cursor);
+  }
+  
+  void _evaluateRangeConstraints(T typedValue, Cursor cursor) {
+    // Determine if we have contradictory ranges (exclusive logic)
+    bool hasExclusiveRange = _hasExclusiveRange();
+    
+    if (hasExclusiveRange) {
+      _evaluateExclusiveRange(typedValue, cursor);
+    } else {
+      _evaluateInclusiveRange(typedValue, cursor);
+    }
+  }
+  
+  bool _hasExclusiveRange() {
+    // Check for contradictory constraints that create exclusive ranges:
+    // gt > lt (e.g., gt: 10, lt: 0) - value must be > 10 OR < 0
+    // gte > lte (e.g., gte: 256, lte: 128) - value must be >= 256 OR <= 128
+    
+    if (gt != null && lt != null && gt!.compareTo(lt!) >= 0) {
+      return true;
+    }
+    
+    if (gte != null && lte != null && gte!.compareTo(lte!) > 0) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  void _evaluateExclusiveRange(T typedValue, Cursor cursor) {
+    // For exclusive ranges, the value is valid if it satisfies ANY constraint
+    bool valid = false;
+    String? primaryConstraint;
+    int? primaryFieldNumber;
+    
+    if (gt != null && lt != null && gt!.compareTo(lt!) >= 0) {
+      // Exclusive gt_lt: value must be > gt OR < lt
+      valid = typedValue.compareTo(gt!) > 0 || typedValue.compareTo(lt!) < 0;
+      primaryConstraint = 'gt_lt_exclusive';
+      primaryFieldNumber = 4; // gt field number
+    } else if (gte != null && lte != null && gte!.compareTo(lte!) > 0) {
+      // Exclusive gte_lte: value must be >= gte OR <= lte  
+      valid = typedValue.compareTo(gte!) >= 0 || typedValue.compareTo(lte!) <= 0;
+      primaryConstraint = 'gte_lte_exclusive';
+      primaryFieldNumber = 5; // gte field number
+    }
+    
+    if (!valid && primaryConstraint != null && primaryFieldNumber != null) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.$primaryConstraint',
+        rulePathElements: _buildRulePath(_getFieldNameFromNumber(primaryFieldNumber), primaryFieldNumber),
+      );
+    }
+  }
+  
+  void _evaluateInclusiveRange(T typedValue, Cursor cursor) {
+    // For inclusive ranges, check each constraint individually
+    
+    // Combined gt_lt (inclusive range): must satisfy BOTH gt AND lt
+    if (gt != null && lt != null && gt!.compareTo(lt!) < 0) {
+      // This is an inclusive range (e.g., gt: 0, lt: 10)
+      if (!(typedValue.compareTo(gt!) > 0 && typedValue.compareTo(lt!) < 0)) {
+        // Violates the combined constraint - report the more relevant one
+        if (typedValue.compareTo(gt!) <= 0) {
+          cursor.violate(
+            message: '',
+            constraintId: '$constraintPrefix.gt_lt',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: '$constraintPrefix.gt_lt',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        }
+        return;
+      }
+    }
+    
+    // Combined gte_lte (inclusive range): must satisfy BOTH gte AND lte
+    if (gte != null && lte != null && gte!.compareTo(lte!) <= 0) {
+      // This is an inclusive range (e.g., gte: 128, lte: 256)
+      if (!(typedValue.compareTo(gte!) >= 0 && typedValue.compareTo(lte!) <= 0)) {
+        // Violates the combined constraint - report the more relevant one
+        if (typedValue.compareTo(gte!) < 0) {
+          cursor.violate(
+            message: '',
+            constraintId: '$constraintPrefix.gte_lte',
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: '$constraintPrefix.gte_lte', 
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        }
+        return;
+      }
+    }
+    
+    // Individual constraint checks (when not part of a range)
+    if (lt != null && gt == null && typedValue.compareTo(lt!) >= 0) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.lt',
+        rulePathElements: _buildRulePath('lt', 2),
       );
     }
     
-    // Check not_in
-    if (notInValues != null && notInValues!.contains(typedValue)) {
+    if (lte != null && gte == null && typedValue.compareTo(lte!) > 0) {
       cursor.violate(
-        message: 'Value must not be one of $notInValues',
-        constraintId: '$constraintPrefix.not_in',
+        message: '',
+        constraintId: '$constraintPrefix.lte',
+        rulePathElements: _buildRulePath('lte', 3),
       );
+    }
+    
+    if (gt != null && lt == null && typedValue.compareTo(gt!) <= 0) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.gt',
+        rulePathElements: _buildRulePath('gt', 4),
+      );
+    }
+    
+    if (gte != null && lte == null && typedValue.compareTo(gte!) < 0) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.gte',
+        rulePathElements: _buildRulePath('gte', 5),
+      );
+    }
+  }
+  
+  List<pb.FieldPathElement> _buildRulePath(String fieldName, int fieldNumber) {
+    return [
+      pb.FieldPathElement()
+        ..fieldNumber = ruleFieldNumber
+        ..fieldName = constraintPrefix
+        ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE,
+      pb.FieldPathElement()
+        ..fieldNumber = fieldNumber
+        ..fieldName = fieldName
+        ..fieldType = _getFieldTypeFromName(fieldName),
+    ];
+  }
+  
+  FieldDescriptorProto_Type _getFieldTypeFromName(String fieldName) {
+    // Return the appropriate type based on the constraint prefix
+    switch (constraintPrefix) {
+      case 'float':
+        return FieldDescriptorProto_Type.TYPE_FLOAT;
+      case 'double':
+        return FieldDescriptorProto_Type.TYPE_DOUBLE;
+      case 'int32':
+        return FieldDescriptorProto_Type.TYPE_INT32;
+      case 'int64':
+        return FieldDescriptorProto_Type.TYPE_INT64;
+      case 'uint32':
+        return FieldDescriptorProto_Type.TYPE_UINT32;
+      case 'uint64':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      default:
+        return FieldDescriptorProto_Type.TYPE_INT32;
+    }
+  }
+  
+  String _getFieldNameFromNumber(int fieldNumber) {
+    switch (fieldNumber) {
+      case 1: return 'const';
+      case 2: return 'lt';
+      case 3: return 'lte';
+      case 4: return 'gt';
+      case 5: return 'gte';
+      case 6: return 'in';
+      case 7: return 'not_in';
+      default: return 'unknown';
     }
   }
 }
@@ -153,6 +311,9 @@ class Int32Evaluator extends NumericEvaluator<int> {
   
   @override
   String get constraintPrefix => 'int32';
+  
+  @override
+  int get ruleFieldNumber => 3; // int32 field number in validate.proto
   
   @override
   bool isValidType(dynamic value) => value is int;
@@ -188,6 +349,9 @@ class Int64Evaluator extends NumericEvaluator<Int64> {
   String get constraintPrefix => 'int64';
   
   @override
+  int get ruleFieldNumber => 4;
+  
+  @override
   bool isValidType(dynamic value) => value is Int64;
   
   @override
@@ -211,6 +375,9 @@ class UInt32Evaluator extends NumericEvaluator<int> {
   
   @override
   String get constraintPrefix => 'uint32';
+  
+  @override
+  int get ruleFieldNumber => 5;
   
   @override
   bool isValidType(dynamic value) => value is int && value >= 0;
@@ -246,6 +413,9 @@ class UInt64Evaluator extends NumericEvaluator<Int64> {
   String get constraintPrefix => 'uint64';
   
   @override
+  int get ruleFieldNumber => 6;
+  
+  @override
   bool isValidType(dynamic value) => value is Int64 && !value.isNegative;
   
   @override
@@ -272,6 +442,9 @@ class FloatEvaluator extends NumericEvaluator<double> {
   
   @override
   String get constraintPrefix => 'float';
+  
+  @override
+  int get ruleFieldNumber => 1;
   
   @override
   bool isValidType(dynamic value) => value is double;
@@ -317,6 +490,9 @@ class DoubleEvaluator extends NumericEvaluator<double> {
   
   @override
   String get constraintPrefix => 'double';
+  
+  @override
+  int get ruleFieldNumber => 2;
   
   @override
   bool isValidType(dynamic value) => value is double;
@@ -967,6 +1143,9 @@ class Fixed32Evaluator extends NumericEvaluator<int> {
   String get constraintPrefix => 'fixed32';
   
   @override
+  int get ruleFieldNumber => 9;
+  
+  @override
   bool isValidType(dynamic value) => value is int && value >= 0;
   
   @override
@@ -1000,6 +1179,9 @@ class Fixed64Evaluator extends NumericEvaluator<Int64> {
   String get constraintPrefix => 'fixed64';
   
   @override
+  int get ruleFieldNumber => 10;
+  
+  @override
   bool isValidType(dynamic value) => value is Int64 && !value.isNegative;
   
   @override
@@ -1023,6 +1205,9 @@ class SFixed32Evaluator extends NumericEvaluator<int> {
   
   @override
   String get constraintPrefix => 'sfixed32';
+  
+  @override
+  int get ruleFieldNumber => 11;
   
   @override
   bool isValidType(dynamic value) => value is int;
@@ -1058,6 +1243,9 @@ class SFixed64Evaluator extends NumericEvaluator<Int64> {
   String get constraintPrefix => 'sfixed64';
   
   @override
+  int get ruleFieldNumber => 12;
+  
+  @override
   bool isValidType(dynamic value) => value is Int64;
   
   @override
@@ -1081,6 +1269,9 @@ class SInt32Evaluator extends NumericEvaluator<int> {
   
   @override
   String get constraintPrefix => 'sint32';
+  
+  @override
+  int get ruleFieldNumber => 7;
   
   @override
   bool isValidType(dynamic value) => value is int;
@@ -1114,6 +1305,9 @@ class SInt64Evaluator extends NumericEvaluator<Int64> {
   
   @override
   String get constraintPrefix => 'sint64';
+  
+  @override
+  int get ruleFieldNumber => 8;
   
   @override
   bool isValidType(dynamic value) => value is Int64;

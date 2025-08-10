@@ -1,8 +1,10 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
-import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart' as pb_duration;
-import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart' as pb_timestamp;
+import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart'
+    as pb_duration;
+import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart'
+    as pb_timestamp;
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
 import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
 import 'package:cel/cel.dart' as cel;
@@ -20,35 +22,35 @@ import 'cursor.dart';
 class EvaluatorBuilder {
   /// Cache of compiled evaluators by message type.
   final Map<Type, Evaluator> _cache = {};
-  
+
   /// Optional descriptor rules for extracting validation rules from FileDescriptorSet.
   final DescriptorRules? descriptorRules;
-  
+
   /// CEL compiler for custom expressions
   final CELCompiler _celCompiler;
-  
+
   EvaluatorBuilder({this.descriptorRules, cel.Environment? celEnvironment})
-    : _celCompiler = CELCompiler(env: celEnvironment);
-  
+      : _celCompiler = CELCompiler(env: celEnvironment);
+
   /// Builds an evaluator for the given message type.
   Evaluator buildForMessage(GeneratedMessage message) {
     final messageType = message.runtimeType;
-    
+
     // Check cache
     if (_cache.containsKey(messageType)) {
       return _cache[messageType]!;
     }
-    
+
     // Build evaluator
     final evaluator = _buildMessageEvaluator(message);
     _cache[messageType] = evaluator;
     return evaluator;
   }
-  
+
   /// Builds a message evaluator.
   Evaluator _buildMessageEvaluator(GeneratedMessage message) {
     final evaluators = <Evaluator>[];
-    
+
     // Build field evaluators
     for (final field in message.info_.fieldInfo.values) {
       final fieldEvaluator = _buildFieldEvaluator(field, message);
@@ -56,15 +58,15 @@ class EvaluatorBuilder {
         evaluators.add(fieldEvaluator);
       }
     }
-    
+
     if (evaluators.isEmpty) {
       // Return a no-op evaluator
       return NoOpEvaluator();
     }
-    
+
     return CompositeEvaluator(evaluators);
   }
-  
+
   /// Builds a field evaluator.
   Evaluator? _buildFieldEvaluator(FieldInfo field, GeneratedMessage message) {
     // Try to get field rules from the descriptor if available
@@ -73,7 +75,7 @@ class EvaluatorBuilder {
       final messageTypeName = descriptorRules!.getFullTypeName(message);
       fieldRules = descriptorRules!.getFieldRules(messageTypeName, field.name);
     }
-    
+
     // If we have field rules, build evaluator from them
     if (fieldRules != null) {
       final evaluator = buildFromFieldRules(fieldRules);
@@ -81,7 +83,7 @@ class EvaluatorBuilder {
         return FieldValidatorWrapper(field, evaluator, rules: fieldRules);
       }
     }
-    
+
     // Fall back to basic type validation
     // Handle repeated fields
     if (field.isRepeated && !field.isMapField) {
@@ -93,7 +95,7 @@ class EvaluatorBuilder {
         );
       }
     }
-    
+
     // Handle map fields
     if (field.isMapField) {
       // For map fields, we need map rules from fieldRules
@@ -103,18 +105,19 @@ class EvaluatorBuilder {
       }
       return null;
     }
-    
+
     // Handle message fields
     if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
       // For message fields, check for required/ignore rules
       final messageEvaluator = MessageFieldEvaluator(
         required: fieldRules?.required ?? false,
         ignore: fieldRules?.hasIgnore() == true ? fieldRules!.ignore : null,
-        nestedEvaluator: null, // Would need to recursively build for the nested type
+        nestedEvaluator:
+            null, // Would need to recursively build for the nested type
       );
       return FieldValidatorWrapper(field, messageEvaluator, rules: fieldRules);
     }
-    
+
     // Handle enum fields
     if (field.type == PbFieldType.OE || field.type == PbFieldType.PE) {
       if (fieldRules?.hasEnum_16() == true) {
@@ -125,91 +128,91 @@ class EvaluatorBuilder {
         return FieldValidatorWrapper(field, EnumEvaluator());
       }
     }
-    
+
     // Handle scalar fields
     final scalarEvaluator = _buildScalarEvaluator(field);
     if (scalarEvaluator != null) {
       return FieldValidatorWrapper(field, scalarEvaluator);
     }
-    
+
     return null;
   }
-  
+
   /// Builds a scalar evaluator based on field type.
   Evaluator? _buildScalarEvaluator(FieldInfo field) {
     // For now, create basic type validators
     // In a full implementation, we would read the actual rules from extensions
-    
+
     switch (field.type) {
       case PbFieldType.OB:
       case PbFieldType.PB:
         return BoolEvaluator();
-        
+
       case PbFieldType.O3:
       case PbFieldType.P3:
         return Int32Evaluator();
-        
+
       case PbFieldType.O6:
       case PbFieldType.P6:
         return Int64Evaluator();
-        
+
       case PbFieldType.OU3:
       case PbFieldType.PU3:
         return UInt32Evaluator();
-        
+
       case PbFieldType.OU6:
       case PbFieldType.PU6:
         return UInt64Evaluator();
-        
+
       case PbFieldType.OS3:
       case PbFieldType.PS3:
         return SInt32Evaluator();
-        
+
       case PbFieldType.OS6:
       case PbFieldType.PS6:
         return SInt64Evaluator();
-        
+
       case PbFieldType.OSF3:
       case PbFieldType.PSF3:
         return SFixed32Evaluator();
-        
+
       case PbFieldType.OSF6:
       case PbFieldType.PSF6:
         return SFixed64Evaluator();
-        
+
       case PbFieldType.OF3:
       case PbFieldType.PF3:
         return Fixed32Evaluator();
-        
+
       case PbFieldType.OF6:
       case PbFieldType.PF6:
         return Fixed64Evaluator();
-        
+
       case PbFieldType.OF:
       case PbFieldType.PF:
         return FloatEvaluator();
-        
+
       case PbFieldType.OD:
       case PbFieldType.PD:
         return DoubleEvaluator();
-        
+
       case PbFieldType.OS:
       case PbFieldType.PS:
         return StringRulesEvaluator();
-        
+
       case PbFieldType.OY:
       case PbFieldType.PY:
         return BytesEvaluator();
-        
+
       default:
         return null;
     }
   }
-  
+
   /// Builds an evaluator from field rules.
   Evaluator? buildFromFieldRules(FieldRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Build type-specific evaluator
     Evaluator? typeEvaluator;
     if (rules.hasBool_13()) {
@@ -256,11 +259,11 @@ class EvaluatorBuilder {
     } else if (rules.hasAny()) {
       typeEvaluator = _buildAnyEvaluator(rules.any);
     }
-    
+
     if (typeEvaluator != null) {
       evaluators.add(typeEvaluator);
     }
-    
+
     // Build CEL evaluator if there are CEL expressions
     if (rules.cel.isNotEmpty) {
       final celEvaluator = _buildCELEvaluator(rules.cel);
@@ -268,7 +271,7 @@ class EvaluatorBuilder {
         evaluators.add(celEvaluator);
       }
     }
-    
+
     // Return composite or single evaluator
     if (evaluators.isEmpty) {
       return null;
@@ -278,13 +281,13 @@ class EvaluatorBuilder {
       return CompositeEvaluator(evaluators);
     }
   }
-  
+
   Evaluator _buildBoolEvaluator(BoolRules rules) {
     return BoolEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
     );
   }
-  
+
   Evaluator _buildInt32Evaluator(Int32Rules rules) {
     return Int32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -296,7 +299,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildInt64Evaluator(Int64Rules rules) {
     return Int64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -308,7 +311,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildUInt32Evaluator(UInt32Rules rules) {
     return UInt32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -320,7 +323,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildUInt64Evaluator(UInt64Rules rules) {
     return UInt64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -332,7 +335,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildFloatEvaluator(FloatRules rules) {
     return FloatEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -345,7 +348,7 @@ class EvaluatorBuilder {
       finite: rules.hasFinite() ? rules.finite : null,
     );
   }
-  
+
   Evaluator _buildDoubleEvaluator(DoubleRules rules) {
     return DoubleEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -358,7 +361,7 @@ class EvaluatorBuilder {
       finite: rules.hasFinite() ? rules.finite : null,
     );
   }
-  
+
   Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
     return SInt32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -370,7 +373,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
     return SInt64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -382,7 +385,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
     return Fixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -394,7 +397,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
     return Fixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -406,7 +409,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
     return SFixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -418,7 +421,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
     return SFixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -430,7 +433,7 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
   }
-  
+
   Evaluator _buildStringEvaluator(StringRules rules) {
     return StringRulesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -455,10 +458,11 @@ class EvaluatorBuilder {
       uriRef: rules.hasUriRef() ? rules.uriRef : null,
       address: rules.hasAddress() ? rules.address : null,
       uuid: rules.hasUuid() ? rules.uuid : null,
-      wellKnownRegex: rules.hasWellKnownRegex() ? (rules.wellKnownRegex.value > 0) : null,
+      wellKnownRegex:
+          rules.hasWellKnownRegex() ? (rules.wellKnownRegex.value > 0) : null,
     );
   }
-  
+
   Evaluator _buildBytesEvaluator(BytesRules rules) {
     return BytesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -476,7 +480,7 @@ class EvaluatorBuilder {
       ipv6: rules.hasIpv6() ? rules.ipv6 : null,
     );
   }
-  
+
   Evaluator _buildEnumEvaluator(EnumRules rules) {
     // TODO: Need to get enum value names from the field descriptor
     // For now, just return the basic enum rules evaluator
@@ -485,17 +489,17 @@ class EvaluatorBuilder {
       enumValueNames: null, // Would need to be populated from field descriptor
     );
   }
-  
+
   Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
     // Build item evaluator from rules.items if present
     Evaluator? itemEvaluator;
     if (rules.hasItems()) {
       itemEvaluator = buildFromFieldRules(rules.items);
     }
-    
+
     // If no item evaluator, use a no-op
     itemEvaluator ??= NoOpEvaluator();
-    
+
     return RepeatedFieldEvaluator(
       itemEvaluator: itemEvaluator,
       minItems: rules.hasMinItems() ? rules.minItems.toInt() : null,
@@ -503,19 +507,19 @@ class EvaluatorBuilder {
       unique: rules.hasUnique() ? rules.unique : null,
     );
   }
-  
+
   Evaluator _buildMapEvaluator(MapRules rules) {
     // Build key and value evaluators from rules if present
     Evaluator? keyEvaluator;
     if (rules.hasKeys()) {
       keyEvaluator = buildFromFieldRules(rules.keys);
     }
-    
+
     Evaluator? valueEvaluator;
     if (rules.hasValues()) {
       valueEvaluator = buildFromFieldRules(rules.values);
     }
-    
+
     return MapFieldEvaluator(
       keyEvaluator: keyEvaluator,
       valueEvaluator: valueEvaluator,
@@ -523,23 +527,24 @@ class EvaluatorBuilder {
       maxPairs: rules.hasMaxPairs() ? rules.maxPairs.toInt() : null,
     );
   }
-  
+
   Evaluator _buildDurationEvaluator(DurationRules rules) {
     return DurationEvaluator(rules: rules);
   }
-  
+
   Evaluator _buildTimestampEvaluator(TimestampRules rules) {
     return TimestampEvaluator(rules: rules);
   }
-  
+
   Evaluator _buildAnyEvaluator(AnyRules rules) {
     return AnyEvaluator(rules: rules);
   }
-  
+
   /// Checks if a message type is a well-known type and builds appropriate evaluator.
-  Evaluator? buildWKTEvaluator(GeneratedMessage message, FieldRules? fieldRules) {
+  Evaluator? buildWKTEvaluator(
+      GeneratedMessage message, FieldRules? fieldRules) {
     final typeName = message.info_.messageName;
-    
+
     // Check for wrapper types
     if (message is BoolValue) {
       return BoolValueEvaluator(rules: fieldRules?.bool_13);
@@ -564,27 +569,28 @@ class EvaluatorBuilder {
     else if (message is pb_duration.Duration) {
       return DurationEvaluator(rules: fieldRules?.duration ?? DurationRules());
     } else if (message is pb_timestamp.Timestamp) {
-      return TimestampEvaluator(rules: fieldRules?.timestamp ?? TimestampRules());
+      return TimestampEvaluator(
+          rules: fieldRules?.timestamp ?? TimestampRules());
     } else if (message is pb_any.Any) {
       return AnyEvaluator(rules: fieldRules?.any ?? AnyRules());
     }
-    
+
     return null;
   }
-  
+
   /// Build CEL evaluator from a list of CEL rules
   Evaluator? _buildCELEvaluator(List<Rule> celRules) {
     if (celRules.isEmpty) {
       return null;
     }
-    
+
     try {
       final expressions = _celCompiler.compile(celRules);
-      
+
       if (expressions.isEmpty) {
         return null;
       }
-      
+
       return CELEvaluator(expressions: expressions);
     } catch (e) {
       // Log compilation error but don't fail completely
@@ -599,33 +605,75 @@ class FieldValidatorWrapper implements Evaluator {
   final FieldInfo field;
   final Evaluator evaluator;
   final FieldRules? rules;
-  
+
   FieldValidatorWrapper(this.field, this.evaluator, {this.rules});
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (value is! GeneratedMessage) {
       return;
     }
-    
+
     final message = value as GeneratedMessage;
     final fieldValue = message.getField(field.tagNumber);
-    
+
     // Check if we should skip validation based on ignore rules
     // For proto3, if field is not set and doesn't have const or required rules, skip
     final hasField = message.hasField(field.tagNumber);
-    
-    // Always validate if there's a const rule or required rule
-    final hasConstRule = rules?.hasBool_13() == true && rules!.bool_13.hasConst_1();
-    final hasRequiredRule = rules?.hasRequired() == true && rules!.required;
-    
-    if (!hasField && !hasConstRule && !hasRequiredRule) {
-      // Skip validation for unset fields without const/required rules
+
+    // Check if we should skip validation based on ignore rules
+    final shouldIgnore = _shouldIgnoreField(hasField, field, rules);
+    if (shouldIgnore) {
       return;
     }
-    
+
     final fieldCursor = cursor.field(field);
     evaluator.evaluate(fieldValue, fieldCursor);
+  }
+
+  /// Returns true if validation should always be skipped for this field.
+  bool _shouldIgnoreAlways(FieldRules? rules) {
+    return rules?.hasIgnore() == true && rules!.ignore == Ignore.IGNORE_ALWAYS;
+  }
+
+  /// Returns true if validation should be skipped when field is not set (zero value).
+  bool _shouldIgnoreEmpty(FieldInfo field, FieldRules? rules) {
+    // Proto3 scalar fields have implicit presence - they don't distinguish between unset and zero
+    // For these, we only skip if explicitly told to ignore zero values
+    if (rules?.hasIgnore() == true &&
+        rules!.ignore == Ignore.IGNORE_IF_ZERO_VALUE) {
+      return true;
+    }
+
+    // TODO: For proto2/editions with explicit presence, would return true here
+    // For now, assume proto3 semantics
+    return false;
+  }
+
+  /// Determines if field validation should be skipped.
+  bool _shouldIgnoreField(bool hasField, FieldInfo field, FieldRules? rules) {
+    // Always skip if ignore is set to ALWAYS
+    if (_shouldIgnoreAlways(rules)) {
+      return true;
+    }
+
+    // If field is set, always validate
+    if (hasField) {
+      return false;
+    }
+
+    // If field is not set and we should ignore empty, skip validation
+    if (_shouldIgnoreEmpty(field, rules)) {
+      return true;
+    }
+
+    // For required fields, never skip (will fail validation if not set)
+    if (rules?.hasRequired() == true && rules!.required) {
+      return false;
+    }
+
+    // If we have validation rules, validate the zero value
+    return rules == null;
   }
 }
 
