@@ -67,13 +67,14 @@ class FieldEvaluator implements Evaluator {
       return;
     }
     
-    // Skip validation if field is empty and should be ignored
-    if (shouldIgnoreEmpty && !hasValue) {
+    // For fields with IGNORE_IF_ZERO_VALUE, skip validation for default values
+    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && _isDefaultValue(fieldValue)) {
       return;
     }
     
-    // Skip if field value is default and we should ignore empty
-    if (shouldIgnoreEmpty && _isDefaultValue(fieldValue)) {
+    // For fields with presence, skip validation if not set
+    // (unless explicitly required, which was already checked above)
+    if (hasPresence && !hasValue && !required) {
       return;
     }
     

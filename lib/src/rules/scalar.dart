@@ -735,6 +735,8 @@ class StringRulesEvaluator implements Evaluator {
   final pb.KnownRegex? wellKnownRegex;
   final bool? strict;
   final bool? ipWithPrefixlen;
+  final bool? ipv4WithPrefixlen;
+  final bool? ipv6WithPrefixlen;
   final bool? tuuid;
   final bool? hostAndPort;
   
@@ -779,6 +781,8 @@ class StringRulesEvaluator implements Evaluator {
     this.wellKnownRegex,
     this.strict,
     this.ipWithPrefixlen,
+    this.ipv4WithPrefixlen,
+    this.ipv6WithPrefixlen,
     this.tuuid,
     this.hostAndPort,
   }) {
@@ -950,30 +954,54 @@ class StringRulesEvaluator implements Evaluator {
     }
     
     // IP validation (v4 or v6)
-    if (ip == true && !_isValidIP(value)) {
-      cursor.violate(
-        message: 'String must be a valid IP address',
-        constraintId: 'string.ip',
-        rulePath: RulePathBuilder.stringConstraint('ip'),
-      );
+    if (ip == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IP address',
+          constraintId: 'string.ip_empty',
+          rulePath: RulePathBuilder.stringConstraint('ip'),
+        );
+      } else if (!_isValidIP(value)) {
+        cursor.violate(
+          message: 'String must be a valid IP address',
+          constraintId: 'string.ip',
+          rulePath: RulePathBuilder.stringConstraint('ip'),
+        );
+      }
     }
     
     // IPv4 validation
-    if (ipv4 == true && !_isValidIPv4(value)) {
-      cursor.violate(
-        message: 'String must be a valid IPv4 address',
-        constraintId: 'string.ipv4',
-        rulePath: RulePathBuilder.stringConstraint('ipv4'),
-      );
+    if (ipv4 == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv4 address',
+          constraintId: 'string.ipv4_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv4'),
+        );
+      } else if (!_isValidIPv4(value)) {
+        cursor.violate(
+          message: 'String must be a valid IPv4 address',
+          constraintId: 'string.ipv4',
+          rulePath: RulePathBuilder.stringConstraint('ipv4'),
+        );
+      }
     }
     
     // IPv6 validation
-    if (ipv6 == true && !_isValidIPv6(value)) {
-      cursor.violate(
-        message: 'String must be a valid IPv6 address',
-        constraintId: 'string.ipv6',
-        rulePath: RulePathBuilder.stringConstraint('ipv6'),
-      );
+    if (ipv6 == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv6 address',
+          constraintId: 'string.ipv6_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv6'),
+        );
+      } else if (!_isValidIPv6(value)) {
+        cursor.violate(
+          message: 'String must be a valid IPv6 address',
+          constraintId: 'string.ipv6',
+          rulePath: RulePathBuilder.stringConstraint('ipv6'),
+        );
+      }
     }
     
     // URI validation
@@ -1067,6 +1095,40 @@ class StringRulesEvaluator implements Evaluator {
           message: 'value must be a valid IP with prefix length',
           constraintId: 'string.ip_with_prefixlen',
           rulePath: RulePathBuilder.stringConstraint('ip_with_prefixlen'),
+        );
+      }
+    }
+    
+    // IPv4 with prefix length validation
+    if (ipv4WithPrefixlen == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv4 with prefix length',
+          constraintId: 'string.ipv4_with_prefixlen_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv4_with_prefixlen'),
+        );
+      } else if (!_isValidIPv4WithPrefixLen(value)) {
+        cursor.violate(
+          message: 'value must be a valid IPv4 with prefix length',
+          constraintId: 'string.ipv4_with_prefixlen',
+          rulePath: RulePathBuilder.stringConstraint('ipv4_with_prefixlen'),
+        );
+      }
+    }
+    
+    // IPv6 with prefix length validation
+    if (ipv6WithPrefixlen == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv6 with prefix length',
+          constraintId: 'string.ipv6_with_prefixlen_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv6_with_prefixlen'),
+        );
+      } else if (!_isValidIPv6WithPrefixLen(value)) {
+        cursor.violate(
+          message: 'value must be a valid IPv6 with prefix length',
+          constraintId: 'string.ipv6_with_prefixlen',
+          rulePath: RulePathBuilder.stringConstraint('ipv6_with_prefixlen'),
         );
       }
     }
@@ -1195,6 +1257,16 @@ class StringRulesEvaluator implements Evaluator {
   // IP with prefix length validation
   bool _isValidIPWithPrefixLen(String value) {
     return StringValidators.isValidIPWithPrefixLen(value);
+  }
+  
+  // IPv4 with prefix length validation
+  bool _isValidIPv4WithPrefixLen(String value) {
+    return StringValidators.isValidIPv4WithPrefixLen(value);
+  }
+  
+  // IPv6 with prefix length validation
+  bool _isValidIPv6WithPrefixLen(String value) {
+    return StringValidators.isValidIPv6WithPrefixLen(value);
   }
   
   // TUUID validation

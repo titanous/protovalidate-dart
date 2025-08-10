@@ -125,18 +125,17 @@ class EvaluatorBuilder {
   }
   
   bool _fieldHasPresence(FieldInfo field) {
-    // Optional fields have presence
-    if (field.type == PbFieldType.OM || field.type == PbFieldType.OE ||
-        field.type == PbFieldType.OS || field.type == PbFieldType.OY ||
-        field.type == PbFieldType.OB || field.type == PbFieldType.O3 ||
-        field.type == PbFieldType.O6 || field.type == PbFieldType.OU3 ||
-        field.type == PbFieldType.OU6 || field.type == PbFieldType.OS3 ||
-        field.type == PbFieldType.OS6 || field.type == PbFieldType.OSF3 ||
-        field.type == PbFieldType.OSF6 || field.type == PbFieldType.OF3 ||
-        field.type == PbFieldType.OF6 || field.type == PbFieldType.OF ||
-        field.type == PbFieldType.OD) {
+    // In proto3, only explicit optional fields and message fields have presence
+    // For now, we'll assume proto3 scalar fields don't have presence
+    // TODO: Properly detect proto2 vs proto3 and explicit optional fields
+    
+    // Message fields always have presence
+    if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
       return true;
     }
+    
+    // For scalar fields, we currently assume no presence (proto3 behavior)
+    // This may need refinement to handle proto2 or explicit optional fields
     return false;
   }
   
@@ -664,6 +663,8 @@ class EvaluatorBuilder {
       wellKnownRegex: rules.hasWellKnownRegex() ? rules.wellKnownRegex : null,
       strict: rules.hasStrict() ? rules.strict : null,
       ipWithPrefixlen: rules.hasIpWithPrefixlen() ? rules.ipWithPrefixlen : null,
+      ipv4WithPrefixlen: rules.hasIpv4WithPrefixlen() ? rules.ipv4WithPrefixlen : null,
+      ipv6WithPrefixlen: rules.hasIpv6WithPrefixlen() ? rules.ipv6WithPrefixlen : null,
       hostAndPort: rules.hasHostAndPort() ? rules.hostAndPort : null,
       tuuid: rules.hasTuuid() ? rules.tuuid : null,
     );
