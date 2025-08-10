@@ -729,6 +729,8 @@ class StringRulesEvaluator implements Evaluator {
   final bool? uriRef;
   final bool? address;
   final bool? uuid;
+  final bool? ipv4Prefix;
+  final bool? ipv6Prefix;
   final bool? wellKnownRegex;
   
   // Cached compiled pattern
@@ -767,6 +769,8 @@ class StringRulesEvaluator implements Evaluator {
     this.uriRef,
     this.address,
     this.uuid,
+    this.ipv4Prefix,
+    this.ipv6Prefix,
     this.wellKnownRegex,
   }) {
     // Compile pattern once during construction
@@ -988,6 +992,57 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('uuid'),
       );
     }
+    
+    // Address validation (IP or hostname)
+    if (address == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid hostname or IP address',
+          constraintId: 'string.address_empty',
+          rulePath: RulePathBuilder.stringConstraint('address'),
+        );
+      } else if (!_isValidAddress(value)) {
+        cursor.violate(
+          message: 'value must be a valid hostname or IP address',
+          constraintId: 'string.address',
+          rulePath: RulePathBuilder.stringConstraint('address'),
+        );
+      }
+    }
+    
+    // IPv4 prefix validation
+    if (ipv4Prefix == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv4 prefix',
+          constraintId: 'string.ipv4_prefix_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv4_prefix'),
+        );
+      } else if (!_isValidIPv4Prefix(value)) {
+        cursor.violate(
+          message: 'value must be a valid IPv4 prefix',
+          constraintId: 'string.ipv4_prefix',
+          rulePath: RulePathBuilder.stringConstraint('ipv4_prefix'),
+        );
+      }
+    }
+    
+    // IPv6 prefix validation
+    if (ipv6Prefix == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IPv6 prefix',
+          constraintId: 'string.ipv6_prefix_empty',
+          rulePath: RulePathBuilder.stringConstraint('ipv6_prefix'),
+        );
+      } else if (!_isValidIPv6Prefix(value)) {
+        cursor.violate(
+          message: 'value must be a valid IPv6 prefix',
+          constraintId: 'string.ipv6_prefix',
+          rulePath: RulePathBuilder.stringConstraint('ipv6_prefix'),
+        );
+      }
+    }
   }
   
   // Email validation - simplified version
@@ -1080,6 +1135,113 @@ class StringRulesEvaluator implements Evaluator {
     );
     return uuidRegex.hasMatch(value);
   }
+  
+  // Address validation (IP or hostname)
+  bool _isValidAddress(String value) {
+    return _isValidIP(value) || _isValidHostname(value);
+  }
+  
+  // IPv4 prefix validation
+  bool _isValidIPv4Prefix(String value) {
+    // IPv4 prefix format: x.x.x.x/y where y is 0-32
+    final parts = value.split('/');
+    if (parts.length != 2) return false;
+    
+    final ip = parts[0];
+    final prefixLength = int.tryParse(parts[1]);
+    
+    if (prefixLength == null || prefixLength < 0 || prefixLength > 32) {
+      return false;
+    }
+    
+    // Validate the IP part
+    if (!_isValidIPv4(ip)) return false;
+    
+    // Check that host bits are zero
+    final ipParts = ip.split('.').map(int.parse).toList();
+    int ipInt = (ipParts[0] << 24) | (ipParts[1] << 16) | (ipParts[2] << 8) | ipParts[3];
+    
+    // Create mask for the prefix length
+    int hostBits = 32 - prefixLength;
+    if (hostBits > 0) {
+      int hostMask = (1 << hostBits) - 1;
+      if ((ipInt & hostMask) != 0) {
+        return false; // Host bits are not zero
+      }
+    }
+    
+    return true;
+  }
+  
+  // IPv6 prefix validation
+  bool _isValidIPv6Prefix(String value) {
+    // IPv6 prefix format: xxxx:xxxx::/y where y is 0-128
+    final parts = value.split('/');
+    if (parts.length != 2) return false;
+    
+    final ip = parts[0];
+    final prefixLength = int.tryParse(parts[1]);
+    
+    if (prefixLength == null || prefixLength < 0 || prefixLength > 128) {
+      return false;
+    }
+    
+    // Parse and expand IPv6 address to check host bits
+    final expanded = _expandIPv6(ip);
+    if (expanded == null) return false;
+    
+    // Convert to bytes and check host bits
+    final groups = expanded.split(':');
+    if (groups.length != 8) return false;
+    
+    // Check that host bits are zero
+    int bitsChecked = 0;
+    for (final group in groups) {
+      final value = int.tryParse(group, radix: 16);
+      if (value == null) return false;
+      
+      for (int bit = 15; bit >= 0; bit--) {
+        bitsChecked++;
+        if (bitsChecked > prefixLength) {
+          // This is a host bit, it must be zero
+          if ((value & (1 << bit)) != 0) {
+            return false;
+          }
+        }
+      }
+    }
+    
+    return true;
+  }
+  
+  // Helper to expand IPv6 address to full form
+  String? _expandIPv6(String ip) {
+    // Handle IPv6 addresses with :: notation
+    if (ip.contains('::')) {
+      final parts = ip.split('::');
+      if (parts.length > 2) return null; // Invalid format
+      
+      final left = parts[0].isEmpty ? [] : parts[0].split(':');
+      final right = parts.length > 1 && parts[1].isNotEmpty ? parts[1].split(':') : [];
+      
+      final missingGroups = 8 - left.length - right.length;
+      if (missingGroups < 0) return null; // Too many groups
+      
+      final expanded = <String>[];
+      expanded.addAll(left.map((g) => g.padLeft(4, '0')));
+      for (int i = 0; i < missingGroups; i++) {
+        expanded.add('0000');
+      }
+      expanded.addAll(right.map((g) => g.padLeft(4, '0')));
+      
+      return expanded.join(':');
+    } else {
+      // No :: notation, just pad groups
+      final groups = ip.split(':');
+      if (groups.length != 8) return null;
+      return groups.map((g) => g.padLeft(4, '0')).join(':');
+    }
+  }
 
   List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {
     return [
@@ -1121,6 +1283,8 @@ class StringRulesEvaluator implements Evaluator {
       case 'uri_ref':
       case 'address':
       case 'uuid':
+      case 'ipv4_prefix':
+      case 'ipv6_prefix':
       case 'well_known_regex':
         return FieldDescriptorProto_Type.TYPE_BOOL;
       default:

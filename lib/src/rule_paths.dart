@@ -59,6 +59,8 @@ class ConstraintNumbers {
   static const int uriRef = 18;
   static const int address = 21;
   static const int uuid = 22;
+  static const int ipv4Prefix = 30;
+  static const int ipv6Prefix = 31;
   static const int wellKnownRegex = 24;
   
   // Numeric constraints (lt, lte, gt, gte)
@@ -158,6 +160,8 @@ class RulePathBuilder {
       case 'uri_ref': return ConstraintNumbers.uriRef;
       case 'address': return ConstraintNumbers.address;
       case 'uuid': return ConstraintNumbers.uuid;
+      case 'ipv4_prefix': return ConstraintNumbers.ipv4Prefix;
+      case 'ipv6_prefix': return ConstraintNumbers.ipv6Prefix;
       case 'well_known_regex': return ConstraintNumbers.wellKnownRegex;
       default: throw ArgumentError('Unknown string constraint: $constraintName');
     }
@@ -191,6 +195,8 @@ class RulePathBuilder {
       case 'uri_ref':
       case 'address':
       case 'uuid':
+      case 'ipv4_prefix':
+      case 'ipv6_prefix':
       case 'well_known_regex':
         return FieldDescriptorProto_Type.TYPE_BOOL;
       default:
