@@ -588,3 +588,233 @@ class NoOpEvaluator implements Evaluator {
     // Do nothing
   }
 }
+
+/// Evaluator for Google protobuf wrapper types that delegates to scalar evaluators.
+/// These evaluators extract the .value field from wrapper types and delegate validation
+/// to the appropriate scalar evaluator.
+
+/// Wrapper evaluator for BoolValue.
+class BoolWrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  BoolWrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! BoolValue) {
+      cursor.violate(
+        message: 'Expected bool, got ${value.runtimeType}',
+        constraintId: 'bool.type',
+      );
+      return;
+    }
+    
+    // Extract the wrapped value and delegate to scalar evaluator
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for Int32Value.
+class Int32WrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  Int32WrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! Int32Value) {
+      cursor.violate(
+        message: 'Expected int32, got ${value.runtimeType}',
+        constraintId: 'int32.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for Int64Value.
+class Int64WrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  Int64WrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! Int64Value) {
+      cursor.violate(
+        message: 'Expected int64, got ${value.runtimeType}',
+        constraintId: 'int64.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for UInt32Value.
+class UInt32WrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  UInt32WrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! UInt32Value) {
+      cursor.violate(
+        message: 'Expected uint32, got ${value.runtimeType}',
+        constraintId: 'uint32.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for UInt64Value.
+class UInt64WrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  UInt64WrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! UInt64Value) {
+      cursor.violate(
+        message: 'Expected uint64, got ${value.runtimeType}',
+        constraintId: 'uint64.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for FloatValue.
+class FloatWrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  FloatWrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! FloatValue) {
+      cursor.violate(
+        message: 'Expected float, got ${value.runtimeType}',
+        constraintId: 'float.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for DoubleValue.
+class DoubleWrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  DoubleWrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! DoubleValue) {
+      cursor.violate(
+        message: 'Expected double, got ${value.runtimeType}',
+        constraintId: 'double.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for StringValue.
+class StringWrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  StringWrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! StringValue) {
+      cursor.violate(
+        message: 'Expected string, got ${value.runtimeType}',
+        constraintId: 'string.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}
+
+/// Wrapper evaluator for BytesValue.
+class BytesWrapperEvaluator implements Evaluator {
+  final Evaluator delegate;
+  
+  BytesWrapperEvaluator(this.delegate);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      delegate.evaluate(null, cursor);
+      return;
+    }
+    
+    if (value is! BytesValue) {
+      cursor.violate(
+        message: 'Expected bytes, got ${value.runtimeType}',
+        constraintId: 'bytes.type',
+      );
+      return;
+    }
+    
+    delegate.evaluate(value.value, cursor);
+  }
+}

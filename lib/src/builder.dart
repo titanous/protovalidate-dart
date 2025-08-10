@@ -83,7 +83,9 @@ class EvaluatorBuilder {
       
       final evaluator = buildFromFieldRules(fieldRules);
       if (evaluator != null) {
-        return FieldValidatorWrapper(field, evaluator, rules: fieldRules);
+        // Check if this field is a wrapper type and needs a wrapper evaluator
+        final wrappedEvaluator = _wrapForWrapperType(field, evaluator);
+        return FieldValidatorWrapper(field, wrappedEvaluator, rules: fieldRules);
       }
     }
 
@@ -123,12 +125,15 @@ class EvaluatorBuilder {
 
     // Handle enum fields
     if (field.type == PbFieldType.OE || field.type == PbFieldType.PE) {
+      // Get enum value names from field info
+      final enumValueNames = _getEnumValueNames(field);
+      
       if (fieldRules?.hasEnum_16() == true) {
-        final enumEvaluator = _buildEnumEvaluator(fieldRules!.enum_16);
+        final enumEvaluator = _buildEnumEvaluator(fieldRules!.enum_16, enumValueNames);
         return FieldValidatorWrapper(field, enumEvaluator, rules: fieldRules);
       } else {
         // Basic enum evaluator
-        return FieldValidatorWrapper(field, EnumEvaluator());
+        return FieldValidatorWrapper(field, EnumEvaluator(enumValueNames: enumValueNames));
       }
     }
 
@@ -249,7 +254,9 @@ class EvaluatorBuilder {
     } else if (rules.hasBytes()) {
       typeEvaluator = _buildBytesEvaluator(rules.bytes);
     } else if (rules.hasEnum_16()) {
-      typeEvaluator = _buildEnumEvaluator(rules.enum_16);
+      // For field rules without a field context, we can't get enum names
+      // This would need to be handled differently in a full implementation  
+      typeEvaluator = _buildEnumEvaluator(rules.enum_16, null);
     } else if (rules.hasRepeated()) {
       typeEvaluator = _buildRepeatedEvaluator(rules.repeated);
     } else if (rules.hasMap()) {
@@ -484,13 +491,25 @@ class EvaluatorBuilder {
     );
   }
 
-  Evaluator _buildEnumEvaluator(EnumRules rules) {
-    // TODO: Need to get enum value names from the field descriptor
-    // For now, just return the basic enum rules evaluator
+  Evaluator _buildEnumEvaluator(EnumRules rules, [Map<int, String>? enumValueNames]) {
     return EnumRulesEvaluator(
       rules: rules,
-      enumValueNames: null, // Would need to be populated from field descriptor
+      enumValueNames: enumValueNames,
     );
+  }
+  
+  /// Gets enum value names from field info.
+  Map<int, String>? _getEnumValueNames(FieldInfo field) {
+    final enumValues = field.enumValues;
+    if (enumValues == null || enumValues.isEmpty) {
+      return null;
+    }
+    
+    final result = <int, String>{};
+    for (final enumValue in enumValues) {
+      result[enumValue.value] = enumValue.name;
+    }
+    return result;
   }
 
   Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
@@ -705,8 +724,73 @@ class EvaluatorBuilder {
       case PbFieldType.PE:
         return 'enum';
         
+      case PbFieldType.OM:
+      case PbFieldType.PM:
+        // Handle message types - check for Google wrapper types
+        return _getWrapperTypeRuleName(field);
+        
       default:
         return null;
+    }
+  }
+  
+  /// Gets the expected rule type for Google protobuf wrapper types.
+  String? _getWrapperTypeRuleName(FieldInfo field) {
+    // Check if this is a Google protobuf wrapper type by creating an instance
+    if (field.subBuilder == null) return null;
+    
+    try {
+      final message = field.subBuilder!();
+      
+      // Check runtime type of the wrapper message
+      if (message is BoolValue) return 'bool';
+      if (message is Int32Value) return 'int32';
+      if (message is Int64Value) return 'int64';
+      if (message is UInt32Value) return 'uint32';
+      if (message is UInt64Value) return 'uint64';
+      if (message is FloatValue) return 'float';
+      if (message is DoubleValue) return 'double';
+      if (message is StringValue) return 'string';
+      if (message is BytesValue) return 'bytes';
+      
+      // Not a wrapper type - regular message, no scalar rules expected
+      return null;
+    } catch (e) {
+      // If we can't create the message, assume it's not a wrapper type
+      return null;
+    }
+  }
+  
+  /// Wraps an evaluator with appropriate wrapper type handling if needed.
+  Evaluator _wrapForWrapperType(FieldInfo field, Evaluator evaluator) {
+    final wrapperType = _getWrapperTypeRuleName(field);
+    if (wrapperType == null) {
+      // Not a wrapper type, return evaluator as-is
+      return evaluator;
+    }
+    
+    // Wrap the evaluator based on the wrapper type
+    switch (wrapperType) {
+      case 'bool':
+        return BoolWrapperEvaluator(evaluator);
+      case 'int32':
+        return Int32WrapperEvaluator(evaluator);
+      case 'int64':
+        return Int64WrapperEvaluator(evaluator);
+      case 'uint32':
+        return UInt32WrapperEvaluator(evaluator);
+      case 'uint64':
+        return UInt64WrapperEvaluator(evaluator);
+      case 'float':
+        return FloatWrapperEvaluator(evaluator);
+      case 'double':
+        return DoubleWrapperEvaluator(evaluator);
+      case 'string':
+        return StringWrapperEvaluator(evaluator);
+      case 'bytes':
+        return BytesWrapperEvaluator(evaluator);
+      default:
+        return evaluator;
     }
   }
 }

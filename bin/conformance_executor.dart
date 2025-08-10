@@ -22,6 +22,9 @@ void main() async {
   // Create validator with FileDescriptorSet if provided
   final validator = Validator(
     fileDescriptorSet: request.hasFdset() ? request.fdset : null,
+    options: ValidatorOptions(
+      extensionRegistry: extensionRegistry,
+    ),
   );
   
   // Create a type registry for unpacking Any messages
