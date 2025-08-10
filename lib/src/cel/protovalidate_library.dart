@@ -36,6 +36,22 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
+      // isIp(string, int) - specific version
+      Overload('isIp', binaryOperator: (value, version) {
+        if (value is StringValue && version is IntValue) {
+          final ver = version.value.toInt();
+          if (ver == 4) {
+            return BooleanValue(StringValidators.isValidIPv4(value.value));
+          } else if (ver == 6) {
+            return BooleanValue(StringValidators.isValidIPv6(value.value));
+          } else {
+            // Invalid version - no IP address can be valid
+            return BooleanValue(false);
+          }
+        }
+        return BooleanValue(false);
+      }),
+      
       Overload('isIpv4', unaryOperator: (value) {
         if (value is StringValue) {
           return BooleanValue(StringValidators.isValidIPv4(value.value));

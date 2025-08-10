@@ -378,10 +378,71 @@ class StringValidators {
 
   // Strict IPv6 prefix validation
   static bool isValidStrictIPv6Prefix(String ip, int prefixLength) {
-    // For IPv6, we need to expand the address first
-    // This is complex, so for now we'll accept any valid IPv6 with prefix
-    // TODO: Implement strict IPv6 prefix validation
+    // Parse and expand IPv6 address to full form
+    final expanded = _expandIPv6(ip);
+    if (expanded == null) return false;
+    
+    // Convert to binary representation
+    final parts = expanded.split(':');
+    if (parts.length != 8) return false;
+    
+    final bytes = <int>[];
+    for (final part in parts) {
+      final value = int.tryParse(part, radix: 16);
+      if (value == null) return false;
+      bytes.add((value >> 8) & 0xFF);
+      bytes.add(value & 0xFF);
+    }
+    
+    // Check that host bits are zero
+    int bitsChecked = 0;
+    for (int i = 0; i < 16; i++) {
+      for (int bit = 7; bit >= 0; bit--) {
+        if (bitsChecked >= prefixLength) {
+          // This is a host bit, should be zero
+          if ((bytes[i] & (1 << bit)) != 0) {
+            return false;
+          }
+        }
+        bitsChecked++;
+      }
+    }
+    
     return true;
+  }
+  
+  // Helper to expand IPv6 address to full form
+  static String? _expandIPv6(String ip) {
+    // Remove any zone identifier
+    final zoneIndex = ip.indexOf('%');
+    if (zoneIndex >= 0) {
+      ip = ip.substring(0, zoneIndex);
+    }
+    
+    // Handle :: expansion
+    if (ip.contains('::')) {
+      final parts = ip.split('::');
+      if (parts.length > 2) return null; // Invalid - multiple ::
+      
+      final left = parts[0].isEmpty ? [] : parts[0].split(':');
+      final right = parts.length > 1 && parts[1].isNotEmpty ? parts[1].split(':') : [];
+      
+      final totalParts = left.length + right.length;
+      if (totalParts > 7) return null; // Too many parts
+      
+      final middle = List.filled(8 - totalParts, '0');
+      final allParts = [...left, ...middle, ...right];
+      
+      // Pad each part to 4 hex digits
+      return allParts.map((part) => part.padLeft(4, '0')).join(':');
+    } else {
+      // No :: compression
+      final parts = ip.split(':');
+      if (parts.length != 8) return null;
+      
+      // Pad each part to 4 hex digits
+      return parts.map((part) => part.padLeft(4, '0')).join(':');
+    }
   }
 
   // Host and port validation

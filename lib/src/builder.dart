@@ -53,6 +53,31 @@ class EvaluatorBuilder {
   Evaluator _buildMessageEvaluator(GeneratedMessage message) {
     final evaluators = <Evaluator>[];
 
+    // Check for message-level rules
+    if (descriptorRules != null) {
+      final messageTypeName = descriptorRules!.getFullTypeName(message);
+      final messageRules = descriptorRules!.getMessageRules(messageTypeName);
+      
+      if (messageRules != null) {
+        // Add message-level CEL evaluator if there are CEL expressions
+        if (messageRules.cel.isNotEmpty) {
+          try {
+            final compiledExpressions = _celCompiler.compile(messageRules.cel.toList());
+            if (compiledExpressions.isNotEmpty) {
+              evaluators.add(MessageCELEvaluator(expressions: compiledExpressions));
+            }
+          } catch (e) {
+            throw CompilationError('Failed to compile message-level CEL expressions: $e');
+          }
+        }
+        
+        // Add oneof evaluator if there are oneof rules
+        if (messageRules.oneof.isNotEmpty) {
+          evaluators.add(MessageRulesEvaluator(rules: messageRules, builder: this));
+        }
+      }
+    }
+
     // Build field evaluators
     for (final field in message.info_.fieldInfo.values) {
       final fieldEvaluator = _buildFieldEvaluator(field, message);
@@ -648,6 +673,12 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildStringEvaluator(StringRules rules) {
+    // Check for predefined rules first
+    final predefinedEvaluator = PredefinedRulesChecker.checkStringRules(rules);
+    if (predefinedEvaluator != null) {
+      return predefinedEvaluator;
+    }
+    
     return StringRulesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       len: rules.hasLen() ? rules.len.toInt() : null,
