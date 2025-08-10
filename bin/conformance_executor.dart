@@ -56,6 +56,9 @@ void main() async {
       } else if (result.isInvalid) {
         if (result.violations != null) {
           testResult.validationError = result.violations!;
+        } else {
+          // This shouldn't happen, but handle it
+          testResult.unexpectedError = 'Invalid result without violations';
         }
       } else if (result.isCompilationError) {
         testResult.compilationError = result.error.toString();
@@ -69,13 +72,20 @@ void main() async {
     } catch (e, stackTrace) {
       // Handle any unexpected errors
       final testResult = TestResult()
-        ..unexpectedError = 'Error: $e\nStack: $stackTrace';
+        ..unexpectedError = 'Error: $e';
       response.results[caseName] = testResult;
     }
   }
   
   // Write the response to stdout
-  final output = response.writeToBuffer();
-  stdout.add(output);
-  await stdout.flush();
+  try {
+    final output = response.writeToBuffer();
+    stdout.add(output);
+    await stdout.flush();
+    await stdout.close();
+  } catch (e, stack) {
+    stderr.writeln('[FATAL] Failed to write response: $e');
+    stderr.writeln('Stack: $stack');
+    exit(1);
+  }
 }

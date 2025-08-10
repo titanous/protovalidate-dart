@@ -114,6 +114,14 @@ class ProtovalidateLibrary extends Library {
         }
         return BooleanValue(false);
       }),
+      
+      // Host and port validation function
+      Overload('isHostAndPort', binaryOperator: (value, portRequired) {
+        if (value is StringValue && portRequired is BooleanValue) {
+          return BooleanValue(_isValidHostAndPort(value.value, portRequired.value));
+        }
+        return BooleanValue(false);
+      }),
     ];
   }
 
@@ -268,6 +276,75 @@ class ProtovalidateLibrary extends Library {
   bool _isValidAddress(String value) {
     // Address validation - can be IP or hostname
     return _isValidIp(value) || _isValidHostname(value);
+  }
+
+  bool _isValidHostAndPort(String value, bool portRequired) {
+    if (value.isEmpty) return false;
+    
+    // Find the last colon that could be a port separator
+    // Need to handle IPv6 addresses in brackets: [::1]:8080
+    String host;
+    String? port;
+    
+    if (value.startsWith('[')) {
+      // IPv6 address in brackets
+      final closeBracket = value.indexOf(']');
+      if (closeBracket == -1) return false;
+      
+      host = value.substring(1, closeBracket);
+      if (closeBracket + 1 < value.length) {
+        if (value[closeBracket + 1] != ':') return false;
+        port = value.substring(closeBracket + 2);
+      }
+    } else {
+      // Regular hostname or IPv4
+      final lastColon = value.lastIndexOf(':');
+      if (lastColon == -1) {
+        host = value;
+      } else {
+        // Check if this could be an IPv6 address without brackets (has multiple colons)
+        final colonCount = ':'.allMatches(value).length;
+        if (colonCount > 1) {
+          // This is an IPv6 address without port
+          host = value;
+        } else {
+          host = value.substring(0, lastColon);
+          port = value.substring(lastColon + 1);
+        }
+      }
+    }
+    
+    // Validate the host part
+    if (!_isValidHostname(host) && !_isValidIp(host)) {
+      return false;
+    }
+    
+    // Check port requirements
+    if (portRequired && (port == null || port.isEmpty)) {
+      return false;
+    }
+    
+    // If port is present, validate it
+    if (port != null && port.isNotEmpty) {
+      if (!_isValidPort(port)) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+  
+  bool _isValidPort(String port) {
+    if (port.isEmpty) return false;
+    
+    // Port cannot have leading zeros unless it's just "0"
+    if (port.length > 1 && port.startsWith('0')) return false;
+    
+    final portNum = int.tryParse(port);
+    if (portNum == null) return false;
+    
+    // Port must be in range 0-65535
+    return portNum >= 0 && portNum <= 65535;
   }
 
   bool _isUnique(List<dynamic> list) {

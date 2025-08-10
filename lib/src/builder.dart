@@ -638,9 +638,8 @@ class EvaluatorBuilder {
 
       return CELEvaluator(expressions: expressions);
     } catch (e) {
-      // Log compilation error but don't fail completely
-      print('Failed to compile CEL expressions: $e');
-      return null;
+      // Rethrow compilation error - don't catch and hide it
+      rethrow;
     }
   }
   
