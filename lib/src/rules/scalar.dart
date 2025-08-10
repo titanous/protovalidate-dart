@@ -5,6 +5,7 @@ import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 import '../cursor.dart';
 import '../evaluator.dart';
 import '../rule_paths.dart';
+import '../shared/string_validators.dart';
 
 /// Evaluator for boolean field rules.
 class BoolEvaluator implements Evaluator {
@@ -731,7 +732,11 @@ class StringRulesEvaluator implements Evaluator {
   final bool? uuid;
   final bool? ipv4Prefix;
   final bool? ipv6Prefix;
-  final bool? wellKnownRegex;
+  final pb.KnownRegex? wellKnownRegex;
+  final bool? strict;
+  final bool? ipWithPrefixlen;
+  final bool? tuuid;
+  final bool? hostAndPort;
   
   // Cached compiled pattern
   RegExp? _compiledPattern;
@@ -772,6 +777,10 @@ class StringRulesEvaluator implements Evaluator {
     this.ipv4Prefix,
     this.ipv6Prefix,
     this.wellKnownRegex,
+    this.strict,
+    this.ipWithPrefixlen,
+    this.tuuid,
+    this.hostAndPort,
   }) {
     // Compile pattern once during construction
     if (pattern != null) {
@@ -804,8 +813,9 @@ class StringRulesEvaluator implements Evaluator {
       );
     }
     
-    // Check exact length
-    if (len != null && stringValue.length != len) {
+    // Check exact length (count runes, not UTF-16 code units)
+    final runeLength = stringValue.runes.length;
+    if (len != null && runeLength != len) {
       cursor.violate(
         message: 'value length must be $len characters',
         constraintId: 'string.len',
@@ -813,8 +823,8 @@ class StringRulesEvaluator implements Evaluator {
       );
     }
     
-    // Check min length
-    if (minLen != null && stringValue.length < minLen!) {
+    // Check min length (count runes, not UTF-16 code units)
+    if (minLen != null && stringValue.runes.length < minLen!) {
       cursor.violate(
         message: 'String must be at least $minLen characters',
         constraintId: 'string.min_len',
@@ -822,8 +832,8 @@ class StringRulesEvaluator implements Evaluator {
       );
     }
     
-    // Check max length
-    if (maxLen != null && stringValue.length > maxLen!) {
+    // Check max length (count runes, not UTF-16 code units)
+    if (maxLen != null && stringValue.runes.length > maxLen!) {
       cursor.violate(
         message: 'String must be at most $maxLen characters',
         constraintId: 'string.max_len',
@@ -1043,204 +1053,168 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
+    
+    // IP with prefix length validation
+    if (ipWithPrefixlen == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid IP with prefix length',
+          constraintId: 'string.ip_with_prefixlen_empty',
+          rulePath: RulePathBuilder.stringConstraint('ip_with_prefixlen'),
+        );
+      } else if (!_isValidIPWithPrefixLen(value)) {
+        cursor.violate(
+          message: 'value must be a valid IP with prefix length',
+          constraintId: 'string.ip_with_prefixlen',
+          rulePath: RulePathBuilder.stringConstraint('ip_with_prefixlen'),
+        );
+      }
+    }
+    
+    // TUUID validation
+    if (tuuid == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid TUUID',
+          constraintId: 'string.tuuid_empty',
+          rulePath: RulePathBuilder.stringConstraint('tuuid'),
+        );
+      } else if (!_isValidTUUID(value)) {
+        cursor.violate(
+          message: 'value must be a valid TUUID',
+          constraintId: 'string.tuuid',
+          rulePath: RulePathBuilder.stringConstraint('tuuid'),
+        );
+      }
+    }
+    
+    // Host and port validation
+    if (hostAndPort == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: 'value is empty, which is not a valid host and port',
+          constraintId: 'string.host_and_port_empty',
+          rulePath: RulePathBuilder.stringConstraint('host_and_port'),
+        );
+      } else if (!_isValidHostAndPort(value)) {
+        cursor.violate(
+          message: 'value must be a valid host and port',
+          constraintId: 'string.host_and_port',
+          rulePath: RulePathBuilder.stringConstraint('host_and_port'),
+        );
+      }
+    }
+    
+    // Well-known regex validation
+    if (wellKnownRegex != null && wellKnownRegex != pb.KnownRegex.KNOWN_REGEX_UNSPECIFIED) {
+      _validateWellKnownRegex(value, cursor);
+    }
   }
   
-  // Email validation - simplified version
+  void _validateWellKnownRegex(String value, Cursor cursor) {
+    switch (wellKnownRegex) {
+      case pb.KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME:
+        if (!_isValidHTTPHeaderName(value)) {
+          cursor.violate(
+            message: 'value must be a valid HTTP header name',
+            constraintId: 'string.well_known_regex.http_header_name',
+            rulePath: RulePathBuilder.stringConstraint('well_known_regex'),
+          );
+        }
+        break;
+      case pb.KnownRegex.KNOWN_REGEX_HTTP_HEADER_VALUE:
+        if (!_isValidHTTPHeaderValue(value)) {
+          cursor.violate(
+            message: 'value must be a valid HTTP header value',
+            constraintId: 'string.well_known_regex.http_header_value',
+            rulePath: RulePathBuilder.stringConstraint('well_known_regex'),
+          );
+        }
+        break;
+      default:
+        // Unknown regex type
+        break;
+    }
+  }
+  
+  // Email validation
   bool _isValidEmail(String value) {
-    final emailRegex = RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    );
-    return emailRegex.hasMatch(value);
+    return StringValidators.isValidEmail(value);
   }
   
   // Hostname validation
   bool _isValidHostname(String value) {
-    if (value.isEmpty || value.length > 253) return false;
-    
-    final labels = value.split('.');
-    for (final label in labels) {
-      if (label.isEmpty || label.length > 63) return false;
-      if (!RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$').hasMatch(label)) {
-        return false;
-      }
-    }
-    return true;
+    return StringValidators.isValidHostname(value);
   }
   
   // IP validation (v4 or v6)
   bool _isValidIP(String value) {
-    return _isValidIPv4(value) || _isValidIPv6(value);
+    return StringValidators.isValidIP(value);
   }
   
   // IPv4 validation
   bool _isValidIPv4(String value) {
-    final parts = value.split('.');
-    if (parts.length != 4) return false;
-    
-    for (final part in parts) {
-      final num = int.tryParse(part);
-      if (num == null || num < 0 || num > 255) return false;
-    }
-    return true;
+    return StringValidators.isValidIPv4(value);
   }
   
-  // IPv6 validation - simplified
+  // IPv6 validation
   bool _isValidIPv6(String value) {
-    // Basic IPv6 pattern - this is a simplified check
-    final ipv6Regex = RegExp(
-      r'^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|'
-      r'([0-9a-fA-F]{1,4}:){1,7}:|'
-      r'([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|'
-      r'([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|'
-      r'([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|'
-      r'([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|'
-      r'([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|'
-      r'[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|'
-      r':((:[0-9a-fA-F]{1,4}){1,7}|:)|'
-      r'fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|'
-      r'::(ffff(:0{1,4}){0,1}:){0,1}'
-      r'((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}'
-      r'(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|'
-      r'([0-9a-fA-F]{1,4}:){1,4}:'
-      r'((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}'
-      r'(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))$',
-    );
-    return ipv6Regex.hasMatch(value);
+    return StringValidators.isValidIPv6(value);
   }
   
   // URI validation
   bool _isValidURI(String value) {
-    try {
-      final uri = Uri.parse(value);
-      return uri.hasScheme && (uri.hasAuthority || uri.hasAbsolutePath);
-    } catch (_) {
-      return false;
-    }
+    return StringValidators.isValidURI(value);
   }
   
   // URI reference validation (can be relative)
   bool _isValidURIRef(String value) {
-    try {
-      Uri.parse(value);
-      return true;
-    } catch (_) {
-      return false;
-    }
+    return StringValidators.isValidURIRef(value);
   }
   
   // UUID validation
   bool _isValidUUID(String value) {
-    final uuidRegex = RegExp(
-      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$',
-    );
-    return uuidRegex.hasMatch(value);
+    return StringValidators.isValidUUID(value);
   }
   
   // Address validation (IP or hostname)
   bool _isValidAddress(String value) {
-    return _isValidIP(value) || _isValidHostname(value);
+    return StringValidators.isValidAddress(value);
   }
   
   // IPv4 prefix validation
   bool _isValidIPv4Prefix(String value) {
-    // IPv4 prefix format: x.x.x.x/y where y is 0-32
-    final parts = value.split('/');
-    if (parts.length != 2) return false;
-    
-    final ip = parts[0];
-    final prefixLength = int.tryParse(parts[1]);
-    
-    if (prefixLength == null || prefixLength < 0 || prefixLength > 32) {
-      return false;
-    }
-    
-    // Validate the IP part
-    if (!_isValidIPv4(ip)) return false;
-    
-    // Check that host bits are zero
-    final ipParts = ip.split('.').map(int.parse).toList();
-    int ipInt = (ipParts[0] << 24) | (ipParts[1] << 16) | (ipParts[2] << 8) | ipParts[3];
-    
-    // Create mask for the prefix length
-    int hostBits = 32 - prefixLength;
-    if (hostBits > 0) {
-      int hostMask = (1 << hostBits) - 1;
-      if ((ipInt & hostMask) != 0) {
-        return false; // Host bits are not zero
-      }
-    }
-    
-    return true;
+    return StringValidators.isValidIPv4Prefix(value);
   }
   
   // IPv6 prefix validation
   bool _isValidIPv6Prefix(String value) {
-    // IPv6 prefix format: xxxx:xxxx::/y where y is 0-128
-    final parts = value.split('/');
-    if (parts.length != 2) return false;
-    
-    final ip = parts[0];
-    final prefixLength = int.tryParse(parts[1]);
-    
-    if (prefixLength == null || prefixLength < 0 || prefixLength > 128) {
-      return false;
-    }
-    
-    // Parse and expand IPv6 address to check host bits
-    final expanded = _expandIPv6(ip);
-    if (expanded == null) return false;
-    
-    // Convert to bytes and check host bits
-    final groups = expanded.split(':');
-    if (groups.length != 8) return false;
-    
-    // Check that host bits are zero
-    int bitsChecked = 0;
-    for (final group in groups) {
-      final value = int.tryParse(group, radix: 16);
-      if (value == null) return false;
-      
-      for (int bit = 15; bit >= 0; bit--) {
-        bitsChecked++;
-        if (bitsChecked > prefixLength) {
-          // This is a host bit, it must be zero
-          if ((value & (1 << bit)) != 0) {
-            return false;
-          }
-        }
-      }
-    }
-    
-    return true;
+    return StringValidators.isValidIPv6Prefix(value);
   }
   
-  // Helper to expand IPv6 address to full form
-  String? _expandIPv6(String ip) {
-    // Handle IPv6 addresses with :: notation
-    if (ip.contains('::')) {
-      final parts = ip.split('::');
-      if (parts.length > 2) return null; // Invalid format
-      
-      final left = parts[0].isEmpty ? [] : parts[0].split(':');
-      final right = parts.length > 1 && parts[1].isNotEmpty ? parts[1].split(':') : [];
-      
-      final missingGroups = 8 - left.length - right.length;
-      if (missingGroups < 0) return null; // Too many groups
-      
-      final expanded = <String>[];
-      expanded.addAll(left.map((g) => g.padLeft(4, '0')));
-      for (int i = 0; i < missingGroups; i++) {
-        expanded.add('0000');
-      }
-      expanded.addAll(right.map((g) => g.padLeft(4, '0')));
-      
-      return expanded.join(':');
-    } else {
-      // No :: notation, just pad groups
-      final groups = ip.split(':');
-      if (groups.length != 8) return null;
-      return groups.map((g) => g.padLeft(4, '0')).join(':');
-    }
+  // IP with prefix length validation
+  bool _isValidIPWithPrefixLen(String value) {
+    return StringValidators.isValidIPWithPrefixLen(value);
+  }
+  
+  // TUUID validation
+  bool _isValidTUUID(String value) {
+    return StringValidators.isValidTUUID(value);
+  }
+  
+  // Host and port validation
+  bool _isValidHostAndPort(String value) {
+    return StringValidators.isValidHostAndPort(value, portRequired: false);
+  }
+  
+  // HTTP header name validation
+  bool _isValidHTTPHeaderName(String value) {
+    return StringValidators.isValidHTTPHeaderName(value, strict ?? false);
+  }
+  
+  // HTTP header value validation
+  bool _isValidHTTPHeaderValue(String value) {
+    return StringValidators.isValidHTTPHeaderValue(value, strict ?? false);
   }
 
   List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {

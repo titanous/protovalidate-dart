@@ -1,4 +1,5 @@
 import 'package:cel/cel.dart';
+import '../shared/string_validators.dart';
 
 /// Protovalidate validation functions library for CEL
 /// Implements all validation functions defined in the protovalidate specification
@@ -16,56 +17,56 @@ class ProtovalidateLibrary extends Library {
       // String validation functions
       Overload('isEmail', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidEmail(value.value));
+          return BooleanValue(StringValidators.isValidEmail(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isHostname', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidHostname(value.value));
+          return BooleanValue(StringValidators.isValidHostname(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isIp', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidIp(value.value));
+          return BooleanValue(StringValidators.isValidIP(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isIpv4', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidIpv4(value.value));
+          return BooleanValue(StringValidators.isValidIPv4(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isIpv6', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidIpv6(value.value));
+          return BooleanValue(StringValidators.isValidIPv6(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isUri', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidUri(value.value));
+          return BooleanValue(StringValidators.isValidURI(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isUriRef', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidUriRef(value.value));
+          return BooleanValue(StringValidators.isValidURIRef(value.value));
         }
         return BooleanValue(false);
       }),
       
       Overload('isUuid', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidUuid(value.value));
+          return BooleanValue(StringValidators.isValidUUID(value.value));
         }
         return BooleanValue(false);
       }),
@@ -110,7 +111,7 @@ class ProtovalidateLibrary extends Library {
       // Additional string format validation functions
       Overload('isAddress', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(_isValidAddress(value.value));
+          return BooleanValue(StringValidators.isValidAddress(value.value));
         }
         return BooleanValue(false);
       }),
@@ -118,243 +119,93 @@ class ProtovalidateLibrary extends Library {
       // Host and port validation function
       Overload('isHostAndPort', binaryOperator: (value, portRequired) {
         if (value is StringValue && portRequired is BooleanValue) {
-          return BooleanValue(_isValidHostAndPort(value.value, portRequired.value));
+          return BooleanValue(StringValidators.isValidHostAndPort(value.value, portRequired: portRequired.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // IP prefix validation functions with multiple overloads
+      // isIpPrefix(string) - any version, non-strict
+      Overload('isIpPrefix', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: null, strict: false));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, int) - specific version, non-strict
+      Overload('isIpPrefix', binaryOperator: (value, version) {
+        if (value is StringValue && version is IntValue) {
+          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: version.value.toInt(), strict: false));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, bool) - any version, with strict mode
+      Overload('isIpPrefix', binaryOperator: (value, strict) {
+        if (value is StringValue && strict is BooleanValue) {
+          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: null, strict: strict.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, int, bool) - specific version with strict mode
+      Overload('isIpPrefix', functionOperator: (args) {
+        if (args.length == 3 && args[0] is StringValue && args[1] is IntValue && args[2] is BooleanValue) {
+          final value = args[0] as StringValue;
+          final version = args[1] as IntValue;
+          final strict = args[2] as BooleanValue;
+          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: version.value.toInt(), strict: strict.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // IP with prefix length validation functions
+      Overload('isIpv4WithPrefixLen', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isValidIPv4WithPrefixLen(value.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      Overload('isIpv6WithPrefixLen', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isValidIPv6WithPrefixLen(value.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      Overload('isIpWithPrefixLen', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(_isValidIpWithPrefixLen(value.value, null));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // Case-insensitive UUID validation (TUUID)
+      Overload('isTuuid', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isValidTUUID(value.value));
         }
         return BooleanValue(false);
       }),
     ];
   }
-
-  // String validation implementations following protovalidate specifications
-  bool _isValidEmail(String value) {
-    if (value.isEmpty || value.length > 254) return false;
-    
-    // Basic email validation - more comprehensive than simple regex
-    final emailRegex = RegExp(
-      r'^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*$'
-    );
-    
-    if (!emailRegex.hasMatch(value)) return false;
-    
-    // Check for valid local and domain parts
-    final parts = value.split('@');
-    if (parts.length != 2) return false;
-    
-    final local = parts[0];
-    final domain = parts[1];
-    
-    // Local part validation
-    if (local.isEmpty || local.length > 64) return false;
-    if (local.startsWith('.') || local.endsWith('.')) return false;
-    if (local.contains('..')) return false;
-    
-    // Domain part validation
-    if (domain.isEmpty || domain.length > 253) return false;
-    
-    return _isValidHostname(domain);
-  }
-
-  bool _isValidHostname(String value) {
-    if (value.isEmpty || value.length > 253) return false;
-    if (value.endsWith('.')) {
-      value = value.substring(0, value.length - 1);
+  
+  // Helper functions
+  bool _isUnique(List<dynamic> list) {
+    final seen = <String>{};
+    for (final item in list) {
+      final key = item.toString();
+      if (seen.contains(key)) return false;
+      seen.add(key);
     }
-    
-    // Split into labels
-    final labels = value.split('.');
-    if (labels.isEmpty) return false;
-    
-    for (final label in labels) {
-      if (label.isEmpty || label.length > 63) return false;
-      if (label.startsWith('-') || label.endsWith('-')) return false;
-      
-      // Check that label contains only valid characters
-      final labelRegex = RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$');
-      if (!labelRegex.hasMatch(label)) return false;
-    }
-    
-    return true;
-  }
-
-  bool _isValidIp(String value) {
-    return _isValidIpv4(value) || _isValidIpv6(value);
-  }
-
-  bool _isValidIpv4(String value) {
-    final parts = value.split('.');
-    if (parts.length != 4) return false;
-    
-    for (final part in parts) {
-      if (part.isEmpty) return false;
-      
-      // No leading zeros unless it's just "0"
-      if (part.length > 1 && part.startsWith('0')) return false;
-      
-      final num = int.tryParse(part);
-      if (num == null || num < 0 || num > 255) return false;
-    }
-    return true;
-  }
-
-  bool _isValidIpv6(String value) {
-    if (value.isEmpty) return false;
-    
-    // Handle IPv6 with embedded IPv4
-    String ipv6Part = value;
-    if (value.contains('.')) {
-      final lastColon = value.lastIndexOf(':');
-      if (lastColon == -1) return false;
-      
-      final ipv4Part = value.substring(lastColon + 1);
-      if (!_isValidIpv4(ipv4Part)) return false;
-      
-      ipv6Part = value.substring(0, lastColon + 1) + '0:0';
-    }
-    
-    // Handle :: notation
-    final doubleColonCount = '::'.allMatches(ipv6Part).length;
-    if (doubleColonCount > 1) return false;
-    
-    List<String> parts;
-    if (doubleColonCount == 1) {
-      final splitParts = ipv6Part.split('::');
-      if (splitParts.length != 2) return false;
-      
-      final leftParts = splitParts[0].isEmpty ? <String>[] : splitParts[0].split(':');
-      final rightParts = splitParts[1].isEmpty ? <String>[] : splitParts[1].split(':');
-      
-      final totalParts = leftParts.length + rightParts.length;
-      if (totalParts > 8) return false;
-      
-      parts = List<String>.from(leftParts);
-      for (int i = 0; i < 8 - totalParts; i++) {
-        parts.add('0');
-      }
-      parts.addAll(rightParts);
-    } else {
-      parts = ipv6Part.split(':');
-      if (parts.length != 8) return false;
-    }
-    
-    // Validate each part
-    for (final part in parts) {
-      if (part.isEmpty && doubleColonCount == 0) return false;
-      if (part.length > 4) return false;
-      
-      if (part.isNotEmpty) {
-        final hexRegex = RegExp(r'^[0-9a-fA-F]+$');
-        if (!hexRegex.hasMatch(part)) return false;
-      }
-    }
-    
-    return true;
-  }
-
-  bool _isValidUri(String value) {
-    try {
-      final uri = Uri.parse(value);
-      return uri.hasScheme && uri.scheme.isNotEmpty;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool _isValidUriRef(String value) {
-    try {
-      Uri.parse(value);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  bool _isValidUuid(String value) {
-    final uuidRegex = RegExp(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$', caseSensitive: false);
-    return uuidRegex.hasMatch(value);
-  }
-
-  bool _isValidAddress(String value) {
-    // Address validation - can be IP or hostname
-    return _isValidIp(value) || _isValidHostname(value);
-  }
-
-  bool _isValidHostAndPort(String value, bool portRequired) {
-    if (value.isEmpty) return false;
-    
-    // Find the last colon that could be a port separator
-    // Need to handle IPv6 addresses in brackets: [::1]:8080
-    String host;
-    String? port;
-    
-    if (value.startsWith('[')) {
-      // IPv6 address in brackets
-      final closeBracket = value.indexOf(']');
-      if (closeBracket == -1) return false;
-      
-      host = value.substring(1, closeBracket);
-      if (closeBracket + 1 < value.length) {
-        if (value[closeBracket + 1] != ':') return false;
-        port = value.substring(closeBracket + 2);
-      }
-    } else {
-      // Regular hostname or IPv4
-      final lastColon = value.lastIndexOf(':');
-      if (lastColon == -1) {
-        host = value;
-      } else {
-        // Check if this could be an IPv6 address without brackets (has multiple colons)
-        final colonCount = ':'.allMatches(value).length;
-        if (colonCount > 1) {
-          // This is an IPv6 address without port
-          host = value;
-        } else {
-          host = value.substring(0, lastColon);
-          port = value.substring(lastColon + 1);
-        }
-      }
-    }
-    
-    // Validate the host part
-    if (!_isValidHostname(host) && !_isValidIp(host)) {
-      return false;
-    }
-    
-    // Check port requirements
-    if (portRequired && (port == null || port.isEmpty)) {
-      return false;
-    }
-    
-    // If port is present, validate it
-    if (port != null && port.isNotEmpty) {
-      if (!_isValidPort(port)) {
-        return false;
-      }
-    }
-    
     return true;
   }
   
-  bool _isValidPort(String port) {
-    if (port.isEmpty) return false;
-    
-    // Port cannot have leading zeros unless it's just "0"
-    if (port.length > 1 && port.startsWith('0')) return false;
-    
-    final portNum = int.tryParse(port);
-    if (portNum == null) return false;
-    
-    // Port must be in range 0-65535
-    return portNum >= 0 && portNum <= 65535;
-  }
-
-  bool _isUnique(List<dynamic> list) {
-    final seen = <dynamic>{};
-    for (final item in list) {
-      if (seen.contains(item)) {
-        return false;
-      }
-      seen.add(item);
-    }
-    return true;
+  bool _isValidIpWithPrefixLen(String value, int? version) {
+    if (version == 4) return StringValidators.isValidIPv4WithPrefixLen(value);
+    if (version == 6) return StringValidators.isValidIPv6WithPrefixLen(value);
+    return StringValidators.isValidIPWithPrefixLen(value);
   }
 }

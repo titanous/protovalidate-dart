@@ -661,8 +661,11 @@ class EvaluatorBuilder {
       uuid: rules.hasUuid() ? rules.uuid : null,
       ipv4Prefix: rules.hasIpv4Prefix() ? rules.ipv4Prefix : null,
       ipv6Prefix: rules.hasIpv6Prefix() ? rules.ipv6Prefix : null,
-      wellKnownRegex:
-          rules.hasWellKnownRegex() ? (rules.wellKnownRegex.value > 0) : null,
+      wellKnownRegex: rules.hasWellKnownRegex() ? rules.wellKnownRegex : null,
+      strict: rules.hasStrict() ? rules.strict : null,
+      ipWithPrefixlen: rules.hasIpWithPrefixlen() ? rules.ipWithPrefixlen : null,
+      hostAndPort: rules.hasHostAndPort() ? rules.hostAndPort : null,
+      tuuid: rules.hasTuuid() ? rules.tuuid : null,
     );
   }
 

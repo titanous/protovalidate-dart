@@ -62,6 +62,13 @@ class ConstraintNumbers {
   static const int ipv4Prefix = 30;
   static const int ipv6Prefix = 31;
   static const int wellKnownRegex = 24;
+  static const int strict = 25;
+  static const int ipWithPrefixlen = 26;
+  static const int ipv4WithPrefixlen = 27;
+  static const int ipv6WithPrefixlen = 28;
+  static const int ipPrefix = 29;
+  static const int hostAndPort = 32;
+  static const int tuuid = 33;
   
   // Numeric constraints (lt, lte, gt, gte)
   static const int lt = 2;
@@ -163,6 +170,13 @@ class RulePathBuilder {
       case 'ipv4_prefix': return ConstraintNumbers.ipv4Prefix;
       case 'ipv6_prefix': return ConstraintNumbers.ipv6Prefix;
       case 'well_known_regex': return ConstraintNumbers.wellKnownRegex;
+      case 'strict': return ConstraintNumbers.strict;
+      case 'ip_with_prefixlen': return ConstraintNumbers.ipWithPrefixlen;
+      case 'ipv4_with_prefixlen': return ConstraintNumbers.ipv4WithPrefixlen;
+      case 'ipv6_with_prefixlen': return ConstraintNumbers.ipv6WithPrefixlen;
+      case 'ip_prefix': return ConstraintNumbers.ipPrefix;
+      case 'host_and_port': return ConstraintNumbers.hostAndPort;
+      case 'tuuid': return ConstraintNumbers.tuuid;
       default: throw ArgumentError('Unknown string constraint: $constraintName');
     }
   }
@@ -198,6 +212,13 @@ class RulePathBuilder {
       case 'ipv4_prefix':
       case 'ipv6_prefix':
       case 'well_known_regex':
+      case 'ip_with_prefixlen':
+      case 'ipv4_with_prefixlen':
+      case 'ipv6_with_prefixlen':
+      case 'ip_prefix':
+      case 'host_and_port':
+      case 'tuuid':
+      case 'strict':
         return FieldDescriptorProto_Type.TYPE_BOOL;
       default:
         return FieldDescriptorProto_Type.TYPE_STRING;

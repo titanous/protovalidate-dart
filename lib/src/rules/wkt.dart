@@ -518,7 +518,7 @@ class StringValueEvaluator extends WrapperEvaluator {
         uriRef: rules!.hasUriRef() ? rules!.uriRef : null,
         address: rules!.hasAddress() ? rules!.address : null,
         uuid: rules!.hasUuid() ? rules!.uuid : null,
-        wellKnownRegex: rules!.hasWellKnownRegex() ? (rules!.wellKnownRegex.value > 0) : null,
+        wellKnownRegex: rules!.hasWellKnownRegex() ? rules!.wellKnownRegex : null,
       );
     }
     return NoOpEvaluator();
