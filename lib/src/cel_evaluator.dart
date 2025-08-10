@@ -1,6 +1,5 @@
 import 'package:cel/cel.dart' as cel;
 import 'package:protobuf/protobuf.dart';
-import 'package:fixnum/fixnum.dart';
 
 import 'evaluator.dart';
 import 'cursor.dart';
@@ -8,8 +7,7 @@ import 'error.dart' as err;
 import 'gen/buf/validate/validate.pb.dart';
 import 'gen/google/protobuf/descriptor.pb.dart';
 import 'gen/google/protobuf/timestamp.pb.dart';
-import 'gen/google/protobuf/duration.pb.dart';
-// import 'cel/library.dart'; // Commented out - CEL library not yet available
+import 'cel/protovalidate_library.dart';
 
 /// CEL evaluator for custom expression rules
 class CELEvaluator implements Evaluator {
@@ -164,10 +162,9 @@ class CELCompiler {
     // Create a CEL environment with protobuf support and validation functions
     final env = cel.Environment.standard();
     
-    // TODO: Apply the ProtovalidateLibrary to add custom validation functions
-    // when CEL library support is available
-    // final library = ProtovalidateLibrary();
-    // library.toEnvironmentOption()(env);
+    // Apply the ProtovalidateLibrary to add custom validation functions
+    final library = ProtovalidateLibrary();
+    library.toEnvironmentOption()(env);
     
     return env;
   }

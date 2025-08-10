@@ -11,7 +11,7 @@ dependencies:
     path: ../protobuf.dart/protobuf
   fixnum: ^1.1.1
   cel:
-    path: ../cel-dart-forprotovalidate
+    path: ../cel-dart-for-protovalidate
   build: ^2.4.1
   source_gen: ^1.5.0
   glob: ^2.1.2
