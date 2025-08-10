@@ -1,5 +1,7 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
+import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart';
+import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto_editions.pb.dart';
 
 /// Registry for validation rule extensions.
 class ValidationExtensionRegistry {
@@ -27,6 +29,14 @@ class ValidationExtensionRegistry {
     
     // Register predefined validation extension
     _registry.add(Validate.predefined);
+    
+    // Register predefined rule extensions from proto2
+    Predefined_rules_proto2.registerAllExtensions(_registry);
+    
+    // Proto3 messages use proto2 extensions, no separate proto3 extensions to register
+    
+    // Register predefined rule extensions from editions
+    Predefined_rules_proto_editions.registerAllExtensions(_registry);
     
     _initialized = true;
   }

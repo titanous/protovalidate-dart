@@ -193,8 +193,45 @@ class RulePath {
     return newPath;
   }
   
+  /// Adds a predefined extension rule (with field number 1161)
+  RulePath predefinedExtension(String extensionName) {
+    final newPath = clone();
+    // Predefined extensions use field number 1161
+    newPath._elements.add(pb.FieldPathElement()
+      ..fieldNumber = 1161
+      ..fieldName = '[buf.validate.conformance.cases.$extensionName]'
+      ..fieldType = FieldDescriptorProto_Type.TYPE_BOOL);
+    return newPath;
+  }
+  
+  /// Helper to append a RulePathElement to this path
+  RulePath append(RulePathElement element) {
+    final newPath = clone();
+    newPath._elements.add(element.toProto());
+    return newPath;
+  }
+  
   /// Converts this path to protobuf FieldPathElements.
   List<pb.FieldPathElement> toProtoElements() {
     return List.unmodifiable(_elements);
   }
+}
+
+/// Helper class for creating rule path elements
+class RulePathElement {
+  final pb.FieldPathElement _element;
+  
+  RulePathElement._(this._element);
+  
+  /// Creates a predefined extension element
+  static RulePathElement predefinedExtension(String extensionId) {
+    // Extract the extension name from the rule ID (e.g., "uint64.even.proto2" -> "uint64_even_proto2")
+    final extensionName = extensionId.replaceAll('.', '_');
+    return RulePathElement._(pb.FieldPathElement()
+      ..fieldNumber = 1161
+      ..fieldName = '[buf.validate.conformance.cases.$extensionName]'
+      ..fieldType = FieldDescriptorProto_Type.TYPE_BOOL);
+  }
+  
+  pb.FieldPathElement toProto() => _element;
 }

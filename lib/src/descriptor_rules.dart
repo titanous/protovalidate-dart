@@ -1,6 +1,7 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
+import 'extension_registry.dart';
 
 /// Extracts validation rules from FileDescriptorSet.
 class DescriptorRules {
@@ -12,9 +13,8 @@ class DescriptorRules {
   final Map<String, MessageRules> _messageRulesCache = {};
   
   DescriptorRules(this.descriptorSet, {ExtensionRegistry? extensionRegistry}) 
-    : registry = extensionRegistry ?? ExtensionRegistry() {
-    // Register the validation extensions if not already registered
-    Validate.registerAllExtensions(registry);
+    : registry = extensionRegistry ?? ValidationExtensionRegistry.registry {
+    // Extensions are already registered in ValidationExtensionRegistry
   }
   
   /// Gets field rules for a specific field in a message.
@@ -114,8 +114,13 @@ class DescriptorRules {
       if (field.hasOptions()) {
         try {
           // Try to get field rules from the extension
-          final rules = field.options.getExtension(Validate.field_1159) as FieldRules?;
+          var rules = field.options.getExtension(Validate.field_1159) as FieldRules?;
           if (rules != null) {
+            // Reparse the rules to handle predefined extensions
+            if (rules.unknownFields.isNotEmpty) {
+              final bytes = rules.writeToBuffer();
+              rules = FieldRules.fromBuffer(bytes, registry);
+            }
             fieldRules[field.name] = rules;
           }
         } catch (e) {
