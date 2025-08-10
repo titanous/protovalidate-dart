@@ -147,6 +147,18 @@ class FieldPath {
       return FieldDescriptorProto_Type.TYPE_UINT32;
     } else if (field.type == PbFieldType.OU6 || field.type == PbFieldType.PU6) {
       return FieldDescriptorProto_Type.TYPE_UINT64;
+    } else if (field.type == PbFieldType.OS3 || field.type == PbFieldType.PS3) {
+      return FieldDescriptorProto_Type.TYPE_SINT32;
+    } else if (field.type == PbFieldType.OS6 || field.type == PbFieldType.PS6) {
+      return FieldDescriptorProto_Type.TYPE_SINT64;
+    } else if (field.type == PbFieldType.OSF3 || field.type == PbFieldType.PSF3) {
+      return FieldDescriptorProto_Type.TYPE_SFIXED32;
+    } else if (field.type == PbFieldType.OSF6 || field.type == PbFieldType.PSF6) {
+      return FieldDescriptorProto_Type.TYPE_SFIXED64;
+    } else if (field.type == PbFieldType.OF3 || field.type == PbFieldType.PF3) {
+      return FieldDescriptorProto_Type.TYPE_FIXED32;
+    } else if (field.type == PbFieldType.OF6 || field.type == PbFieldType.PF6) {
+      return FieldDescriptorProto_Type.TYPE_FIXED64;
     } else if (field.type == PbFieldType.OF || field.type == PbFieldType.PF) {
       return FieldDescriptorProto_Type.TYPE_FLOAT;
     } else if (field.type == PbFieldType.OD || field.type == PbFieldType.PD) {

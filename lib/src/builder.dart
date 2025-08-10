@@ -191,7 +191,20 @@ class EvaluatorBuilder {
   }
   
   Evaluator? _buildMessageFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
-    // For now, just return a no-op evaluator
+    // Check if this is a wrapper type
+    if (_isWrapperType(field)) {
+      // Build the appropriate wrapper evaluator
+      if (fieldRules != null) {
+        // Build evaluator from the scalar rules
+        final scalarEvaluator = buildFromFieldRules(fieldRules);
+        if (scalarEvaluator != null) {
+          // Wrap it with the appropriate wrapper evaluator
+          return _wrapForWrapperType(field, scalarEvaluator);
+        }
+      }
+    }
+    
+    // For now, return a no-op evaluator for non-wrapper messages
     // In a full implementation, this would recursively build for the nested type
     return NoOpEvaluator();
   }

@@ -1,4 +1,5 @@
 import 'package:protobuf/protobuf.dart';
+import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
 import 'evaluator.dart';
@@ -60,10 +61,12 @@ class FieldEvaluator implements Evaluator {
     
     // Check required constraint first
     if (required && !hasValue) {
-      cursor.violate(
+      // Add the field to the cursor before violating
+      final fieldCursor = cursor.field(field);
+      fieldCursor.violate(
         message: 'value is required',
         constraintId: 'required',
-        rulePath: RulePath.fromFieldRules().constraint('required', 1000, FieldDescriptorProto_Type.TYPE_BOOL),
+        rulePath: RulePath.fromFieldRules().constraint('required', 25, FieldDescriptorProto_Type.TYPE_BOOL),
       );
       return;
     }
@@ -92,6 +95,7 @@ class FieldEvaluator implements Evaluator {
     // Check for default values based on type
     if (value is bool && !value) return true;
     if (value is int && value == 0) return true;
+    if (value is Int64 && value == Int64.ZERO) return true;
     if (value is double && value == 0.0) return true;
     if (value is String && value.isEmpty) return true;
     if (value is List && value.isEmpty) return true;

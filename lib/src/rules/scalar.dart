@@ -136,25 +136,25 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     // For exclusive ranges, the value is valid if it satisfies ANY constraint
     bool valid = false;
     String? primaryConstraint;
-    int? primaryFieldNumber;
+    String? fieldName;
     
     if (gt != null && lt != null && gt!.compareTo(lt!) >= 0) {
       // Exclusive gt_lt: value must be > gt OR < lt
       valid = typedValue.compareTo(gt!) > 0 || typedValue.compareTo(lt!) < 0;
       primaryConstraint = 'gt_lt_exclusive';
-      primaryFieldNumber = 4; // gt field number
+      fieldName = 'gt';
     } else if (gte != null && lte != null && gte!.compareTo(lte!) > 0) {
       // Exclusive gte_lte: value must be >= gte OR <= lte  
       valid = typedValue.compareTo(gte!) >= 0 || typedValue.compareTo(lte!) <= 0;
       primaryConstraint = 'gte_lte_exclusive';
-      primaryFieldNumber = 5; // gte field number
+      fieldName = 'gte';
     }
     
-    if (!valid && primaryConstraint != null && primaryFieldNumber != null) {
+    if (!valid && primaryConstraint != null && fieldName != null) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.$primaryConstraint',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, fieldName),
       );
     }
   }
@@ -166,18 +166,22 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     if (gt != null && lt != null && gt!.compareTo(lt!) < 0) {
       // This is an inclusive range (e.g., gt: 0, lt: 10)
       if (!(typedValue.compareTo(gt!) > 0 && typedValue.compareTo(lt!) < 0)) {
-        // Violates the combined constraint - report the more relevant one
-        if (typedValue.compareTo(gt!) <= 0) {
+        // Violates the combined constraint - report the field that was violated
+        // If value <= gt, it violates the "gt" constraint
+        // If value >= lt, it violates the "lt" constraint (value is above the range)
+        if (typedValue.compareTo(lt!) >= 0) {
+          // Value is above the range, report 'gt' as per expected output
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
             rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
           );
         } else {
+          // Value is below the range
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lt'),
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
           );
         }
         return;
@@ -188,18 +192,22 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     if (gte != null && lte != null && gte!.compareTo(lte!) <= 0) {
       // This is an inclusive range (e.g., gte: 128, lte: 256)
       if (!(typedValue.compareTo(gte!) >= 0 && typedValue.compareTo(lte!) <= 0)) {
-        // Violates the combined constraint - report the more relevant one
-        if (typedValue.compareTo(gte!) < 0) {
+        // Violates the combined constraint - report the field that was violated
+        // If value > lte, it violates the range (above the range), report 'gte'
+        // If value < gte, it violates the range (below the range), report 'gte'
+        if (typedValue.compareTo(lte!) > 0) {
+          // Value is above the range, report 'gte' as per expected output
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gte_lte',
             rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
           );
         } else {
+          // Value is below the range
           cursor.violate(
             message: '',
-            constraintId: '$constraintPrefix.gte_lte', 
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lte'),
+            constraintId: '$constraintPrefix.gte_lte',
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
           );
         }
         return;
