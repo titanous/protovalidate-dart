@@ -3,23 +3,114 @@ import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 
-/// Represents a path element in a protobuf message field path.
-abstract class PathElement {
-  String toFieldPathString();
-  pb.FieldPathElement toProto();
-}
-
-/// A field element in the path.
-class FieldElement implements PathElement {
-  final FieldInfo field;
+/// Represents a field path through a protobuf message structure.
+/// This implementation matches the reference Go/TypeScript implementations.
+class FieldPath {
+  final List<pb.FieldPathElement> _elements;
   
-  FieldElement(this.field);
+  FieldPath() : _elements = [];
   
-  @override
-  String toFieldPathString() => field.name;
+  FieldPath._(List<pb.FieldPathElement> elements) : _elements = List.from(elements);
   
-  @override
-  pb.FieldPathElement toProto() {
+  /// Creates a copy of this path.
+  FieldPath clone() => FieldPath._(_elements);
+  
+  /// Adds a field to the path.
+  FieldPath field(FieldInfo field) {
+    final newPath = clone();
+    newPath._elements.add(_createFieldElement(field));
+    return newPath;
+  }
+  
+  /// Adds a list index to the current field path.
+  /// This modifies the last field element to include the index.
+  FieldPath listIndex(int index) {
+    if (_elements.isEmpty) {
+      throw StateError('Cannot add list index to empty field path');
+    }
+    
+    final newPath = clone();
+    final lastElement = newPath._elements.last;
+    
+    // Create a new element with the index
+    newPath._elements[newPath._elements.length - 1] = pb.FieldPathElement()
+      ..fieldNumber = lastElement.fieldNumber
+      ..fieldName = lastElement.fieldName
+      ..fieldType = lastElement.fieldType
+      ..index = Int64(index);
+      
+    return newPath;
+  }
+  
+  /// Adds a map key to the current field path.
+  /// This modifies the last field element to include the key.
+  FieldPath mapKey(dynamic key) {
+    if (_elements.isEmpty) {
+      throw StateError('Cannot add map key to empty field path');
+    }
+    
+    final newPath = clone();
+    final lastElement = newPath._elements.last;
+    
+    // Create a new element with the appropriate key
+    final newElement = pb.FieldPathElement()
+      ..fieldNumber = lastElement.fieldNumber
+      ..fieldName = lastElement.fieldName
+      ..fieldType = lastElement.fieldType;
+    
+    if (key is String) {
+      newElement.stringKey = key;
+    } else if (key is bool) {
+      newElement.boolKey = key;
+    } else if (key is int) {
+      newElement.intKey = Int64(key);
+    } else if (key is Int64) {
+      newElement.intKey = key;
+    } else {
+      // Convert to string as fallback
+      newElement.stringKey = key.toString();
+    }
+    
+    newPath._elements[newPath._elements.length - 1] = newElement;
+    return newPath;
+  }
+  
+  /// Returns the string representation of this path.
+  String toFieldPathString() {
+    if (_elements.isEmpty) return '';
+    
+    final buffer = StringBuffer();
+    for (var i = 0; i < _elements.length; i++) {
+      final element = _elements[i];
+      
+      if (i > 0) {
+        buffer.write('.');
+      }
+      
+      buffer.write(element.fieldName);
+      
+      // Add subscript if present
+      if (element.hasIndex()) {
+        buffer.write('[${element.index}]');
+      } else if (element.hasBoolKey()) {
+        buffer.write('[${element.boolKey}]');
+      } else if (element.hasIntKey()) {
+        buffer.write('[${element.intKey}]');
+      } else if (element.hasUintKey()) {
+        buffer.write('[${element.uintKey}]');
+      } else if (element.hasStringKey()) {
+        buffer.write('["${element.stringKey}"]');
+      }
+    }
+    return buffer.toString();
+  }
+  
+  /// Converts this path to protobuf FieldPathElements.
+  List<pb.FieldPathElement> toProtoElements() {
+    return List.unmodifiable(_elements);
+  }
+  
+  pb.FieldPathElement _createFieldElement(FieldInfo field) {
     final element = pb.FieldPathElement()
       ..fieldNumber = field.tagNumber
       ..fieldName = field.name;
@@ -32,7 +123,6 @@ class FieldElement implements PathElement {
   
   FieldDescriptorProto_Type _getFieldType(FieldInfo field) {
     // Map PbFieldType to FieldDescriptorProto_Type
-    // This is a simplified mapping - in production you'd want a complete mapping
     if (field.type == PbFieldType.OB || field.type == PbFieldType.PB) {
       return FieldDescriptorProto_Type.TYPE_BOOL;
     } else if (field.type == PbFieldType.O3 || field.type == PbFieldType.P3) {
@@ -60,113 +150,51 @@ class FieldElement implements PathElement {
       return FieldDescriptorProto_Type.TYPE_STRING;
     }
   }
+  
+  @override
+  String toString() => toFieldPathString();
 }
 
-/// A list index element in the path.
-class ListElement implements PathElement {
-  final int index;
+/// A helper class for building rule paths following the protobuf schema hierarchy
+class RulePath {
+  final List<pb.FieldPathElement> _elements;
   
-  ListElement(this.index);
+  RulePath() : _elements = [];
   
-  @override
-  String toFieldPathString() => '[$index]';
-  
-  @override
-  pb.FieldPathElement toProto() {
-    return pb.FieldPathElement()
-      ..index = Int64(index);
-  }
-}
-
-/// A map key element in the path.
-class MapKeyElement implements PathElement {
-  final dynamic key;
-  
-  MapKeyElement(this.key);
-  
-  @override
-  String toFieldPathString() {
-    if (key is String) {
-      return '["$key"]';
-    }
-    return '[$key]';
-  }
-  
-  @override
-  pb.FieldPathElement toProto() {
-    final element = pb.FieldPathElement();
-    
-    if (key is String) {
-      element.stringKey = key;
-    } else if (key is bool) {
-      element.boolKey = key;
-    } else if (key is int) {
-      element.intKey = Int64(key);
-    } else {
-      // Convert to string as fallback
-      element.stringKey = key.toString();
-    }
-    
-    return element;
-  }
-}
-
-/// Represents a field path through a protobuf message structure.
-class FieldPath {
-  final List<PathElement> _elements;
-  
-  FieldPath() : _elements = [];
-  
-  FieldPath._(List<PathElement> elements) : _elements = List.from(elements);
+  RulePath._(List<pb.FieldPathElement> elements) : _elements = List.from(elements);
   
   /// Creates a copy of this path.
-  FieldPath clone() => FieldPath._(_elements);
+  RulePath clone() => RulePath._(_elements);
   
-  /// Adds a field to the path.
-  FieldPath field(FieldInfo field) {
+  /// Creates a rule path starting from FieldRules
+  static RulePath fromFieldRules() {
+    final rulePath = RulePath();
+    // Note: FieldRules is the root, no element needed for it
+    return rulePath;
+  }
+  
+  /// Adds a specific rule type (e.g., "string", "int32", "repeated")
+  RulePath ruleType(String typeName, int fieldNumber) {
     final newPath = clone();
-    newPath._elements.add(FieldElement(field));
+    newPath._elements.add(pb.FieldPathElement()
+      ..fieldNumber = fieldNumber
+      ..fieldName = typeName
+      ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE);
     return newPath;
   }
   
-  /// Adds a list index to the path.
-  FieldPath listIndex(int index) {
+  /// Adds a specific rule constraint (e.g., "const", "min_len")
+  RulePath constraint(String constraintName, int fieldNumber, FieldDescriptorProto_Type fieldType) {
     final newPath = clone();
-    newPath._elements.add(ListElement(index));
+    newPath._elements.add(pb.FieldPathElement()
+      ..fieldNumber = fieldNumber
+      ..fieldName = constraintName
+      ..fieldType = fieldType);
     return newPath;
-  }
-  
-  /// Adds a map key to the path.
-  FieldPath mapKey(dynamic key) {
-    final newPath = clone();
-    newPath._elements.add(MapKeyElement(key));
-    return newPath;
-  }
-  
-  /// Returns the string representation of this path.
-  String toFieldPathString() {
-    if (_elements.isEmpty) return '';
-    
-    final buffer = StringBuffer();
-    for (var i = 0; i < _elements.length; i++) {
-      final element = _elements[i];
-      final str = element.toFieldPathString();
-      
-      if (i == 0 || str.startsWith('[')) {
-        buffer.write(str);
-      } else {
-        buffer.write('.');
-        buffer.write(str);
-      }
-    }
-    return buffer.toString();
   }
   
   /// Converts this path to protobuf FieldPathElements.
   List<pb.FieldPathElement> toProtoElements() {
-    return _elements.map((e) => e.toProto()).toList();
+    return List.unmodifiable(_elements);
   }
-  
-  @override
-  String toString() => toFieldPathString();
 }

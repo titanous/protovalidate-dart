@@ -4,17 +4,18 @@ import 'error.dart';
 import 'field_path.dart';
 
 /// Cursor maintains a field path and tracks violations during validation.
+/// This implementation matches the reference Go/TypeScript implementations.
 class Cursor {
   final bool failFast;
   final List<Violation> _violations;
-  final FieldPath _path;
+  final FieldPath _fieldPath;
   
   Cursor({
     required this.failFast,
     List<Violation>? violations,
-    FieldPath? path,
+    FieldPath? fieldPath,
   }) : _violations = violations ?? [],
-       _path = path ?? FieldPath();
+       _fieldPath = fieldPath ?? FieldPath();
   
   /// Creates a new cursor for validation.
   static Cursor create({bool failFast = false}) {
@@ -27,21 +28,20 @@ class Cursor {
   /// Returns the list of violations.
   List<Violation> get violations => List.unmodifiable(_violations);
   
-  /// Records a validation violation.
+  /// Records a validation violation with proper rule path construction.
   void violate({
     required String message,
     required String constraintId,
-    String? rulePath,
-    List<pb.FieldPathElement>? rulePathElements,
+    RulePath? rulePath,
     bool forKey = false,
   }) {
     _violations.add(Violation(
-      fieldPath: _path.toFieldPathString(),
-      fieldPathElements: _path.toProtoElements(),
+      fieldPath: _fieldPath.toFieldPathString(),
+      fieldPathElements: _fieldPath.toProtoElements(),
       constraintId: constraintId,
       message: message,
-      rulePath: rulePath,
-      rulePathElements: rulePathElements,
+      rulePath: '', // Will be computed from rulePath if provided
+      rulePathElements: rulePath?.toProtoElements() ?? [],
       forKey: forKey,
     ));
     
@@ -58,14 +58,14 @@ class Cursor {
   }
   
   /// Returns the current field path.
-  FieldPath getPath() => _path.clone();
+  FieldPath getPath() => _fieldPath.clone();
   
   /// Creates a new cursor with an additional field in the path.
   Cursor field(FieldInfo field) {
     return Cursor(
       failFast: failFast,
       violations: _violations,
-      path: _path.field(field),
+      fieldPath: _fieldPath.field(field),
     );
   }
   
@@ -74,7 +74,7 @@ class Cursor {
     return Cursor(
       failFast: failFast,
       violations: _violations,
-      path: _path.listIndex(index),
+      fieldPath: _fieldPath.listIndex(index),
     );
   }
   
@@ -83,7 +83,7 @@ class Cursor {
     return Cursor(
       failFast: failFast,
       violations: _violations,
-      path: _path.mapKey(key),
+      fieldPath: _fieldPath.mapKey(key),
     );
   }
 }

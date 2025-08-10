@@ -1,0 +1,284 @@
+import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
+import 'field_path.dart';
+
+/// Constants for field numbers in the validate.proto schema.
+/// These correspond to the field numbers in buf.validate.FieldRules.
+class FieldRuleNumbers {
+  // Standard scalar types
+  static const int float = 1;
+  static const int double = 2;
+  static const int int32 = 3;
+  static const int int64 = 4;
+  static const int uint32 = 5;
+  static const int uint64 = 6;
+  static const int sint32 = 7;
+  static const int sint64 = 8;
+  static const int fixed32 = 9;
+  static const int fixed64 = 10;
+  static const int sfixed32 = 11;
+  static const int sfixed64 = 12;
+  static const int bool = 13;
+  static const int string = 14;
+  static const int bytes = 15;
+  static const int enum_ = 16;
+  static const int message = 17;
+  static const int repeated = 18;
+  static const int map = 19;
+  
+  // Well-known types
+  static const int any = 20;
+  static const int duration = 21;
+  static const int timestamp = 22;
+}
+
+/// Constants for constraint field numbers within each rule type.
+class ConstraintNumbers {
+  // Common constraints (used by multiple types)
+  static const int const_ = 1;
+  static const int in_ = 6;
+  static const int notIn = 7;
+  
+  // String constraints
+  static const int len = 19;
+  static const int minLen = 2;
+  static const int maxLen = 3;
+  static const int lenBytes = 20;
+  static const int minBytes = 4;
+  static const int maxBytes = 5;
+  static const int pattern = 6;
+  static const int prefix = 7;
+  static const int suffix = 8;
+  static const int contains = 9;
+  static const int notContains = 23;
+  static const int email = 12;
+  static const int hostname = 13;
+  static const int ip = 14;
+  static const int ipv4 = 15;
+  static const int ipv6 = 16;
+  static const int uri = 17;
+  static const int uriRef = 18;
+  static const int address = 21;
+  static const int uuid = 22;
+  static const int wellKnownRegex = 24;
+  
+  // Numeric constraints (lt, lte, gt, gte)
+  static const int lt = 2;
+  static const int lte = 3;
+  static const int gt = 4;
+  static const int gte = 5;
+  static const int finite = 8;
+  
+  // Repeated constraints
+  static const int minItems = 1;
+  static const int maxItems = 2;
+  static const int unique = 3;
+  static const int items = 4;
+  
+  // Map constraints  
+  static const int minPairs = 1;
+  static const int maxPairs = 2;
+  static const int keys = 3;
+  static const int values = 4;
+  
+  // Enum constraints
+  static const int definedOnly = 2;
+}
+
+/// Helper class for constructing rule paths for different validation scenarios.
+class RulePathBuilder {
+  /// Creates a rule path for string constraints.
+  static RulePath stringConstraint(String constraintName) {
+    final fieldNumber = _getStringConstraintNumber(constraintName);
+    final fieldType = _getStringConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('string', FieldRuleNumbers.string)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for numeric constraints.
+  static RulePath numericConstraint(String ruleTypeName, int ruleTypeNumber, String constraintName) {
+    final fieldNumber = _getNumericConstraintNumber(constraintName);
+    final fieldType = _getNumericConstraintType(constraintName, ruleTypeName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType(ruleTypeName, ruleTypeNumber)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for repeated constraints.
+  static RulePath repeatedConstraint(String constraintName) {
+    final fieldNumber = _getRepeatedConstraintNumber(constraintName);
+    final fieldType = _getRepeatedConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('repeated', FieldRuleNumbers.repeated)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for bool constraints.
+  static RulePath boolConstraint(String constraintName) {
+    return RulePath.fromFieldRules()
+        .ruleType('bool', FieldRuleNumbers.bool)
+        .constraint(constraintName, ConstraintNumbers.const_, FieldDescriptorProto_Type.TYPE_BOOL);
+  }
+  
+  /// Creates a rule path for enum constraints.
+  static RulePath enumConstraint(String constraintName) {
+    final fieldNumber = _getEnumConstraintNumber(constraintName);
+    final fieldType = _getEnumConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('enum', FieldRuleNumbers.enum_)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  static int _getStringConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return ConstraintNumbers.const_;
+      case 'len': return ConstraintNumbers.len;
+      case 'min_len': return ConstraintNumbers.minLen;
+      case 'max_len': return ConstraintNumbers.maxLen;
+      case 'len_bytes': return ConstraintNumbers.lenBytes;
+      case 'min_bytes': return ConstraintNumbers.minBytes;
+      case 'max_bytes': return ConstraintNumbers.maxBytes;
+      case 'pattern': return ConstraintNumbers.pattern;
+      case 'prefix': return ConstraintNumbers.prefix;
+      case 'suffix': return ConstraintNumbers.suffix;
+      case 'contains': return ConstraintNumbers.contains;
+      case 'not_contains': return ConstraintNumbers.notContains;
+      case 'in': return ConstraintNumbers.in_;
+      case 'not_in': return ConstraintNumbers.notIn;
+      case 'email': return ConstraintNumbers.email;
+      case 'hostname': return ConstraintNumbers.hostname;
+      case 'ip': return ConstraintNumbers.ip;
+      case 'ipv4': return ConstraintNumbers.ipv4;
+      case 'ipv6': return ConstraintNumbers.ipv6;
+      case 'uri': return ConstraintNumbers.uri;
+      case 'uri_ref': return ConstraintNumbers.uriRef;
+      case 'address': return ConstraintNumbers.address;
+      case 'uuid': return ConstraintNumbers.uuid;
+      case 'well_known_regex': return ConstraintNumbers.wellKnownRegex;
+      default: throw ArgumentError('Unknown string constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getStringConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'const':
+      case 'pattern':
+      case 'prefix':
+      case 'suffix':
+      case 'contains':
+      case 'not_contains':
+        return FieldDescriptorProto_Type.TYPE_STRING;
+      case 'len':
+      case 'min_len':
+      case 'max_len':
+      case 'len_bytes':
+      case 'min_bytes':
+      case 'max_bytes':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_STRING; // repeated string
+      case 'email':
+      case 'hostname':
+      case 'ip':
+      case 'ipv4':
+      case 'ipv6':
+      case 'uri':
+      case 'uri_ref':
+      case 'address':
+      case 'uuid':
+      case 'well_known_regex':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      default:
+        return FieldDescriptorProto_Type.TYPE_STRING;
+    }
+  }
+  
+  static int _getNumericConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return ConstraintNumbers.const_;
+      case 'lt': return ConstraintNumbers.lt;
+      case 'lte': return ConstraintNumbers.lte;
+      case 'gt': return ConstraintNumbers.gt;
+      case 'gte': return ConstraintNumbers.gte;
+      case 'in': return ConstraintNumbers.in_;
+      case 'not_in': return ConstraintNumbers.notIn;
+      case 'finite': return ConstraintNumbers.finite;
+      default: throw ArgumentError('Unknown numeric constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getNumericConstraintType(String constraintName, String ruleTypeName) {
+    if (constraintName == 'finite') {
+      return FieldDescriptorProto_Type.TYPE_BOOL;
+    }
+    
+    // Return the same type as the rule type for value constraints
+    switch (ruleTypeName) {
+      case 'float': return FieldDescriptorProto_Type.TYPE_FLOAT;
+      case 'double': return FieldDescriptorProto_Type.TYPE_DOUBLE;
+      case 'int32': return FieldDescriptorProto_Type.TYPE_INT32;
+      case 'int64': return FieldDescriptorProto_Type.TYPE_INT64;
+      case 'uint32': return FieldDescriptorProto_Type.TYPE_UINT32;
+      case 'uint64': return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'sint32': return FieldDescriptorProto_Type.TYPE_SINT32;
+      case 'sint64': return FieldDescriptorProto_Type.TYPE_SINT64;
+      case 'fixed32': return FieldDescriptorProto_Type.TYPE_FIXED32;
+      case 'fixed64': return FieldDescriptorProto_Type.TYPE_FIXED64;
+      case 'sfixed32': return FieldDescriptorProto_Type.TYPE_SFIXED32;
+      case 'sfixed64': return FieldDescriptorProto_Type.TYPE_SFIXED64;
+      default: return FieldDescriptorProto_Type.TYPE_INT32;
+    }
+  }
+  
+  static int _getRepeatedConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'min_items': return ConstraintNumbers.minItems;
+      case 'max_items': return ConstraintNumbers.maxItems;
+      case 'unique': return ConstraintNumbers.unique;
+      case 'items': return ConstraintNumbers.items;
+      default: throw ArgumentError('Unknown repeated constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getRepeatedConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'min_items':
+      case 'max_items':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'unique':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      case 'items':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
+      default:
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+    }
+  }
+  
+  static int _getEnumConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return ConstraintNumbers.const_;
+      case 'defined_only': return ConstraintNumbers.definedOnly;
+      case 'in': return ConstraintNumbers.in_;
+      case 'not_in': return ConstraintNumbers.notIn;
+      default: throw ArgumentError('Unknown enum constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getEnumConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'const':
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_INT32;
+      case 'defined_only':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      default:
+        return FieldDescriptorProto_Type.TYPE_INT32;
+    }
+  }
+}

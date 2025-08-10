@@ -1,5 +1,6 @@
 import 'package:protobuf/protobuf.dart';
 import 'cursor.dart';
+import 'rule_paths.dart';
 
 /// Base interface for all evaluators.
 abstract class Evaluator {
@@ -87,15 +88,17 @@ class RepeatedFieldEvaluator implements Evaluator {
     // Check min/max items
     if (minItems != null && list.length < minItems!) {
       cursor.violate(
-        message: 'List has ${list.length} items, minimum required is $minItems',
+        message: 'value must contain at least $minItems item(s)',
         constraintId: 'repeated.min_items',
+        rulePath: RulePathBuilder.repeatedConstraint('min_items'),
       );
     }
     
     if (maxItems != null && list.length > maxItems!) {
       cursor.violate(
-        message: 'List has ${list.length} items, maximum allowed is $maxItems',
+        message: 'value must contain no more than $maxItems item(s)',
         constraintId: 'repeated.max_items',
+        rulePath: RulePathBuilder.repeatedConstraint('max_items'),
       );
     }
     
@@ -105,9 +108,10 @@ class RepeatedFieldEvaluator implements Evaluator {
       for (var i = 0; i < list.length; i++) {
         final item = list[i];
         if (!seen.add(item)) {
-          cursor.listIndex(i).violate(
-            message: 'Duplicate value in list',
+          cursor.violate(
+            message: 'repeated value must contain unique items',
             constraintId: 'repeated.unique',
+            rulePath: RulePathBuilder.repeatedConstraint('unique'),
           );
         }
       }
@@ -149,14 +153,14 @@ class MapFieldEvaluator implements Evaluator {
     // Check min/max pairs
     if (minPairs != null && map.length < minPairs!) {
       cursor.violate(
-        message: 'Map has ${map.length} pairs, minimum required is $minPairs',
+        message: 'value must contain at least $minPairs pair(s)',
         constraintId: 'map.min_pairs',
       );
     }
     
     if (maxPairs != null && map.length > maxPairs!) {
       cursor.violate(
-        message: 'Map has ${map.length} pairs, maximum allowed is $maxPairs',
+        message: 'value must contain no more than $maxPairs pair(s)',
         constraintId: 'map.max_pairs',
       );
     }

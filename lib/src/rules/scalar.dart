@@ -4,6 +4,7 @@ import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 import '../cursor.dart';
 import '../evaluator.dart';
+import '../rule_paths.dart';
 
 /// Evaluator for boolean field rules.
 class BoolEvaluator implements Evaluator {
@@ -25,16 +26,7 @@ class BoolEvaluator implements Evaluator {
       cursor.violate(
         message: '',  // Empty message to match expected output
         constraintId: 'bool.const',
-        rulePathElements: [
-          pb.FieldPathElement()
-            ..fieldNumber = 13
-            ..fieldName = 'bool'
-            ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE,
-          pb.FieldPathElement()
-            ..fieldNumber = 1
-            ..fieldName = 'const'
-            ..fieldType = FieldDescriptorProto_Type.TYPE_BOOL,
-        ],
+        rulePath: RulePathBuilder.boolConstraint('const'),
       );
     }
   }
@@ -84,7 +76,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.const',
-        rulePathElements: _buildRulePath('const', 1),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'const'),
       );
       return; // If const fails, don't check other rules
     }
@@ -94,7 +86,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.in',
-        rulePathElements: _buildRulePath('in', 6),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'in'),
       );
       return;
     }
@@ -103,7 +95,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.not_in',
-        rulePathElements: _buildRulePath('not_in', 7),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'not_in'),
       );
       return;
     }
@@ -161,7 +153,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.$primaryConstraint',
-        rulePathElements: _buildRulePath(_getFieldNameFromNumber(primaryFieldNumber), primaryFieldNumber),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
       );
     }
   }
@@ -178,13 +170,13 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lt'),
           );
         }
         return;
@@ -200,13 +192,13 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gte_lte',
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gte_lte', 
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lte'),
           );
         }
         return;
@@ -218,7 +210,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.lt',
-        rulePathElements: _buildRulePath('lt', 2),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lt'),
       );
     }
     
@@ -226,7 +218,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.lte',
-        rulePathElements: _buildRulePath('lte', 3),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lte'),
       );
     }
     
@@ -234,7 +226,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.gt',
-        rulePathElements: _buildRulePath('gt', 4),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
       );
     }
     
@@ -242,7 +234,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.gte',
-        rulePathElements: _buildRulePath('gte', 5),
+        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
       );
     }
   }
@@ -507,13 +499,13 @@ class FloatEvaluator extends NumericEvaluator<double> {
           cursor.violate(
             message: '',
             constraintId: 'float.gt_lt_exclusive',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint('float', 1, 'gt'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: 'float.gt_lt',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint('float', 1, 'gt'),
           );
         }
         return;
@@ -523,13 +515,13 @@ class FloatEvaluator extends NumericEvaluator<double> {
           cursor.violate(
             message: '',
             constraintId: 'float.gte_lte_exclusive',
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint('float', 1, 'gte'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: 'float.gte_lte',
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint('float', 1, 'gte'),
           );
         }
         return;
@@ -540,7 +532,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'float.gt',
-          rulePathElements: _buildRulePath('gt', 4),
+          rulePath: RulePathBuilder.numericConstraint('float', 1, 'gt'),
         );
         return;
       }
@@ -548,7 +540,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'float.gte',
-          rulePathElements: _buildRulePath('gte', 5),
+          rulePath: RulePathBuilder.numericConstraint('float', 1, 'gte'),
         );
         return;
       }
@@ -556,7 +548,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'float.lt',
-          rulePathElements: _buildRulePath('lt', 2),
+          rulePath: RulePathBuilder.numericConstraint('float', 1, 'lt'),
         );
         return;
       }
@@ -564,7 +556,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'float.lte',
-          rulePathElements: _buildRulePath('lte', 3),
+          rulePath: RulePathBuilder.numericConstraint('float', 1, 'lte'),
         );
         return;
       }
@@ -578,7 +570,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
       cursor.violate(
         message: 'value must be finite',
         constraintId: 'float.finite',
-        rulePathElements: _buildRulePath('finite', 8),
+        rulePath: RulePathBuilder.numericConstraint('float', 1, 'finite'),
       );
     }
   }
@@ -634,13 +626,13 @@ class DoubleEvaluator extends NumericEvaluator<double> {
           cursor.violate(
             message: '',
             constraintId: 'double.gt_lt_exclusive',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint('double', 2, 'gt'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: 'double.gt_lt',
-            rulePathElements: _buildRulePath('gt', 4),
+            rulePath: RulePathBuilder.numericConstraint('double', 2, 'gt'),
           );
         }
         return;
@@ -650,13 +642,13 @@ class DoubleEvaluator extends NumericEvaluator<double> {
           cursor.violate(
             message: '',
             constraintId: 'double.gte_lte_exclusive',
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint('double', 2, 'gte'),
           );
         } else {
           cursor.violate(
             message: '',
             constraintId: 'double.gte_lte',
-            rulePathElements: _buildRulePath('gte', 5),
+            rulePath: RulePathBuilder.numericConstraint('double', 2, 'gte'),
           );
         }
         return;
@@ -667,7 +659,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'double.gt',
-          rulePathElements: _buildRulePath('gt', 4),
+          rulePath: RulePathBuilder.numericConstraint('double', 2, 'gt'),
         );
         return;
       }
@@ -675,7 +667,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'double.gte',
-          rulePathElements: _buildRulePath('gte', 5),
+          rulePath: RulePathBuilder.numericConstraint('double', 2, 'gte'),
         );
         return;
       }
@@ -683,7 +675,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'double.lt',
-          rulePathElements: _buildRulePath('lt', 2),
+          rulePath: RulePathBuilder.numericConstraint('double', 2, 'lt'),
         );
         return;
       }
@@ -691,7 +683,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         cursor.violate(
           message: '',
           constraintId: 'double.lte',
-          rulePathElements: _buildRulePath('lte', 3),
+          rulePath: RulePathBuilder.numericConstraint('double', 2, 'lte'),
         );
         return;
       }
@@ -705,7 +697,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
       cursor.violate(
         message: 'value must be finite',
         constraintId: 'double.finite',
-        rulePathElements: _buildRulePath('finite', 8),
+        rulePath: RulePathBuilder.numericConstraint('double', 2, 'finite'),
       );
     }
   }
@@ -742,6 +734,16 @@ class StringRulesEvaluator implements Evaluator {
   // Cached compiled pattern
   RegExp? _compiledPattern;
   
+  /// Compiles a regex pattern, handling PCRE-style flags like (?i)
+  static RegExp? _compilePattern(String pattern) {
+    // Handle case-insensitive flag (?i) at the beginning
+    if (pattern.startsWith('(?i)')) {
+      final cleanPattern = pattern.substring(4); // Remove (?i)
+      return RegExp(cleanPattern, caseSensitive: false);
+    }
+    return RegExp(pattern);
+  }
+  
   StringRulesEvaluator({
     this.constValue,
     this.len,
@@ -770,7 +772,7 @@ class StringRulesEvaluator implements Evaluator {
     // Compile pattern once during construction
     if (pattern != null) {
       try {
-        _compiledPattern = RegExp(pattern!);
+        _compiledPattern = _compilePattern(pattern!);
       } catch (e) {
         // Pattern compilation error will be caught during validation
       }
@@ -792,16 +794,18 @@ class StringRulesEvaluator implements Evaluator {
     // Check const
     if (constValue != null && stringValue != constValue) {
       cursor.violate(
-        message: 'Value must be "$constValue"',
+        message: '',
         constraintId: 'string.const',
+        rulePath: RulePathBuilder.stringConstraint('const'),
       );
     }
     
     // Check exact length
     if (len != null && stringValue.length != len) {
       cursor.violate(
-        message: 'String length must be exactly $len characters',
+        message: 'value length must be $len characters',
         constraintId: 'string.len',
+        rulePath: RulePathBuilder.stringConstraint('len'),
       );
     }
     
@@ -810,6 +814,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be at least $minLen characters',
         constraintId: 'string.min_len',
+        rulePath: RulePathBuilder.stringConstraint('min_len'),
       );
     }
     
@@ -818,6 +823,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'String must be at most $maxLen characters',
         constraintId: 'string.max_len',
+        rulePath: RulePathBuilder.stringConstraint('max_len'),
       );
     }
     
@@ -893,7 +899,7 @@ class StringRulesEvaluator implements Evaluator {
     // Check in
     if (inValues != null && !inValues!.contains(stringValue)) {
       cursor.violate(
-        message: 'Value must be one of: ${inValues!.join(", ")}',
+        message: 'value must be in list [${inValues!.join(", ")}]',
         constraintId: 'string.in',
       );
     }
@@ -901,7 +907,7 @@ class StringRulesEvaluator implements Evaluator {
     // Check not_in
     if (notInValues != null && notInValues!.contains(stringValue)) {
       cursor.violate(
-        message: 'Value must not be one of: ${notInValues!.join(", ")}',
+        message: 'value must not be in list [${notInValues!.join(", ")}]',
         constraintId: 'string.not_in',
       );
     }
@@ -1066,6 +1072,53 @@ class StringRulesEvaluator implements Evaluator {
     );
     return uuidRegex.hasMatch(value);
   }
+
+  List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {
+    return [
+      pb.FieldPathElement()
+        ..fieldNumber = 14  // string field number in FieldRules
+        ..fieldName = 'string'
+        ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE,
+      pb.FieldPathElement()
+        ..fieldNumber = fieldNumber
+        ..fieldName = fieldName
+        ..fieldType = _getStringFieldType(fieldName),
+    ];
+  }
+
+  FieldDescriptorProto_Type _getStringFieldType(String fieldName) {
+    switch (fieldName) {
+      case 'const':
+      case 'pattern':
+      case 'prefix':
+      case 'suffix':
+      case 'contains':
+      case 'not_contains':
+        return FieldDescriptorProto_Type.TYPE_STRING;
+      case 'len':
+      case 'min_len':
+      case 'max_len':
+      case 'min_bytes':
+      case 'max_bytes':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_STRING; // repeated string
+      case 'email':
+      case 'hostname':
+      case 'ip':
+      case 'ipv4':
+      case 'ipv6':
+      case 'uri':
+      case 'uri_ref':
+      case 'address':
+      case 'uuid':
+      case 'well_known_regex':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      default:
+        return FieldDescriptorProto_Type.TYPE_STRING;
+    }
+  }
 }
 
 /// Evaluator for bytes field rules.
@@ -1130,7 +1183,7 @@ class BytesEvaluator implements Evaluator {
     // Check const
     if (constValue != null && !_bytesEqual(bytesValue, constValue!)) {
       cursor.violate(
-        message: 'Value must be exactly the specified bytes',
+        message: '',
         constraintId: 'bytes.const',
       );
     }
