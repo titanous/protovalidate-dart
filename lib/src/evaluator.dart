@@ -155,6 +155,7 @@ class MapFieldEvaluator implements Evaluator {
       cursor.violate(
         message: 'value must contain at least $minPairs pair(s)',
         constraintId: 'map.min_pairs',
+        rulePath: RulePathBuilder.mapConstraint('min_pairs'),
       );
     }
     
@@ -162,6 +163,7 @@ class MapFieldEvaluator implements Evaluator {
       cursor.violate(
         message: 'value must contain no more than $maxPairs pair(s)',
         constraintId: 'map.max_pairs',
+        rulePath: RulePathBuilder.mapConstraint('max_pairs'),
       );
     }
     
@@ -199,5 +201,58 @@ class NoOpEvaluator implements Evaluator {
   @override
   void evaluate(dynamic value, Cursor cursor) {
     // Does nothing
+  }
+}
+
+/// Evaluator for embedded message fields.
+/// This wraps a message evaluator and handles field path updates.
+class EmbeddedMessageEvaluator implements Evaluator {
+  final Evaluator messageEvaluator;
+  
+  EmbeddedMessageEvaluator(this.messageEvaluator);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) {
+      // Null messages are allowed for optional fields
+      return;
+    }
+    
+    if (value is! GeneratedMessage) {
+      cursor.violate(
+        message: 'Expected a GeneratedMessage',
+        constraintId: 'message.type',
+      );
+      return;
+    }
+    
+    // Evaluate the nested message
+    messageEvaluator.evaluate(value, cursor);
+  }
+}
+
+/// Wraps an evaluator to add map.keys rule path context
+class MapKeysEvaluator implements Evaluator {
+  final Evaluator wrapped;
+  
+  MapKeysEvaluator(this.wrapped);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    // TODO: Add map.keys to rule path
+    wrapped.evaluate(value, cursor);
+  }
+}
+
+/// Wraps an evaluator to add map.values rule path context
+class MapValuesEvaluator implements Evaluator {
+  final Evaluator wrapped;
+  
+  MapValuesEvaluator(this.wrapped);
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    // TODO: Add map.values to rule path
+    wrapped.evaluate(value, cursor);
   }
 }

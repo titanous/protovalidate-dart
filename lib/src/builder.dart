@@ -1,4 +1,5 @@
 import 'package:protobuf/protobuf.dart';
+import 'package:protobuf/meta.dart' show MapFieldInfo;
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart'
@@ -209,10 +210,61 @@ class EvaluatorBuilder {
   }
   
   Evaluator? _buildMapFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
-    if (fieldRules?.hasMap() == true) {
-      return _buildMapEvaluator(fieldRules!.map);
+    // For map fields, we need to handle both explicit rules and implicit message validation
+    if (field is! MapFieldInfo) {
+      // Not a map field, return null
+      return null;
     }
-    return null;
+    
+    final mapField = field as MapFieldInfo;
+    final mapRules = fieldRules?.map;
+    
+    // Build key evaluator from rules if present
+    Evaluator? keyEvaluator;
+    if (mapRules?.hasKeys() == true) {
+      final baseKeyEvaluator = buildFromFieldRules(mapRules!.keys);
+      if (baseKeyEvaluator != null) {
+        keyEvaluator = MapKeysEvaluator(baseKeyEvaluator);
+      }
+    }
+    
+    // Build value evaluator - handle both explicit rules and implicit message validation
+    Evaluator? valueEvaluator;
+    
+    // First check for explicit value rules
+    if (mapRules?.hasValues() == true) {
+      final baseValueEvaluator = buildFromFieldRules(mapRules!.values);
+      if (baseValueEvaluator != null) {
+        valueEvaluator = MapValuesEvaluator(baseValueEvaluator);
+      }
+    }
+    
+    // If the value type is a message and we don't have explicit rules,
+    // still need to recursively validate the message
+    if (valueEvaluator == null && mapField.valueCreator != null) {
+      // Value is a message type
+      try {
+        final valueMessage = mapField.valueCreator!();
+        final nestedEvaluator = buildForMessage(valueMessage);
+        valueEvaluator = EmbeddedMessageEvaluator(nestedEvaluator);
+      } catch (e) {
+        // If we can't create the message, skip validation
+      }
+    }
+    
+    // Return null if we have no validation to perform
+    if (keyEvaluator == null && valueEvaluator == null && 
+        mapRules?.hasMinPairs() != true && mapRules?.hasMaxPairs() != true) {
+      return null;
+    }
+    
+    // Create map field evaluator with all rules
+    return field_eval.MapFieldEvaluator(
+      keyEvaluator: keyEvaluator,
+      valueEvaluator: valueEvaluator,
+      minPairs: mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
+      maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
+    );
   }
   
   Evaluator? _buildMessageFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
@@ -229,8 +281,23 @@ class EvaluatorBuilder {
       }
     }
     
-    // For now, return a no-op evaluator for non-wrapper messages
-    // In a full implementation, this would recursively build for the nested type
+    // For non-wrapper messages, recursively build evaluator for the nested type
+    if (field.subBuilder != null) {
+      try {
+        // Create an instance of the nested message to build its evaluator
+        final nestedMessage = field.subBuilder!();
+        
+        // Use cached evaluator if available, otherwise build and cache
+        final nestedEvaluator = buildForMessage(nestedMessage);
+        
+        // Wrap it in an embedded message evaluator that handles field path updates
+        return EmbeddedMessageEvaluator(nestedEvaluator);
+      } catch (e) {
+        // If we can't create the message, return a no-op evaluator
+        return NoOpEvaluator();
+      }
+    }
+    
     return NoOpEvaluator();
   }
   
@@ -787,12 +854,18 @@ class EvaluatorBuilder {
     // Build key and value evaluators from rules if present
     Evaluator? keyEvaluator;
     if (rules.hasKeys()) {
-      keyEvaluator = buildFromFieldRules(rules.keys);
+      final baseKeyEvaluator = buildFromFieldRules(rules.keys);
+      if (baseKeyEvaluator != null) {
+        keyEvaluator = MapKeysEvaluator(baseKeyEvaluator);
+      }
     }
 
     Evaluator? valueEvaluator;
     if (rules.hasValues()) {
-      valueEvaluator = buildFromFieldRules(rules.values);
+      final baseValueEvaluator = buildFromFieldRules(rules.values);
+      if (baseValueEvaluator != null) {
+        valueEvaluator = MapValuesEvaluator(baseValueEvaluator);
+      }
     }
 
     // Create map field evaluator with all rules
