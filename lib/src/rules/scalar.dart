@@ -1215,92 +1215,92 @@ class StringRulesEvaluator implements Evaluator {
   
   // Email validation
   bool _isValidEmail(String value) {
-    return StringValidators.isValidEmail(value);
+    return StringValidators.isEmail(value);
   }
   
   // Hostname validation
   bool _isValidHostname(String value) {
-    return StringValidators.isValidHostname(value);
+    return StringValidators.isHostname(value);
   }
   
   // IP validation (v4 or v6)
   bool _isValidIP(String value) {
-    return StringValidators.isValidIP(value);
+    return StringValidators.isIp(value);
   }
   
   // IPv4 validation
   bool _isValidIPv4(String value) {
-    return StringValidators.isValidIPv4(value);
+    return StringValidators.isIp(value, 4);
   }
   
   // IPv6 validation
   bool _isValidIPv6(String value) {
-    return StringValidators.isValidIPv6(value);
+    return StringValidators.isIp(value, 6);
   }
   
   // URI validation
   bool _isValidURI(String value) {
-    return StringValidators.isValidURI(value);
+    return StringValidators.isUri(value);
   }
   
   // URI reference validation (can be relative)
   bool _isValidURIRef(String value) {
-    return StringValidators.isValidURIRef(value);
+    return StringValidators.isUriRef(value);
   }
   
   // UUID validation
   bool _isValidUUID(String value) {
-    return StringValidators.isValidUUID(value);
+    return StringValidators.isUuid(value);
   }
   
   // Address validation (IP or hostname)
   bool _isValidAddress(String value) {
-    return StringValidators.isValidAddress(value);
+    return StringValidators.isAddress(value);
   }
   
   // IPv4 prefix validation
   bool _isValidIPv4Prefix(String value) {
-    return StringValidators.isValidIPv4Prefix(value);
+    return StringValidators.isIpPrefix(value, 4);
   }
   
   // IPv6 prefix validation
   bool _isValidIPv6Prefix(String value) {
-    return StringValidators.isValidIPv6Prefix(value);
+    return StringValidators.isIpPrefix(value, 6);
   }
   
   // IP with prefix length validation
   bool _isValidIPWithPrefixLen(String value) {
-    return StringValidators.isValidIPWithPrefixLen(value);
+    return StringValidators.isIpPrefix(value);
   }
   
   // IPv4 with prefix length validation
   bool _isValidIPv4WithPrefixLen(String value) {
-    return StringValidators.isValidIPv4WithPrefixLen(value);
+    return StringValidators.isIpPrefix(value, 4);
   }
   
   // IPv6 with prefix length validation
   bool _isValidIPv6WithPrefixLen(String value) {
-    return StringValidators.isValidIPv6WithPrefixLen(value);
+    return StringValidators.isIpPrefix(value, 6);
   }
   
   // TUUID validation
   bool _isValidTUUID(String value) {
-    return StringValidators.isValidTUUID(value);
+    return StringValidators.isTuuid(value);
   }
   
   // Host and port validation
   bool _isValidHostAndPort(String value) {
-    return StringValidators.isValidHostAndPort(value, portRequired: false);
+    return StringValidators.isHostAndPort(value, false);
   }
   
   // HTTP header name validation
   bool _isValidHTTPHeaderName(String value) {
-    return StringValidators.isValidHTTPHeaderName(value, strict ?? false);
+    return StringValidators.isHttpHeaderName(value, strict ?? false);
   }
   
   // HTTP header value validation
   bool _isValidHTTPHeaderValue(String value) {
-    return StringValidators.isValidHTTPHeaderValue(value, strict ?? false);
+    return StringValidators.isHttpHeaderValue(value, strict ?? false);
   }
 
   List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {

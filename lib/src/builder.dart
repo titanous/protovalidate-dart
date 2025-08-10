@@ -18,6 +18,7 @@ import 'rules/message.dart';
 import 'rules/wkt.dart';
 import 'rules/predefined.dart';
 import 'cel_evaluator.dart';
+import 'cel/cel_integration.dart';
 import 'error.dart';
 import 'cursor.dart';
 
@@ -31,8 +32,14 @@ class EvaluatorBuilder {
 
   /// CEL compiler for custom expressions
   final CELCompiler _celCompiler;
+  
+  /// Managed CEL compiler for improved integration
+  final ManagedCELCompiler _managedCelCompiler = ManagedCELCompiler();
+  
+  /// Whether to use the new managed CEL approach
+  final bool useManagedCel;
 
-  EvaluatorBuilder({this.descriptorRules, cel.Environment? celEnvironment})
+  EvaluatorBuilder({this.descriptorRules, cel.Environment? celEnvironment, this.useManagedCel = true})
       : _celCompiler = CELCompiler(env: celEnvironment);
 
   /// Builds an evaluator for the given message type.
@@ -63,9 +70,16 @@ class EvaluatorBuilder {
         // Add message-level CEL evaluator if there are CEL expressions
         if (messageRules.cel.isNotEmpty) {
           try {
-            final compiledExpressions = _celCompiler.compile(messageRules.cel.toList());
-            if (compiledExpressions.isNotEmpty) {
-              evaluators.add(MessageCELEvaluator(expressions: compiledExpressions));
+            if (useManagedCel) {
+              final compiledExpressions = _managedCelCompiler.compile(messageRules.cel.toList());
+              if (compiledExpressions.isNotEmpty) {
+                evaluators.add(ManagedMessageCELEvaluator(expressions: compiledExpressions));
+              }
+            } else {
+              final compiledExpressions = _celCompiler.compile(messageRules.cel.toList());
+              if (compiledExpressions.isNotEmpty) {
+                evaluators.add(MessageCELEvaluator(expressions: compiledExpressions));
+              }
             }
           } catch (e) {
             throw CompilationError('Failed to compile message-level CEL expressions: $e');
@@ -934,13 +948,19 @@ class EvaluatorBuilder {
     }
 
     try {
-      final expressions = _celCompiler.compile(celRules);
-
-      if (expressions.isEmpty) {
-        return null;
+      if (useManagedCel) {
+        final expressions = _managedCelCompiler.compile(celRules);
+        if (expressions.isEmpty) {
+          return null;
+        }
+        return ManagedCELEvaluator(expressions: expressions);
+      } else {
+        final expressions = _celCompiler.compile(celRules);
+        if (expressions.isEmpty) {
+          return null;
+        }
+        return CELEvaluator(expressions: expressions);
       }
-
-      return CELEvaluator(expressions: expressions);
     } catch (e) {
       // Rethrow compilation error - don't catch and hide it
       rethrow;

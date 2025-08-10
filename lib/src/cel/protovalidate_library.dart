@@ -1,8 +1,8 @@
 import 'package:cel/cel.dart';
 import '../shared/string_validators.dart';
 
-/// Protovalidate validation functions library for CEL
-/// Implements all validation functions defined in the protovalidate specification
+/// Refactored Protovalidate validation functions library for CEL
+/// Uses the new parser-based validators for cleaner implementation
 class ProtovalidateLibrary extends Library {
   @override
   List<ProgramOption> get programOptions => [
@@ -15,87 +15,126 @@ class ProtovalidateLibrary extends Library {
   List<Overload> _createValidationOverloads() {
     return [
       // String validation functions
+      
+      // isEmail(string) -> bool
       Overload('isEmail', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidEmail(value.value));
+          return BooleanValue(StringValidators.isEmail(value.value));
         }
         return BooleanValue(false);
       }),
       
+      // isHostname(string) -> bool
       Overload('isHostname', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidHostname(value.value));
+          return BooleanValue(StringValidators.isHostname(value.value));
         }
         return BooleanValue(false);
       }),
       
+      // isIp(string) -> bool (any version)
       Overload('isIp', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIP(value.value));
+          return BooleanValue(StringValidators.isIp(value.value));
         }
         return BooleanValue(false);
       }),
       
-      // isIp(string, int) - specific version
+      // isIp(string, int) -> bool (specific version)
       Overload('isIp', binaryOperator: (value, version) {
         if (value is StringValue && version is IntValue) {
-          final ver = version.value.toInt();
-          if (ver == 4) {
-            return BooleanValue(StringValidators.isValidIPv4(value.value));
-          } else if (ver == 6) {
-            return BooleanValue(StringValidators.isValidIPv6(value.value));
-          } else {
-            // Invalid version - no IP address can be valid
-            return BooleanValue(false);
-          }
+          return BooleanValue(StringValidators.isIp(value.value, version.value.toInt()));
         }
         return BooleanValue(false);
       }),
       
-      Overload('isIpv4', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIPv4(value.value));
-        }
-        return BooleanValue(false);
-      }),
-      
-      Overload('isIpv6', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIPv6(value.value));
-        }
-        return BooleanValue(false);
-      }),
-      
+      // isUri(string) -> bool
       Overload('isUri', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidURI(value.value));
+          return BooleanValue(StringValidators.isUri(value.value));
         }
         return BooleanValue(false);
       }),
       
+      // isUriRef(string) -> bool
       Overload('isUriRef', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidURIRef(value.value));
+          return BooleanValue(StringValidators.isUriRef(value.value));
         }
         return BooleanValue(false);
       }),
       
+      // isUuid(string) -> bool
       Overload('isUuid', unaryOperator: (value) {
         if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidUUID(value.value));
+          return BooleanValue(StringValidators.isUuid(value.value));
         }
         return BooleanValue(false);
       }),
       
-      // List functions
-      Overload('unique', unaryOperator: (value) {
-        if (value is ListValue) {
-          return BooleanValue(_isUnique(value.value));
+      // isAddress(string) -> bool
+      Overload('isAddress', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isAddress(value.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isHostAndPort(string, bool) -> bool
+      Overload('isHostAndPort', binaryOperator: (value, portRequired) {
+        if (value is StringValue && portRequired is BooleanValue) {
+          return BooleanValue(StringValidators.isHostAndPort(value.value, portRequired.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // IP prefix validation with multiple overloads
+      
+      // isIpPrefix(string) -> bool (any version, non-strict)
+      Overload('isIpPrefix', unaryOperator: (value) {
+        if (value is StringValue) {
+          return BooleanValue(StringValidators.isIpPrefix(value.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, int) -> bool (specific version, non-strict)
+      Overload('isIpPrefix', binaryOperator: (value, version) {
+        if (value is StringValue && version is IntValue) {
+          return BooleanValue(StringValidators.isIpPrefix(value.value, version.value.toInt()));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, bool) -> bool (any version, with strict mode)
+      Overload('isIpPrefix:strict', binaryOperator: (value, strict) {
+        if (value is StringValue && strict is BooleanValue) {
+          return BooleanValue(StringValidators.isIpPrefix(value.value, null, strict.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // isIpPrefix(string, int, bool) -> bool (specific version with strict mode)
+      Overload('isIpPrefix', functionOperator: (args) {
+        if (args.length == 3 && 
+            args[0] is StringValue && 
+            args[1] is IntValue && 
+            args[2] is BooleanValue) {
+          final value = args[0] as StringValue;
+          final version = args[1] as IntValue;
+          final strict = args[2] as BooleanValue;
+          return BooleanValue(StringValidators.isIpPrefix(
+            value.value, 
+            version.value.toInt(), 
+            strict.value
+          ));
         }
         return BooleanValue(false);
       }),
       
       // Numeric functions
+      
+      // isNan(double) -> bool
       Overload('isNan', unaryOperator: (value) {
         if (value is DoubleValue) {
           return BooleanValue(value.value.isNaN);
@@ -103,6 +142,7 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
+      // isInf(double) -> bool (any infinity)
       Overload('isInf', unaryOperator: (value) {
         if (value is DoubleValue) {
           return BooleanValue(value.value.isInfinite);
@@ -110,118 +150,67 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
-      // Binary version of isInf with sign parameter
+      // isInf(double, int) -> bool (specific sign)
       Overload('isInf', binaryOperator: (value, sign) {
         if (value is DoubleValue && sign is IntValue) {
-          final isInf = value.value.isInfinite;
-          if (!isInf) return BooleanValue(false);
-          
-          final signValue = sign.value.toInt();
-          if (signValue == 0) return BooleanValue(true); // Any infinity
-          if (signValue > 0) return BooleanValue(value.value.isInfinite && value.value > 0);
-          if (signValue < 0) return BooleanValue(value.value.isInfinite && value.value < 0);
-        }
-        return BooleanValue(false);
-      }),
-
-      // Additional string format validation functions
-      Overload('isAddress', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidAddress(value.value));
+          return BooleanValue(StringValidators.isInf(value.value, sign.value.toInt()));
         }
         return BooleanValue(false);
       }),
       
-      // Host and port validation function
-      Overload('isHostAndPort', binaryOperator: (value, portRequired) {
-        if (value is StringValue && portRequired is BooleanValue) {
-          return BooleanValue(StringValidators.isValidHostAndPort(value.value, portRequired: portRequired.value));
+      // List functions
+      
+      // unique(list) -> bool
+      Overload('unique', unaryOperator: (value) {
+        if (value is ListValue) {
+          return BooleanValue(StringValidators.unique(value.value));
         }
         return BooleanValue(false);
       }),
       
-      // IP prefix validation functions with multiple overloads
-      // isIpPrefix(string) - any version, non-strict
-      Overload('isIpPrefix', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: null, strict: false));
+      // Bytes functions
+      
+      // bytesContains(bytes, bytes) -> bool
+      Overload('bytesContains', binaryOperator: (bytes, sub) {
+        if (bytes is BytesValue && sub is BytesValue) {
+          return BooleanValue(StringValidators.bytesContains(bytes.value, sub.value));
         }
         return BooleanValue(false);
       }),
       
-      // isIpPrefix(string, int) - specific version, non-strict
-      Overload('isIpPrefix', binaryOperator: (value, version) {
-        if (value is StringValue && version is IntValue) {
-          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: version.value.toInt(), strict: false));
+      // bytesStartsWith(bytes, bytes) -> bool
+      Overload('bytesStartsWith', binaryOperator: (bytes, prefix) {
+        if (bytes is BytesValue && prefix is BytesValue) {
+          return BooleanValue(StringValidators.bytesStartsWith(bytes.value, prefix.value));
         }
         return BooleanValue(false);
       }),
       
-      // isIpPrefix(string, bool) - any version, with strict mode
-      Overload('isIpPrefix', binaryOperator: (value, strict) {
+      // bytesEndsWith(bytes, bytes) -> bool
+      Overload('bytesEndsWith', binaryOperator: (bytes, suffix) {
+        if (bytes is BytesValue && suffix is BytesValue) {
+          return BooleanValue(StringValidators.bytesEndsWith(bytes.value, suffix.value));
+        }
+        return BooleanValue(false);
+      }),
+      
+      // HTTP header validation
+      
+      // isHttpHeaderName(string, bool) -> bool
+      Overload('isHttpHeaderName', binaryOperator: (value, strict) {
         if (value is StringValue && strict is BooleanValue) {
-          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: null, strict: strict.value));
+          return BooleanValue(StringValidators.isHttpHeaderName(value.value, strict.value));
         }
         return BooleanValue(false);
       }),
       
-      // isIpPrefix(string, int, bool) - specific version with strict mode
-      Overload('isIpPrefix', functionOperator: (args) {
-        if (args.length == 3 && args[0] is StringValue && args[1] is IntValue && args[2] is BooleanValue) {
-          final value = args[0] as StringValue;
-          final version = args[1] as IntValue;
-          final strict = args[2] as BooleanValue;
-          return BooleanValue(StringValidators.isValidIPPrefix(value.value, version: version.value.toInt(), strict: strict.value));
-        }
-        return BooleanValue(false);
-      }),
-      
-      // IP with prefix length validation functions
-      Overload('isIpv4WithPrefixLen', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIPv4WithPrefixLen(value.value));
-        }
-        return BooleanValue(false);
-      }),
-      
-      Overload('isIpv6WithPrefixLen', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidIPv6WithPrefixLen(value.value));
-        }
-        return BooleanValue(false);
-      }),
-      
-      Overload('isIpWithPrefixLen', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(_isValidIpWithPrefixLen(value.value, null));
-        }
-        return BooleanValue(false);
-      }),
-      
-      // Case-insensitive UUID validation (TUUID)
-      Overload('isTuuid', unaryOperator: (value) {
-        if (value is StringValue) {
-          return BooleanValue(StringValidators.isValidTUUID(value.value));
+      // isHttpHeaderValue(string, bool) -> bool
+      Overload('isHttpHeaderValue', binaryOperator: (value, strict) {
+        if (value is StringValue && strict is BooleanValue) {
+          return BooleanValue(StringValidators.isHttpHeaderValue(value.value, strict.value));
         }
         return BooleanValue(false);
       }),
     ];
-  }
-  
-  // Helper functions
-  bool _isUnique(List<dynamic> list) {
-    final seen = <String>{};
-    for (final item in list) {
-      final key = item.toString();
-      if (seen.contains(key)) return false;
-      seen.add(key);
-    }
-    return true;
-  }
-  
-  bool _isValidIpWithPrefixLen(String value, int? version) {
-    if (version == 4) return StringValidators.isValidIPv4WithPrefixLen(value);
-    if (version == 6) return StringValidators.isValidIPv6WithPrefixLen(value);
-    return StringValidators.isValidIPWithPrefixLen(value);
   }
 }
