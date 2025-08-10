@@ -261,20 +261,55 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
   }
   
   FieldDescriptorProto_Type _getFieldTypeFromName(String fieldName) {
-    // Return the appropriate type based on the constraint prefix
-    switch (constraintPrefix) {
-      case 'float':
-        return FieldDescriptorProto_Type.TYPE_FLOAT;
-      case 'double':
-        return FieldDescriptorProto_Type.TYPE_DOUBLE;
-      case 'int32':
-        return FieldDescriptorProto_Type.TYPE_INT32;
-      case 'int64':
-        return FieldDescriptorProto_Type.TYPE_INT64;
-      case 'uint32':
-        return FieldDescriptorProto_Type.TYPE_UINT32;
-      case 'uint64':
-        return FieldDescriptorProto_Type.TYPE_UINT64;
+    // Return the appropriate type based on the field name
+    switch (fieldName) {
+      case 'finite':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      case 'const':
+      case 'lt':
+      case 'lte':
+      case 'gt':
+      case 'gte':
+        // Return the appropriate type based on the constraint prefix
+        switch (constraintPrefix) {
+          case 'float':
+            return FieldDescriptorProto_Type.TYPE_FLOAT;
+          case 'double':
+            return FieldDescriptorProto_Type.TYPE_DOUBLE;
+          case 'int32':
+            return FieldDescriptorProto_Type.TYPE_INT32;
+          case 'int64':
+            return FieldDescriptorProto_Type.TYPE_INT64;
+          case 'uint32':
+            return FieldDescriptorProto_Type.TYPE_UINT32;
+          case 'uint64':
+            return FieldDescriptorProto_Type.TYPE_UINT64;
+          default:
+            return FieldDescriptorProto_Type.TYPE_INT32;
+        }
+      case 'in':
+      case 'not_in':
+        // Return the same type as the constraint prefix for the element type
+        switch (constraintPrefix) {
+          case 'float':
+            return FieldDescriptorProto_Type.TYPE_FLOAT;
+          case 'double':
+            return FieldDescriptorProto_Type.TYPE_DOUBLE;
+          case 'int32':
+            return FieldDescriptorProto_Type.TYPE_INT32;
+          case 'int64':
+            return FieldDescriptorProto_Type.TYPE_INT64;
+          case 'uint32':
+            return FieldDescriptorProto_Type.TYPE_UINT32;
+          case 'uint64':
+            return FieldDescriptorProto_Type.TYPE_UINT64;
+          case 'string':
+            return FieldDescriptorProto_Type.TYPE_STRING;
+          case 'bytes':
+            return FieldDescriptorProto_Type.TYPE_BYTES;
+          default:
+            return FieldDescriptorProto_Type.TYPE_INT32;
+        }
       default:
         return FieldDescriptorProto_Type.TYPE_INT32;
     }
@@ -454,17 +489,96 @@ class FloatEvaluator extends NumericEvaluator<double> {
   
   @override
   void evaluate(dynamic value, Cursor cursor) {
-    super.evaluate(value, cursor);
-    
-    if (!isValidType(value)) return;
+    if (!isValidType(value)) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.type',
+      );
+      return;
+    }
     
     final floatValue = value as double;
+    
+    // Handle NaN specially - NaN should fail all comparison constraints
+    if (floatValue.isNaN) {
+      // Check for combined constraints first (ranges)
+      if (gt != null && lt != null) {
+        if (gt! >= lt!) {
+          cursor.violate(
+            message: '',
+            constraintId: 'float.gt_lt_exclusive',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: 'float.gt_lt',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        }
+        return;
+      }
+      if (gte != null && lte != null) {
+        if (gte! > lte!) {
+          cursor.violate(
+            message: '',
+            constraintId: 'float.gte_lte_exclusive',
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: 'float.gte_lte',
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        }
+        return;
+      }
+      
+      // Individual constraint checks (when not part of a range)
+      if (gt != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'float.gt',
+          rulePathElements: _buildRulePath('gt', 4),
+        );
+        return;
+      }
+      if (gte != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'float.gte',
+          rulePathElements: _buildRulePath('gte', 5),
+        );
+        return;
+      }
+      if (lt != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'float.lt',
+          rulePathElements: _buildRulePath('lt', 2),
+        );
+        return;
+      }
+      if (lte != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'float.lte',
+          rulePathElements: _buildRulePath('lte', 3),
+        );
+        return;
+      }
+    }
+    
+    // For non-NaN values, use the base implementation
+    super.evaluate(value, cursor);
     
     // Check finite
     if (finite == true && !floatValue.isFinite) {
       cursor.violate(
-        message: 'Value must be finite',
+        message: 'value must be finite',
         constraintId: 'float.finite',
+        rulePathElements: _buildRulePath('finite', 8),
       );
     }
   }
@@ -502,17 +616,96 @@ class DoubleEvaluator extends NumericEvaluator<double> {
   
   @override
   void evaluate(dynamic value, Cursor cursor) {
-    super.evaluate(value, cursor);
-    
-    if (!isValidType(value)) return;
+    if (!isValidType(value)) {
+      cursor.violate(
+        message: '',
+        constraintId: '$constraintPrefix.type',
+      );
+      return;
+    }
     
     final doubleValue = value as double;
+    
+    // Handle NaN specially - NaN should fail all comparison constraints
+    if (doubleValue.isNaN) {
+      // Check for combined constraints first (ranges)
+      if (gt != null && lt != null) {
+        if (gt! >= lt!) {
+          cursor.violate(
+            message: '',
+            constraintId: 'double.gt_lt_exclusive',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: 'double.gt_lt',
+            rulePathElements: _buildRulePath('gt', 4),
+          );
+        }
+        return;
+      }
+      if (gte != null && lte != null) {
+        if (gte! > lte!) {
+          cursor.violate(
+            message: '',
+            constraintId: 'double.gte_lte_exclusive',
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        } else {
+          cursor.violate(
+            message: '',
+            constraintId: 'double.gte_lte',
+            rulePathElements: _buildRulePath('gte', 5),
+          );
+        }
+        return;
+      }
+      
+      // Individual constraint checks (when not part of a range)
+      if (gt != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'double.gt',
+          rulePathElements: _buildRulePath('gt', 4),
+        );
+        return;
+      }
+      if (gte != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'double.gte',
+          rulePathElements: _buildRulePath('gte', 5),
+        );
+        return;
+      }
+      if (lt != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'double.lt',
+          rulePathElements: _buildRulePath('lt', 2),
+        );
+        return;
+      }
+      if (lte != null) {
+        cursor.violate(
+          message: '',
+          constraintId: 'double.lte',
+          rulePathElements: _buildRulePath('lte', 3),
+        );
+        return;
+      }
+    }
+    
+    // For non-NaN values, use the base implementation
+    super.evaluate(value, cursor);
     
     // Check finite
     if (finite == true && !doubleValue.isFinite) {
       cursor.violate(
-        message: 'Value must be finite',
+        message: 'value must be finite',
         constraintId: 'double.finite',
+        rulePathElements: _buildRulePath('finite', 8),
       );
     }
   }
