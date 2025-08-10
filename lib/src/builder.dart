@@ -125,8 +125,31 @@ class EvaluatorBuilder {
 
     // Handle enum fields
     if (field.type == PbFieldType.OE || field.type == PbFieldType.PE) {
-      // Get enum value names from field info
-      final enumValueNames = _getEnumValueNames(field);
+      // Get enum value names from descriptor if available
+      Map<int, String>? enumValueNames;
+      
+      if (descriptorRules != null) {
+        final messageTypeName = descriptorRules!.getFullTypeName(message);
+        final enumTypeName = descriptorRules!.getFieldEnumTypeName(messageTypeName, field.name);
+        if (enumTypeName != null) {
+          // Clean up the type name (remove leading dot if present)
+          final cleanEnumTypeName = enumTypeName.startsWith('.') 
+              ? enumTypeName.substring(1) 
+              : enumTypeName;
+          final enumDesc = descriptorRules!.getEnumDescriptor(cleanEnumTypeName);
+          if (enumDesc != null) {
+            enumValueNames = {};
+            for (final value in enumDesc.value) {
+              enumValueNames[value.number] = value.name;
+            }
+          }
+        }
+      }
+      
+      // Fall back to field info if descriptor not available
+      if (enumValueNames == null) {
+        enumValueNames = _getEnumValueNames(field);
+      }
       
       if (fieldRules?.hasEnum_16() == true) {
         final enumEvaluator = _buildEnumEvaluator(fieldRules!.enum_16, enumValueNames);

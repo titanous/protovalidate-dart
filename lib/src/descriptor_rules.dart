@@ -137,6 +137,85 @@ class DescriptorRules {
     return qualifiedName;
   }
   
+  /// Gets enum descriptor for a given enum type name.
+  EnumDescriptorProto? getEnumDescriptor(String enumTypeName) {
+    // Search through all files in the descriptor set
+    for (final file in descriptorSet.file) {
+      // Check top-level enums
+      for (final enumDesc in file.enumType) {
+        final fullName = file.package.isNotEmpty 
+            ? '${file.package}.${enumDesc.name}' 
+            : enumDesc.name;
+        if (fullName == enumTypeName) {
+          return enumDesc;
+        }
+      }
+      
+      // Check nested enums in messages
+      for (final message in file.messageType) {
+        final enumDesc = _findNestedEnum(message, enumTypeName, file.package);
+        if (enumDesc != null) {
+          return enumDesc;
+        }
+      }
+    }
+    return null;
+  }
+  
+  /// Recursively searches for nested enums.
+  EnumDescriptorProto? _findNestedEnum(
+      DescriptorProto message, String enumTypeName, String package) {
+    final messagePrefix = package.isNotEmpty 
+        ? '${package}.${message.name}' 
+        : message.name;
+    
+    // Check enums in this message
+    for (final enumDesc in message.enumType) {
+      final fullName = '${messagePrefix}.${enumDesc.name}';
+      if (fullName == enumTypeName) {
+        return enumDesc;
+      }
+    }
+    
+    // Check nested messages
+    for (final nestedMessage in message.nestedType) {
+      final enumDesc = _findNestedEnum(
+        nestedMessage, 
+        enumTypeName, 
+        messagePrefix
+      );
+      if (enumDesc != null) {
+        return enumDesc;
+      }
+    }
+    
+    return null;
+  }
+  
+  /// Gets the enum type name for a field.
+  String? getFieldEnumTypeName(String messageTypeName, String fieldName) {
+    // Search through all files in the descriptor set
+    for (final file in descriptorSet.file) {
+      // Check if this file contains the message we're looking for
+      if (!messageTypeName.startsWith(file.package)) continue;
+      
+      // Look for the message in this file
+      final message = _findMessageDescriptor(file, messageTypeName);
+      if (message != null) {
+        // Find the field
+        for (final field in message.field) {
+          if (field.name == fieldName) {
+            // Check if this is an enum field
+            if (field.type == FieldDescriptorProto_Type.TYPE_ENUM) {
+              return field.typeName;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+  
   /// Checks if a field should be validated based on its rules.
   bool shouldValidateField(FieldRules? rules, dynamic value, FieldInfo field) {
     if (rules == null) return false;

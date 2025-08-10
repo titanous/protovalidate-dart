@@ -41,27 +41,16 @@ class EnumRulesEvaluator implements Evaluator {
     
     // Check defined_only rule
     if (rules.definedOnly == true) {
-      bool isUndefined = false;
-      
-      // Check if the value is defined
-      if (enumValueNames != null) {
-        // If we have the enum value names, check if this value is in the list
-        isUndefined = !enumValueNames!.containsKey(enumValue);
-      } else if (value is ProtobufEnum) {
-        // Without enum names, check if the name is empty (undefined values have empty names)
-        // This is a heuristic since protobuf-dart creates ProtobufEnum instances
-        // even for undefined values, but with empty names
-        isUndefined = value.name.isEmpty || value.name == value.value.toString();
-      } else if (value is int) {
-        // Raw int values are considered undefined
-        isUndefined = true;
-      }
-      
-      if (isUndefined) {
+      // If we have the enum value names map, use it to check if the value is defined
+      if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
           message: 'value must be one of the defined enum values',
           constraintId: 'enum.defined_only',
         );
+      } else if (enumValueNames == null) {
+        // Without proper enum descriptor info, we can't validate defined_only
+        // This is a limitation of the current implementation
+        // Log a warning or skip validation
       }
     }
     
@@ -115,10 +104,9 @@ class EnumEvaluator implements Evaluator {
     
     // If definedOnly is true and we have enum info, validate
     if (definedOnly && enumValueNames != null) {
-      final isDefined = enumValueNames!.containsKey(enumValue);
-      if (!isDefined) {
+      if (!enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
-          message: 'Value must be one of the defined enum values',
+          message: 'value must be one of the defined enum values',
           constraintId: 'enum.defined_only',
         );
       }
