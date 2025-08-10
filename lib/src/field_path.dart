@@ -58,18 +58,27 @@ class FieldPath {
       ..fieldName = lastElement.fieldName
       ..fieldType = lastElement.fieldType;
     
+    // Set the key value and keyType based on the key's type
     if (key is String) {
       newElement.stringKey = key;
+      newElement.keyType = FieldDescriptorProto_Type.TYPE_STRING;
     } else if (key is bool) {
       newElement.boolKey = key;
+      newElement.keyType = FieldDescriptorProto_Type.TYPE_BOOL;
     } else if (key is int) {
       newElement.intKey = Int64(key);
+      newElement.keyType = FieldDescriptorProto_Type.TYPE_INT64;
     } else if (key is Int64) {
       newElement.intKey = key;
+      newElement.keyType = FieldDescriptorProto_Type.TYPE_INT64;
     } else {
       // Convert to string as fallback
       newElement.stringKey = key.toString();
+      newElement.keyType = FieldDescriptorProto_Type.TYPE_STRING;
     }
+    
+    // Set valueType - this is a basic assumption, ideally we'd have type info
+    newElement.valueType = FieldDescriptorProto_Type.TYPE_STRING;
     
     newPath._elements[newPath._elements.length - 1] = newElement;
     return newPath;
@@ -122,6 +131,11 @@ class FieldPath {
   }
   
   FieldDescriptorProto_Type _getFieldType(FieldInfo field) {
+    // Map fields are special - they're TYPE_MESSAGE in protobuf
+    if (field.isMapField) {
+      return FieldDescriptorProto_Type.TYPE_MESSAGE;
+    }
+    
     // Map PbFieldType to FieldDescriptorProto_Type
     if (field.type == PbFieldType.OB || field.type == PbFieldType.PB) {
       return FieldDescriptorProto_Type.TYPE_BOOL;
@@ -144,6 +158,10 @@ class FieldPath {
     } else if (field.type == PbFieldType.OE || field.type == PbFieldType.PE) {
       return FieldDescriptorProto_Type.TYPE_ENUM;
     } else if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
+      return FieldDescriptorProto_Type.TYPE_MESSAGE;
+    } else if (field.isRepeated) {
+      // For repeated fields, we need to check the value type
+      // This is a fallback - ideally we'd have more type info
       return FieldDescriptorProto_Type.TYPE_MESSAGE;
     } else {
       // Default to string for unknown types

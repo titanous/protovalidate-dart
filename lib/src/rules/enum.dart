@@ -2,6 +2,7 @@ import 'package:protobuf/protobuf.dart';
 import '../evaluator.dart';
 import '../cursor.dart';
 import '../gen/buf/validate/validate.pb.dart';
+import '../rule_paths.dart';
 
 /// Evaluator for enum field validation rules.
 class EnumRulesEvaluator implements Evaluator {
@@ -33,8 +34,9 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.hasConst_1()) {
       if (enumValue != rules.const_1) {
         cursor.violate(
-          message: 'Value must be exactly ${rules.const_1}',
+          message: '',
           constraintId: 'enum.const',
+          rulePath: RulePathBuilder.enumConstraint('const'),
         );
       }
     }
@@ -44,8 +46,9 @@ class EnumRulesEvaluator implements Evaluator {
       // If we have the enum value names map, use it to check if the value is defined
       if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
-          message: 'value must be one of the defined enum values',
+          message: '',
           constraintId: 'enum.defined_only',
+          rulePath: RulePathBuilder.enumConstraint('defined_only'),
         );
       } else if (enumValueNames == null) {
         // Without proper enum descriptor info, we can't validate defined_only
@@ -58,8 +61,9 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.in_3.isNotEmpty) {
       if (!rules.in_3.contains(enumValue)) {
         cursor.violate(
-          message: 'value must be in list ${rules.in_3}',
+          message: '',
           constraintId: 'enum.in',
+          rulePath: RulePathBuilder.enumConstraint('in'),
         );
       }
     }
@@ -68,8 +72,9 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.notIn.isNotEmpty) {
       if (rules.notIn.contains(enumValue)) {
         cursor.violate(
-          message: 'value must not be in list ${rules.notIn}',
+          message: '',
           constraintId: 'enum.not_in',
+          rulePath: RulePathBuilder.enumConstraint('not_in'),
         );
       }
     }

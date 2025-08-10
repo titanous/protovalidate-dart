@@ -751,11 +751,12 @@ class EvaluatorBuilder {
       valueEvaluator = buildFromFieldRules(rules.values);
     }
 
-    // For now, return a basic map field evaluator
-    // TODO: Add support for min/max pairs validation
+    // Create map field evaluator with all rules
     return field_eval.MapFieldEvaluator(
       keyEvaluator: keyEvaluator,
       valueEvaluator: valueEvaluator,
+      minPairs: rules.hasMinPairs() ? rules.minPairs.toInt() : null,
+      maxPairs: rules.hasMaxPairs() ? rules.maxPairs.toInt() : null,
     );
   }
 

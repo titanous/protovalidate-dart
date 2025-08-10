@@ -142,6 +142,26 @@ class RulePathBuilder {
         .constraint(constraintName, fieldNumber, fieldType);
   }
   
+  /// Creates a rule path for bytes constraints.
+  static RulePath bytesConstraint(String constraintName) {
+    final fieldNumber = _getBytesConstraintNumber(constraintName);
+    final fieldType = _getBytesConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('bytes', FieldRuleNumbers.bytes)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for map constraints.
+  static RulePath mapConstraint(String constraintName) {
+    final fieldNumber = _getMapConstraintNumber(constraintName);
+    final fieldType = _getMapConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('map', FieldRuleNumbers.map)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
   static int _getStringConstraintNumber(String constraintName) {
     switch (constraintName) {
       case 'const': return ConstraintNumbers.const_;
@@ -306,6 +326,72 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_BOOL;
       default:
         return FieldDescriptorProto_Type.TYPE_INT32;
+    }
+  }
+  
+  static int _getBytesConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return 1;
+      case 'len': return 13;
+      case 'min_len': return 2;
+      case 'max_len': return 3;
+      case 'pattern': return 4;
+      case 'prefix': return 5;
+      case 'suffix': return 6;
+      case 'contains': return 7;
+      case 'in': return 8;
+      case 'not_in': return 9;
+      case 'ip': return 10;
+      case 'ipv4': return 11;
+      case 'ipv6': return 12;
+      default: throw ArgumentError('Unknown bytes constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getBytesConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'const':
+      case 'prefix':
+      case 'suffix':
+      case 'contains':
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_BYTES;
+      case 'len':
+      case 'min_len':
+      case 'max_len':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'pattern':
+        return FieldDescriptorProto_Type.TYPE_STRING;
+      case 'ip':
+      case 'ipv4':
+      case 'ipv6':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      default:
+        return FieldDescriptorProto_Type.TYPE_BYTES;
+    }
+  }
+  
+  static int _getMapConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'min_pairs': return ConstraintNumbers.minPairs;
+      case 'max_pairs': return ConstraintNumbers.maxPairs;
+      case 'keys': return ConstraintNumbers.keys;
+      case 'values': return ConstraintNumbers.values;
+      default: throw ArgumentError('Unknown map constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getMapConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'min_pairs':
+      case 'max_pairs':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'keys':
+      case 'values':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
+      default:
+        return FieldDescriptorProto_Type.TYPE_UINT64;
     }
   }
 }

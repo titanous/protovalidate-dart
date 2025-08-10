@@ -1176,10 +1176,16 @@ class StringRulesEvaluator implements Evaluator {
   void _validateWellKnownRegex(String value, Cursor cursor) {
     switch (wellKnownRegex) {
       case pb.KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME:
-        if (!_isValidHTTPHeaderName(value)) {
+        if (value.isEmpty) {
+          cursor.violate(
+            message: 'value is empty, which is not a valid HTTP header name',
+            constraintId: 'string.well_known_regex.header_name_empty',
+            rulePath: RulePathBuilder.stringConstraint('well_known_regex'),
+          );
+        } else if (!_isValidHTTPHeaderName(value)) {
           cursor.violate(
             message: 'value must be a valid HTTP header name',
-            constraintId: 'string.well_known_regex.http_header_name',
+            constraintId: 'string.well_known_regex.header_name',
             rulePath: RulePathBuilder.stringConstraint('well_known_regex'),
           );
         }
@@ -1188,7 +1194,7 @@ class StringRulesEvaluator implements Evaluator {
         if (!_isValidHTTPHeaderValue(value)) {
           cursor.violate(
             message: 'value must be a valid HTTP header value',
-            constraintId: 'string.well_known_regex.http_header_value',
+            constraintId: 'string.well_known_regex.header_value',
             rulePath: RulePathBuilder.stringConstraint('well_known_regex'),
           );
         }
@@ -1403,30 +1409,34 @@ class BytesEvaluator implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: 'bytes.const',
+        rulePath: RulePathBuilder.bytesConstraint('const'),
       );
     }
     
     // Check exact length
     if (len != null && bytesValue.length != len) {
       cursor.violate(
-        message: 'Bytes must be exactly $len bytes',
+        message: '',
         constraintId: 'bytes.len',
+        rulePath: RulePathBuilder.bytesConstraint('len'),
       );
     }
     
     // Check min length
     if (minLen != null && bytesValue.length < minLen!) {
       cursor.violate(
-        message: 'Bytes must be at least $minLen bytes',
+        message: '',
         constraintId: 'bytes.min_len',
+        rulePath: RulePathBuilder.bytesConstraint('min_len'),
       );
     }
     
     // Check max length
     if (maxLen != null && bytesValue.length > maxLen!) {
       cursor.violate(
-        message: 'Bytes must be at most $maxLen bytes',
+        message: '',
         constraintId: 'bytes.max_len',
+        rulePath: RulePathBuilder.bytesConstraint('max_len'),
       );
     }
     
@@ -1436,13 +1446,15 @@ class BytesEvaluator implements Evaluator {
         cursor.violate(
           message: 'Invalid regex pattern: $pattern',
           constraintId: 'bytes.pattern.compile_error',
+          rulePath: RulePathBuilder.bytesConstraint('pattern'),
         );
       } else {
         final hexString = _toHexString(bytesValue);
         if (!_compiledPattern!.hasMatch(hexString)) {
           cursor.violate(
-            message: 'Bytes must match pattern: $pattern',
+            message: '',
             constraintId: 'bytes.pattern',
+            rulePath: RulePathBuilder.bytesConstraint('pattern'),
           );
         }
       }
@@ -1451,24 +1463,27 @@ class BytesEvaluator implements Evaluator {
     // Check prefix
     if (prefix != null && !_hasPrefix(bytesValue, prefix!)) {
       cursor.violate(
-        message: 'Bytes must start with the specified prefix',
+        message: '',
         constraintId: 'bytes.prefix',
+        rulePath: RulePathBuilder.bytesConstraint('prefix'),
       );
     }
     
     // Check suffix
     if (suffix != null && !_hasSuffix(bytesValue, suffix!)) {
       cursor.violate(
-        message: 'Bytes must end with the specified suffix',
+        message: '',
         constraintId: 'bytes.suffix',
+        rulePath: RulePathBuilder.bytesConstraint('suffix'),
       );
     }
     
     // Check contains
     if (contains != null && !_containsBytes(bytesValue, contains!)) {
       cursor.violate(
-        message: 'Bytes must contain the specified sequence',
+        message: '',
         constraintId: 'bytes.contains',
+        rulePath: RulePathBuilder.bytesConstraint('contains'),
       );
     }
     
@@ -1483,8 +1498,9 @@ class BytesEvaluator implements Evaluator {
       }
       if (!found) {
         cursor.violate(
-          message: 'Bytes must be one of the allowed values',
+          message: '',
           constraintId: 'bytes.in',
+          rulePath: RulePathBuilder.bytesConstraint('in'),
         );
       }
     }
@@ -1494,8 +1510,9 @@ class BytesEvaluator implements Evaluator {
       for (final disallowedValue in notInValues!) {
         if (_bytesEqual(bytesValue, disallowedValue)) {
           cursor.violate(
-            message: 'Bytes must not be one of the disallowed values',
+            message: '',
             constraintId: 'bytes.not_in',
+            rulePath: RulePathBuilder.bytesConstraint('not_in'),
           );
           break;
         }
@@ -1511,8 +1528,9 @@ class BytesEvaluator implements Evaluator {
     if (ip == true) {
       if (!_isValidIPBytes(value)) {
         cursor.violate(
-          message: 'Bytes must be a valid IP address (4 or 16 bytes)',
+          message: 'value must be a valid IP address',
           constraintId: 'bytes.ip',
+          rulePath: RulePathBuilder.bytesConstraint('ip'),
         );
       }
     }
@@ -1521,8 +1539,9 @@ class BytesEvaluator implements Evaluator {
     if (ipv4 == true) {
       if (value.length != 4) {
         cursor.violate(
-          message: 'Bytes must be a valid IPv4 address (4 bytes)',
+          message: 'value must be a valid IPv4 address',
           constraintId: 'bytes.ipv4',
+          rulePath: RulePathBuilder.bytesConstraint('ipv4'),
         );
       }
     }
@@ -1531,8 +1550,9 @@ class BytesEvaluator implements Evaluator {
     if (ipv6 == true) {
       if (value.length != 16) {
         cursor.violate(
-          message: 'Bytes must be a valid IPv6 address (16 bytes)',
+          message: 'value must be a valid IPv6 address',
           constraintId: 'bytes.ipv6',
+          rulePath: RulePathBuilder.bytesConstraint('ipv6'),
         );
       }
     }

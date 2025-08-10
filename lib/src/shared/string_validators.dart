@@ -135,6 +135,8 @@ class StringValidators {
 
   // URI validation
   static bool isValidURI(String value) {
+    if (!_isValidURIChars(value)) return false;
+    
     try {
       final uri = Uri.parse(value);
       return uri.hasScheme && uri.scheme.isNotEmpty;
@@ -145,12 +147,60 @@ class StringValidators {
 
   // URI reference validation
   static bool isValidURIRef(String value) {
+    if (!_isValidURIChars(value)) return false;
+    
     try {
       Uri.parse(value);
       return true;
     } catch (e) {
       return false;
     }
+  }
+  
+  // Check for invalid URI characters
+  static bool _isValidURIChars(String value) {
+    // Check for invalid control characters (0x00-0x1F, 0x7F)
+    for (int i = 0; i < value.length; i++) {
+      final code = value.codeUnitAt(i);
+      if (code <= 0x1F || code == 0x7F) {
+        return false;
+      }
+      
+      // Check for invalid characters that should be percent-encoded
+      // These characters are not allowed unencoded in URIs: < > " { } | \ ^ `
+      final char = value[i];
+      if ('<>"{}|\\^`'.contains(char)) {
+        return false;
+      }
+    }
+    
+    // Check for invalid percent encoding (must be %HH where H is hex digit)
+    int i = 0;
+    while (i < value.length) {
+      if (value[i] == '%') {
+        // Must be followed by exactly 2 hex digits
+        if (i + 2 >= value.length) {
+          return false;
+        }
+        final hex1 = value[i + 1];
+        final hex2 = value[i + 2];
+        if (!_isHexDigit(hex1) || !_isHexDigit(hex2)) {
+          return false;
+        }
+        i += 3;
+      } else {
+        i++;
+      }
+    }
+    
+    return true;
+  }
+  
+  static bool _isHexDigit(String char) {
+    final code = char.codeUnitAt(0);
+    return (code >= 48 && code <= 57) ||  // 0-9
+           (code >= 65 && code <= 70) ||  // A-F
+           (code >= 97 && code <= 102);   // a-f
   }
 
   // UUID validation

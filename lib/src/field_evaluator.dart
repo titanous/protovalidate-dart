@@ -5,6 +5,7 @@ import 'evaluator.dart';
 import 'cursor.dart';
 import 'field_path.dart';
 import 'error.dart';
+import 'rule_paths.dart';
 
 /// FieldEvaluator performs validation on a single message field.
 /// This architecture matches the Go/ES implementations for proper field handling.
@@ -170,10 +171,14 @@ class RepeatedFieldItemsEvaluator implements Evaluator {
 class MapFieldEvaluator implements Evaluator {
   final Evaluator? keyEvaluator;
   final Evaluator? valueEvaluator;
+  final int? minPairs;
+  final int? maxPairs;
   
   MapFieldEvaluator({
     this.keyEvaluator,
     this.valueEvaluator,
+    this.minPairs,
+    this.maxPairs,
   });
   
   @override
@@ -181,6 +186,26 @@ class MapFieldEvaluator implements Evaluator {
     if (value == null) return;
     
     final map = value as Map;
+    
+    // Check min pairs
+    if (minPairs != null && map.length < minPairs!) {
+      cursor.violate(
+        message: 'map must be at least $minPairs entries',
+        constraintId: 'map.min_pairs',
+        rulePath: RulePathBuilder.mapConstraint('min_pairs'),
+      );
+    }
+    
+    // Check max pairs
+    if (maxPairs != null && map.length > maxPairs!) {
+      cursor.violate(
+        message: 'map must be at most $maxPairs entries',
+        constraintId: 'map.max_pairs',
+        rulePath: RulePathBuilder.mapConstraint('max_pairs'),
+      );
+    }
+    
+    // Validate each entry
     for (final entry in map.entries) {
       // Create cursor with map key
       final keyCursor = cursor.mapKey(entry.key);
