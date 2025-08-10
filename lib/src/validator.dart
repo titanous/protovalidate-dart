@@ -34,6 +34,7 @@ class Validator {
   final FileDescriptorSet? _fileDescriptorSet;
   final DescriptorRules? _descriptorRules;
   final EvaluatorBuilder _builder;
+  final Map<String, Evaluator> _evaluatorCache = {};
   
   Validator({
     ValidatorOptions? options,
@@ -55,8 +56,9 @@ class Validator {
       // Create a cursor for tracking violations
       final cursor = Cursor.create(failFast: _options.failFast);
       
-      // Build evaluator for this message type
-      final evaluator = _builder.buildForMessage(message);
+      // Build evaluator for this message type (with caching)
+      final messageType = message.info_.qualifiedMessageName;
+      final evaluator = _evaluatorCache[messageType] ??= _builder.buildForMessage(message);
       
       // Run validation
       evaluator.evaluate(message, cursor);

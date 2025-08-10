@@ -12,7 +12,7 @@ import 'gen/google/protobuf/duration.pb.dart';
 // import 'cel/library.dart'; // Commented out - CEL library not yet available
 
 /// CEL evaluator for custom expression rules
-class CELEvaluator extends Evaluator {
+class CELEvaluator implements Evaluator {
   final List<CompiledExpression> expressions;
   final FieldDescriptorProto? fieldDescriptor;
 
@@ -22,17 +22,12 @@ class CELEvaluator extends Evaluator {
   });
 
   @override
-  bool evaluate(dynamic value, Cursor cursor) {
+  void evaluate(dynamic value, Cursor cursor) {
     for (final expr in expressions) {
-      final result = expr.evaluate(value, cursor);
-      if (!result) {
-        return false;
-      }
+      expr.evaluate(value, cursor);
     }
-    return true;
   }
 
-  @override
   bool get tautology => expressions.isEmpty;
 }
 
@@ -50,7 +45,7 @@ class CompiledExpression {
     this.id,
   });
 
-  bool evaluate(dynamic value, Cursor cursor) {
+  void evaluate(dynamic value, Cursor cursor) {
     try {
       // Create activation with standard variables
       final activation = _createActivation(value, cursor);
@@ -63,21 +58,18 @@ class CompiledExpression {
         if (!result) {
           _addViolation(cursor, value);
         }
-        return result;
       } else if (result is Exception) {
         // CEL evaluation error
         cursor.violate(
           message: 'CEL evaluation error: ${result.toString()}',
           constraintId: 'cel.error',
         );
-        return false;
       } else {
         // Unexpected result type
         cursor.violate(
           message: 'CEL expression must return a boolean, got: ${result.runtimeType}',
           constraintId: 'cel.type_error',
         );
-        return false;
       }
     } catch (e) {
       // Runtime error during evaluation
@@ -85,7 +77,6 @@ class CompiledExpression {
         message: 'CEL evaluation failed: $e',
         constraintId: 'cel.runtime_error',
       );
-      return false;
     }
   }
 
@@ -201,7 +192,6 @@ class MessageCELEvaluator extends MessageEvaluator {
     }
   }
 
-  @override
   bool get tautology => expressions.isEmpty;
 }
 
@@ -228,6 +218,5 @@ class FieldCELEvaluator extends FieldEvaluator {
     }
   }
 
-  @override
   bool get tautology => celEvaluator.tautology;
 }

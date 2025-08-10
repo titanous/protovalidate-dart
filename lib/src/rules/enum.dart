@@ -51,7 +51,7 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.in_3.isNotEmpty) {
       if (!rules.in_3.contains(enumValue)) {
         cursor.violate(
-          message: 'Value must be in ${rules.in_3}',
+          message: 'value must be in list ${rules.in_3}',
           constraintId: 'enum.in',
         );
       }
@@ -61,7 +61,7 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.notIn.isNotEmpty) {
       if (rules.notIn.contains(enumValue)) {
         cursor.violate(
-          message: 'Value must not be in ${rules.notIn}',
+          message: 'value must not be in list ${rules.notIn}',
           constraintId: 'enum.not_in',
         );
       }
