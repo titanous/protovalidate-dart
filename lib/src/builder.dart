@@ -5,12 +5,14 @@ import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart' as pb_du
 import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart' as pb_timestamp;
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
 import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
+import 'package:cel/cel.dart' as cel;
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
 import 'rules/scalar.dart';
 import 'rules/enum.dart';
 import 'rules/message.dart';
 import 'rules/wkt.dart';
+import 'cel_evaluator.dart';
 import 'error.dart';
 import 'cursor.dart';
 
@@ -22,7 +24,11 @@ class EvaluatorBuilder {
   /// Optional descriptor rules for extracting validation rules from FileDescriptorSet.
   final DescriptorRules? descriptorRules;
   
-  EvaluatorBuilder({this.descriptorRules});
+  /// CEL compiler for custom expressions
+  final CELCompiler _celCompiler;
+  
+  EvaluatorBuilder({this.descriptorRules, cel.Environment? celEnvironment})
+    : _celCompiler = CELCompiler(env: celEnvironment);
   
   /// Builds an evaluator for the given message type.
   Evaluator buildForMessage(GeneratedMessage message) {
@@ -202,73 +208,75 @@ class EvaluatorBuilder {
   
   /// Builds an evaluator from field rules.
   Evaluator? buildFromFieldRules(FieldRules rules) {
-    // Build evaluator based on the type in the rules
+    final evaluators = <Evaluator>[];
+    
+    // Build type-specific evaluator
+    Evaluator? typeEvaluator;
     if (rules.hasBool_13()) {
-      return _buildBoolEvaluator(rules.bool_13);
-    }
-    if (rules.hasInt32()) {
-      return _buildInt32Evaluator(rules.int32);
-    }
-    if (rules.hasInt64()) {
-      return _buildInt64Evaluator(rules.int64);
-    }
-    if (rules.hasUint32()) {
-      return _buildUInt32Evaluator(rules.uint32);
-    }
-    if (rules.hasUint64()) {
-      return _buildUInt64Evaluator(rules.uint64);
-    }
-    if (rules.hasSint32()) {
-      return _buildSInt32Evaluator(rules.sint32);
-    }
-    if (rules.hasSint64()) {
-      return _buildSInt64Evaluator(rules.sint64);
-    }
-    if (rules.hasFixed32()) {
-      return _buildFixed32Evaluator(rules.fixed32);
-    }
-    if (rules.hasFixed64()) {
-      return _buildFixed64Evaluator(rules.fixed64);
-    }
-    if (rules.hasSfixed32()) {
-      return _buildSFixed32Evaluator(rules.sfixed32);
-    }
-    if (rules.hasSfixed64()) {
-      return _buildSFixed64Evaluator(rules.sfixed64);
-    }
-    if (rules.hasFloat()) {
-      return _buildFloatEvaluator(rules.float);
-    }
-    if (rules.hasDouble_2()) {
-      return _buildDoubleEvaluator(rules.double_2);
-    }
-    if (rules.hasString()) {
-      return _buildStringEvaluator(rules.string);
-    }
-    if (rules.hasBytes()) {
-      return _buildBytesEvaluator(rules.bytes);
-    }
-    if (rules.hasEnum_16()) {
-      return _buildEnumEvaluator(rules.enum_16);
-    }
-    if (rules.hasRepeated()) {
-      return _buildRepeatedEvaluator(rules.repeated);
-    }
-    if (rules.hasMap()) {
-      return _buildMapEvaluator(rules.map);
-    }
-    // Handle WKT types
-    if (rules.hasDuration()) {
-      return _buildDurationEvaluator(rules.duration);
-    }
-    if (rules.hasTimestamp()) {
-      return _buildTimestampEvaluator(rules.timestamp);
-    }
-    if (rules.hasAny()) {
-      return _buildAnyEvaluator(rules.any);
+      typeEvaluator = _buildBoolEvaluator(rules.bool_13);
+    } else if (rules.hasInt32()) {
+      typeEvaluator = _buildInt32Evaluator(rules.int32);
+    } else if (rules.hasInt64()) {
+      typeEvaluator = _buildInt64Evaluator(rules.int64);
+    } else if (rules.hasUint32()) {
+      typeEvaluator = _buildUInt32Evaluator(rules.uint32);
+    } else if (rules.hasUint64()) {
+      typeEvaluator = _buildUInt64Evaluator(rules.uint64);
+    } else if (rules.hasSint32()) {
+      typeEvaluator = _buildSInt32Evaluator(rules.sint32);
+    } else if (rules.hasSint64()) {
+      typeEvaluator = _buildSInt64Evaluator(rules.sint64);
+    } else if (rules.hasFixed32()) {
+      typeEvaluator = _buildFixed32Evaluator(rules.fixed32);
+    } else if (rules.hasFixed64()) {
+      typeEvaluator = _buildFixed64Evaluator(rules.fixed64);
+    } else if (rules.hasSfixed32()) {
+      typeEvaluator = _buildSFixed32Evaluator(rules.sfixed32);
+    } else if (rules.hasSfixed64()) {
+      typeEvaluator = _buildSFixed64Evaluator(rules.sfixed64);
+    } else if (rules.hasFloat()) {
+      typeEvaluator = _buildFloatEvaluator(rules.float);
+    } else if (rules.hasDouble_2()) {
+      typeEvaluator = _buildDoubleEvaluator(rules.double_2);
+    } else if (rules.hasString()) {
+      typeEvaluator = _buildStringEvaluator(rules.string);
+    } else if (rules.hasBytes()) {
+      typeEvaluator = _buildBytesEvaluator(rules.bytes);
+    } else if (rules.hasEnum_16()) {
+      typeEvaluator = _buildEnumEvaluator(rules.enum_16);
+    } else if (rules.hasRepeated()) {
+      typeEvaluator = _buildRepeatedEvaluator(rules.repeated);
+    } else if (rules.hasMap()) {
+      typeEvaluator = _buildMapEvaluator(rules.map);
+    } else if (rules.hasDuration()) {
+      // Handle WKT types
+      typeEvaluator = _buildDurationEvaluator(rules.duration);
+    } else if (rules.hasTimestamp()) {
+      typeEvaluator = _buildTimestampEvaluator(rules.timestamp);
+    } else if (rules.hasAny()) {
+      typeEvaluator = _buildAnyEvaluator(rules.any);
     }
     
-    return null;
+    if (typeEvaluator != null) {
+      evaluators.add(typeEvaluator);
+    }
+    
+    // Build CEL evaluator if there are CEL expressions
+    if (rules.cel.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(rules.cel);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
+    
+    // Return composite or single evaluator
+    if (evaluators.isEmpty) {
+      return null;
+    } else if (evaluators.length == 1) {
+      return evaluators.first;
+    } else {
+      return CompositeEvaluator(evaluators);
+    }
   }
   
   Evaluator _buildBoolEvaluator(BoolRules rules) {
@@ -562,6 +570,27 @@ class EvaluatorBuilder {
     }
     
     return null;
+  }
+  
+  /// Build CEL evaluator from a list of CEL rules
+  Evaluator? _buildCELEvaluator(List<Rule> celRules) {
+    if (celRules.isEmpty) {
+      return null;
+    }
+    
+    try {
+      final expressions = _celCompiler.compile(celRules);
+      
+      if (expressions.isEmpty) {
+        return null;
+      }
+      
+      return CELEvaluator(expressions: expressions);
+    } catch (e) {
+      // Log compilation error but don't fail completely
+      print('Failed to compile CEL expressions: $e');
+      return null;
+    }
   }
 }
 

@@ -1,3 +1,12 @@
+builders:
+  conformance_registry:
+    import: "package:protovalidate/builder.dart"
+    builder_factories: ["conformanceRegistryBuilder"]
+    build_extensions: {".dart": [".conformance.g.dart"]}
+    auto_apply: root_package
+    build_to: source
+    applies_builders: ["source_gen|combining_builder"]
+
 targets:
   $default:
     builders:
@@ -5,3 +14,7 @@ targets:
         generate_for:
           include:
             - proto/**
+      protovalidate:conformance_registry:
+        enabled: true
+        generate_for:
+          - lib/src/conformance_registry_marker.dart
