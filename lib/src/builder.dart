@@ -530,18 +530,36 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildBoolEvaluator(BoolRules rules) {
-    return BoolEvaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
+    
+    // Add standard rules
+    final standardEvaluator = BoolEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildInt32Evaluator(Int32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkInt32Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
     }
     
     // Add standard rules
@@ -682,7 +700,16 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
-    return SInt32Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkSInt32Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = SInt32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -691,10 +718,22 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
-    return SInt64Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkSInt64Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = SInt64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -703,10 +742,22 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
-    return Fixed32Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkFixed32Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = Fixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -715,10 +766,22 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
-    return Fixed64Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkFixed64Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = Fixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -727,10 +790,22 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
-    return SFixed32Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkSFixed32Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = SFixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -739,10 +814,22 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
-    return SFixed64Evaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkSFixed64Rules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = SFixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       lt: rules.hasLt() ? rules.lt : null,
       lte: rules.hasLte() ? rules.lte : null,
@@ -751,6 +838,9 @@ class EvaluatorBuilder {
       inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildStringEvaluator(StringRules rules) {
@@ -796,7 +886,16 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildBytesEvaluator(BytesRules rules) {
-    return BytesEvaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkBytesRules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = BytesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       len: rules.hasLen() ? rules.len.toInt() : null,
       minLen: rules.hasMinLen() ? rules.minLen.toInt() : null,
@@ -811,13 +910,28 @@ class EvaluatorBuilder {
       ipv4: rules.hasIpv4() ? rules.ipv4 : null,
       ipv6: rules.hasIpv6() ? rules.ipv6 : null,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildEnumEvaluator(EnumRules rules, [Map<int, String>? enumValueNames]) {
-    return EnumRulesEvaluator(
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkEnumRules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = EnumRulesEvaluator(
       rules: rules,
       enumValueNames: enumValueNames,
     );
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
   
   /// Gets enum value names from field info.
@@ -892,11 +1006,35 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildDurationEvaluator(DurationRules rules) {
-    return DurationEvaluator(rules: rules);
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkDurationRules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = DurationEvaluator(rules: rules);
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildTimestampEvaluator(TimestampRules rules) {
-    return TimestampEvaluator(rules: rules);
+    final evaluators = <Evaluator>[];
+    
+    // Check for predefined rules
+    final predefinedEvaluator = PredefinedRulesChecker.checkTimestampRules(rules);
+    if (predefinedEvaluator != null) {
+      evaluators.add(predefinedEvaluator);
+    }
+    
+    // Add standard rules
+    final standardEvaluator = TimestampEvaluator(rules: rules);
+    evaluators.add(standardEvaluator);
+    
+    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildAnyEvaluator(AnyRules rules) {
@@ -1138,6 +1276,221 @@ class EvaluatorBuilder {
       default:
         return evaluator;
     }
+  }
+  
+  /// Extract predefined CEL rules from rule extensions.
+  /// 
+  /// Predefined rules are CEL expressions attached to extensions on rule types.
+  /// When an extension is set to true (or has a value), we need to compile and
+  /// evaluate its associated CEL expressions.
+  List<Rule> _getPredefinedCelRules(GeneratedMessage rules) {
+    final celRules = <Rule>[];
+    
+    // Check for proto2 predefined extensions
+    if (rules is SInt32Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.sint32EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.sint32EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'sint32.even.proto2'
+            ..expression = 'this % 2 == 0'
+            ..message = 'sint32 value is not even');
+        }
+      }
+    } else if (rules is SInt64Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.sint64EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.sint64EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'sint64.even.proto2'
+            ..expression = 'this % 2 == 0'
+            ..message = 'sint64 value is not even');
+        }
+      }
+    } else if (rules is Fixed32Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.fixed32EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.fixed32EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'fixed32.even.proto2'
+            ..expression = 'uint(this) % 2u == 0u'
+            ..message = 'fixed32 value is not even');
+        }
+      }
+    } else if (rules is Fixed64Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.fixed64EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.fixed64EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'fixed64.even.proto2'
+            ..expression = 'uint(this) % 2u == 0u'
+            ..message = 'fixed64 value is not even');
+        }
+      }
+    } else if (rules is SFixed32Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.sfixed32EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.sfixed32EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'sfixed32.even.proto2'
+            ..expression = 'this % 2 == 0'
+            ..message = 'sfixed32 value is not even');
+        }
+      }
+    } else if (rules is SFixed64Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.sfixed64EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.sfixed64EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'sfixed64.even.proto2'
+            ..expression = 'this % 2 == 0'
+            ..message = 'sfixed64 value is not even');
+        }
+      }
+    } else if (rules is BoolRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.boolFalseProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.boolFalseProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'bool.false.proto2'
+            ..expression = 'this == false'
+            ..message = 'bool value is not false');
+        }
+      }
+    } else if (rules is StringRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.stringValidPathProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.stringValidPathProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'string.valid_path.proto2'
+            ..expression = '!this.startsWith("../")'
+            ..message = 'not a valid path: `%s`');
+        }
+      }
+    } else if (rules is BytesRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.bytesValidPathProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.bytesValidPathProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'bytes.valid_path.proto2'
+            ..expression = '!string(this).startsWith("../")'
+            ..message = 'not a valid path: `%s`');
+        }
+      }
+    } else if (rules is EnumRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.enumNonZeroProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.enumNonZeroProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'enum.non_zero.proto2'
+            ..expression = 'int(this) != 0'
+            ..message = 'enum value is not non-zero');
+        }
+      }
+    } else if (rules is RepeatedRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'repeated.at_least_five.proto2'
+            ..expression = 'this.size() >= 5'
+            ..message = 'repeated field must have at least five values');
+        }
+      }
+    } else if (rules is DurationRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.durationTooLongProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.durationTooLongProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'duration.too_long.proto2'
+            ..expression = 'this <= duration("10s")'
+            ..message = 'duration can\'t be longer than 10 seconds');
+        }
+      }
+    } else if (rules is TimestampRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.timestampInRangeProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.timestampInRangeProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'timestamp.time_range.proto2'
+            ..expression = 'int(this) >= 1049587200 && int(this) <= 1080432000'
+            ..message = 'timestamp out of range');
+        }
+      }
+    } else if (rules is FloatRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.floatAbsRangeProto2)) {
+        final range = rules.getExtension(Predefined_rules_proto2.floatAbsRangeProto2) as double;
+        if (range > 0) {
+          celRules.add(Rule()
+            ..id = 'float.abs_range.proto2'
+            ..expression = 'this.abs() <= $range'
+            ..message = 'float value is out of range');
+        }
+      }
+    } else if (rules is DoubleRules) {
+      if (rules.hasExtension(Predefined_rules_proto2.doubleAbsRangeProto2)) {
+        final range = rules.getExtension(Predefined_rules_proto2.doubleAbsRangeProto2) as double;
+        if (range > 0) {
+          celRules.add(Rule()
+            ..id = 'double.abs_range.proto2'
+            ..expression = 'this.abs() <= $range'
+            ..message = 'double value is out of range');
+        }
+      }
+    } else if (rules is Int32Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.int32AbsInProto2)) {
+        final absIn = rules.getExtension(Predefined_rules_proto2.int32AbsInProto2) as List;
+        if (absIn.isNotEmpty) {
+          final values = absIn.map((v) => v.toString()).join(', ');
+          celRules.add(Rule()
+            ..id = 'int32.abs_in.proto2'
+            ..expression = '[$values].exists(v, this.abs() == v)'
+            ..message = 'value must be in absolute value of list');
+        }
+      }
+    } else if (rules is Int64Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.int64AbsInProto2)) {
+        final absIn = rules.getExtension(Predefined_rules_proto2.int64AbsInProto2) as List;
+        if (absIn.isNotEmpty) {
+          // Extract values from wrapper types
+          final values = absIn.map((v) {
+            if (v is GeneratedMessage && v.hasField(1)) {
+              return 'int(${v.getField(1)})';
+            }
+            return 'int($v)';
+          }).join(', ');
+          celRules.add(Rule()
+            ..id = 'int64.abs_in.proto2'
+            ..expression = '[$values].exists(v, this.abs() == v)'
+            ..message = 'value must be in absolute value of list');
+        }
+      }
+    } else if (rules is UInt32Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.uint32EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.uint32EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'uint32.even.proto2'
+            ..expression = 'this % 2u == 0u'
+            ..message = 'uint32 value is not even');
+        }
+      }
+    } else if (rules is UInt64Rules) {
+      if (rules.hasExtension(Predefined_rules_proto2.uint64EvenProto2)) {
+        final isSet = rules.getExtension(Predefined_rules_proto2.uint64EvenProto2) as bool;
+        if (isSet) {
+          celRules.add(Rule()
+            ..id = 'uint64.even.proto2'
+            ..expression = 'uint(this) % 2u == 0u'
+            ..message = 'uint64 value is not even');
+        }
+      }
+    }
+    
+    // TODO: Add support for proto editions extensions
+    // These use different field numbers (1162) but same logic
+    
+    return celRules;
   }
 }
 

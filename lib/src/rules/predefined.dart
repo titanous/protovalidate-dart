@@ -1,399 +1,220 @@
 import 'package:protobuf/protobuf.dart';
-import 'package:fixnum/fixnum.dart';
+import 'package:protobuf/src/protobuf/extension_options.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart';
-import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto_editions.pb.dart';
-import '../evaluator.dart';
-import '../error.dart' as error;
-import '../cursor.dart';
-import '../field_path.dart';
+import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto3.pb.dart';
+import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
 
-/// Checks and applies predefined rules on field rules.
-class PredefinedRulesChecker {
-  /// Checks for predefined extensions on float rules.
-  static Evaluator? checkFloatRules(FloatRules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.floatAbsRangeProto2)) {
-      final absRange = rules.getExtension(Predefined_rules_proto2.floatAbsRangeProto2) as double;
-      return PredefinedFloatAbsRangeEvaluator(absRange, 'float.abs_range.proto2');
-    }
+/// Registry of predefined rule extensions and their associated CEL expressions.
+/// 
+/// Predefined rules are custom validation rules that are defined as extensions
+/// on the various *Rules messages (e.g., FloatRules, Int32Rules, etc.).
+/// Each extension has an associated CEL expression that defines the validation logic.
+/// 
+/// This class manages the registration and lookup of these predefined rules.
+class PredefinedRulesRegistry {
+  /// Map from extension to the predefined rules extracted from its options
+  static final Map<Extension, PredefinedRules> _predefinedRulesByExtension = {};
+  
+  /// Map from extension field number to predefined rules (for quick lookup)
+  static final Map<int, PredefinedRules> _predefinedRulesByNumber = {};
+  
+  /// Extension registry for deserializing options
+  static final ExtensionRegistry _registry = ExtensionRegistry()
+    ..add(Validate.predefined);
+  
+  /// Whether the registry has been initialized
+  static bool _initialized = false;
+  
+  /// Initialize the registry with all known predefined rules.
+  /// This should be called once at startup.
+  static void initialize() {
+    if (_initialized) return;
     
+    // Register proto2 predefined rules (also used by proto3)
+    _registerProto2Extensions();
     
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.floatAbsRangeEdition2023)) {
-      final absRange = rules.getExtension(Predefined_rules_proto_editions.floatAbsRangeEdition2023) as double;
-      return PredefinedFloatAbsRangeEvaluator(absRange, 'float.abs_range.edition_2023');
-    }
+    // Note: Proto editions are not yet supported by protoc-gen-dart
     
-    return null;
+    _initialized = true;
   }
   
-  /// Checks for predefined extensions on double rules.
-  static Evaluator? checkDoubleRules(DoubleRules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.doubleAbsRangeProto2)) {
-      final absRange = rules.getExtension(Predefined_rules_proto2.doubleAbsRangeProto2) as double;
-      return PredefinedDoubleAbsRangeEvaluator(absRange, 'double.abs_range.proto2');
+  /// Get predefined rules for a specific extension field number
+  static PredefinedRules? getRulesForExtension(int fieldNumber) {
+    if (!_initialized) {
+      initialize();
     }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.doubleAbsRangeEdition2023)) {
-      final absRange = rules.getExtension(Predefined_rules_proto_editions.doubleAbsRangeEdition2023) as double;
-      return PredefinedDoubleAbsRangeEvaluator(absRange, 'double.abs_range.edition_2023');
-    }
-    
-    return null;
+    return _predefinedRulesByNumber[fieldNumber];
   }
   
-  /// Checks for predefined extensions on int32 rules.
-  static Evaluator? checkInt32Rules(Int32Rules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.int32AbsInProto2)) {
-      final absIn = rules.getExtension(Predefined_rules_proto2.int32AbsInProto2) as List<int>;
-      return PredefinedInt32AbsInEvaluator(absIn, 'int32.abs_in.proto2');
+  /// Get predefined rules for a specific extension
+  static PredefinedRules? getRulesForExtensionObject(Extension ext) {
+    if (!_initialized) {
+      initialize();
     }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.int32AbsInEdition2023)) {
-      final absIn = rules.getExtension(Predefined_rules_proto_editions.int32AbsInEdition2023) as List<int>;
-      return PredefinedInt32AbsInEvaluator(absIn, 'int32.abs_in.edition_2023');
-    }
-    
-    return null;
+    return _predefinedRulesByExtension[ext];
   }
   
-  /// Checks for predefined extensions on int64 rules.
-  static Evaluator? checkInt64Rules(Int64Rules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.int64AbsInProto2)) {
-      final absIn = rules.getExtension(Predefined_rules_proto2.int64AbsInProto2) as List;
-      return PredefinedInt64AbsInEvaluator(absIn, 'int64.abs_in.proto2');
+  /// Check if an extension field number has predefined rules
+  static bool hasPredefinedRules(int fieldNumber) {
+    if (!_initialized) {
+      initialize();
     }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.int64AbsInEdition2023)) {
-      final absIn = rules.getExtension(Predefined_rules_proto_editions.int64AbsInEdition2023) as List;
-      return PredefinedInt64AbsInEvaluator(absIn, 'int64.abs_in.edition_2023');
-    }
-    
-    return null;
+    return _predefinedRulesByNumber.containsKey(fieldNumber);
   }
   
-  /// Checks for predefined extensions on uint32 rules.
-  static Evaluator? checkUInt32Rules(UInt32Rules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.uint32EvenProto2)) {
-      final even = rules.getExtension(Predefined_rules_proto2.uint32EvenProto2) as bool;
-      if (even) {
-        return PredefinedUInt32EvenEvaluator('uint32.even.proto2');
-      }
+  /// Extract predefined rules from an extension's options
+  static PredefinedRules? _extractPredefinedRules(Extension ext) {
+    if (ext.optionsBytes == null || ext.optionsBytes!.isEmpty) {
+      return null;
     }
     
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.uint32EvenEdition2023)) {
-      final even = rules.getExtension(Predefined_rules_proto_editions.uint32EvenEdition2023) as bool;
-      if (even) {
-        return PredefinedUInt32EvenEvaluator('uint32.even.edition_2023');
+    try {
+      // Deserialize the FieldOptions
+      final options = FieldOptions.fromBuffer(ext.optionsBytes!, _registry);
+      
+      // Check if the predefined extension is set
+      if (!options.hasExtension(Validate.predefined)) {
+        return null;
       }
+      
+      // Get the predefined rules
+      return options.getExtension(Validate.predefined) as PredefinedRules;
+    } catch (e) {
+      // Failed to extract predefined rules
+      print('Failed to extract predefined rules from extension: $e');
+      return null;
     }
-    
-    return null;
   }
   
-  /// Checks for predefined extensions on uint64 rules.
-  static Evaluator? checkUInt64Rules(UInt64Rules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.uint64EvenProto2)) {
-      final even = rules.getExtension(Predefined_rules_proto2.uint64EvenProto2) as bool;
-      if (even) {
-        return PredefinedUInt64EvenEvaluator('uint64.even.proto2');
-      }
+  /// Register an extension with its predefined rules
+  static void _registerExtension(Extension ext) {
+    final rules = _extractPredefinedRules(ext);
+    if (rules != null) {
+      _predefinedRulesByExtension[ext] = rules;
+      _predefinedRulesByNumber[ext.tagNumber] = rules;
     }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.uint64EvenEdition2023)) {
-      final even = rules.getExtension(Predefined_rules_proto_editions.uint64EvenEdition2023) as bool;
-      if (even) {
-        return PredefinedUInt64EvenEvaluator('uint64.even.edition_2023');
-      }
-    }
-    
-    return null;
   }
   
-  /// Similar methods for other types...
-  static Evaluator? checkStringRules(StringRules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.stringValidPathProto2)) {
-      final validPath = rules.getExtension(Predefined_rules_proto2.stringValidPathProto2) as bool;
-      if (validPath) {
-        return PredefinedStringValidPathEvaluator('string.valid_path.proto2');
-      }
-    }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.stringValidPathEdition2023)) {
-      final validPath = rules.getExtension(Predefined_rules_proto_editions.stringValidPathEdition2023) as bool;
-      if (validPath) {
-        return PredefinedStringValidPathEvaluator('string.valid_path.edition_2023');
-      }
-    }
-    
-    return null;
+  /// Register proto2 predefined rules extensions
+  static void _registerProto2Extensions() {
+    // Register all proto2 predefined rule extensions
+    _registerExtension(Predefined_rules_proto2.floatAbsRangeProto2);
+    _registerExtension(Predefined_rules_proto2.doubleAbsRangeProto2);
+    _registerExtension(Predefined_rules_proto2.int32AbsInProto2);
+    _registerExtension(Predefined_rules_proto2.int64AbsInProto2);
+    _registerExtension(Predefined_rules_proto2.uint32EvenProto2);
+    _registerExtension(Predefined_rules_proto2.uint64EvenProto2);
+    _registerExtension(Predefined_rules_proto2.sint32EvenProto2);
+    _registerExtension(Predefined_rules_proto2.sint64EvenProto2);
+    _registerExtension(Predefined_rules_proto2.fixed32EvenProto2);
+    _registerExtension(Predefined_rules_proto2.fixed64EvenProto2);
+    _registerExtension(Predefined_rules_proto2.sfixed32EvenProto2);
+    _registerExtension(Predefined_rules_proto2.sfixed64EvenProto2);
+    _registerExtension(Predefined_rules_proto2.boolFalseProto2);
+    _registerExtension(Predefined_rules_proto2.stringValidPathProto2);
+    _registerExtension(Predefined_rules_proto2.bytesValidPathProto2);
+    _registerExtension(Predefined_rules_proto2.enumNonZeroProto2);
+    _registerExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2);
+    _registerExtension(Predefined_rules_proto2.durationTooLongProto2);
+    _registerExtension(Predefined_rules_proto2.timestampInRangeProto2);
   }
   
-  /// Checks for predefined extensions on repeated rules.
-  static Evaluator? checkRepeatedRules(RepeatedRules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2)) {
-      final atLeastFive = rules.getExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2) as bool;
-      if (atLeastFive) {
-        return PredefinedRepeatedAtLeastFiveEvaluator('repeated.at_least_five.proto2');
-      }
-    }
-    
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.repeatedAtLeastFiveEdition2023)) {
-      final atLeastFive = rules.getExtension(Predefined_rules_proto_editions.repeatedAtLeastFiveEdition2023) as bool;
-      if (atLeastFive) {
-        return PredefinedRepeatedAtLeastFiveEvaluator('repeated.at_least_five.edition_2023');
-      }
-    }
-    
-    return null;
-  }
-  
-  /// Checks for predefined extensions on enum rules.
-  static Evaluator? checkEnumRules(EnumRules rules) {
-    // Check proto2 extensions
-    if (rules.hasExtension(Predefined_rules_proto2.enumNonZeroProto2)) {
-      final nonZero = rules.getExtension(Predefined_rules_proto2.enumNonZeroProto2) as bool;
-      if (nonZero) {
-        return PredefinedEnumNonZeroEvaluator('enum.non_zero.proto2');
-      }
-    }
-    
-    // Proto3 messages use proto2 extensions, no separate proto3 extensions
-    
-    // Check editions extensions
-    if (rules.hasExtension(Predefined_rules_proto_editions.enumNonZeroEdition2023)) {
-      final nonZero = rules.getExtension(Predefined_rules_proto_editions.enumNonZeroEdition2023) as bool;
-      if (nonZero) {
-        return PredefinedEnumNonZeroEvaluator('enum.non_zero.edition_2023');
-      }
-    }
-    
-    return null;
-  }
-  
-  /// Add more type checking methods for sint32, sint64, fixed32, fixed64, sfixed32, sfixed64, bytes, bool, duration, timestamp
 }
 
-// Evaluator implementations for predefined rules
-
-class PredefinedFloatAbsRangeEvaluator implements Evaluator {
-  final double absRange;
-  final String ruleId;
-  
-  PredefinedFloatAbsRangeEvaluator(this.absRange, this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
+/// Helper class to check for predefined extensions on rule types
+class PredefinedExtensionChecker {
+  /// Get all predefined extensions set on a rules message
+  static List<Extension> getSetPredefinedExtensions(GeneratedMessage rulesMessage) {
+    final setExtensions = <Extension>[];
     
-    final floatValue = value as double;
-    if (floatValue.abs() > absRange) {
-      cursor.violate(
-        message: 'float value is out of range',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedDoubleAbsRangeEvaluator implements Evaluator {
-  final double absRange;
-  final String ruleId;
-  
-  PredefinedDoubleAbsRangeEvaluator(this.absRange, this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
+    // Map rule types to their relevant extensions
+    final extensionsByType = <Type, List<Extension>>{
+      FloatRules: [Predefined_rules_proto2.floatAbsRangeProto2],
+      DoubleRules: [Predefined_rules_proto2.doubleAbsRangeProto2],
+      Int32Rules: [Predefined_rules_proto2.int32AbsInProto2],
+      Int64Rules: [Predefined_rules_proto2.int64AbsInProto2],
+      UInt32Rules: [Predefined_rules_proto2.uint32EvenProto2],
+      UInt64Rules: [Predefined_rules_proto2.uint64EvenProto2],
+      SInt32Rules: [Predefined_rules_proto2.sint32EvenProto2],
+      SInt64Rules: [Predefined_rules_proto2.sint64EvenProto2],
+      Fixed32Rules: [Predefined_rules_proto2.fixed32EvenProto2],
+      Fixed64Rules: [Predefined_rules_proto2.fixed64EvenProto2],
+      SFixed32Rules: [Predefined_rules_proto2.sfixed32EvenProto2],
+      SFixed64Rules: [Predefined_rules_proto2.sfixed64EvenProto2],
+      BoolRules: [Predefined_rules_proto2.boolFalseProto2],
+      StringRules: [Predefined_rules_proto2.stringValidPathProto2],
+      BytesRules: [Predefined_rules_proto2.bytesValidPathProto2],
+      EnumRules: [Predefined_rules_proto2.enumNonZeroProto2],
+      RepeatedRules: [Predefined_rules_proto2.repeatedAtLeastFiveProto2],
+      DurationRules: [Predefined_rules_proto2.durationTooLongProto2],
+      TimestampRules: [Predefined_rules_proto2.timestampInRangeProto2],
+    };
     
-    final doubleValue = value as double;
-    if (doubleValue.abs() > absRange) {
-      cursor.violate(
-        message: 'double value is out of range',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedInt32AbsInEvaluator implements Evaluator {
-  final List<int> absIn;
-  final String ruleId;
-  
-  PredefinedInt32AbsInEvaluator(this.absIn, this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
+    // Get extensions for this specific message type
+    final relevantExtensions = extensionsByType[rulesMessage.runtimeType];
     
-    final intValue = value as int;
-    final absValue = intValue.abs();
-    
-    if (!absIn.contains(absValue)) {
-      cursor.violate(
-        message: 'value must be in absolute value of list',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedInt64AbsInEvaluator implements Evaluator {
-  final List absIn;
-  final String ruleId;
-  
-  PredefinedInt64AbsInEvaluator(this.absIn, this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
-    
-    final intValue = value as Int64;
-    final absValue = intValue.abs();
-    
-    // Extract Int64 values from wrappers if necessary
-    final absValues = absIn.map((v) {
-      if (v is Int64) return v;
-      if (v is GeneratedMessage && v.hasField(1)) {
-        // Wrapper type
-        return v.getField(1) as Int64;
+    if (relevantExtensions == null) {
+      // Fallback: check all extensions
+      final allExtensions = [
+        Predefined_rules_proto2.floatAbsRangeProto2,
+        Predefined_rules_proto2.doubleAbsRangeProto2,
+        Predefined_rules_proto2.int32AbsInProto2,
+        Predefined_rules_proto2.int64AbsInProto2,
+        Predefined_rules_proto2.uint32EvenProto2,
+        Predefined_rules_proto2.uint64EvenProto2,
+        Predefined_rules_proto2.sint32EvenProto2,
+        Predefined_rules_proto2.sint64EvenProto2,
+        Predefined_rules_proto2.fixed32EvenProto2,
+        Predefined_rules_proto2.fixed64EvenProto2,
+        Predefined_rules_proto2.sfixed32EvenProto2,
+        Predefined_rules_proto2.sfixed64EvenProto2,
+        Predefined_rules_proto2.boolFalseProto2,
+        Predefined_rules_proto2.stringValidPathProto2,
+        Predefined_rules_proto2.bytesValidPathProto2,
+        Predefined_rules_proto2.enumNonZeroProto2,
+        Predefined_rules_proto2.repeatedAtLeastFiveProto2,
+        Predefined_rules_proto2.durationTooLongProto2,
+        Predefined_rules_proto2.timestampInRangeProto2,
+      ];
+      
+      for (final ext in allExtensions) {
+        try {
+          if (rulesMessage.hasExtension(ext)) {
+            setExtensions.add(ext);
+          }
+        } catch (e) {
+          // Extension not applicable to this message type
+        }
       }
-      return Int64(v as int);
-    }).toList();
-    
-    if (!absValues.contains(absValue)) {
-      cursor.violate(
-        message: 'value must be in absolute value of list',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
+    } else {
+      // Check which extensions are set
+      for (final ext in relevantExtensions) {
+        try {
+          if (rulesMessage.hasExtension(ext)) {
+            setExtensions.add(ext);
+          }
+        } catch (e) {
+          // Extension not applicable to this message type
+        }
+      }
     }
+    
+    return setExtensions;
   }
-}
-
-class PredefinedUInt32EvenEvaluator implements Evaluator {
-  final String ruleId;
   
-  PredefinedUInt32EvenEvaluator(this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
+  /// Get predefined rules for extensions set on a rules message
+  static List<PredefinedRules> getPredefinedRulesForMessage(GeneratedMessage rulesMessage) {
+    final rules = <PredefinedRules>[];
+    final extensions = getSetPredefinedExtensions(rulesMessage);
     
-    final uintValue = value as int;
-    if (uintValue % 2 != 0) {
-      cursor.violate(
-        message: 'uint32 value is not even',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
+    for (final ext in extensions) {
+      final predefinedRules = PredefinedRulesRegistry.getRulesForExtensionObject(ext);
+      if (predefinedRules != null) {
+        rules.add(predefinedRules);
+      }
     }
-  }
-}
-
-class PredefinedUInt64EvenEvaluator implements Evaluator {
-  final String ruleId;
-  
-  PredefinedUInt64EvenEvaluator(this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
     
-    final uintValue = value is Int64 ? value : Int64(value as int);
-    if (uintValue % Int64(2) != Int64.ZERO) {
-      cursor.violate(
-        message: 'uint64 value is not even',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedStringValidPathEvaluator implements Evaluator {
-  final String ruleId;
-  
-  PredefinedStringValidPathEvaluator(this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
-    
-    final stringValue = value as String;
-    // A valid path should not start with "../"
-    if (stringValue.startsWith('../')) {
-      cursor.violate(
-        message: 'not a valid path: `$stringValue`',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedRepeatedAtLeastFiveEvaluator implements Evaluator {
-  final String ruleId;
-  
-  PredefinedRepeatedAtLeastFiveEvaluator(this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
-    
-    final list = value as List;
-    if (list.length < 5) {
-      cursor.violate(
-        message: 'repeated field must have at least five values',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
-  }
-}
-
-class PredefinedEnumNonZeroEvaluator implements Evaluator {
-  final String ruleId;
-  
-  PredefinedEnumNonZeroEvaluator(this.ruleId);
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value == null) return;
-    
-    // Check if enum value is zero (unspecified)
-    final enumValue = value is ProtobufEnum ? value.value : value as int;
-    if (enumValue == 0) {
-      cursor.violate(
-        message: 'enum value is not non-zero',
-        constraintId: ruleId,
-        rulePath: RulePath.fromFieldRules().predefinedExtension(ruleId.replaceAll('.', '_')),
-      );
-    }
+    return rules;
   }
 }
