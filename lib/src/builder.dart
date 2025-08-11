@@ -8,7 +8,6 @@ import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart'
     as pb_timestamp;
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
 import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
-import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart';
 import 'package:cel/cel.dart' as cel;
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
@@ -633,8 +632,14 @@ class EvaluatorBuilder {
   Evaluator _buildUInt64Evaluator(UInt64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkUInt64Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = UInt64Evaluator(
@@ -654,8 +659,14 @@ class EvaluatorBuilder {
   Evaluator _buildFloatEvaluator(FloatRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkFloatRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = FloatEvaluator(
@@ -676,8 +687,14 @@ class EvaluatorBuilder {
   Evaluator _buildDoubleEvaluator(DoubleRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkDoubleRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = DoubleEvaluator(
@@ -698,8 +715,14 @@ class EvaluatorBuilder {
   Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkSInt32Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = SInt32Evaluator(
@@ -719,8 +742,14 @@ class EvaluatorBuilder {
   Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkSInt64Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = SInt64Evaluator(
@@ -740,8 +769,14 @@ class EvaluatorBuilder {
   Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkFixed32Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = Fixed32Evaluator(
@@ -761,8 +796,14 @@ class EvaluatorBuilder {
   Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkFixed64Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = Fixed64Evaluator(
@@ -782,8 +823,14 @@ class EvaluatorBuilder {
   Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkSFixed32Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = SFixed32Evaluator(
@@ -803,8 +850,14 @@ class EvaluatorBuilder {
   Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkSFixed64Rules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = SFixed64Evaluator(
@@ -861,8 +914,14 @@ class EvaluatorBuilder {
   Evaluator _buildBytesEvaluator(BytesRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkBytesRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = BytesEvaluator(
@@ -888,8 +947,14 @@ class EvaluatorBuilder {
   Evaluator _buildEnumEvaluator(EnumRules rules, [Map<int, String>? enumValueNames]) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkEnumRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = EnumRulesEvaluator(
@@ -918,8 +983,14 @@ class EvaluatorBuilder {
   Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkRepeatedRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Build item evaluator from rules.items if present
     Evaluator? itemEvaluator;
@@ -972,8 +1043,14 @@ class EvaluatorBuilder {
   Evaluator _buildDurationEvaluator(DurationRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkDurationRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = DurationEvaluator(rules: rules);
@@ -985,8 +1062,14 @@ class EvaluatorBuilder {
   Evaluator _buildTimestampEvaluator(TimestampRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules - removed for now
-    // final predefinedEvaluator = PredefinedExtensionChecker.checkTimestampRules(rules);
+    // Check for predefined CEL rules via extensions
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Add standard rules
     final standardEvaluator = TimestampEvaluator(rules: rules);
@@ -1236,219 +1319,12 @@ class EvaluatorBuilder {
     }
   }
   
-  /// Extract predefined CEL rules from rule extensions.
+  /// Extract predefined CEL rules from rule extensions using dynamic discovery.
   /// 
-  /// Predefined rules are CEL expressions attached to extensions on rule types.
-  /// When an extension is set to true (or has a value), we need to compile and
-  /// evaluate its associated CEL expressions.
+  /// This replaces the previous hardcoded approach with the ES/Go pattern
+  /// that dynamically discovers predefined rules and extracts their CEL expressions.
   List<Rule> _getPredefinedCelRules(GeneratedMessage rules) {
-    final celRules = <Rule>[];
-    
-    // Check for proto2 predefined extensions
-    if (rules is SInt32Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.sint32EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.sint32EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'sint32.even.proto2'
-            ..expression = 'this % 2 == 0'
-            ..message = 'sint32 value is not even');
-        }
-      }
-    } else if (rules is SInt64Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.sint64EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.sint64EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'sint64.even.proto2'
-            ..expression = 'this % 2 == 0'
-            ..message = 'sint64 value is not even');
-        }
-      }
-    } else if (rules is Fixed32Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.fixed32EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.fixed32EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'fixed32.even.proto2'
-            ..expression = 'uint(this) % 2u == 0u'
-            ..message = 'fixed32 value is not even');
-        }
-      }
-    } else if (rules is Fixed64Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.fixed64EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.fixed64EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'fixed64.even.proto2'
-            ..expression = 'uint(this) % 2u == 0u'
-            ..message = 'fixed64 value is not even');
-        }
-      }
-    } else if (rules is SFixed32Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.sfixed32EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.sfixed32EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'sfixed32.even.proto2'
-            ..expression = 'this % 2 == 0'
-            ..message = 'sfixed32 value is not even');
-        }
-      }
-    } else if (rules is SFixed64Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.sfixed64EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.sfixed64EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'sfixed64.even.proto2'
-            ..expression = 'this % 2 == 0'
-            ..message = 'sfixed64 value is not even');
-        }
-      }
-    } else if (rules is BoolRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.boolFalseProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.boolFalseProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'bool.false.proto2'
-            ..expression = 'this == false'
-            ..message = 'bool value is not false');
-        }
-      }
-    } else if (rules is StringRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.stringValidPathProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.stringValidPathProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'string.valid_path.proto2'
-            ..expression = '!this.startsWith("../")'
-            ..message = 'not a valid path: `%s`');
-        }
-      }
-    } else if (rules is BytesRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.bytesValidPathProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.bytesValidPathProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'bytes.valid_path.proto2'
-            ..expression = '!string(this).startsWith("../")'
-            ..message = 'not a valid path: `%s`');
-        }
-      }
-    } else if (rules is EnumRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.enumNonZeroProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.enumNonZeroProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'enum.non_zero.proto2'
-            ..expression = 'int(this) != 0'
-            ..message = 'enum value is not non-zero');
-        }
-      }
-    } else if (rules is RepeatedRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.repeatedAtLeastFiveProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'repeated.at_least_five.proto2'
-            ..expression = 'this.size() >= 5'
-            ..message = 'repeated field must have at least five values');
-        }
-      }
-    } else if (rules is DurationRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.durationTooLongProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.durationTooLongProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'duration.too_long.proto2'
-            ..expression = 'this <= duration("10s")'
-            ..message = 'duration can\'t be longer than 10 seconds');
-        }
-      }
-    } else if (rules is TimestampRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.timestampInRangeProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.timestampInRangeProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'timestamp.time_range.proto2'
-            ..expression = 'int(this) >= 1049587200 && int(this) <= 1080432000'
-            ..message = 'timestamp out of range');
-        }
-      }
-    } else if (rules is FloatRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.floatAbsRangeProto2)) {
-        final range = rules.getExtension(Predefined_rules_proto2.floatAbsRangeProto2) as double;
-        if (range > 0) {
-          celRules.add(Rule()
-            ..id = 'float.abs_range.proto2'
-            ..expression = 'this.abs() <= $range'
-            ..message = 'float value is out of range');
-        }
-      }
-    } else if (rules is DoubleRules) {
-      if (rules.hasExtension(Predefined_rules_proto2.doubleAbsRangeProto2)) {
-        final range = rules.getExtension(Predefined_rules_proto2.doubleAbsRangeProto2) as double;
-        if (range > 0) {
-          celRules.add(Rule()
-            ..id = 'double.abs_range.proto2'
-            ..expression = 'this.abs() <= $range'
-            ..message = 'double value is out of range');
-        }
-      }
-    } else if (rules is Int32Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.int32AbsInProto2)) {
-        final absIn = rules.getExtension(Predefined_rules_proto2.int32AbsInProto2) as List;
-        if (absIn.isNotEmpty) {
-          final values = absIn.map((v) => v.toString()).join(', ');
-          celRules.add(Rule()
-            ..id = 'int32.abs_in.proto2'
-            ..expression = '[$values].exists(v, this.abs() == v)'
-            ..message = 'value must be in absolute value of list');
-        }
-      }
-    } else if (rules is Int64Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.int64AbsInProto2)) {
-        final absIn = rules.getExtension(Predefined_rules_proto2.int64AbsInProto2) as List;
-        if (absIn.isNotEmpty) {
-          // Extract values from wrapper types
-          final values = absIn.map((v) {
-            if (v is GeneratedMessage && v.hasField(1)) {
-              return 'int(${v.getField(1)})';
-            }
-            return 'int($v)';
-          }).join(', ');
-          celRules.add(Rule()
-            ..id = 'int64.abs_in.proto2'
-            ..expression = '[$values].exists(v, this.abs() == v)'
-            ..message = 'value must be in absolute value of list');
-        }
-      }
-    } else if (rules is UInt32Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.uint32EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.uint32EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'uint32.even.proto2'
-            ..expression = 'this % 2u == 0u'
-            ..message = 'uint32 value is not even');
-        }
-      }
-    } else if (rules is UInt64Rules) {
-      if (rules.hasExtension(Predefined_rules_proto2.uint64EvenProto2)) {
-        final isSet = rules.getExtension(Predefined_rules_proto2.uint64EvenProto2) as bool;
-        if (isSet) {
-          celRules.add(Rule()
-            ..id = 'uint64.even.proto2'
-            ..expression = 'uint(this) % 2u == 0u'
-            ..message = 'uint64 value is not even');
-        }
-      }
-    }
-    
-    // TODO: Add support for proto editions extensions
-    // These use different field numbers (1162) but same logic
-    
-    return celRules;
+    return PredefinedRulesManager.getPredefinedCelRules(rules);
   }
 }
 
