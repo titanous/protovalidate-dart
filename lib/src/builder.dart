@@ -296,6 +296,16 @@ class EvaluatorBuilder {
       }
     }
     
+    final evaluators = <Evaluator>[];
+    
+    // Build CEL evaluator for field-level CEL expressions only
+    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
+    
     // For non-wrapper messages, recursively build evaluator for the nested type
     if (field.subBuilder != null) {
       try {
@@ -306,14 +316,20 @@ class EvaluatorBuilder {
         final nestedEvaluator = buildForMessage(nestedMessage);
         
         // Wrap it in an embedded message evaluator that handles field path updates
-        return EmbeddedMessageEvaluator(nestedEvaluator);
+        evaluators.add(EmbeddedMessageEvaluator(nestedEvaluator));
       } catch (e) {
         // If we can't create the message, return a no-op evaluator
-        return NoOpEvaluator();
+        // But still keep any field-level evaluators
       }
     }
     
-    return NoOpEvaluator();
+    if (evaluators.isEmpty) {
+      return NoOpEvaluator();
+    } else if (evaluators.length == 1) {
+      return evaluators[0];
+    } else {
+      return CompositeEvaluator(evaluators);
+    }
   }
   
   Evaluator? _buildEnumFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
