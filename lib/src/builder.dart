@@ -193,6 +193,7 @@ class EvaluatorBuilder {
       // Extract item evaluator if there are item rules
       Evaluator? itemEvaluator;
       Ignore itemIgnoreRule = Ignore.IGNORE_UNSPECIFIED;
+      bool hasExplicitItemValidation = false; // Track if item rules define actual validation
       
       if (repeatedRules.hasItems()) {
         final itemRules = repeatedRules.items;
@@ -204,6 +205,41 @@ class EvaluatorBuilder {
         // Only build item evaluator if not ignoring always
         if (itemIgnoreRule != Ignore.IGNORE_ALWAYS) {
           itemEvaluator = buildFromFieldRules(itemRules);
+          // Check if the item rules actually defined validation constraints
+          // For message fields, check if the item evaluator is different from implicit message validation
+          if (field.type == PbFieldType.PM && field.subBuilder != null) {
+            // For message fields, consider it explicit validation only if the item rules
+            // define something other than just message validation
+            try {
+              final nestedMessage = field.subBuilder!();
+              final implicitEvaluator = buildForMessage(nestedMessage);
+              // If the item evaluator is the same as what we'd get from implicit validation,
+              // then the item rules don't add meaningful constraints
+              hasExplicitItemValidation = itemEvaluator != null && 
+                itemEvaluator.runtimeType.toString() != 'NoOpEvaluator' &&
+                itemEvaluator != implicitEvaluator;
+            } catch (e) {
+              hasExplicitItemValidation = itemEvaluator != null && itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
+            }
+          } else {
+            // For non-message fields, any non-noop evaluator counts as explicit validation
+            hasExplicitItemValidation = itemEvaluator != null && itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
+          }
+        }
+      }
+      
+      // If no explicit item validation but this is a message field, add implicit message validation
+      if (itemEvaluator == null && field.type == PbFieldType.PM && field.subBuilder != null) {
+        try {
+          final nestedMessage = field.subBuilder!();
+          final nestedEvaluator = buildForMessage(nestedMessage);
+          
+          if (nestedEvaluator != null) {
+            // Use the nested evaluator directly as item evaluator
+            itemEvaluator = nestedEvaluator;
+          }
+        } catch (e) {
+          // If we can't create the message, continue without item validation
         }
       }
       
@@ -215,8 +251,36 @@ class EvaluatorBuilder {
         itemEvaluator: itemEvaluator,
         unwrapWrapperTypes: _isWrapperType(field),
         ignoreRule: itemIgnoreRule,
+        // Only add items rule prefix when there are explicit repeated.items rules
+        addItemsRulePrefix: repeatedRules.hasItems(),
       );
       evaluators.add(repeatedEvaluator);
+    }
+    
+    // Even if no explicit repeated rules, we may still need to validate message items
+    if (evaluators.isEmpty) {
+      // Check if this is a repeated message field that needs item validation
+      if (field.type == PbFieldType.PM && field.subBuilder != null) {
+        // This is a repeated message field - create an item evaluator for nested message validation
+        try {
+          final nestedMessage = field.subBuilder!();
+          final nestedEvaluator = buildForMessage(nestedMessage);
+          
+          if (nestedEvaluator != null) {
+            // Use RepeatedItemsOnlyEvaluator for just item validation
+            // No rule prefix for implicit message validation (no explicit repeated.items rules)
+            final itemsEvaluator = field_eval.RepeatedItemsOnlyEvaluator(
+              itemEvaluator: EmbeddedMessageEvaluator(nestedEvaluator),
+              unwrapWrapperTypes: _isWrapperType(field),
+              ignoreRule: Ignore.IGNORE_UNSPECIFIED,
+              addItemsRulePrefix: false,
+            );
+            evaluators.add(itemsEvaluator);
+          }
+        } catch (e) {
+          // If we can't create the message, continue without item validation
+        }
+      }
     }
     
     // Return appropriate evaluator

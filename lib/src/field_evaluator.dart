@@ -145,11 +145,13 @@ class RepeatedItemsOnlyEvaluator implements Evaluator {
   final Evaluator itemEvaluator;
   final bool unwrapWrapperTypes;
   final Ignore ignoreRule;
+  final bool addItemsRulePrefix;
   
   RepeatedItemsOnlyEvaluator({
     required this.itemEvaluator,
     this.unwrapWrapperTypes = false,
     this.ignoreRule = Ignore.IGNORE_UNSPECIFIED,
+    this.addItemsRulePrefix = false,
   });
   
   @override
@@ -176,12 +178,14 @@ class RepeatedItemsOnlyEvaluator implements Evaluator {
         itemValue = _unwrapWrapperValue(itemValue);
       }
       
-      // Create cursor with list index and proper rule path prefix for repeated.items
+      // Create cursor with list index and conditionally add rule path prefix
       final itemCursor = cursor.listIndex(i);
-      final prefixedCursor = PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase());
+      final evaluationCursor = addItemsRulePrefix 
+          ? PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase())
+          : itemCursor;
       
-      // Evaluate the item with proper rule path prefix
-      itemEvaluator.evaluate(itemValue, prefixedCursor);
+      // Evaluate the item
+      itemEvaluator.evaluate(itemValue, evaluationCursor);
     }
   }
   
@@ -236,6 +240,7 @@ class RepeatedFieldEvaluator implements Evaluator {
   final Evaluator? itemEvaluator;
   final bool unwrapWrapperTypes;
   final Ignore ignoreRule;
+  final bool addItemsRulePrefix;
   
   RepeatedFieldEvaluator({
     this.minItems,
@@ -244,6 +249,7 @@ class RepeatedFieldEvaluator implements Evaluator {
     this.itemEvaluator,
     this.unwrapWrapperTypes = false,
     this.ignoreRule = Ignore.IGNORE_UNSPECIFIED,
+    this.addItemsRulePrefix = true,
   });
   
   @override
@@ -304,12 +310,14 @@ class RepeatedFieldEvaluator implements Evaluator {
           itemValue = _unwrapWrapperValue(itemValue);
         }
         
-        // Create cursor with list index and proper rule path prefix
+        // Create cursor with list index and conditionally add rule path prefix
         final itemCursor = cursor.listIndex(i);
-        final prefixedCursor = PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase());
+        final evaluationCursor = addItemsRulePrefix 
+            ? PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase())
+            : itemCursor;
         
-        // Evaluate the item with proper rule path prefix
-        itemEvaluator!.evaluate(itemValue, prefixedCursor);
+        // Evaluate the item
+        itemEvaluator!.evaluate(itemValue, evaluationCursor);
       }
     }
   }
@@ -356,6 +364,7 @@ class RepeatedFieldEvaluator implements Evaluator {
     return wrapper;
   }
 }
+
 
 /// Evaluator for map fields that properly iterates through entries
 class MapFieldEvaluator implements Evaluator {
