@@ -171,6 +171,16 @@ class EvaluatorBuilder {
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
+    final evaluators = <Evaluator>[];
+    
+    // Build CEL evaluator for field-level CEL expressions
+    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
+    
     // Handle explicit repeated rules if present
     if (fieldRules?.hasRepeated() == true) {
       final repeatedRules = fieldRules!.repeated;
@@ -198,7 +208,7 @@ class EvaluatorBuilder {
       }
       
       // Create full repeated field evaluator with both field-level and item-level validation
-      return field_eval.RepeatedFieldEvaluator(
+      final repeatedEvaluator = field_eval.RepeatedFieldEvaluator(
         minItems: minItems,
         maxItems: maxItems,
         unique: unique,
@@ -206,9 +216,17 @@ class EvaluatorBuilder {
         unwrapWrapperTypes: _isWrapperType(field),
         ignoreRule: itemIgnoreRule,
       );
+      evaluators.add(repeatedEvaluator);
     }
     
-    return null;
+    // Return appropriate evaluator
+    if (evaluators.isEmpty) {
+      return null;
+    } else if (evaluators.length == 1) {
+      return evaluators.first;
+    } else {
+      return CompositeEvaluator(evaluators);
+    }
   }
   
   Evaluator? _buildMapFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
@@ -220,6 +238,16 @@ class EvaluatorBuilder {
     
     final mapField = field as MapFieldInfo;
     final mapRules = fieldRules?.map;
+    
+    final evaluators = <Evaluator>[];
+    
+    // Build CEL evaluator for field-level CEL expressions
+    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
     
     // Build key evaluator from rules if present
     Evaluator? keyEvaluator;
@@ -254,19 +282,26 @@ class EvaluatorBuilder {
       }
     }
     
-    // Return null if we have no validation to perform
-    if (keyEvaluator == null && valueEvaluator == null && 
-        mapRules?.hasMinPairs() != true && mapRules?.hasMaxPairs() != true) {
-      return null;
+    // Build the map field evaluator with structural rules if needed
+    if (keyEvaluator != null || valueEvaluator != null || 
+        mapRules?.hasMinPairs() == true || mapRules?.hasMaxPairs() == true) {
+      final mapFieldEvaluator = field_eval.MapFieldEvaluator(
+        keyEvaluator: keyEvaluator,
+        valueEvaluator: valueEvaluator,
+        minPairs: mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
+        maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
+      );
+      evaluators.add(mapFieldEvaluator);
     }
     
-    // Create map field evaluator with all rules
-    return field_eval.MapFieldEvaluator(
-      keyEvaluator: keyEvaluator,
-      valueEvaluator: valueEvaluator,
-      minPairs: mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
-      maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
-    );
+    // Return appropriate evaluator
+    if (evaluators.isEmpty) {
+      return null;
+    } else if (evaluators.length == 1) {
+      return evaluators.first;
+    } else {
+      return CompositeEvaluator(evaluators);
+    }
   }
   
   Evaluator? _buildMessageFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
