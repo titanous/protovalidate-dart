@@ -109,6 +109,16 @@ class RulePathBuilder {
         .constraint(constraintName, fieldNumber, fieldType);
   }
   
+  /// Creates a rule path for any constraints.
+  static RulePath anyConstraint(String constraintName) {
+    final fieldNumber = _getAnyConstraintNumber(constraintName);
+    final fieldType = _getAnyConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('any', FieldRuleNumbers.any)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
   /// Creates a rule path for numeric constraints.
   static RulePath numericConstraint(String ruleTypeName, int ruleTypeNumber, String constraintName) {
     final fieldNumber = _getNumericConstraintNumber(constraintName);
@@ -268,6 +278,23 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_BOOL;
       default:
         return FieldDescriptorProto_Type.TYPE_STRING;
+    }
+  }
+  
+  static int _getAnyConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'in': return 2;  // AnyRules.in field number
+      case 'not_in': return 3;  // AnyRules.not_in field number
+      default: throw ArgumentError('Unknown any constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getAnyConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_STRING; // repeated string
+      default: throw ArgumentError('Unknown any constraint: $constraintName');
     }
   }
   

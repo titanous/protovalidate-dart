@@ -283,6 +283,7 @@ class AnyEvaluator implements Evaluator {
         cursor.violate(
           message: 'type URL must be in the allow list',
           constraintId: 'any.in',
+          rulePath: RulePathBuilder.anyConstraint('in'),
         );
       }
     }
@@ -293,6 +294,7 @@ class AnyEvaluator implements Evaluator {
         cursor.violate(
           message: 'type URL must not be in the block list',
           constraintId: 'any.not_in',
+          rulePath: RulePathBuilder.anyConstraint('not_in'),
         );
       }
     }

@@ -59,6 +59,14 @@ class FieldEvaluator implements Evaluator {
     var fieldValue = message.getField(field.tagNumber);
     final hasValue = message.hasField(field.tagNumber);
     
+    // For enum fields with defined_only validation, we need to check unknown fields
+    // for raw integer values that were not recognized during deserialization
+    final unknownField = message.unknownFields.getField(field.tagNumber);
+    if (unknownField != null && unknownField.varints.isNotEmpty) {
+      // There's an unknown raw value for this field, use the first one
+      fieldValue = unknownField.varints.first.toInt();
+    }
+    
     // For proto3 implicit presence fields, getField() returns the default value automatically
     // No need to manually provide defaults since the protobuf library handles this now
     
@@ -91,13 +99,19 @@ class FieldEvaluator implements Evaluator {
     }
     
     // For fields with presence, skip validation if not set
-    // (unless explicitly required, which was already checked above)  
-    if (hasPresence && !hasValue && !required) {
+    // (unless explicitly required, which was already checked above)
+    // Exception: repeated fields should always validate even if empty
+    if (hasPresence && !hasValue && !required && !field.isRepeated) {
       return;
     }
     
     // For proto3 scalars without presence that weren't set, we now have default value
     // Continue with validation using the default value
+    
+    // For repeated fields that weren't set, provide empty list
+    if (field.isRepeated && !hasValue) {
+      fieldValue = <dynamic>[];
+    }
     
     // Create a cursor for this field
     final fieldCursor = cursor.field(field);
@@ -214,8 +228,7 @@ class RepeatedItemsOnlyEvaluator implements Evaluator {
   }
 }
 
-/// Legacy unified evaluator - kept for backward compatibility with _buildRepeatedEvaluator
-/// TODO: Remove once all repeated field handling goes through _buildRepeatedFieldEvaluator
+/// Unified evaluator for repeated field validation with field-level and item-level constraints
 class RepeatedFieldEvaluator implements Evaluator {
   final int? minItems;
   final int? maxItems;

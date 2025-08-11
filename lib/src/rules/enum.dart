@@ -46,7 +46,7 @@ class EnumRulesEvaluator implements Evaluator {
       // If we have the enum value names map, use it to check if the value is defined
       if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
-          message: '',
+          message: 'value must be one of the defined enum values',
           constraintId: 'enum.defined_only',
           rulePath: RulePathBuilder.enumConstraint('defined_only'),
         );

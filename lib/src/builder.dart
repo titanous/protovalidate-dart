@@ -175,9 +175,10 @@ class EvaluatorBuilder {
     if (fieldRules?.hasRepeated() == true) {
       final repeatedRules = fieldRules!.repeated;
       
-      // Following Go/ES architecture: field-level constraints (min_items, max_items, unique) 
-      // should be handled by CEL, not by custom evaluators.
-      // Only item validation needs a custom evaluator.
+      // Extract field-level constraints
+      int? minItems = repeatedRules.hasMinItems() ? repeatedRules.minItems.toInt() : null;
+      int? maxItems = repeatedRules.hasMaxItems() ? repeatedRules.maxItems.toInt() : null;
+      bool? unique = repeatedRules.hasUnique() ? repeatedRules.unique : null;
       
       // Extract item evaluator if there are item rules
       Evaluator? itemEvaluator;
@@ -196,16 +197,15 @@ class EvaluatorBuilder {
         }
       }
       
-      // Create simple items-only evaluator following Go/ES architecture
-      if (itemEvaluator != null) {
-        final itemsOnlyEvaluator = field_eval.RepeatedItemsOnlyEvaluator(
-          itemEvaluator: itemEvaluator,
-          unwrapWrapperTypes: _isWrapperType(field),
-          ignoreRule: itemIgnoreRule,
-        );
-        
-        return itemsOnlyEvaluator;
-      }
+      // Create full repeated field evaluator with both field-level and item-level validation
+      return field_eval.RepeatedFieldEvaluator(
+        minItems: minItems,
+        maxItems: maxItems,
+        unique: unique,
+        itemEvaluator: itemEvaluator,
+        unwrapWrapperTypes: _isWrapperType(field),
+        ignoreRule: itemIgnoreRule,
+      );
     }
     
     return null;

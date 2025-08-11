@@ -901,6 +901,7 @@ class StringRulesEvaluator implements Evaluator {
         cursor.violate(
           message: 'String must match pattern: $pattern',
           constraintId: 'string.pattern',
+          rulePath: RulePathBuilder.stringConstraint('pattern'),
         );
       }
     }
@@ -951,6 +952,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'value must not be in list [${notInValues!.join(", ")}]',
         constraintId: 'string.not_in',
+        rulePath: RulePathBuilder.stringConstraint('not_in'),
       );
     }
     
