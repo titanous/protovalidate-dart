@@ -242,9 +242,23 @@ class RulePath {
     return newPath;
   }
   
+  /// Helper to append all elements from another RulePath
+  RulePath appendPath(RulePath other) {
+    final newPath = clone();
+    newPath._elements.addAll(other.toProtoElements());
+    return newPath;
+  }
+  
   /// Converts this path to protobuf FieldPathElements.
   List<pb.FieldPathElement> toProtoElements() {
     return List.unmodifiable(_elements);
+  }
+  
+  /// Converts this path to a string representation (e.g., "repeated.items.string.in")
+  String toRulePathString() {
+    return _elements
+        .map((element) => element.fieldName)
+        .join('.');
   }
 }
 

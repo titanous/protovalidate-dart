@@ -56,8 +56,13 @@ class FieldEvaluator implements Evaluator {
     }
     
     // Get field value
-    final fieldValue = message.getField(field.tagNumber);
+    var fieldValue = message.getField(field.tagNumber);
     final hasValue = message.hasField(field.tagNumber);
+    
+    // For proto3 scalar fields without presence that are unset, use the default value
+    if (!hasPresence && !hasValue) {
+      fieldValue = _getDefaultValue(field);
+    }
     
     // Check required constraint first
     if (required && !hasValue) {
@@ -71,9 +76,20 @@ class FieldEvaluator implements Evaluator {
       return;
     }
     
-    // For fields with IGNORE_IF_ZERO_VALUE, skip validation for default/zero values
-    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && (!hasValue || _isZeroValue(fieldValue))) {
-      return;
+    // For fields with IGNORE_IF_ZERO_VALUE, skip validation based on presence semantics
+    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE) {
+      // For fields with presence (proto3 optional, proto2, messages), only skip if not set
+      if (hasPresence) {
+        if (!hasValue) {
+          return; // Skip unset fields
+        }
+        // If set explicitly, validate even if zero value
+      } else {
+        // For fields without presence (proto3 scalars), skip if zero value
+        if (!hasValue || _isZeroValue(fieldValue)) {
+          return;
+        }
+      }
     }
     
     // For fields with presence, skip validation if not set
@@ -105,16 +121,50 @@ class FieldEvaluator implements Evaluator {
     
     return false;
   }
+  
+  /// Get default value for proto3 scalar fields
+  dynamic _getDefaultValue(FieldInfo field) {
+    switch (field.type) {
+      case PbFieldType.PB:  // bool
+        return false;
+      case PbFieldType.P3:  // int32
+      case PbFieldType.PS3: // sint32
+      case PbFieldType.PU3: // uint32  
+      case PbFieldType.PF3: // fixed32
+      case PbFieldType.PSF3: // sfixed32
+        return 0;
+      case PbFieldType.P6:  // int64
+      case PbFieldType.PS6: // sint64
+      case PbFieldType.PU6: // uint64
+      case PbFieldType.PF6: // fixed64
+      case PbFieldType.PSF6: // sfixed64
+        return Int64.ZERO;
+      case PbFieldType.PF:  // float
+      case PbFieldType.PD:  // double
+        return 0.0;
+      case PbFieldType.PS:  // string
+        return '';
+      case PbFieldType.PY:  // bytes
+        return <int>[];
+      case PbFieldType.PE:  // enum
+        return 0; // Default enum value is 0
+      default:
+        return null;
+    }
+  }
 }
 
-/// Evaluator for repeated fields that properly iterates through items
-class RepeatedFieldItemsEvaluator implements Evaluator {
+/// Items-only evaluator for repeated fields following Go/ES architecture
+/// Only handles item validation - field-level constraints handled by CEL
+class RepeatedItemsOnlyEvaluator implements Evaluator {
   final Evaluator itemEvaluator;
   final bool unwrapWrapperTypes;
+  final Ignore ignoreRule;
   
-  RepeatedFieldItemsEvaluator({
+  RepeatedItemsOnlyEvaluator({
     required this.itemEvaluator,
     this.unwrapWrapperTypes = false,
+    this.ignoreRule = Ignore.IGNORE_UNSPECIFIED,
   });
   
   @override
@@ -122,20 +172,179 @@ class RepeatedFieldItemsEvaluator implements Evaluator {
     if (value == null) return;
     
     final list = value as List;
+    
+    // Only validate individual items - NO field-level constraints
     for (int i = 0; i < list.length; i++) {
       var itemValue = list[i];
+      
+      // Check ignore rules for item
+      if (ignoreRule == Ignore.IGNORE_ALWAYS) {
+        continue; // Skip this item entirely
+      }
+      
+      if (ignoreRule == Ignore.IGNORE_IF_ZERO_VALUE && _isZeroValue(itemValue)) {
+        continue; // Skip zero values
+      }
       
       // Unwrap wrapper types if needed
       if (unwrapWrapperTypes && itemValue is GeneratedMessage) {
         itemValue = _unwrapWrapperValue(itemValue);
       }
       
-      // Create cursor with list index
+      // Create cursor with list index and proper rule path prefix for repeated.items
       final itemCursor = cursor.listIndex(i);
+      final prefixedCursor = PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase());
       
-      // Evaluate the item
-      itemEvaluator.evaluate(itemValue, itemCursor);
+      // Evaluate the item with proper rule path prefix
+      itemEvaluator.evaluate(itemValue, prefixedCursor);
     }
+  }
+  
+  bool _isZeroValue(dynamic value) {
+    if (value == null) return true;
+    
+    // Check for zero values based on type (for IGNORE_IF_ZERO_VALUE)
+    if (value is bool && !value) return true;
+    if (value is int && value == 0) return true;
+    if (value is Int64 && value == Int64.ZERO) return true;
+    if (value is double && value == 0.0) return true;
+    if (value is String && value.isEmpty) return true;
+    if (value is List && value.isEmpty) return true;
+    if (value is Map && value.isEmpty) return true;
+    // For messages, only consider null/unset as zero value, not empty messages
+    // An explicitly created empty message {} is NOT a zero value
+    
+    return false;
+  }
+  
+  dynamic _unwrapWrapperValue(GeneratedMessage wrapper) {
+    // Check if this is a wrapper type and unwrap the value
+    final wrapperTypes = [
+      'google.protobuf.DoubleValue',
+      'google.protobuf.FloatValue', 
+      'google.protobuf.Int64Value',
+      'google.protobuf.UInt64Value',
+      'google.protobuf.Int32Value',
+      'google.protobuf.UInt32Value',
+      'google.protobuf.BoolValue',
+      'google.protobuf.StringValue',
+      'google.protobuf.BytesValue',
+    ];
+    
+    final typeName = wrapper.info_.qualifiedMessageName;
+    if (wrapperTypes.contains(typeName)) {
+      // Wrapper types have a single field with tag 1 named 'value'
+      if (wrapper.hasField(1)) {
+        return wrapper.getField(1);
+      }
+    }
+    
+    return wrapper;
+  }
+}
+
+/// Legacy unified evaluator - kept for backward compatibility with _buildRepeatedEvaluator
+/// TODO: Remove once all repeated field handling goes through _buildRepeatedFieldEvaluator
+class RepeatedFieldEvaluator implements Evaluator {
+  final int? minItems;
+  final int? maxItems;
+  final bool? unique;
+  final Evaluator? itemEvaluator;
+  final bool unwrapWrapperTypes;
+  final Ignore ignoreRule;
+  
+  RepeatedFieldEvaluator({
+    this.minItems,
+    this.maxItems,
+    this.unique,
+    this.itemEvaluator,
+    this.unwrapWrapperTypes = false,
+    this.ignoreRule = Ignore.IGNORE_UNSPECIFIED,
+  });
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value == null) return;
+    
+    final list = value as List;
+    
+    // Check field-level constraints first
+    if (minItems != null && list.length < minItems!) {
+      cursor.violate(
+        message: 'value must contain at least $minItems item(s)',
+        constraintId: 'repeated.min_items',
+        rulePath: RulePathBuilder.repeatedConstraint('min_items'),
+      );
+    }
+    
+    if (maxItems != null && list.length > maxItems!) {
+      cursor.violate(
+        message: 'value must contain no more than $maxItems item(s)',
+        constraintId: 'repeated.max_items', 
+        rulePath: RulePathBuilder.repeatedConstraint('max_items'),
+      );
+    }
+    
+    if (unique == true) {
+      final seen = <dynamic>{};
+      for (int i = 0; i < list.length; i++) {
+        final item = list[i];
+        if (seen.contains(item)) {
+          cursor.violate(
+            message: 'repeated value must contain unique items',
+            constraintId: 'repeated.unique',
+            rulePath: RulePathBuilder.repeatedConstraint('unique'),
+          );
+          break; // Only report once
+        }
+        seen.add(item);
+      }
+    }
+    
+    // Now validate individual items if we have an item evaluator
+    if (itemEvaluator != null) {
+      for (int i = 0; i < list.length; i++) {
+        var itemValue = list[i];
+        
+        // Check ignore rules for item
+        if (ignoreRule == Ignore.IGNORE_ALWAYS) {
+          continue; // Skip this item entirely
+        }
+        
+        if (ignoreRule == Ignore.IGNORE_IF_ZERO_VALUE && _isZeroValue(itemValue)) {
+          continue; // Skip zero values
+        }
+        
+        // Unwrap wrapper types if needed
+        if (unwrapWrapperTypes && itemValue is GeneratedMessage) {
+          itemValue = _unwrapWrapperValue(itemValue);
+        }
+        
+        // Create cursor with list index and proper rule path prefix
+        final itemCursor = cursor.listIndex(i);
+        final prefixedCursor = PrefixedRulePathCursor(itemCursor, RulePathBuilder.repeatedItemsBase());
+        
+        // Evaluate the item with proper rule path prefix
+        itemEvaluator!.evaluate(itemValue, prefixedCursor);
+      }
+    }
+  }
+  
+  bool _isZeroValue(dynamic value) {
+    if (value == null) return true;
+    
+    // Check for zero values based on type (for IGNORE_IF_ZERO_VALUE)
+    if (value is bool && !value) return true;
+    if (value is int && value == 0) return true;
+    if (value is Int64 && value == Int64.ZERO) return true;
+    if (value is double && value == 0.0) return true;
+    if (value is String && value.isEmpty) return true;
+    if (value is List && value.isEmpty) return true;
+    if (value is Map && value.isEmpty) return true;
+    // For messages, only consider null/unset as zero value, not empty messages
+    // An explicitly created empty message {} is NOT a zero value
+    
+    return false;
   }
   
   dynamic _unwrapWrapperValue(GeneratedMessage wrapper) {

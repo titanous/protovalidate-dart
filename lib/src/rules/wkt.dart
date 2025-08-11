@@ -7,6 +7,7 @@ import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
 import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
 import '../evaluator.dart';
 import '../cursor.dart';
+import '../rule_paths.dart';
 import 'scalar.dart';
 
 /// Evaluator for Duration well-known type validation.
@@ -36,8 +37,9 @@ class DurationEvaluator implements Evaluator {
       final constNanos = _durationToNanos(rules.const_2);
       if (durationNanos != constNanos) {
         cursor.violate(
-          message: 'value must equal ${rules.const_2.seconds}s ${rules.const_2.nanos}ns',
+          message: 'value must equal ${_formatDuration(rules.const_2)}',
           constraintId: 'duration.const',
+          rulePath: RulePathBuilder.durationConstraint('const'),
         );
       }
     }
@@ -47,8 +49,9 @@ class DurationEvaluator implements Evaluator {
       final ltNanos = _durationToNanos(rules.lt);
       if (durationNanos >= ltNanos) {
         cursor.violate(
-          message: 'value must be less than ${rules.lt.seconds}s ${rules.lt.nanos}ns',
+          message: '',
           constraintId: 'duration.lt',
+          rulePath: RulePathBuilder.durationConstraint('lt'),
         );
       }
     }
@@ -57,8 +60,9 @@ class DurationEvaluator implements Evaluator {
       final lteNanos = _durationToNanos(rules.lte);
       if (durationNanos > lteNanos) {
         cursor.violate(
-          message: 'value must be less than or equal to ${rules.lte.seconds}s ${rules.lte.nanos}ns',
+          message: '',
           constraintId: 'duration.lte',
+          rulePath: RulePathBuilder.durationConstraint('lte'),
         );
       }
     }
@@ -67,8 +71,9 @@ class DurationEvaluator implements Evaluator {
       final gtNanos = _durationToNanos(rules.gt);
       if (durationNanos <= gtNanos) {
         cursor.violate(
-          message: 'value must be greater than ${rules.gt.seconds}s ${rules.gt.nanos}ns',
+          message: '',
           constraintId: 'duration.gt',
+          rulePath: RulePathBuilder.durationConstraint('gt'),
         );
       }
     }
@@ -77,8 +82,9 @@ class DurationEvaluator implements Evaluator {
       final gteNanos = _durationToNanos(rules.gte);
       if (durationNanos < gteNanos) {
         cursor.violate(
-          message: 'value must be greater than or equal to ${rules.gte.seconds}s ${rules.gte.nanos}ns',
+          message: '',
           constraintId: 'duration.gte',
+          rulePath: RulePathBuilder.durationConstraint('gte'),
         );
       }
     }
@@ -88,8 +94,9 @@ class DurationEvaluator implements Evaluator {
       final inSet = rules.in_7.map(_durationToNanos).toSet();
       if (!inSet.contains(durationNanos)) {
         cursor.violate(
-          message: 'value must be in list',
+          message: '',
           constraintId: 'duration.in',
+          rulePath: RulePathBuilder.durationConstraint('in'),
         );
       }
     }
@@ -98,13 +105,23 @@ class DurationEvaluator implements Evaluator {
       final notInSet = rules.notIn.map(_durationToNanos).toSet();
       if (notInSet.contains(durationNanos)) {
         cursor.violate(
-          message: 'value must not be in list',
+          message: '',
           constraintId: 'duration.not_in',
+          rulePath: RulePathBuilder.durationConstraint('not_in'),
         );
       }
     }
   }
   
+  /// Formats a Duration for display in error messages.
+  String _formatDuration(pb_duration.Duration duration) {
+    if (duration.nanos == 0) {
+      return '${duration.seconds}s';
+    } else {
+      return '${duration.seconds}s ${duration.nanos}ns';
+    }
+  }
+
   /// Converts a Duration to total nanoseconds.
   Int64 _durationToNanos(pb_duration.Duration duration) {
     return duration.seconds * Int64(1000000000) + Int64(duration.nanos);

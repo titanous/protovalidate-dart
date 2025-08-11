@@ -125,6 +125,18 @@ class RulePathBuilder {
         .constraint(constraintName, fieldNumber, fieldType);
   }
   
+  /// Creates a base rule path for repeated items (repeated.items)
+  static RulePath repeatedItemsBase() {
+    return RulePath.fromFieldRules()
+        .ruleType('repeated', FieldRuleNumbers.repeated)
+        .ruleType('items', ConstraintNumbers.items);
+  }
+  
+  /// Creates a rule path for repeated items with a specific item constraint
+  static RulePath repeatedItemsConstraint(RulePath itemRulePath) {
+    return repeatedItemsBase().appendPath(itemRulePath);
+  }
+  
   /// Creates a rule path for bool constraints.
   static RulePath boolConstraint(String constraintName) {
     return RulePath.fromFieldRules()
@@ -159,6 +171,16 @@ class RulePathBuilder {
     
     return RulePath.fromFieldRules()
         .ruleType('map', FieldRuleNumbers.map)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for duration constraints.
+  static RulePath durationConstraint(String constraintName) {
+    final fieldNumber = _getDurationConstraintNumber(constraintName);
+    final fieldType = _getDurationConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('duration', FieldRuleNumbers.duration)
         .constraint(constraintName, fieldNumber, fieldType);
   }
   
@@ -392,6 +414,35 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_MESSAGE;
       default:
         return FieldDescriptorProto_Type.TYPE_UINT64;
+    }
+  }
+  
+  static int _getDurationConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return 2; // DurationRules.const field number
+      case 'lt': return 3;    // DurationRules.lt field number
+      case 'lte': return 4;   // DurationRules.lte field number
+      case 'gt': return 5;    // DurationRules.gt field number
+      case 'gte': return 6;   // DurationRules.gte field number
+      case 'in': return 7;    // DurationRules.in field number
+      case 'not_in': return 8; // DurationRules.not_in field number
+      default: throw ArgumentError('Unknown duration constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getDurationConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'const':
+      case 'lt':
+      case 'lte':
+      case 'gt':
+      case 'gte':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE; // repeated Duration
+      default:
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
     }
   }
 }

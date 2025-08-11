@@ -59,70 +59,10 @@ abstract class MessageEvaluator implements Evaluator {
   void evaluateMessage(GeneratedMessage message, Cursor cursor);
 }
 
-/// Evaluator for repeated fields.
-class RepeatedFieldEvaluator implements Evaluator {
-  final Evaluator itemEvaluator;
-  final int? minItems;
-  final int? maxItems;
-  final bool? unique;
-  
-  RepeatedFieldEvaluator({
-    required this.itemEvaluator,
-    this.minItems,
-    this.maxItems,
-    this.unique,
-  });
-  
-  @override
-  void evaluate(dynamic value, Cursor cursor) {
-    if (value is! List) {
-      cursor.violate(
-        message: 'Expected a List',
-        constraintId: 'repeated.type',
-      );
-      return;
-    }
-    
-    final list = value;
-    
-    // Check min/max items
-    if (minItems != null && list.length < minItems!) {
-      cursor.violate(
-        message: 'value must contain at least $minItems item(s)',
-        constraintId: 'repeated.min_items',
-        rulePath: RulePathBuilder.repeatedConstraint('min_items'),
-      );
-    }
-    
-    if (maxItems != null && list.length > maxItems!) {
-      cursor.violate(
-        message: 'value must contain no more than $maxItems item(s)',
-        constraintId: 'repeated.max_items',
-        rulePath: RulePathBuilder.repeatedConstraint('max_items'),
-      );
-    }
-    
-    // Check uniqueness
-    if (unique == true) {
-      final seen = <dynamic>{};
-      for (var i = 0; i < list.length; i++) {
-        final item = list[i];
-        if (!seen.add(item)) {
-          cursor.violate(
-            message: 'repeated value must contain unique items',
-            constraintId: 'repeated.unique',
-            rulePath: RulePathBuilder.repeatedConstraint('unique'),
-          );
-        }
-      }
-    }
-    
-    // Evaluate each item
-    for (var i = 0; i < list.length; i++) {
-      itemEvaluator.evaluate(list[i], cursor.listIndex(i));
-    }
-  }
-}
+/// Evaluator for repeated field constraints (min_items, max_items, unique).
+/// This evaluator handles field-level constraints only.
+/// Item validation is handled separately by RepeatedFieldItemsEvaluator.
+// Old RepeatedFieldEvaluator removed - now using unified version in field_evaluator.dart
 
 /// Evaluator for map fields.
 class MapFieldEvaluator implements Evaluator {

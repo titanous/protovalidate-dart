@@ -166,58 +166,73 @@ class EvaluatorBuilder {
   
   bool _fieldHasPresence(FieldInfo field) {
     // In proto3, only explicit optional fields and message fields have presence
-    // For now, we'll assume proto3 scalar fields don't have presence
-    // TODO: Properly detect proto2 vs proto3 and explicit optional fields
     
     // Message fields always have presence
     if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
       return true;
     }
     
-    // For scalar fields, we currently assume no presence (proto3 behavior)
-    // This may need refinement to handle proto2 or explicit optional fields
-    return false;
+    // Check for proto3 optional fields by looking at the field type
+    // Optional scalars in proto3 use PbFieldType.O* (optional) variants
+    switch (field.type) {
+      case PbFieldType.O3:   // optional int32
+      case PbFieldType.OS3:  // optional sint32
+      case PbFieldType.OU3:  // optional uint32
+      case PbFieldType.OF3:  // optional fixed32
+      case PbFieldType.OSF3: // optional sfixed32
+      case PbFieldType.O6:   // optional int64
+      case PbFieldType.OS6:  // optional sint64
+      case PbFieldType.OU6:  // optional uint64
+      case PbFieldType.OF6:  // optional fixed64
+      case PbFieldType.OSF6: // optional sfixed64
+      case PbFieldType.OF:   // optional float
+      case PbFieldType.OD:   // optional double
+      case PbFieldType.OB:   // optional bool
+      case PbFieldType.OS:   // optional string
+      case PbFieldType.OY:   // optional bytes
+      case PbFieldType.OE:   // optional enum
+        return true;
+      default:
+        return false;
+    }
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
-    // Check if we have repeated rules
+    // Handle explicit repeated rules if present
     if (fieldRules?.hasRepeated() == true) {
       final repeatedRules = fieldRules!.repeated;
       
-      // Build item evaluator if there are item rules
+      // Following Go/ES architecture: field-level constraints (min_items, max_items, unique) 
+      // should be handled by CEL, not by custom evaluators.
+      // Only item validation needs a custom evaluator.
+      
+      // Extract item evaluator if there are item rules
       Evaluator? itemEvaluator;
+      Ignore itemIgnoreRule = Ignore.IGNORE_UNSPECIFIED;
+      
       if (repeatedRules.hasItems()) {
-        itemEvaluator = buildFromFieldRules(repeatedRules.items);
+        final itemRules = repeatedRules.items;
+        
+        if (itemRules.hasIgnore()) {
+          itemIgnoreRule = itemRules.ignore;
+        }
+        
+        // Only build item evaluator if not ignoring always
+        if (itemIgnoreRule != Ignore.IGNORE_ALWAYS) {
+          itemEvaluator = buildFromFieldRules(itemRules);
+        }
       }
       
-      // Check if items are wrapper types
-      final isWrapperType = _isWrapperType(field);
-      
-      // Build the repeated evaluator with proper item iteration
-      final evaluators = <Evaluator>[];
-      
-      // Add repeated rules evaluator
-      final repeatedEvaluator = _buildRepeatedEvaluator(repeatedRules);
-      evaluators.add(repeatedEvaluator);
-      
-      // Add item evaluator if present
+      // Create simple items-only evaluator following Go/ES architecture
       if (itemEvaluator != null) {
-        evaluators.add(field_eval.RepeatedFieldItemsEvaluator(
+        final itemsOnlyEvaluator = field_eval.RepeatedItemsOnlyEvaluator(
           itemEvaluator: itemEvaluator,
-          unwrapWrapperTypes: isWrapperType,
-        ));
+          unwrapWrapperTypes: _isWrapperType(field),
+          ignoreRule: itemIgnoreRule,
+        );
+        
+        return itemsOnlyEvaluator;
       }
-      
-      return CompositeEvaluator(evaluators);
-    }
-    
-    // Fall back to basic item validation
-    final itemEvaluator = _buildScalarEvaluator(field);
-    if (itemEvaluator != null) {
-      return field_eval.RepeatedFieldItemsEvaluator(
-        itemEvaluator: itemEvaluator,
-        unwrapWrapperTypes: _isWrapperType(field),
-      );
     }
     
     return null;
@@ -292,6 +307,14 @@ class EvaluatorBuilder {
           // Wrap it with the appropriate wrapper evaluator
           return _wrapForWrapperType(field, scalarEvaluator);
         }
+      }
+    }
+    
+    // Check if this is a Well-Known Type with specific rules
+    if (fieldRules != null && _isWellKnownType(field)) {
+      final wktEvaluator = _buildWellKnownTypeEvaluator(field, fieldRules);
+      if (wktEvaluator != null) {
+        return wktEvaluator;
       }
     }
     
@@ -375,6 +398,52 @@ class EvaluatorBuilder {
     return _buildScalarEvaluator(field);
   }
   
+  bool _isWellKnownType(FieldInfo field) {
+    if (field.subBuilder == null) return false;
+    
+    try {
+      final message = field.subBuilder!();
+      final typeName = message.info_.qualifiedMessageName;
+      
+      return typeName == 'google.protobuf.Duration' ||
+             typeName == 'google.protobuf.Timestamp' ||
+             typeName == 'google.protobuf.Any';
+    } catch (e) {
+      return false;
+    }
+  }
+  
+  Evaluator? _buildWellKnownTypeEvaluator(FieldInfo field, FieldRules fieldRules) {
+    if (field.subBuilder == null) return null;
+    
+    try {
+      final message = field.subBuilder!();
+      final typeName = message.info_.qualifiedMessageName;
+      
+      switch (typeName) {
+        case 'google.protobuf.Duration':
+          if (fieldRules.hasDuration()) {
+            return _buildDurationEvaluator(fieldRules.duration);
+          }
+          break;
+        case 'google.protobuf.Timestamp':
+          if (fieldRules.hasTimestamp()) {
+            return _buildTimestampEvaluator(fieldRules.timestamp);
+          }
+          break;
+        case 'google.protobuf.Any':
+          if (fieldRules.hasAny()) {
+            return _buildAnyEvaluator(fieldRules.any);
+          }
+          break;
+      }
+    } catch (e) {
+      // If we can't create the message, fall through to default handling
+    }
+    
+    return null;
+  }
+
   bool _isWrapperType(FieldInfo field) {
     // Check if the field's message type is a wrapper type
     if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
@@ -511,7 +580,9 @@ class EvaluatorBuilder {
       // This would need to be handled differently in a full implementation  
       typeEvaluator = _buildEnumEvaluator(rules.enum_16, null);
     } else if (rules.hasRepeated()) {
-      typeEvaluator = _buildRepeatedEvaluator(rules.repeated);
+      // Skip repeated rules here - they should be handled by _buildRepeatedFieldEvaluator
+      // If we reach this point, it means item rules incorrectly contain repeated rules
+      return null;
     } else if (rules.hasMap()) {
       typeEvaluator = _buildMapEvaluator(rules.map);
     } else if (rules.hasDuration()) {
@@ -875,10 +946,12 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildStringEvaluator(StringRules rules) {
-    
+    // Note: Unlike other evaluators, string evaluator doesn't check for predefined CEL rules
+    // This is intentional as string validation is handled entirely by StringRulesEvaluator
     return StringRulesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
       len: rules.hasLen() ? rules.len.toInt() : null,
+      lenBytes: rules.hasLenBytes() ? rules.lenBytes.toInt() : null,
       minLen: rules.hasMinLen() ? rules.minLen.toInt() : null,
       maxLen: rules.hasMaxLen() ? rules.maxLen.toInt() : null,
       minBytes: rules.hasMinBytes() ? rules.minBytes.toInt() : null,
@@ -981,6 +1054,10 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
+    // Note: This method is called from buildFromFieldRules when processing repeated rules
+    // In the new architecture, repeated field handling should primarily go through _buildRepeatedFieldEvaluator
+    // This method exists for compatibility when repeated rules appear in other contexts
+    
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
@@ -991,22 +1068,13 @@ class EvaluatorBuilder {
         evaluators.add(celEvaluator);
       }
     }
-    
-    // Build item evaluator from rules.items if present
-    Evaluator? itemEvaluator;
-    if (rules.hasItems()) {
-      itemEvaluator = buildFromFieldRules(rules.items);
-    }
 
-    // If no item evaluator, use a no-op
-    itemEvaluator ??= NoOpEvaluator();
-
-    // Add standard rules
-    final standardEvaluator = RepeatedFieldEvaluator(
-      itemEvaluator: itemEvaluator,
+    // Use field evaluator for field-level constraints only
+    final standardEvaluator = field_eval.RepeatedFieldEvaluator(
       minItems: rules.hasMinItems() ? rules.minItems.toInt() : null,
       maxItems: rules.hasMaxItems() ? rules.maxItems.toInt() : null,
       unique: rules.hasUnique() ? rules.unique : null,
+      itemEvaluator: null, // No item evaluator in this context
     );
     evaluators.add(standardEvaluator);
     

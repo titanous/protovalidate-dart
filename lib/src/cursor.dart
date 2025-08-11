@@ -2,6 +2,7 @@ import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'error.dart';
 import 'field_path.dart';
+import 'rule_paths.dart';
 
 /// Cursor maintains a field path and tracks violations during validation.
 /// This implementation matches the reference Go/TypeScript implementations.
@@ -40,7 +41,7 @@ class Cursor {
       fieldPathElements: _fieldPath.toProtoElements(),
       constraintId: constraintId,
       message: message,
-      rulePath: '', // Will be computed from rulePath if provided
+      rulePath: rulePath?.toRulePathString() ?? '',
       rulePathElements: rulePath?.toProtoElements() ?? [],
       forKey: forKey,
     ));
@@ -86,4 +87,47 @@ class Cursor {
       fieldPath: _fieldPath.mapKey(key),
     );
   }
+  
+  // Note: oneof method removed - not needed for current implementation
+}
+
+/// Cursor that prefixes rule paths with a base path (for repeated items, etc.)
+class PrefixedRulePathCursor extends Cursor {
+  final RulePath _baseRulePath;
+
+  PrefixedRulePathCursor(Cursor delegate, this._baseRulePath) 
+      : super(
+          failFast: delegate.failFast,
+          violations: delegate._violations,
+          fieldPath: delegate._fieldPath,
+        );
+
+  @override
+  void violate({
+    required String message,
+    required String constraintId,
+    RulePath? rulePath,
+    bool forKey = false,
+  }) {
+    // Combine base rule path with the provided rule path
+    final combinedRulePath = rulePath != null 
+        ? _baseRulePath.appendPath(rulePath)
+        : _baseRulePath;
+
+    super.violate(
+      message: message,
+      constraintId: constraintId,
+      rulePath: combinedRulePath,
+      forKey: forKey,
+    );
+  }
+
+  @override
+  Cursor field(FieldInfo field) => PrefixedRulePathCursor(super.field(field), _baseRulePath);
+
+  @override
+  Cursor listIndex(int index) => PrefixedRulePathCursor(super.listIndex(index), _baseRulePath);
+
+  @override
+  Cursor mapKey(dynamic key) => PrefixedRulePathCursor(super.mapKey(key), _baseRulePath);
 }

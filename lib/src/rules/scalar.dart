@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
@@ -716,6 +717,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
 class StringRulesEvaluator implements Evaluator {
   final String? constValue;
   final int? len;
+  final int? lenBytes;
   final int? minLen;
   final int? maxLen;
   final int? minBytes;
@@ -764,6 +766,7 @@ class StringRulesEvaluator implements Evaluator {
   StringRulesEvaluator({
     this.constValue,
     this.len,
+    this.lenBytes,
     this.minLen,
     this.maxLen,
     this.minBytes,
@@ -833,6 +836,18 @@ class StringRulesEvaluator implements Evaluator {
         constraintId: 'string.len',
         rulePath: RulePathBuilder.stringConstraint('len'),
       );
+    }
+    
+    // Check exact byte length (UTF-8 bytes)
+    if (lenBytes != null) {
+      final utf8ByteLength = utf8.encode(stringValue).length;
+      if (utf8ByteLength != lenBytes) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.len_bytes',
+          rulePath: RulePathBuilder.stringConstraint('len_bytes'),
+        );
+      }
     }
     
     // Check min length (count runes, not UTF-16 code units)
@@ -927,6 +942,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: 'value must be in list [${inValues!.join(", ")}]',
         constraintId: 'string.in',
+        rulePath: RulePathBuilder.stringConstraint('in'),
       );
     }
     
@@ -1013,12 +1029,20 @@ class StringRulesEvaluator implements Evaluator {
     }
     
     // URI validation
-    if (uri == true && !_isValidURI(value)) {
-      cursor.violate(
-        message: 'String must be a valid URI',
-        constraintId: 'string.uri',
-        rulePath: RulePathBuilder.stringConstraint('uri'),
-      );
+    if (uri == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.uri_empty',
+          rulePath: RulePathBuilder.stringConstraint('uri'),
+        );
+      } else if (!_isValidURI(value)) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.uri',
+          rulePath: RulePathBuilder.stringConstraint('uri'),
+        );
+      }
     }
     
     // URI reference validation
@@ -1031,12 +1055,20 @@ class StringRulesEvaluator implements Evaluator {
     }
     
     // UUID validation
-    if (uuid == true && !_isValidUUID(value)) {
-      cursor.violate(
-        message: 'String must be a valid UUID',
-        constraintId: 'string.uuid',
-        rulePath: RulePathBuilder.stringConstraint('uuid'),
-      );
+    if (uuid == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.uuid_empty',
+          rulePath: RulePathBuilder.stringConstraint('uuid'),
+        );
+      } else if (!_isValidUUID(value)) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.uuid',
+          rulePath: RulePathBuilder.stringConstraint('uuid'),
+        );
+      }
     }
     
     // Address validation (IP or hostname)
@@ -1145,13 +1177,13 @@ class StringRulesEvaluator implements Evaluator {
     if (tuuid == true) {
       if (value.isEmpty) {
         cursor.violate(
-          message: 'value is empty, which is not a valid TUUID',
+          message: '',
           constraintId: 'string.tuuid_empty',
           rulePath: RulePathBuilder.stringConstraint('tuuid'),
         );
       } else if (!_isValidTUUID(value)) {
         cursor.violate(
-          message: 'value must be a valid TUUID',
+          message: '',
           constraintId: 'string.tuuid',
           rulePath: RulePathBuilder.stringConstraint('tuuid'),
         );
