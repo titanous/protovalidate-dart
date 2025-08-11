@@ -8,6 +8,7 @@ import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart'
     as pb_timestamp;
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart' as pb_any;
 import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
+import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart';
 import 'package:cel/cel.dart' as cel;
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
@@ -580,12 +581,6 @@ class EvaluatorBuilder {
   Evaluator _buildInt64Evaluator(Int64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkInt64Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
-    
     // Add standard rules
     final standardEvaluator = Int64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -603,12 +598,6 @@ class EvaluatorBuilder {
 
   Evaluator _buildUInt32Evaluator(UInt32Rules rules) {
     final evaluators = <Evaluator>[];
-    
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkUInt32Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
     
     // Add standard rules
     final standardEvaluator = UInt32Evaluator(
@@ -628,11 +617,8 @@ class EvaluatorBuilder {
   Evaluator _buildUInt64Evaluator(UInt64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkUInt64Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkUInt64Rules(rules);
     
     // Add standard rules
     final standardEvaluator = UInt64Evaluator(
@@ -652,11 +638,8 @@ class EvaluatorBuilder {
   Evaluator _buildFloatEvaluator(FloatRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkFloatRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkFloatRules(rules);
     
     // Add standard rules
     final standardEvaluator = FloatEvaluator(
@@ -677,11 +660,8 @@ class EvaluatorBuilder {
   Evaluator _buildDoubleEvaluator(DoubleRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkDoubleRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkDoubleRules(rules);
     
     // Add standard rules
     final standardEvaluator = DoubleEvaluator(
@@ -702,11 +682,8 @@ class EvaluatorBuilder {
   Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkSInt32Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkSInt32Rules(rules);
     
     // Add standard rules
     final standardEvaluator = SInt32Evaluator(
@@ -726,11 +703,8 @@ class EvaluatorBuilder {
   Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkSInt64Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkSInt64Rules(rules);
     
     // Add standard rules
     final standardEvaluator = SInt64Evaluator(
@@ -750,11 +724,8 @@ class EvaluatorBuilder {
   Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkFixed32Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkFixed32Rules(rules);
     
     // Add standard rules
     final standardEvaluator = Fixed32Evaluator(
@@ -774,11 +745,8 @@ class EvaluatorBuilder {
   Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkFixed64Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkFixed64Rules(rules);
     
     // Add standard rules
     final standardEvaluator = Fixed64Evaluator(
@@ -798,11 +766,8 @@ class EvaluatorBuilder {
   Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkSFixed32Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkSFixed32Rules(rules);
     
     // Add standard rules
     final standardEvaluator = SFixed32Evaluator(
@@ -822,11 +787,8 @@ class EvaluatorBuilder {
   Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkSFixed64Rules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkSFixed64Rules(rules);
     
     // Add standard rules
     final standardEvaluator = SFixed64Evaluator(
@@ -844,11 +806,6 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildStringEvaluator(StringRules rules) {
-    // Check for predefined rules first
-    final predefinedEvaluator = PredefinedRulesChecker.checkStringRules(rules);
-    if (predefinedEvaluator != null) {
-      return predefinedEvaluator;
-    }
     
     return StringRulesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -888,11 +845,8 @@ class EvaluatorBuilder {
   Evaluator _buildBytesEvaluator(BytesRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkBytesRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkBytesRules(rules);
     
     // Add standard rules
     final standardEvaluator = BytesEvaluator(
@@ -918,11 +872,8 @@ class EvaluatorBuilder {
   Evaluator _buildEnumEvaluator(EnumRules rules, [Map<int, String>? enumValueNames]) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkEnumRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkEnumRules(rules);
     
     // Add standard rules
     final standardEvaluator = EnumRulesEvaluator(
@@ -951,11 +902,8 @@ class EvaluatorBuilder {
   Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkRepeatedRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkRepeatedRules(rules);
     
     // Build item evaluator from rules.items if present
     Evaluator? itemEvaluator;
@@ -1008,11 +956,8 @@ class EvaluatorBuilder {
   Evaluator _buildDurationEvaluator(DurationRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkDurationRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkDurationRules(rules);
     
     // Add standard rules
     final standardEvaluator = DurationEvaluator(rules: rules);
@@ -1024,11 +969,8 @@ class EvaluatorBuilder {
   Evaluator _buildTimestampEvaluator(TimestampRules rules) {
     final evaluators = <Evaluator>[];
     
-    // Check for predefined rules
-    final predefinedEvaluator = PredefinedRulesChecker.checkTimestampRules(rules);
-    if (predefinedEvaluator != null) {
-      evaluators.add(predefinedEvaluator);
-    }
+    // Check for predefined rules - removed for now
+    // final predefinedEvaluator = PredefinedExtensionChecker.checkTimestampRules(rules);
     
     // Add standard rules
     final standardEvaluator = TimestampEvaluator(rules: rules);

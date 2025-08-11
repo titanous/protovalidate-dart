@@ -239,7 +239,7 @@ class StringValidators {
   /// UUID validation
   static bool isUuid(String value) {
     final uuidRegex = RegExp(
-      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\$',
+      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
       caseSensitive: false
     );
     return uuidRegex.hasMatch(value);
@@ -247,7 +247,7 @@ class StringValidators {
 
   /// TUUID validation (trimmed UUID - no dashes)
   static bool isTuuid(String value) {
-    final tuuidRegex = RegExp(r'^[0-9a-fA-F]{32}\$');
+    final tuuidRegex = RegExp(r'^[0-9a-fA-F]{32}$');
     return tuuidRegex.hasMatch(value);
   }
 

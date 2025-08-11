@@ -72,12 +72,13 @@ class FieldEvaluator implements Evaluator {
     }
     
     // For fields with IGNORE_IF_ZERO_VALUE, skip validation for default values
-    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && _isDefaultValue(fieldValue)) {
+    // BUT only if the field is not explicitly set (for proto3 optional/proto2)
+    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && !hasValue) {
       return;
     }
     
     // For fields with presence, skip validation if not set
-    // (unless explicitly required, which was already checked above)
+    // (unless explicitly required, which was already checked above)  
     if (hasPresence && !hasValue && !required) {
       return;
     }

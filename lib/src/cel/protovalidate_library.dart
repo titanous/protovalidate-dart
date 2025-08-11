@@ -1,4 +1,5 @@
 import 'package:cel/cel.dart';
+import 'package:cel/src/checker/declaration.dart';
 import '../shared/string_validators.dart';
 
 /// Refactored Protovalidate validation functions library for CEL
@@ -10,7 +11,45 @@ class ProtovalidateLibrary extends Library {
   ];
 
   @override
-  List<EnvironmentOption> get compileEnvironmentOptions => [];
+  List<EnvironmentOption> get compileEnvironmentOptions => [
+    _declarations(_createFunctionDeclarations()),
+  ];
+  
+  /// Returns an EnvironmentOption that appends the given declarations
+  EnvironmentOption _declarations(List<Declaration> declarations) {
+    return (Environment e) {
+      e.declarations.addAll(declarations);
+    };
+  }
+  
+  /// Create function declarations for all our custom validation functions
+  List<Declaration> _createFunctionDeclarations() {
+    return [
+      // String validation functions
+      FunctionDeclaration(Overload('isEmail')),
+      FunctionDeclaration(Overload('isHostname')),
+      FunctionDeclaration(Overload('isIp')),
+      FunctionDeclaration(Overload('isIpPrefix')),
+      FunctionDeclaration(Overload('isUri')),
+      FunctionDeclaration(Overload('isUriRef')),
+      
+      // Numeric functions
+      FunctionDeclaration(Overload('isNan')),
+      FunctionDeclaration(Overload('isInf')),
+      
+      // List functions
+      FunctionDeclaration(Overload('unique')),
+      
+      // Bytes functions
+      FunctionDeclaration(Overload('bytesContains')),
+      FunctionDeclaration(Overload('bytesStartsWith')),
+      FunctionDeclaration(Overload('bytesEndsWith')),
+      
+      // HTTP header validation
+      FunctionDeclaration(Overload('isHttpHeaderName')),
+      FunctionDeclaration(Overload('isHttpHeaderValue')),
+    ];
+  }
 
   List<Overload> _createValidationOverloads() {
     return [
@@ -32,17 +71,17 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
-      // isIp(string) -> bool (any version)
-      Overload('isIp', unaryOperator: (value) {
-        if (value is StringValue) {
+      // Use functionOperator to handle all isIp cases due to CEL-dart overload limitations  
+      Overload('isIp', functionOperator: (args) {
+        if (args.length == 1 && args[0] is StringValue) {
+          // Unary: isIp(string)
+          final value = args[0] as StringValue;
           return BooleanValue(StringValidators.isIp(value.value));
         }
-        return BooleanValue(false);
-      }),
-      
-      // isIp(string, int) -> bool (specific version)
-      Overload('isIp', binaryOperator: (value, version) {
-        if (value is StringValue && version is IntValue) {
+        if (args.length == 2 && args[0] is StringValue && args[1] is IntValue) {
+          // Binary: isIp(string, int)
+          final value = args[0] as StringValue;
+          final version = args[1] as IntValue;
           return BooleanValue(StringValidators.isIp(value.value, version.value.toInt()));
         }
         return BooleanValue(false);
@@ -98,36 +137,35 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
-      // isIpPrefix(string, int) -> bool (specific version, non-strict)
-      Overload('isIpPrefix', binaryOperator: (value, version) {
-        if (value is StringValue && version is IntValue) {
-          return BooleanValue(StringValidators.isIpPrefix(value.value, version.value.toInt()));
-        }
-        return BooleanValue(false);
-      }),
-      
-      // isIpPrefix(string, bool) -> bool (any version, with strict mode)
-      Overload('isIpPrefix:strict', binaryOperator: (value, strict) {
-        if (value is StringValue && strict is BooleanValue) {
-          return BooleanValue(StringValidators.isIpPrefix(value.value, null, strict.value));
-        }
-        return BooleanValue(false);
-      }),
-      
-      // isIpPrefix(string, int, bool) -> bool (specific version with strict mode)
+      // Use functionOperator to handle all isIpPrefix cases due to CEL-dart overload limitations
       Overload('isIpPrefix', functionOperator: (args) {
+        if (args.length == 1 && args[0] is StringValue) {
+          // Unary: isIpPrefix(string)
+          final value = args[0] as StringValue;
+          return BooleanValue(StringValidators.isIpPrefix(value.value));
+        }
+        if (args.length == 2 && args[0] is StringValue) {
+          final value = args[0] as StringValue;
+          if (args[1] is IntValue) {
+            // Binary: isIpPrefix(string, int)
+            final version = args[1] as IntValue;
+            return BooleanValue(StringValidators.isIpPrefix(value.value, version.value.toInt()));
+          }
+          if (args[1] is BooleanValue) {
+            // Binary: isIpPrefix(string, bool)
+            final strict = args[1] as BooleanValue;
+            return BooleanValue(StringValidators.isIpPrefix(value.value, null, strict.value));
+          }
+        }
         if (args.length == 3 && 
             args[0] is StringValue && 
             args[1] is IntValue && 
             args[2] is BooleanValue) {
+          // Ternary: isIpPrefix(string, int, bool)
           final value = args[0] as StringValue;
           final version = args[1] as IntValue;
           final strict = args[2] as BooleanValue;
-          return BooleanValue(StringValidators.isIpPrefix(
-            value.value, 
-            version.value.toInt(), 
-            strict.value
-          ));
+          return BooleanValue(StringValidators.isIpPrefix(value.value, version.value.toInt(), strict.value));
         }
         return BooleanValue(false);
       }),
@@ -142,17 +180,17 @@ class ProtovalidateLibrary extends Library {
         return BooleanValue(false);
       }),
       
-      // isInf(double) -> bool (any infinity)
-      Overload('isInf', unaryOperator: (value) {
-        if (value is DoubleValue) {
+      // Use functionOperator to handle all isInf cases due to CEL-dart overload limitations
+      Overload('isInf', functionOperator: (args) {
+        if (args.length == 1 && args[0] is DoubleValue) {
+          // Unary: isInf(double)
+          final value = args[0] as DoubleValue;
           return BooleanValue(value.value.isInfinite);
         }
-        return BooleanValue(false);
-      }),
-      
-      // isInf(double, int) -> bool (specific sign)
-      Overload('isInf', binaryOperator: (value, sign) {
-        if (value is DoubleValue && sign is IntValue) {
+        if (args.length == 2 && args[0] is DoubleValue && args[1] is IntValue) {
+          // Binary: isInf(double, int)
+          final value = args[0] as DoubleValue;
+          final sign = args[1] as IntValue;
           return BooleanValue(StringValidators.isInf(value.value, sign.value.toInt()));
         }
         return BooleanValue(false);
