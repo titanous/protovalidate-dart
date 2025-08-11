@@ -4,6 +4,7 @@ import 'package:protovalidate/protovalidate.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/buf/validate/conformance/harness/harness.pb.dart';
 import 'package:protovalidate/src/conformance_registry_marker.dart';
+import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart' as predefined_proto2;
 
 void main() async {
   // Read the request from stdin
@@ -15,6 +16,9 @@ void main() async {
   // Create extension registry and register validation extensions
   final extensionRegistry = ExtensionRegistry();
   Validate.registerAllExtensions(extensionRegistry);
+  
+  // Register predefined rule extensions so they can be parsed from constraint messages
+  predefined_proto2.Predefined_rules_proto2.registerAllExtensions(extensionRegistry);
   
   final request = TestConformanceRequest()..mergeFromBuffer(input, extensionRegistry);
   final response = TestConformanceResponse();
