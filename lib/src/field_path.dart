@@ -136,41 +136,44 @@ class FieldPath {
       return FieldDescriptorProto_Type.TYPE_MESSAGE;
     }
     
+    // For packed fields, we need to extract the base type by removing the packed bit
+    final baseType = field.type & ~0x4; // Remove PACKED_BIT (0x4)
+    
     // Map PbFieldType to FieldDescriptorProto_Type
     // Note: O = optional, P = repeated, Q = required (proto2 only)
-    if (field.type == PbFieldType.OB || field.type == PbFieldType.PB || field.type == PbFieldType.QB) {
+    if (baseType == PbFieldType.OB || baseType == PbFieldType.PB || baseType == PbFieldType.QB) {
       return FieldDescriptorProto_Type.TYPE_BOOL;
-    } else if (field.type == PbFieldType.O3 || field.type == PbFieldType.P3 || field.type == PbFieldType.Q3) {
+    } else if (baseType == PbFieldType.O3 || baseType == PbFieldType.P3 || baseType == PbFieldType.Q3) {
       return FieldDescriptorProto_Type.TYPE_INT32;
-    } else if (field.type == PbFieldType.O6 || field.type == PbFieldType.P6 || field.type == PbFieldType.Q6) {
+    } else if (baseType == PbFieldType.O6 || baseType == PbFieldType.P6 || baseType == PbFieldType.Q6) {
       return FieldDescriptorProto_Type.TYPE_INT64;
-    } else if (field.type == PbFieldType.OU3 || field.type == PbFieldType.PU3 || field.type == PbFieldType.QU3) {
+    } else if (baseType == PbFieldType.OU3 || baseType == PbFieldType.PU3 || baseType == PbFieldType.QU3) {
       return FieldDescriptorProto_Type.TYPE_UINT32;
-    } else if (field.type == PbFieldType.OU6 || field.type == PbFieldType.PU6 || field.type == PbFieldType.QU6) {
+    } else if (baseType == PbFieldType.OU6 || baseType == PbFieldType.PU6 || baseType == PbFieldType.QU6) {
       return FieldDescriptorProto_Type.TYPE_UINT64;
-    } else if (field.type == PbFieldType.OS3 || field.type == PbFieldType.PS3 || field.type == PbFieldType.QS3) {
+    } else if (baseType == PbFieldType.OS3 || baseType == PbFieldType.PS3 || baseType == PbFieldType.QS3) {
       return FieldDescriptorProto_Type.TYPE_SINT32;
-    } else if (field.type == PbFieldType.OS6 || field.type == PbFieldType.PS6 || field.type == PbFieldType.QS6) {
+    } else if (baseType == PbFieldType.OS6 || baseType == PbFieldType.PS6 || baseType == PbFieldType.QS6) {
       return FieldDescriptorProto_Type.TYPE_SINT64;
-    } else if (field.type == PbFieldType.OSF3 || field.type == PbFieldType.PSF3 || field.type == PbFieldType.QSF3) {
+    } else if (baseType == PbFieldType.OSF3 || baseType == PbFieldType.PSF3 || baseType == PbFieldType.QSF3) {
       return FieldDescriptorProto_Type.TYPE_SFIXED32;
-    } else if (field.type == PbFieldType.OSF6 || field.type == PbFieldType.PSF6 || field.type == PbFieldType.QSF6) {
+    } else if (baseType == PbFieldType.OSF6 || baseType == PbFieldType.PSF6 || baseType == PbFieldType.QSF6) {
       return FieldDescriptorProto_Type.TYPE_SFIXED64;
-    } else if (field.type == PbFieldType.OF3 || field.type == PbFieldType.PF3 || field.type == PbFieldType.QF3) {
+    } else if (baseType == PbFieldType.OF3 || baseType == PbFieldType.PF3 || baseType == PbFieldType.QF3) {
       return FieldDescriptorProto_Type.TYPE_FIXED32;
-    } else if (field.type == PbFieldType.OF6 || field.type == PbFieldType.PF6 || field.type == PbFieldType.QF6) {
+    } else if (baseType == PbFieldType.OF6 || baseType == PbFieldType.PF6 || baseType == PbFieldType.QF6) {
       return FieldDescriptorProto_Type.TYPE_FIXED64;
-    } else if (field.type == PbFieldType.OF || field.type == PbFieldType.PF || field.type == PbFieldType.QF) {
+    } else if (baseType == PbFieldType.OF || baseType == PbFieldType.PF || baseType == PbFieldType.QF) {
       return FieldDescriptorProto_Type.TYPE_FLOAT;
-    } else if (field.type == PbFieldType.OD || field.type == PbFieldType.PD || field.type == PbFieldType.QD) {
+    } else if (baseType == PbFieldType.OD || baseType == PbFieldType.PD || baseType == PbFieldType.QD) {
       return FieldDescriptorProto_Type.TYPE_DOUBLE;
-    } else if (field.type == PbFieldType.OS || field.type == PbFieldType.PS || field.type == PbFieldType.QS) {
+    } else if (baseType == PbFieldType.OS || baseType == PbFieldType.PS || baseType == PbFieldType.QS) {
       return FieldDescriptorProto_Type.TYPE_STRING;
-    } else if (field.type == PbFieldType.OY || field.type == PbFieldType.PY || field.type == PbFieldType.QY) {
+    } else if (baseType == PbFieldType.OY || baseType == PbFieldType.PY || baseType == PbFieldType.QY) {
       return FieldDescriptorProto_Type.TYPE_BYTES;
-    } else if (field.type == PbFieldType.OE || field.type == PbFieldType.PE || field.type == PbFieldType.QE) {
+    } else if (baseType == PbFieldType.OE || baseType == PbFieldType.PE || baseType == PbFieldType.QE) {
       return FieldDescriptorProto_Type.TYPE_ENUM;
-    } else if (field.type == PbFieldType.OM || field.type == PbFieldType.PM || field.type == PbFieldType.QM) {
+    } else if (baseType == PbFieldType.OM || baseType == PbFieldType.PM || baseType == PbFieldType.QM) {
       return FieldDescriptorProto_Type.TYPE_MESSAGE;
     } else if (field.isRepeated) {
       // For repeated fields, we need to check the value type

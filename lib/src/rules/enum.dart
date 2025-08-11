@@ -72,7 +72,7 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.notIn.isNotEmpty) {
       if (rules.notIn.contains(enumValue)) {
         cursor.violate(
-          message: '',
+          message: 'value must not be in list [${rules.notIn.join(", ")}]',
           constraintId: 'enum.not_in',
           rulePath: RulePathBuilder.enumConstraint('not_in'),
         );

@@ -49,6 +49,8 @@ class ConstraintNumbers {
   static const int prefix = 7;
   static const int suffix = 8;
   static const int contains = 9;
+  static const int stringIn = 10;
+  static const int stringNotIn = 11;
   static const int notContains = 23;
   static const int email = 12;
   static const int hostname = 13;
@@ -91,6 +93,8 @@ class ConstraintNumbers {
   
   // Enum constraints
   static const int definedOnly = 2;
+  static const int enumIn = 3;
+  static const int enumNotIn = 4;
 }
 
 /// Helper class for constructing rule paths for different validation scenarios.
@@ -198,8 +202,8 @@ class RulePathBuilder {
       case 'suffix': return ConstraintNumbers.suffix;
       case 'contains': return ConstraintNumbers.contains;
       case 'not_contains': return ConstraintNumbers.notContains;
-      case 'in': return ConstraintNumbers.in_;
-      case 'not_in': return ConstraintNumbers.notIn;
+      case 'in': return ConstraintNumbers.stringIn;
+      case 'not_in': return ConstraintNumbers.stringNotIn;
       case 'email': return ConstraintNumbers.email;
       case 'hostname': return ConstraintNumbers.hostname;
       case 'ip': return ConstraintNumbers.ip;
@@ -332,8 +336,8 @@ class RulePathBuilder {
     switch (constraintName) {
       case 'const': return ConstraintNumbers.const_;
       case 'defined_only': return ConstraintNumbers.definedOnly;
-      case 'in': return ConstraintNumbers.in_;
-      case 'not_in': return ConstraintNumbers.notIn;
+      case 'in': return ConstraintNumbers.enumIn;
+      case 'not_in': return ConstraintNumbers.enumNotIn;
       default: throw ArgumentError('Unknown enum constraint: $constraintName');
     }
   }
