@@ -29,6 +29,9 @@ class FieldRuleNumbers {
   static const int any = 20;
   static const int duration = 21;
   static const int timestamp = 22;
+  
+  // CEL expressions field
+  static const int cel = 23;
 }
 
 /// Constants for constraint field numbers within each rule type.
@@ -196,6 +199,13 @@ class RulePathBuilder {
     return RulePath.fromFieldRules()
         .ruleType('duration', FieldRuleNumbers.duration)
         .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for CEL expressions with index.
+  static RulePath celConstraint(int index) {
+    return RulePath.fromFieldRules()
+        .constraint('cel', FieldRuleNumbers.cel, FieldDescriptorProto_Type.TYPE_MESSAGE)
+        .index(index);
   }
   
   static int _getStringConstraintNumber(String constraintName) {

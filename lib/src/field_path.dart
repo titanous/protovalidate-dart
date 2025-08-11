@@ -252,6 +252,25 @@ class RulePath {
     return newPath;
   }
   
+  /// Adds an index to the last element in the rule path (for array access like cel[0])
+  RulePath index(int index) {
+    if (_elements.isEmpty) {
+      throw StateError('Cannot add index to empty rule path');
+    }
+    
+    final newPath = clone();
+    final lastElement = newPath._elements.last;
+    
+    // Create a new element with the index
+    newPath._elements[newPath._elements.length - 1] = pb.FieldPathElement()
+      ..fieldNumber = lastElement.fieldNumber
+      ..fieldName = lastElement.fieldName
+      ..fieldType = lastElement.fieldType
+      ..index = Int64(index);
+      
+    return newPath;
+  }
+  
   /// Converts this path to protobuf FieldPathElements.
   List<pb.FieldPathElement> toProtoElements() {
     return List.unmodifiable(_elements);

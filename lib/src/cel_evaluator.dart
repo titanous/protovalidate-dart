@@ -8,6 +8,7 @@ import 'gen/buf/validate/validate.pb.dart';
 import 'gen/google/protobuf/descriptor.pb.dart';
 import 'gen/google/protobuf/timestamp.pb.dart';
 import 'cel/protovalidate_library.dart';
+import 'rule_paths.dart';
 
 /// CEL evaluator for custom expression rules
 class CELEvaluator implements Evaluator {
@@ -35,12 +36,14 @@ class CompiledExpression {
   final Rule source;
   final String? message;
   final String? id;
+  final int celIndex;
 
   CompiledExpression({
     required this.program,
     required this.source,
     this.message,
     this.id,
+    required this.celIndex,
   });
 
   void evaluate(dynamic value, Cursor cursor) {
@@ -107,6 +110,7 @@ class CompiledExpression {
     cursor.violate(
       constraintId: id ?? 'cel.expression',
       message: violationMessage,
+      rulePath: RulePathBuilder.celConstraint(celIndex),
     );
   }
 }
@@ -122,10 +126,11 @@ class CELCompiler {
   List<CompiledExpression> compile(List<Rule> rules) {
     final compiled = <CompiledExpression>[];
     
-    for (final rule in rules) {
+    for (int i = 0; i < rules.length; i++) {
+      final rule = rules[i];
       if (rule.hasExpression()) {
         try {
-          final expr = _compileExpression(rule);
+          final expr = _compileExpression(rule, i);
           if (expr != null) {
             compiled.add(expr);
           }
@@ -140,7 +145,7 @@ class CELCompiler {
     return compiled;
   }
 
-  CompiledExpression? _compileExpression(Rule rule) {
+  CompiledExpression? _compileExpression(Rule rule, int index) {
     final expression = rule.expression;
     if (expression.isEmpty) {
       return null;
@@ -155,6 +160,7 @@ class CELCompiler {
       source: rule,
       message: rule.hasMessage() ? rule.message : null,
       id: rule.hasId() ? rule.id : null,
+      celIndex: index,
     );
   }
 
