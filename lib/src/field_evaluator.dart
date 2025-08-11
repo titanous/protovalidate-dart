@@ -71,9 +71,8 @@ class FieldEvaluator implements Evaluator {
       return;
     }
     
-    // For fields with IGNORE_IF_ZERO_VALUE, skip validation for default values
-    // BUT only if the field is not explicitly set (for proto3 optional/proto2)
-    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && !hasValue) {
+    // For fields with IGNORE_IF_ZERO_VALUE, skip validation for default/zero values
+    if (ignore == Ignore.IGNORE_IF_ZERO_VALUE && (!hasValue || _isZeroValue(fieldValue))) {
       return;
     }
     
@@ -90,10 +89,10 @@ class FieldEvaluator implements Evaluator {
     valueEvaluator.evaluate(fieldValue, fieldCursor);
   }
   
-  bool _isDefaultValue(dynamic value) {
+  bool _isZeroValue(dynamic value) {
     if (value == null) return true;
     
-    // Check for default values based on type
+    // Check for zero values based on type (for IGNORE_IF_ZERO_VALUE)
     if (value is bool && !value) return true;
     if (value is int && value == 0) return true;
     if (value is Int64 && value == Int64.ZERO) return true;
@@ -101,15 +100,8 @@ class FieldEvaluator implements Evaluator {
     if (value is String && value.isEmpty) return true;
     if (value is List && value.isEmpty) return true;
     if (value is Map && value.isEmpty) return true;
-    if (value is GeneratedMessage) {
-      // For messages, check if all fields are default
-      for (final f in value.info_.fieldInfo.values) {
-        if (value.hasField(f.tagNumber)) {
-          return false;
-        }
-      }
-      return true;
-    }
+    // For messages, only consider null/unset as zero value, not empty messages
+    // An explicitly created empty message {} is NOT a zero value
     
     return false;
   }
