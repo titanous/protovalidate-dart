@@ -87,11 +87,14 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..oo(0, [16, 17])
-    ..aOS(1, _omitFieldNames ? '' : 'const')
+    ..aOS(1, _omitFieldNames ? '' : 'const',
+        presence: $pb.FieldPresence.implicit)
     ..aOM<ComplexTestMsg>(2, _omitFieldNames ? '' : 'nested',
         subBuilder: ComplexTestMsg.create)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'intConst', $pb.PbFieldType.O3)
-    ..aOB(4, _omitFieldNames ? '' : 'boolConst')
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'intConst', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(4, _omitFieldNames ? '' : 'boolConst',
+        presence: $pb.FieldPresence.implicit)
     ..aOM<$0.FloatValue>(5, _omitFieldNames ? '' : 'floatVal',
         subBuilder: $0.FloatValue.create)
     ..aOM<$1.Duration>(6, _omitFieldNames ? '' : 'durVal',
@@ -101,10 +104,13 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
     ..aOM<ComplexTestMsg>(8, _omitFieldNames ? '' : 'another',
         subBuilder: ComplexTestMsg.create)
     ..a<$core.double>(
-        9, _omitFieldNames ? '' : 'floatConst', $pb.PbFieldType.OF)
-    ..a<$core.double>(10, _omitFieldNames ? '' : 'doubleIn', $pb.PbFieldType.OD)
+        9, _omitFieldNames ? '' : 'floatConst', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.double>(10, _omitFieldNames ? '' : 'doubleIn', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..e<ComplexTestEnum>(
         11, _omitFieldNames ? '' : 'enumConst', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: ComplexTestEnum.COMPLEX_TEST_ENUM_UNSPECIFIED,
         valueOf: ComplexTestEnum.valueOf,
         enumValues: ComplexTestEnum.values)
@@ -119,7 +125,8 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
         valueFieldType: $pb.PbFieldType.OS,
         packageName: const $pb.PackageName('buf.validate.conformance.cases'))
     ..a<$core.List<$core.int>>(
-        15, _omitFieldNames ? '' : 'bytesVal', $pb.PbFieldType.OY)
+        15, _omitFieldNames ? '' : 'bytesVal', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..aOS(16, _omitFieldNames ? '' : 'x')
     ..a<$core.int>(17, _omitFieldNames ? '' : 'y', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;

@@ -135,8 +135,10 @@ class Timestamp extends $pb.GeneratedMessage with $mixin.TimestampMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.TimestampMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.TimestampMixin.fromProto3JsonHelper)
-    ..aInt64(1, _omitFieldNames ? '' : 'seconds')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'nanos', $pb.PbFieldType.O3)
+    ..aInt64(1, _omitFieldNames ? '' : 'seconds',
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'nanos', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

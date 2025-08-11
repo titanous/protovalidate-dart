@@ -59,10 +59,8 @@ class FieldEvaluator implements Evaluator {
     var fieldValue = message.getField(field.tagNumber);
     final hasValue = message.hasField(field.tagNumber);
     
-    // For proto3 scalar fields without presence that are unset, use the default value
-    if (!hasPresence && !hasValue) {
-      fieldValue = _getDefaultValue(field);
-    }
+    // For proto3 implicit presence fields, getField() returns the default value automatically
+    // No need to manually provide defaults since the protobuf library handles this now
     
     // Check required constraint first
     if (required && !hasValue) {
@@ -98,6 +96,9 @@ class FieldEvaluator implements Evaluator {
       return;
     }
     
+    // For proto3 scalars without presence that weren't set, we now have default value
+    // Continue with validation using the default value
+    
     // Create a cursor for this field
     final fieldCursor = cursor.field(field);
     
@@ -122,36 +123,6 @@ class FieldEvaluator implements Evaluator {
     return false;
   }
   
-  /// Get default value for proto3 scalar fields
-  dynamic _getDefaultValue(FieldInfo field) {
-    switch (field.type) {
-      case PbFieldType.PB:  // bool
-        return false;
-      case PbFieldType.P3:  // int32
-      case PbFieldType.PS3: // sint32
-      case PbFieldType.PU3: // uint32  
-      case PbFieldType.PF3: // fixed32
-      case PbFieldType.PSF3: // sfixed32
-        return 0;
-      case PbFieldType.P6:  // int64
-      case PbFieldType.PS6: // sint64
-      case PbFieldType.PU6: // uint64
-      case PbFieldType.PF6: // fixed64
-      case PbFieldType.PSF6: // sfixed64
-        return Int64.ZERO;
-      case PbFieldType.PF:  // float
-      case PbFieldType.PD:  // double
-        return 0.0;
-      case PbFieldType.PS:  // string
-        return '';
-      case PbFieldType.PY:  // bytes
-        return <int>[];
-      case PbFieldType.PE:  // enum
-        return 0; // Default enum value is 0
-      default:
-        return null;
-    }
-  }
 }
 
 /// Items-only evaluator for repeated fields following Go/ES architecture

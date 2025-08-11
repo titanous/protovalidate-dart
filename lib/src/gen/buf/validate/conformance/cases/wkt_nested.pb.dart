@@ -40,7 +40,8 @@ class WktLevelOne_WktLevelTwo_WktLevelThree extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'uuid')
+    ..aOS(1, _omitFieldNames ? '' : 'uuid',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

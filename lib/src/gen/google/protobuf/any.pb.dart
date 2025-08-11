@@ -130,9 +130,11 @@ class Any extends $pb.GeneratedMessage with $mixin.AnyMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.AnyMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.AnyMixin.fromProto3JsonHelper)
-    ..aOS(1, _omitFieldNames ? '' : 'typeUrl')
+    ..aOS(1, _omitFieldNames ? '' : 'typeUrl',
+        presence: $pb.FieldPresence.implicit)
     ..a<$core.List<$core.int>>(
-        2, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OY)
+        2, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

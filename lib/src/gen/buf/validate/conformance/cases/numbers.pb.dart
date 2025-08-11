@@ -40,7 +40,8 @@ class FloatNone extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -95,7 +96,8 @@ class FloatConst extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -150,7 +152,8 @@ class FloatIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -205,7 +208,8 @@ class FloatNotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -260,7 +264,8 @@ class FloatLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -315,7 +320,8 @@ class FloatLTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -370,7 +376,8 @@ class FloatGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -425,7 +432,8 @@ class FloatGTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -480,7 +488,8 @@ class FloatGTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -535,7 +544,8 @@ class FloatExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -591,7 +601,8 @@ class FloatGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -647,7 +658,8 @@ class FloatExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -704,7 +716,8 @@ class FloatFinite extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -760,7 +773,8 @@ class FloatNotFinite extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -817,7 +831,8 @@ class FloatIgnore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -873,7 +888,8 @@ class FloatIncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -930,7 +946,8 @@ class FloatExample extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -987,7 +1004,8 @@ class DoubleNone extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1042,7 +1060,8 @@ class DoubleConst extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1098,7 +1117,8 @@ class DoubleIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1153,7 +1173,8 @@ class DoubleNotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1209,7 +1230,8 @@ class DoubleLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1264,7 +1286,8 @@ class DoubleLTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1319,7 +1342,8 @@ class DoubleGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1374,7 +1398,8 @@ class DoubleGTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1429,7 +1454,8 @@ class DoubleGTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1484,7 +1510,8 @@ class DoubleExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1541,7 +1568,8 @@ class DoubleGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1598,7 +1626,8 @@ class DoubleExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1655,7 +1684,8 @@ class DoubleFinite extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1712,7 +1742,8 @@ class DoubleNotFinite extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1769,7 +1800,8 @@ class DoubleIgnore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1826,7 +1858,8 @@ class DoubleIncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1883,7 +1916,8 @@ class DoubleExample extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1940,7 +1974,8 @@ class Int32None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1995,7 +2030,8 @@ class Int32Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2050,7 +2086,8 @@ class Int32In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2105,7 +2142,8 @@ class Int32NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2160,7 +2198,8 @@ class Int32LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2215,7 +2254,8 @@ class Int32LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2270,7 +2310,8 @@ class Int32GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2325,7 +2366,8 @@ class Int32GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2380,7 +2422,8 @@ class Int32GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2435,7 +2478,8 @@ class Int32ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2491,7 +2535,8 @@ class Int32GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2547,7 +2592,8 @@ class Int32ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2604,7 +2650,8 @@ class Int32Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2660,7 +2707,8 @@ class Int32IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2717,7 +2765,8 @@ class Int32Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2774,7 +2823,8 @@ class Int64None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2829,7 +2879,8 @@ class Int64Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2884,7 +2935,8 @@ class Int64In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2939,7 +2991,8 @@ class Int64NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2994,7 +3047,8 @@ class Int64LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3049,7 +3103,8 @@ class Int64LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3104,7 +3159,8 @@ class Int64GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3159,7 +3215,8 @@ class Int64GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3214,7 +3271,8 @@ class Int64GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3269,7 +3327,8 @@ class Int64ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3325,7 +3384,8 @@ class Int64GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3381,7 +3441,8 @@ class Int64ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3438,7 +3499,8 @@ class Int64Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3516,18 +3578,30 @@ class Int64BigRules extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'ltPos')
-    ..aInt64(2, _omitFieldNames ? '' : 'ltNeg')
-    ..aInt64(3, _omitFieldNames ? '' : 'gtPos')
-    ..aInt64(4, _omitFieldNames ? '' : 'gtNeg')
-    ..aInt64(5, _omitFieldNames ? '' : 'ltePos')
-    ..aInt64(6, _omitFieldNames ? '' : 'lteNeg')
-    ..aInt64(7, _omitFieldNames ? '' : 'gtePos')
-    ..aInt64(8, _omitFieldNames ? '' : 'gteNeg')
-    ..aInt64(9, _omitFieldNames ? '' : 'constantPos')
-    ..aInt64(10, _omitFieldNames ? '' : 'constantNeg')
-    ..aInt64(11, _omitFieldNames ? '' : 'in')
-    ..aInt64(12, _omitFieldNames ? '' : 'notin')
+    ..aInt64(1, _omitFieldNames ? '' : 'ltPos',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(2, _omitFieldNames ? '' : 'ltNeg',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(3, _omitFieldNames ? '' : 'gtPos',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(4, _omitFieldNames ? '' : 'gtNeg',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(5, _omitFieldNames ? '' : 'ltePos',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(6, _omitFieldNames ? '' : 'lteNeg',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(7, _omitFieldNames ? '' : 'gtePos',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(8, _omitFieldNames ? '' : 'gteNeg',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(9, _omitFieldNames ? '' : 'constantPos',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(10, _omitFieldNames ? '' : 'constantNeg',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(11, _omitFieldNames ? '' : 'in',
+        presence: $pb.FieldPresence.implicit)
+    ..aInt64(12, _omitFieldNames ? '' : 'notin',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3684,7 +3758,8 @@ class Int64IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3741,7 +3816,8 @@ class Int64Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3798,7 +3874,8 @@ class UInt32None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3853,7 +3930,8 @@ class UInt32Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3909,7 +3987,8 @@ class UInt32In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -3964,7 +4043,8 @@ class UInt32NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4020,7 +4100,8 @@ class UInt32LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4075,7 +4156,8 @@ class UInt32LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4130,7 +4212,8 @@ class UInt32GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4185,7 +4268,8 @@ class UInt32GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4240,7 +4324,8 @@ class UInt32GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4295,7 +4380,8 @@ class UInt32ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4352,7 +4438,8 @@ class UInt32GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4409,7 +4496,8 @@ class UInt32ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4466,7 +4554,8 @@ class UInt32Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4523,7 +4612,8 @@ class UInt32IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4580,7 +4670,8 @@ class UInt32Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -4638,6 +4729,7 @@ class UInt64None extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4694,6 +4786,7 @@ class UInt64Const extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4751,6 +4844,7 @@ class UInt64In extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4807,6 +4901,7 @@ class UInt64NotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4864,6 +4959,7 @@ class UInt64LT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4920,6 +5016,7 @@ class UInt64LTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -4976,6 +5073,7 @@ class UInt64GT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5032,6 +5130,7 @@ class UInt64GTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5088,6 +5187,7 @@ class UInt64GTLT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5144,6 +5244,7 @@ class UInt64ExLTGT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5202,6 +5303,7 @@ class UInt64GTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5260,6 +5362,7 @@ class UInt64ExGTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5318,6 +5421,7 @@ class UInt64Ignore extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5376,6 +5480,7 @@ class UInt64IncorrectType extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5434,6 +5539,7 @@ class UInt64Example extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -5491,7 +5597,8 @@ class SInt32None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5546,7 +5653,8 @@ class SInt32Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5602,7 +5710,8 @@ class SInt32In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5657,7 +5766,8 @@ class SInt32NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5713,7 +5823,8 @@ class SInt32LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5768,7 +5879,8 @@ class SInt32LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5823,7 +5935,8 @@ class SInt32GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5878,7 +5991,8 @@ class SInt32GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5933,7 +6047,8 @@ class SInt32GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -5988,7 +6103,8 @@ class SInt32ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6045,7 +6161,8 @@ class SInt32GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6102,7 +6219,8 @@ class SInt32ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6159,7 +6277,8 @@ class SInt32Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6216,7 +6335,8 @@ class SInt32IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6273,7 +6393,8 @@ class SInt32Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -6331,6 +6452,7 @@ class SInt64None extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6387,6 +6509,7 @@ class SInt64Const extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6444,6 +6567,7 @@ class SInt64In extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6500,6 +6624,7 @@ class SInt64NotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6557,6 +6682,7 @@ class SInt64LT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6613,6 +6739,7 @@ class SInt64LTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6669,6 +6796,7 @@ class SInt64GT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6725,6 +6853,7 @@ class SInt64GTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6781,6 +6910,7 @@ class SInt64GTLT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6837,6 +6967,7 @@ class SInt64ExLTGT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6895,6 +7026,7 @@ class SInt64GTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -6953,6 +7085,7 @@ class SInt64ExGTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -7011,6 +7144,7 @@ class SInt64Ignore extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -7069,6 +7203,7 @@ class SInt64IncorrectType extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -7127,6 +7262,7 @@ class SInt64Example extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -7184,7 +7320,8 @@ class Fixed32None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7240,7 +7377,8 @@ class Fixed32Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7297,7 +7435,8 @@ class Fixed32In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7352,7 +7491,8 @@ class Fixed32NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7409,7 +7549,8 @@ class Fixed32LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7464,7 +7605,8 @@ class Fixed32LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7519,7 +7661,8 @@ class Fixed32GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7574,7 +7717,8 @@ class Fixed32GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7629,7 +7773,8 @@ class Fixed32GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7685,7 +7830,8 @@ class Fixed32ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7742,7 +7888,8 @@ class Fixed32GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7799,7 +7946,8 @@ class Fixed32ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7856,7 +8004,8 @@ class Fixed32Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7913,7 +8062,8 @@ class Fixed32IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -7971,7 +8121,8 @@ class Fixed32Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8029,6 +8180,7 @@ class Fixed64None extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8086,6 +8238,7 @@ class Fixed64Const extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8144,6 +8297,7 @@ class Fixed64In extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8200,6 +8354,7 @@ class Fixed64NotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8258,6 +8413,7 @@ class Fixed64LT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8314,6 +8470,7 @@ class Fixed64LTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8370,6 +8527,7 @@ class Fixed64GT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8426,6 +8584,7 @@ class Fixed64GTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8482,6 +8641,7 @@ class Fixed64GTLT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8539,6 +8699,7 @@ class Fixed64ExLTGT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8597,6 +8758,7 @@ class Fixed64GTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8655,6 +8817,7 @@ class Fixed64ExGTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8713,6 +8876,7 @@ class Fixed64Ignore extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8771,6 +8935,7 @@ class Fixed64IncorrectType extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8830,6 +8995,7 @@ class Fixed64Example extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -8887,7 +9053,8 @@ class SFixed32None extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -8944,7 +9111,8 @@ class SFixed32Const extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9001,7 +9169,8 @@ class SFixed32In extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9056,7 +9225,8 @@ class SFixed32NotIn extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9113,7 +9283,8 @@ class SFixed32LT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9168,7 +9339,8 @@ class SFixed32LTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9224,7 +9396,8 @@ class SFixed32GT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9279,7 +9452,8 @@ class SFixed32GTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9335,7 +9509,8 @@ class SFixed32GTLT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9392,7 +9567,8 @@ class SFixed32ExLTGT extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9449,7 +9625,8 @@ class SFixed32GTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9506,7 +9683,8 @@ class SFixed32ExGTELTE extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9563,7 +9741,8 @@ class SFixed32Ignore extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9620,7 +9799,8 @@ class SFixed32IncorrectType extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9679,7 +9859,8 @@ class SFixed32Example extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -9737,6 +9918,7 @@ class SFixed64None extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -9795,6 +9977,7 @@ class SFixed64Const extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -9853,6 +10036,7 @@ class SFixed64In extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -9909,6 +10093,7 @@ class SFixed64NotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -9967,6 +10152,7 @@ class SFixed64LT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10023,6 +10209,7 @@ class SFixed64LTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10080,6 +10267,7 @@ class SFixed64GT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10136,6 +10324,7 @@ class SFixed64GTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10193,6 +10382,7 @@ class SFixed64GTLT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10251,6 +10441,7 @@ class SFixed64ExLTGT extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10309,6 +10500,7 @@ class SFixed64GTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10367,6 +10559,7 @@ class SFixed64ExGTELTE extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10425,6 +10618,7 @@ class SFixed64Ignore extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10483,6 +10677,7 @@ class SFixed64IncorrectType extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -10543,6 +10738,7 @@ class SFixed64Example extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 

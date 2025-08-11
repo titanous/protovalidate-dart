@@ -43,7 +43,8 @@ class TestMsg extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'const')
+    ..aOS(1, _omitFieldNames ? '' : 'const',
+        presence: $pb.FieldPresence.implicit)
     ..aOM<TestMsg>(2, _omitFieldNames ? '' : 'nested',
         subBuilder: TestMsg.create)
     ..hasRequiredFields = false;
@@ -622,8 +623,10 @@ class MessageOneofSingleField extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -693,8 +696,10 @@ class MessageOneofSingleFieldRequired extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -767,8 +772,10 @@ class MessageOneofMultipleFields extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -840,8 +847,10 @@ class MessageOneofMultipleFieldsRequired extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -917,9 +926,12 @@ class MessageOneofMultipleSharedFields extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'intField', $pb.PbFieldType.O3)
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'intField', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -999,7 +1011,8 @@ class MessageOneofUnknownFieldName extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1062,8 +1075,10 @@ class MessageOneofDuplicateField extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1134,8 +1149,10 @@ class MessageOneofZeroFields extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1207,9 +1224,9 @@ class MessageOneofUnsatisfiable extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'a')
-    ..aOB(2, _omitFieldNames ? '' : 'b')
-    ..aOB(3, _omitFieldNames ? '' : 'c')
+    ..aOB(1, _omitFieldNames ? '' : 'a', presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'b', presence: $pb.FieldPresence.implicit)
+    ..aOB(3, _omitFieldNames ? '' : 'c', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1288,8 +1305,10 @@ class MessageOneofIgnoreUnpopulated extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1362,8 +1381,10 @@ class MessageOneofIgnoreUnpopulatedRequired extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'strField')
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOS(1, _omitFieldNames ? '' : 'strField',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1438,7 +1459,8 @@ class MessageOneofIgnoreOverride extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aOM<TestMsg>(1, _omitFieldNames ? '' : 'msgField',
         subBuilder: TestMsg.create)
-    ..aOB(2, _omitFieldNames ? '' : 'boolField')
+    ..aOB(2, _omitFieldNames ? '' : 'boolField',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

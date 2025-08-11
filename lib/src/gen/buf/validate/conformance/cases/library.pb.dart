@@ -39,7 +39,7 @@ class IsHostname extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -96,8 +96,9 @@ class IsHostAndPort extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
-    ..aOB(2, _omitFieldNames ? '' : 'portRequired')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'portRequired',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -167,7 +168,7 @@ class IsIpPrefix extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'version', $pb.PbFieldType.O3)
     ..aOB(3, _omitFieldNames ? '' : 'strict')
     ..hasRequiredFields = false;
@@ -244,7 +245,7 @@ class IsIp extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'version', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
@@ -309,7 +310,7 @@ class IsEmail extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -364,7 +365,7 @@ class IsUri extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -419,7 +420,7 @@ class IsUriRef extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

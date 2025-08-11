@@ -431,7 +431,8 @@ class Proto2ScalarRequiredIgnoreUnspecified extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3);
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
+        presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreUnspecified clone() =>
@@ -498,7 +499,7 @@ class Proto2ScalarRequiredIgnoreUnspecifiedWithDefault
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
-        defaultOrMaker: -42);
+        presence: $pb.FieldPresence.legacyRequired, defaultOrMaker: -42);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreUnspecifiedWithDefault clone() =>
@@ -563,7 +564,8 @@ class Proto2ScalarRequiredIgnoreEmpty extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3);
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
+        presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreEmpty clone() =>
@@ -626,7 +628,7 @@ class Proto2ScalarRequiredIgnoreEmptyWithDefault extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
-        defaultOrMaker: -42);
+        presence: $pb.FieldPresence.legacyRequired, defaultOrMaker: -42);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreEmptyWithDefault clone() =>
@@ -689,7 +691,8 @@ class Proto2ScalarRequiredIgnoreAlways extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3);
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
+        presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreAlways clone() =>
@@ -753,7 +756,7 @@ class Proto2ScalarRequiredIgnoreAlwaysWithDefault extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.Q3,
-        defaultOrMaker: -42);
+        presence: $pb.FieldPresence.legacyRequired, defaultOrMaker: -42);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Proto2ScalarRequiredIgnoreAlwaysWithDefault clone() =>
@@ -1273,6 +1276,7 @@ class Proto2MessageRequiredIgnoreUnspecified extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aQM<Proto2MessageRequiredIgnoreUnspecified_Msg>(
         1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.legacyRequired,
         subBuilder: Proto2MessageRequiredIgnoreUnspecified_Msg.create);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1402,6 +1406,7 @@ class Proto2MessageRequiredIgnoreEmpty extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..aQM<Proto2MessageRequiredIgnoreEmpty_Msg>(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.legacyRequired,
         subBuilder: Proto2MessageRequiredIgnoreEmpty_Msg.create);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1531,6 +1536,7 @@ class Proto2MessageRequiredIgnoreAlways extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..aQM<Proto2MessageRequiredIgnoreAlways_Msg>(
         1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.legacyRequired,
         subBuilder: Proto2MessageRequiredIgnoreAlways_Msg.create);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

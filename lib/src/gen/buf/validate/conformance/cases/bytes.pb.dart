@@ -40,7 +40,8 @@ class BytesNone extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -96,7 +97,8 @@ class BytesConst extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -152,7 +154,8 @@ class BytesIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -208,7 +211,8 @@ class BytesNotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -264,7 +268,8 @@ class BytesLen extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -320,7 +325,8 @@ class BytesMinLen extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -377,7 +383,8 @@ class BytesMaxLen extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -434,7 +441,8 @@ class BytesMinMaxLen extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -492,7 +500,8 @@ class BytesEqualMinMaxLen extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -550,7 +559,8 @@ class BytesPattern extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -608,7 +618,8 @@ class BytesPrefix extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -665,7 +676,8 @@ class BytesContains extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -723,7 +735,8 @@ class BytesSuffix extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -780,7 +793,8 @@ class BytesIP extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -836,7 +850,8 @@ class BytesNotIP extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -892,7 +907,8 @@ class BytesIPv4 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -948,7 +964,8 @@ class BytesNotIPv4 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1006,7 +1023,8 @@ class BytesIPv6 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1062,7 +1080,8 @@ class BytesNotIPv6 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1120,7 +1139,8 @@ class BytesIPv6Ignore extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1178,7 +1198,8 @@ class BytesExample extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

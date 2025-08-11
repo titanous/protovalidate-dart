@@ -39,7 +39,7 @@ class RequiredProto3Scalar extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -98,7 +98,7 @@ class RequiredProto3ScalarIgnoreAlways extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -285,7 +285,7 @@ class RequiredProto3Message_Msg extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -407,7 +407,7 @@ class RequiredProto3MessageIgnoreAlways_Msg extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

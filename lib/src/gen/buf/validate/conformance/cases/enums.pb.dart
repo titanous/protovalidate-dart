@@ -46,6 +46,7 @@ class EnumNone extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)
@@ -104,6 +105,7 @@ class EnumConst extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)
@@ -162,6 +164,7 @@ class EnumAliasConst extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnumAlias>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
         enumValues: TestEnumAlias.values)
@@ -222,6 +225,7 @@ class EnumDefined extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)
@@ -281,6 +285,7 @@ class EnumAliasDefined extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnumAlias>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
         enumValues: TestEnumAlias.values)
@@ -341,6 +346,7 @@ class EnumIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)
@@ -399,6 +405,7 @@ class EnumAliasIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnumAlias>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
         enumValues: TestEnumAlias.values)
@@ -458,6 +465,7 @@ class EnumNotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)
@@ -516,6 +524,7 @@ class EnumAliasNotIn extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnumAlias>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
         enumValues: TestEnumAlias.values)
@@ -577,6 +586,7 @@ class EnumExternal extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..e<$0.Embed_Enumerated>(
         1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $0.Embed_Enumerated.ENUMERATED_UNSPECIFIED,
         valueOf: $0.Embed_Enumerated.valueOf,
         enumValues: $0.Embed_Enumerated.values)
@@ -638,6 +648,7 @@ class EnumExternal2 extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..e<$0.Embed_DoubleEmbed_DoubleEnumerated>(
         1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker:
             $0.Embed_DoubleEmbed_DoubleEnumerated.DOUBLE_ENUMERATED_UNSPECIFIED,
         valueOf: $0.Embed_DoubleEmbed_DoubleEnumerated.valueOf,
@@ -1090,6 +1101,7 @@ class EnumExample extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,
         enumValues: TestEnum.values)

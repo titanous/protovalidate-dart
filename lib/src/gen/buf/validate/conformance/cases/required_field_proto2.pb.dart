@@ -299,7 +299,8 @@ class RequiredProto2ScalarRequired extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aQS(1, _omitFieldNames ? '' : 'val');
+    ..aQS(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto2ScalarRequired clone() =>

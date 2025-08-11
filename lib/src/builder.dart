@@ -1,6 +1,4 @@
 import 'package:protobuf/protobuf.dart';
-import 'package:protobuf/meta.dart' show MapFieldInfo;
-import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart'
     as pb_duration;
@@ -165,36 +163,11 @@ class EvaluatorBuilder {
   }
   
   bool _fieldHasPresence(FieldInfo field) {
-    // In proto3, only explicit optional fields and message fields have presence
+    // Use the new FieldPresence enum from protobuf.dart for accurate presence detection
+    // This replaces the old manual field type checking approach
     
-    // Message fields always have presence
-    if (field.type == PbFieldType.OM || field.type == PbFieldType.PM) {
-      return true;
-    }
-    
-    // Check for proto3 optional fields by looking at the field type
-    // Optional scalars in proto3 use PbFieldType.O* (optional) variants
-    switch (field.type) {
-      case PbFieldType.O3:   // optional int32
-      case PbFieldType.OS3:  // optional sint32
-      case PbFieldType.OU3:  // optional uint32
-      case PbFieldType.OF3:  // optional fixed32
-      case PbFieldType.OSF3: // optional sfixed32
-      case PbFieldType.O6:   // optional int64
-      case PbFieldType.OS6:  // optional sint64
-      case PbFieldType.OU6:  // optional uint64
-      case PbFieldType.OF6:  // optional fixed64
-      case PbFieldType.OSF6: // optional sfixed64
-      case PbFieldType.OF:   // optional float
-      case PbFieldType.OD:   // optional double
-      case PbFieldType.OB:   // optional bool
-      case PbFieldType.OS:   // optional string
-      case PbFieldType.OY:   // optional bytes
-      case PbFieldType.OE:   // optional enum
-        return true;
-      default:
-        return false;
-    }
+    // Check the actual presence semantics from the field info
+    return field.presence != FieldPresence.implicit;
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {

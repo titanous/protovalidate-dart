@@ -47,7 +47,8 @@ class Embed extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

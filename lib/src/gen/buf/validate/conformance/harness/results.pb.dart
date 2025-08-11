@@ -53,11 +53,16 @@ class ResultOptions extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.harness'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'suiteFilter')
-    ..aOS(2, _omitFieldNames ? '' : 'caseFilter')
-    ..aOB(3, _omitFieldNames ? '' : 'verbose')
-    ..aOB(5, _omitFieldNames ? '' : 'strictMessage')
-    ..aOB(6, _omitFieldNames ? '' : 'strictError')
+    ..aOS(1, _omitFieldNames ? '' : 'suiteFilter',
+        presence: $pb.FieldPresence.implicit)
+    ..aOS(2, _omitFieldNames ? '' : 'caseFilter',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(3, _omitFieldNames ? '' : 'verbose',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(5, _omitFieldNames ? '' : 'strictMessage',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(6, _omitFieldNames ? '' : 'strictError',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -164,14 +169,17 @@ class ResultSet extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.harness'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'successes', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'failures', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'successes', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'failures', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..pc<SuiteResults>(3, _omitFieldNames ? '' : 'suites', $pb.PbFieldType.PM,
         subBuilder: SuiteResults.create)
     ..aOM<ResultOptions>(4, _omitFieldNames ? '' : 'options',
         subBuilder: ResultOptions.create)
     ..a<$core.int>(
-        5, _omitFieldNames ? '' : 'expectedFailures', $pb.PbFieldType.O3);
+        5, _omitFieldNames ? '' : 'expectedFailures', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ResultSet clone() => ResultSet()..mergeFromMessage(this);
@@ -273,15 +281,19 @@ class SuiteResults extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.harness'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'successes', $pb.PbFieldType.O3)
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'failures', $pb.PbFieldType.O3)
+    ..aOS(1, _omitFieldNames ? '' : 'name',
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'successes', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(3, _omitFieldNames ? '' : 'failures', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..pc<CaseResult>(4, _omitFieldNames ? '' : 'cases', $pb.PbFieldType.PM,
         subBuilder: CaseResult.create)
     ..aOM<$0.FileDescriptorSet>(5, _omitFieldNames ? '' : 'fdset',
         subBuilder: $0.FileDescriptorSet.create)
     ..a<$core.int>(
-        6, _omitFieldNames ? '' : 'expectedFailures', $pb.PbFieldType.O3);
+        6, _omitFieldNames ? '' : 'expectedFailures', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SuiteResults clone() => SuiteResults()..mergeFromMessage(this);
@@ -395,14 +407,17 @@ class CaseResult extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.harness'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..aOB(2, _omitFieldNames ? '' : 'success')
+    ..aOS(1, _omitFieldNames ? '' : 'name',
+        presence: $pb.FieldPresence.implicit)
+    ..aOB(2, _omitFieldNames ? '' : 'success',
+        presence: $pb.FieldPresence.implicit)
     ..aOM<$1.TestResult>(3, _omitFieldNames ? '' : 'wanted',
         subBuilder: $1.TestResult.create)
     ..aOM<$1.TestResult>(4, _omitFieldNames ? '' : 'got',
         subBuilder: $1.TestResult.create)
     ..aOM<$2.Any>(5, _omitFieldNames ? '' : 'input', subBuilder: $2.Any.create)
-    ..aOB(6, _omitFieldNames ? '' : 'expectedFailure')
+    ..aOB(6, _omitFieldNames ? '' : 'expectedFailure',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

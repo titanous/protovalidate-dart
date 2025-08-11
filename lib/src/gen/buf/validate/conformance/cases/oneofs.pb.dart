@@ -39,7 +39,7 @@ class TestOneofMsg extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'val')
+    ..aOB(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

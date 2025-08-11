@@ -50,7 +50,8 @@ class DoubleValue extends $pb.GeneratedMessage with $mixin.DoubleValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.DoubleValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.DoubleValueMixin.fromProto3JsonHelper)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -115,7 +116,8 @@ class FloatValue extends $pb.GeneratedMessage with $mixin.FloatValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.FloatValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.FloatValueMixin.fromProto3JsonHelper)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -179,7 +181,8 @@ class Int64Value extends $pb.GeneratedMessage with $mixin.Int64ValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.Int64ValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.Int64ValueMixin.fromProto3JsonHelper)
-    ..aInt64(1, _omitFieldNames ? '' : 'value')
+    ..aInt64(1, _omitFieldNames ? '' : 'value',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -244,6 +247,7 @@ class UInt64Value extends $pb.GeneratedMessage with $mixin.UInt64ValueMixin {
       toProto3Json: $mixin.UInt64ValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.UInt64ValueMixin.fromProto3JsonHelper)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -309,7 +313,8 @@ class Int32Value extends $pb.GeneratedMessage with $mixin.Int32ValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.Int32ValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.Int32ValueMixin.fromProto3JsonHelper)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -373,7 +378,8 @@ class UInt32Value extends $pb.GeneratedMessage with $mixin.UInt32ValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.UInt32ValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.UInt32ValueMixin.fromProto3JsonHelper)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -438,7 +444,8 @@ class BoolValue extends $pb.GeneratedMessage with $mixin.BoolValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.BoolValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.BoolValueMixin.fromProto3JsonHelper)
-    ..aOB(1, _omitFieldNames ? '' : 'value')
+    ..aOB(1, _omitFieldNames ? '' : 'value',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -502,7 +509,8 @@ class StringValue extends $pb.GeneratedMessage with $mixin.StringValueMixin {
       createEmptyInstance: create,
       toProto3Json: $mixin.StringValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.StringValueMixin.fromProto3JsonHelper)
-    ..aOS(1, _omitFieldNames ? '' : 'value')
+    ..aOS(1, _omitFieldNames ? '' : 'value',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -568,7 +576,8 @@ class BytesValue extends $pb.GeneratedMessage with $mixin.BytesValueMixin {
       toProto3Json: $mixin.BytesValueMixin.toProto3JsonHelper,
       fromProto3Json: $mixin.BytesValueMixin.fromProto3JsonHelper)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'value', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

@@ -93,8 +93,10 @@ class NoExpressions extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..e<Enum>(2, _omitFieldNames ? '' : 'b', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: Enum.ENUM_UNSPECIFIED,
         valueOf: Enum.valueOf,
         enumValues: Enum.values)
@@ -179,8 +181,10 @@ class MessageExpressions_Nested extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'b', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'b', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -260,13 +264,17 @@ class MessageExpressions extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
-    ..a<$core.int>(2, _omitFieldNames ? '' : 'b', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'b', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..e<Enum>(3, _omitFieldNames ? '' : 'c', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: Enum.ENUM_UNSPECIFIED,
         valueOf: Enum.valueOf,
         enumValues: Enum.values)
     ..e<Enum>(4, _omitFieldNames ? '' : 'd', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: Enum.ENUM_UNSPECIFIED,
         valueOf: Enum.valueOf,
         enumValues: Enum.values)
@@ -380,7 +388,8 @@ class MissingField extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -438,7 +447,8 @@ class IncorrectType extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -496,7 +506,8 @@ class DynRuntimeError extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -596,7 +607,8 @@ class FieldExpressionMultipleScalar extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -785,7 +797,8 @@ class FieldExpressionScalar extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -846,6 +859,7 @@ class FieldExpressionEnum extends $pb.GeneratedMessage {
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
     ..e<Enum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: Enum.ENUM_UNSPECIFIED,
         valueOf: Enum.valueOf,
         enumValues: Enum.values)
@@ -906,7 +920,8 @@ class FieldExpressionMessage_Msg extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1447,7 +1462,8 @@ class FieldExpressionMapMessage_Msg extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -1758,7 +1774,8 @@ class FieldExpressionMapMessageValues_Msg extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2005,7 +2022,8 @@ class FieldExpressionRepeatedMessage_Msg extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2246,7 +2264,8 @@ class FieldExpressionRepeatedMessageItems_Msg extends $pb.GeneratedMessage {
           ? ''
           : 'buf.validate.conformance.cases.custom_rules'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')

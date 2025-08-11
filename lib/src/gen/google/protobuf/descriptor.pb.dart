@@ -3237,9 +3237,10 @@ class UninterpretedOption_NamePart extends $pb.GeneratedMessage {
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'google.protobuf'),
       createEmptyInstance: create)
-    ..aQS(1, _omitFieldNames ? '' : 'namePart')
-    ..a<$core.bool>(
-        2, _omitFieldNames ? '' : 'isExtension', $pb.PbFieldType.QB);
+    ..aQS(1, _omitFieldNames ? '' : 'namePart',
+        presence: $pb.FieldPresence.legacyRequired)
+    ..a<$core.bool>(2, _omitFieldNames ? '' : 'isExtension', $pb.PbFieldType.QB,
+        presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UninterpretedOption_NamePart clone() =>

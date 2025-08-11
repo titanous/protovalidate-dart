@@ -49,7 +49,8 @@ class PredefinedFloatRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -108,7 +109,8 @@ class PredefinedDoubleRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD)
+    ..a<$core.double>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OD,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -168,7 +170,8 @@ class PredefinedInt32RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -227,7 +230,8 @@ class PredefinedInt64RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aInt64(1, _omitFieldNames ? '' : 'val')
+    ..aInt64(1, _omitFieldNames ? '' : 'val',
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -286,7 +290,8 @@ class PredefinedUInt32RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -347,6 +352,7 @@ class PredefinedUInt64RuleProto3 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OU6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -407,7 +413,8 @@ class PredefinedSInt32RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -468,6 +475,7 @@ class PredefinedSInt64RuleProto3 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OS6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -528,7 +536,8 @@ class PredefinedFixed32RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -590,6 +599,7 @@ class PredefinedFixed64RuleProto3 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -651,7 +661,8 @@ class PredefinedSFixed32RuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -713,6 +724,7 @@ class PredefinedSFixed64RuleProto3 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OSF6,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..hasRequiredFields = false;
 
@@ -774,7 +786,7 @@ class PredefinedBoolRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOB(1, _omitFieldNames ? '' : 'val')
+    ..aOB(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -833,7 +845,7 @@ class PredefinedStringRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'val')
+    ..aOS(1, _omitFieldNames ? '' : 'val', presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -894,7 +906,8 @@ class PredefinedBytesRuleProto3 extends $pb.GeneratedMessage {
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
     ..a<$core.List<$core.int>>(
-        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY)
+        1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OY,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -955,6 +968,7 @@ class PredefinedEnumRuleProto3 extends $pb.GeneratedMessage {
       createEmptyInstance: create)
     ..e<PredefinedEnumRuleProto3_EnumProto3>(
         1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
+        presence: $pb.FieldPresence.implicit,
         defaultOrMaker:
             PredefinedEnumRuleProto3_EnumProto3.ENUM_PROTO3_ZERO_UNSPECIFIED,
         valueOf: PredefinedEnumRuleProto3_EnumProto3.valueOf,
@@ -2381,7 +2395,8 @@ class PredefinedAndCustomRuleProto3_Nested extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'c', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'c', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
@@ -2445,7 +2460,8 @@ class PredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..aOM<PredefinedAndCustomRuleProto3_Nested>(2, _omitFieldNames ? '' : 'b',
         subBuilder: PredefinedAndCustomRuleProto3_Nested.create)
     ..hasRequiredFields = false;
@@ -2520,7 +2536,8 @@ class StandardPredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.OS3)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'a', $pb.PbFieldType.OS3,
+        presence: $pb.FieldPresence.implicit)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
