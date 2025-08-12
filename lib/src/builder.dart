@@ -10,6 +10,7 @@ import 'package:cel/cel.dart' as cel;
 import 'descriptor_rules.dart';
 import 'evaluator.dart';
 import 'field_evaluator.dart' as field_eval;
+import 'ignore_conditions.dart';
 import 'rules/scalar.dart';
 import 'rules/enum.dart';
 import 'rules/message.dart';
@@ -369,6 +370,8 @@ class EvaluatorBuilder {
         maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
         keyFieldType: mapField.keyFieldType,
         valueFieldType: mapField.valueFieldType,
+        keyIgnoreCondition: createIgnoreCondition(mapRules?.keys?.ignore),
+        valueIgnoreCondition: createIgnoreCondition(mapRules?.values?.ignore),
       );
       evaluators.add(mapFieldEvaluator);
     }
@@ -1195,6 +1198,8 @@ class EvaluatorBuilder {
       valueEvaluator: valueEvaluator,
       minPairs: rules.hasMinPairs() ? rules.minPairs.toInt() : null,
       maxPairs: rules.hasMaxPairs() ? rules.maxPairs.toInt() : null,
+      keyIgnoreCondition: createIgnoreCondition(rules.keys?.ignore),
+      valueIgnoreCondition: createIgnoreCondition(rules.values?.ignore),
     );
   }
 

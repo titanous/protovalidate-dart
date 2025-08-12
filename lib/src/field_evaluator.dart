@@ -8,6 +8,7 @@ import 'cursor.dart';
 import 'field_path.dart';
 import 'error.dart';
 import 'rule_paths.dart';
+import 'ignore_conditions.dart';
 
 /// FieldEvaluator performs validation on a single message field.
 /// This architecture matches the Go/ES implementations for proper field handling.
@@ -377,6 +378,8 @@ class MapFieldEvaluator implements Evaluator {
   final int? maxPairs;
   final int? keyFieldType;
   final int? valueFieldType;
+  final IgnoreCondition<dynamic>? keyIgnoreCondition;
+  final IgnoreCondition<dynamic>? valueIgnoreCondition;
   
   MapFieldEvaluator({
     this.keyEvaluator,
@@ -385,6 +388,8 @@ class MapFieldEvaluator implements Evaluator {
     this.maxPairs,
     this.keyFieldType,
     this.valueFieldType,
+    this.keyIgnoreCondition,
+    this.valueIgnoreCondition,
   });
   
   @override
@@ -416,11 +421,15 @@ class MapFieldEvaluator implements Evaluator {
       // Create cursor with map key
       final keyCursor = _createMapKeyCursor(cursor, entry.key);
       
-      // Evaluate key if evaluator provided
-      keyEvaluator?.evaluate(entry.key, keyCursor);
+      // Evaluate key if evaluator provided and not ignored
+      if (keyEvaluator != null && !(keyIgnoreCondition?.shouldIgnore(entry.key) ?? false)) {
+        keyEvaluator!.evaluate(entry.key, keyCursor);
+      }
       
-      // Evaluate value if evaluator provided  
-      valueEvaluator?.evaluate(entry.value, keyCursor);
+      // Evaluate value if evaluator provided and not ignored
+      if (valueEvaluator != null && !(valueIgnoreCondition?.shouldIgnore(entry.value) ?? false)) {
+        valueEvaluator!.evaluate(entry.value, keyCursor);
+      }
     }
   }
 
