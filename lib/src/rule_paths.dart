@@ -275,9 +275,11 @@ class RulePathBuilder {
       case 'uri_ref':
       case 'address':
       case 'uuid':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      case 'well_known_regex':
+        return FieldDescriptorProto_Type.TYPE_ENUM;
       case 'ipv4_prefix':
       case 'ipv6_prefix':
-      case 'well_known_regex':
       case 'ip_with_prefixlen':
       case 'ipv4_with_prefixlen':
       case 'ipv6_with_prefixlen':
