@@ -34,7 +34,7 @@ class EnumRulesEvaluator implements Evaluator {
     if (rules.hasConst_1()) {
       if (enumValue != rules.const_1) {
         cursor.violate(
-          message: '',
+          message: 'value must equal ${rules.const_1}',
           constraintId: 'enum.const',
           rulePath: RulePathBuilder.enumConstraint('const'),
         );

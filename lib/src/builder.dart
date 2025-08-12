@@ -114,6 +114,13 @@ class EvaluatorBuilder {
     if (descriptorRules != null) {
       final messageTypeName = descriptorRules!.getFullTypeName(message);
       fieldRules = descriptorRules!.getFieldRules(messageTypeName, field.name);
+      
+      // If not found, try with snake_case field name (proto field names are snake_case,
+      // but Dart field names are camelCase)
+      if (fieldRules == null) {
+        final snakeCaseName = _toSnakeCase(field.name);
+        fieldRules = descriptorRules!.getFieldRules(messageTypeName, snakeCaseName);
+      }
     }
 
     // Determine if field has presence
@@ -168,6 +175,21 @@ class EvaluatorBuilder {
     
     // Check the actual presence semantics from the field info
     return field.presence != FieldPresence.implicit;
+  }
+  
+  String _toSnakeCase(String camelCase) {
+    // Convert camelCase to snake_case
+    final result = StringBuffer();
+    for (int i = 0; i < camelCase.length; i++) {
+      final char = camelCase[i];
+      if (i > 0 && char.toUpperCase() == char && char.toLowerCase() != char) {
+        result.write('_');
+        result.write(char.toLowerCase());
+      } else {
+        result.write(char.toLowerCase());
+      }
+    }
+    return result.toString();
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {

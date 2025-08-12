@@ -98,15 +98,17 @@ class FieldEvaluator implements Evaluator {
       }
     }
     
-    // For fields with presence, skip validation if not set
+    // For fields with explicit presence, skip validation if not set
     // (unless explicitly required, which was already checked above)
     // Exception: repeated fields should always validate even if empty
+    // For proto3 scalars without explicit presence, always validate the default value
     if (hasPresence && !hasValue && !required && !field.isRepeated) {
       return;
     }
     
-    // For proto3 scalars without presence that weren't set, we now have default value
-    // Continue with validation using the default value
+    // For proto3 scalars without explicit presence that weren't set, we have default value
+    // Continue with validation using the default value - this is critical for
+    // validating constraints like const, in, etc. on unset proto3 fields
     
     // For repeated fields that weren't set, provide empty list
     if (field.isRepeated && !hasValue) {

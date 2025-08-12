@@ -76,7 +76,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     // Check const first
     if (constValue != null && typedValue != constValue) {
       cursor.violate(
-        message: '',
+        message: 'value must equal $constValue',
         constraintId: '$constraintPrefix.const',
         rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'const'),
       );
@@ -86,7 +86,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     // Check in/not_in
     if (inValues != null && !inValues!.contains(typedValue)) {
       cursor.violate(
-        message: '',
+        message: 'value must be in list $inValues',
         constraintId: '$constraintPrefix.in',
         rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'in'),
       );
@@ -822,7 +822,7 @@ class StringRulesEvaluator implements Evaluator {
     // Check const
     if (constValue != null && stringValue != constValue) {
       cursor.violate(
-        message: '',
+        message: 'value must equal `$constValue`',
         constraintId: 'string.const',
         rulePath: RulePathBuilder.stringConstraint('const'),
       );
@@ -843,7 +843,7 @@ class StringRulesEvaluator implements Evaluator {
       final utf8ByteLength = utf8.encode(stringValue).length;
       if (utf8ByteLength != lenBytes) {
         cursor.violate(
-          message: '',
+          message: 'value length must be $lenBytes bytes',
           constraintId: 'string.len_bytes',
           rulePath: RulePathBuilder.stringConstraint('len_bytes'),
         );
@@ -1449,7 +1449,7 @@ class BytesEvaluator implements Evaluator {
     // Check const
     if (constValue != null && !_bytesEqual(bytesValue, constValue!)) {
       cursor.violate(
-        message: '',
+        message: 'value must be ${_bytesToHex(constValue!)}',
         constraintId: 'bytes.const',
         rulePath: RulePathBuilder.bytesConstraint('const'),
       );
@@ -1644,6 +1644,8 @@ class BytesEvaluator implements Evaluator {
   String _toHexString(List<int> bytes) {
     return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
   }
+  
+  String _bytesToHex(List<int> bytes) => _toHexString(bytes);
   
   bool _isValidIPBytes(List<int> bytes) {
     return bytes.length == 4 || bytes.length == 16;
