@@ -1,10 +1,12 @@
 import 'package:cel/cel.dart' as cel;
+import 'package:cel/src/common/types/error.dart' as cel_error;
 import 'package:protobuf/protobuf.dart';
 import '../error.dart';
 import '../cursor.dart';
 import '../gen/buf/validate/validate.pb.dart';
 import '../gen/google/protobuf/timestamp.pb.dart';
 import '../evaluator.dart';
+import '../rule_paths.dart';
 import 'protovalidate_library.dart';
 
 /// Simplified CEL manager that integrates with existing infrastructure
@@ -60,11 +62,13 @@ class ManagedCompiledExpression {
   final cel.Program program;
   final Rule source;
   final SimpleCelManager manager;
+  final int index;  // Index of this expression in the CEL rules list
   
   ManagedCompiledExpression({
     required this.program,
     required this.source,
     required this.manager,
+    required this.index,
   });
   
   void evaluate(dynamic value, Cursor cursor) {
@@ -93,21 +97,28 @@ class ManagedCompiledExpression {
         if (result.isNotEmpty) {
           _addViolation(cursor, customMessage: result);
         }
+      } else if (result is cel_error.ErrorValue) {
+        // Handle CEL errors (like type mismatches) as runtime errors
+        // This matches the behavior of protovalidate-es
+        throw RuntimeError(result.message);
       } else if (result is Exception) {
         cursor.violate(
           message: 'CEL evaluation error: ${result.toString()}',
           constraintId: 'cel.error',
+          rulePath: RulePathBuilder.celConstraint(index),
         );
       } else {
         cursor.violate(
           message: 'CEL expression must return a boolean or string, got: ${result.runtimeType}',
           constraintId: 'cel.type_error',
+          rulePath: RulePathBuilder.celConstraint(index),
         );
       }
     } catch (e) {
       cursor.violate(
         message: 'CEL evaluation failed: $e',
         constraintId: 'cel.runtime_error',
+        rulePath: RulePathBuilder.celConstraint(index),
       );
     }
   }
@@ -120,6 +131,7 @@ class ManagedCompiledExpression {
     cursor.violate(
       constraintId: source.id.isNotEmpty ? source.id : 'cel.expression',
       message: message,
+      rulePath: RulePathBuilder.celConstraint(index),
     );
   }
 }
@@ -134,7 +146,8 @@ class ManagedCELCompiler {
   List<ManagedCompiledExpression> compile(List<Rule> rules) {
     final compiled = <ManagedCompiledExpression>[];
     
-    for (final rule in rules) {
+    for (int i = 0; i < rules.length; i++) {
+      final rule = rules[i];
       if (rule.hasExpression() && rule.expression.isNotEmpty) {
         try {
           final program = manager.compile(rule.expression);
@@ -142,6 +155,7 @@ class ManagedCELCompiler {
             program: program,
             source: rule,
             manager: manager,
+            index: i,
           ));
         } catch (e) {
           throw CompilationError(
