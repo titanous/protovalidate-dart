@@ -86,8 +86,14 @@ class FieldEvaluator implements Evaluator {
     
     // For fields with IGNORE_IF_ZERO_VALUE, skip validation based on presence semantics
     if (ignore == Ignore.IGNORE_IF_ZERO_VALUE) {
-      // For fields with presence (proto3 optional, proto2, messages), only skip if not set
-      if (hasPresence) {
+      // Special handling for maps and repeated fields - they should be ignored if zero value
+      // regardless of presence semantics
+      if (field.isMapField || field.isRepeated) {
+        if (_isZeroValue(fieldValue)) {
+          return;
+        }
+      } else if (hasPresence) {
+        // For fields with presence (proto3 optional, proto2, messages), only skip if not set
         if (!hasValue) {
           return; // Skip unset fields
         }

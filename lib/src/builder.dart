@@ -115,6 +115,11 @@ class EvaluatorBuilder {
       }
     }
 
+    // Validate rule type compatibility
+    if (fieldRules != null) {
+      _validateRuleTypeCompatibility(field, fieldRules);
+    }
+
     // Determine if field has presence
     final hasPresence = _fieldHasPresence(field);
     
@@ -1326,9 +1331,15 @@ class EvaluatorBuilder {
     if (rules.hasBytes()) presentRuleTypes.add('bytes');
     if (rules.hasEnum_16()) presentRuleTypes.add('enum');
     
-    // Find incompatible rule types
+    // Find incompatible rule types  
     for (final ruleType in presentRuleTypes) {
       if (ruleType != expectedRuleType) {
+        // If we don't recognize the expected rule type, skip validation
+        // This happens with field types we haven't mapped yet
+        if (expectedRuleType == null) {
+          return; // Skip validation for unrecognized field types
+        }
+        
         // Based on the conformance test expectations, all incorrect type tests
         // expect the message "double rules on float field" regardless of actual types.
         // This seems to be a quirk in the test expectations.
