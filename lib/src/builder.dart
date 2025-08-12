@@ -367,6 +367,8 @@ class EvaluatorBuilder {
         valueEvaluator: valueEvaluator,
         minPairs: mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
         maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
+        keyFieldType: mapField.keyFieldType,
+        valueFieldType: mapField.valueFieldType,
       );
       evaluators.add(mapFieldEvaluator);
     }

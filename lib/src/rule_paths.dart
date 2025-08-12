@@ -91,8 +91,8 @@ class ConstraintNumbers {
   // Map constraints  
   static const int minPairs = 1;
   static const int maxPairs = 2;
-  static const int keys = 3;
-  static const int values = 4;
+  static const int keys = 4;
+  static const int values = 5;
   
   // Enum constraints
   static const int definedOnly = 2;

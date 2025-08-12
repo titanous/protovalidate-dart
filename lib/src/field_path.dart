@@ -53,6 +53,12 @@ class FieldPath {
   /// Adds a map key to the current field path.
   /// This modifies the last field element to include the key.
   FieldPath mapKey(dynamic key) {
+    return mapKeyWithTypes(key, null, null);
+  }
+
+  /// Adds a map key to the current field path with explicit type information.
+  /// This modifies the last field element to include the key with proper types.
+  FieldPath mapKeyWithTypes(dynamic key, FieldDescriptorProto_Type? keyType, FieldDescriptorProto_Type? valueType) {
     if (_elements.isEmpty) {
       throw StateError('Cannot add map key to empty field path');
     }
@@ -69,24 +75,24 @@ class FieldPath {
     // Set the key value and keyType based on the key's type
     if (key is String) {
       newElement.stringKey = key;
-      newElement.keyType = FieldDescriptorProto_Type.TYPE_STRING;
+      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_STRING;
     } else if (key is bool) {
       newElement.boolKey = key;
-      newElement.keyType = FieldDescriptorProto_Type.TYPE_BOOL;
+      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_BOOL;
     } else if (key is int) {
       newElement.intKey = Int64(key);
-      newElement.keyType = FieldDescriptorProto_Type.TYPE_INT64;
+      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT32;  // Changed default from INT64 to INT32
     } else if (key is Int64) {
       newElement.intKey = key;
-      newElement.keyType = FieldDescriptorProto_Type.TYPE_INT64;
+      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT64;
     } else {
       // Convert to string as fallback
       newElement.stringKey = key.toString();
-      newElement.keyType = FieldDescriptorProto_Type.TYPE_STRING;
+      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_STRING;
     }
     
-    // Set valueType - this is a basic assumption, ideally we'd have type info
-    newElement.valueType = FieldDescriptorProto_Type.TYPE_STRING;
+    // Set valueType with explicit type or fallback
+    newElement.valueType = valueType ?? FieldDescriptorProto_Type.TYPE_STRING;
     
     newPath._elements[newPath._elements.length - 1] = newElement;
     return newPath;

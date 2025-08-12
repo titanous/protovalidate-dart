@@ -1,5 +1,6 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
+import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 import 'error.dart';
 import 'field_path.dart';
 import 'rule_paths.dart';
@@ -28,6 +29,22 @@ class Cursor {
   
   /// Returns the list of violations.
   List<Violation> get violations => List.unmodifiable(_violations);
+
+  /// Marks violations added after initialCount as forKey violations
+  void markViolationsForKey(int initialCount) {
+    for (int i = initialCount; i < _violations.length; i++) {
+      final oldViolation = _violations[i];
+      _violations[i] = Violation(
+        fieldPath: oldViolation.fieldPath,
+        fieldPathElements: oldViolation.fieldPathElements,
+        constraintId: oldViolation.constraintId,
+        message: oldViolation.message,
+        rulePath: oldViolation.rulePath,
+        rulePathElements: oldViolation.rulePathElements,
+        forKey: true,
+      );
+    }
+  }
   
   /// Records a validation violation with proper rule path construction.
   void violate({
@@ -97,6 +114,15 @@ class Cursor {
       fieldPath: _fieldPath.mapKey(key),
     );
   }
+
+  /// Creates a new cursor with a map key in the path with explicit type information.
+  Cursor mapKeyWithTypes(dynamic key, FieldDescriptorProto_Type keyType, FieldDescriptorProto_Type valueType) {
+    return Cursor(
+      failFast: failFast,
+      violations: _violations,
+      fieldPath: _fieldPath.mapKeyWithTypes(key, keyType, valueType),
+    );
+  }
   
   // Note: oneof method removed - not needed for current implementation
 }
@@ -140,4 +166,9 @@ class PrefixedRulePathCursor extends Cursor {
 
   @override
   Cursor mapKey(dynamic key) => PrefixedRulePathCursor(super.mapKey(key), _baseRulePath);
+
+  @override
+  Cursor mapKeyWithTypes(dynamic key, FieldDescriptorProto_Type keyType, FieldDescriptorProto_Type valueType) => 
+    PrefixedRulePathCursor(super.mapKeyWithTypes(key, keyType, valueType), _baseRulePath);
 }
+
