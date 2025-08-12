@@ -132,6 +132,39 @@ class DescriptorRules {
     _fieldRulesCache[messageTypeName] = fieldRules;
   }
   
+  /// Gets oneof rules for a specific message type.
+  Map<String, OneofRules> getOneofRules(String messageTypeName) {
+    final oneofRules = <String, OneofRules>{};
+    
+    // Search through all files in the descriptor set
+    for (final file in descriptorSet.file) {
+      // Check if this file contains the message we're looking for
+      if (!messageTypeName.startsWith(file.package)) continue;
+      
+      // Look for the message in this file
+      final message = _findMessageDescriptor(file, messageTypeName);
+      if (message != null) {
+        // Extract oneof rules from this message
+        for (final oneof in message.oneofDecl) {
+          if (oneof.hasOptions()) {
+            try {
+              // Try to get oneof rules from the extension
+              final rules = oneof.options.getExtension(Validate.oneof) as OneofRules?;
+              if (rules != null) {
+                oneofRules[oneof.name] = rules;
+              }
+            } catch (e) {
+              // Extension not present, continue
+            }
+          }
+        }
+        break;
+      }
+    }
+    
+    return oneofRules;
+  }
+  
   /// Gets the fully qualified type name for a message.
   String getFullTypeName(GeneratedMessage message) {
     // Get the type name from the message's BuilderInfo

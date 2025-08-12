@@ -22,6 +22,14 @@ class FieldPath {
     return newPath;
   }
   
+  /// Adds a oneof field to the path by name.
+  /// This is used for protobuf oneof validation where we only have the oneof name.
+  FieldPath oneofField(String oneofName) {
+    final newPath = clone();
+    newPath._elements.add(_createOneofElement(oneofName));
+    return newPath;
+  }
+  
   /// Adds a list index to the current field path.
   /// This modifies the last field element to include the index.
   FieldPath listIndex(int index) {
@@ -122,10 +130,18 @@ class FieldPath {
   pb.FieldPathElement _createFieldElement(FieldInfo field) {
     final element = pb.FieldPathElement()
       ..fieldNumber = field.tagNumber
-      ..fieldName = field.name;
+      ..fieldName = field.protoName;
     
     // Set field type based on FieldInfo type
     element.fieldType = _getFieldType(field);
+    
+    return element;
+  }
+  
+  pb.FieldPathElement _createOneofElement(String oneofName) {
+    final element = pb.FieldPathElement()
+      ..fieldName = oneofName;
+    // Oneof elements don't have field numbers or types in the same way regular fields do
     
     return element;
   }

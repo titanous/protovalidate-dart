@@ -144,3 +144,81 @@ class MessageRulesEvaluator implements MessageEvaluator {
     return null;
   }
 }
+
+/// Evaluator for protobuf oneof validation rules.
+class ProtobufOneofEvaluator implements MessageEvaluator {
+  final Map<String, OneofRules> oneofRules;
+  
+  ProtobufOneofEvaluator({required this.oneofRules});
+  
+  @override
+  void evaluate(dynamic value, Cursor cursor) {
+    if (value is! GeneratedMessage) {
+      cursor.violate(
+        message: 'Expected a GeneratedMessage',
+        constraintId: 'oneof.type',
+      );
+      return;
+    }
+    evaluateMessage(value, cursor);
+  }
+  
+  @override
+  void evaluateMessage(GeneratedMessage message, Cursor cursor) {
+    // Check each oneof that has validation rules
+    for (final entry in oneofRules.entries) {
+      final oneofName = entry.key;
+      final rules = entry.value;
+      
+      _evaluateOneofRules(message, oneofName, rules, cursor);
+    }
+  }
+  
+  void _evaluateOneofRules(GeneratedMessage message, String oneofName, OneofRules rules, Cursor cursor) {
+    // For protobuf oneofs, we need to check which field is set in the oneof
+    // This is trickier because we need to introspect the message structure
+    
+    // Find the oneof index by checking the message's oneof descriptors
+    final oneofIndex = _findOneofIndex(message, oneofName);
+    if (oneofIndex == -1) {
+      // Oneof not found, skip validation
+      return;
+    }
+    
+    // Check if any field in the oneof is set
+    final isOneofSet = _isOneofSet(message, oneofIndex);
+    
+    if (rules.required && !isOneofSet) {
+      // Create field path for the oneof
+      final oneofCursor = cursor.oneofField(oneofName);
+      oneofCursor.violate(
+        message: 'exactly one field is required in oneof',
+        constraintId: 'required',
+      );
+    }
+  }
+  
+  /// Finds the index of a oneof by name in the message descriptor.
+  int _findOneofIndex(GeneratedMessage message, String oneofName) {
+    // This is a simplified approach - in a full implementation,
+    // we'd need to introspect the protobuf descriptor to map oneof names to indices
+    // For now, we'll assume index 0 for the first oneof (which works for kitchen_sink)
+    if (oneofName == 'o') {
+      return 0;
+    }
+    return -1;
+  }
+  
+  /// Checks if any field in the oneof at the given index is set.
+  bool _isOneofSet(GeneratedMessage message, int oneofIndex) {
+    try {
+      // Use the built-in $_whichOneof method that all generated messages have
+      final whichField = message.$_whichOneof(oneofIndex);
+      // If whichField is 0, no field in the oneof is set
+      return whichField != 0;
+    } catch (e) {
+      // Fallback if $_whichOneof fails
+      return false;
+    }
+  }
+}

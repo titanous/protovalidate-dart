@@ -74,6 +74,12 @@ class EvaluatorBuilder {
           evaluators.add(MessageRulesEvaluator(rules: messageRules, builder: this));
         }
       }
+      
+      // Check for protobuf oneof rules (different from message-level oneof rules)
+      final oneofRules = descriptorRules!.getOneofRules(messageTypeName);
+      if (oneofRules.isNotEmpty) {
+        evaluators.add(ProtobufOneofEvaluator(oneofRules: oneofRules));
+      }
     }
 
     // Build field evaluators

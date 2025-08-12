@@ -70,6 +70,16 @@ class Cursor {
     );
   }
   
+  /// Creates a new cursor with a oneof field in the path.
+  /// This is used for protobuf oneof validation where we need to reference the oneof by name.
+  Cursor oneofField(String oneofName) {
+    return Cursor(
+      failFast: failFast,
+      violations: _violations,
+      fieldPath: _fieldPath.oneofField(oneofName),
+    );
+  }
+  
   /// Creates a new cursor with a list index in the path.
   Cursor listIndex(int index) {
     return Cursor(
