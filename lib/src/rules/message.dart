@@ -3,6 +3,7 @@ import '../evaluator.dart';
 import '../cursor.dart';
 import '../gen/buf/validate/validate.pb.dart';
 import '../builder.dart';
+import '../cel/cel_integration.dart';
 
 /// Evaluator for message field validation.
 class MessageFieldEvaluator implements Evaluator {
@@ -75,11 +76,25 @@ class MessageFieldEvaluator implements Evaluator {
 class MessageRulesEvaluator implements MessageEvaluator {
   final MessageRules rules;
   final EvaluatorBuilder? builder;
+  final ManagedMessageCELEvaluator? _celEvaluator;
   
   MessageRulesEvaluator({
     required this.rules,
     this.builder,
-  });
+  }) : _celEvaluator = rules.cel.isNotEmpty 
+        ? ManagedMessageCELEvaluator(expressions: _compileCelRules(rules.cel))
+        : null;
+  
+  static List<ManagedCompiledExpression> _compileCelRules(List<Rule> rules) {
+    try {
+      final compiler = ManagedCELCompiler();
+      return compiler.compile(rules);
+    } catch (e) {
+      // If compilation fails, return empty list to avoid breaking validation
+      // TODO: Should we log this error somewhere?
+      return [];
+    }
+  }
   
   @override
   void evaluate(dynamic value, Cursor cursor) {
@@ -100,10 +115,9 @@ class MessageRulesEvaluator implements MessageEvaluator {
       _evaluateOneofRule(message, oneofRule, cursor);
     }
     
-    // CEL rules would be evaluated here
-    // For now, we skip CEL support
-    if (rules.cel.isNotEmpty) {
-      // TODO: Implement CEL evaluation
+    // Evaluate CEL rules if present
+    if (_celEvaluator != null) {
+      _celEvaluator!.evaluateMessage(message, cursor);
     }
   }
   

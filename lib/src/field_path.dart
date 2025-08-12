@@ -15,6 +15,9 @@ class FieldPath {
   /// Creates a copy of this path.
   FieldPath clone() => FieldPath._(_elements);
   
+  /// Returns true if this path is empty.
+  bool get isEmpty => _elements.isEmpty;
+  
   /// Adds a field to the path.
   FieldPath field(FieldInfo field) {
     final newPath = clone();

@@ -471,8 +471,10 @@ class EvaluatorBuilder {
       // For now, we'll leave enumValueNames as null
     }
     
-    if (fieldRules?.hasEnum_16() == true) {
-      return _buildEnumEvaluator(fieldRules!.enum_16, enumValueNames);
+    // Use the general field rule evaluator which handles all rule types,
+    // including enum rules and CEL expressions
+    if (fieldRules != null) {
+      return buildFromFieldRules(fieldRules);
     }
     
     return null;

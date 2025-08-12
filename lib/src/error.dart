@@ -62,8 +62,12 @@ class Violation {
   /// Converts this violation to a protobuf Violation.
   pb.Violation toProto() {
     final violation = pb.Violation()
-      ..ruleId = constraintId
-      ..message = message;
+      ..ruleId = constraintId;
+    
+    // Only set message if it's not empty
+    if (message.isNotEmpty) {
+      violation.message = message;
+    }
     
     // Use provided field path elements if available
     if (fieldPathElements != null && fieldPathElements!.isNotEmpty) {
@@ -88,9 +92,13 @@ class Violation {
       violation.field_5 = pb.FieldPath()..elements.addAll(pathElements);
     }
     
-    // Add rule path if provided
+    // Add rule path if provided and not empty
     if (rulePathElements != null && rulePathElements!.isNotEmpty) {
       violation.rule = pb.FieldPath()..elements.addAll(rulePathElements!);
+    } else if (rulePath != null && rulePath!.isNotEmpty) {
+      // Only add rule path if it's meaningful
+      violation.rule = pb.FieldPath()
+        ..elements.add(pb.FieldPathElement()..fieldName = rulePath!);
     }
     
     if (forKey) {
