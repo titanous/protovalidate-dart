@@ -279,7 +279,13 @@ class RulePath {
   /// Converts this path to a string representation (e.g., "repeated.items.string.in")
   String toRulePathString() {
     return _elements
-        .map((element) => element.fieldName)
+        .map((element) {
+          if (element.hasIndex()) {
+            // For array-style access like cel[0]
+            return '${element.fieldName}[${element.index}]';
+          }
+          return element.fieldName;
+        })
         .join('.');
   }
 }

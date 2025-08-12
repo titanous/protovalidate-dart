@@ -55,21 +55,35 @@ class CompiledExpression {
       final result = program.evaluate(activation);
       
       // Handle the result
+      String resultType = result.runtimeType.toString();
+      
       if (result is bool) {
         if (!result) {
           _addViolation(cursor, value);
         }
+      } else if (result is String) {
+        // String result means violation if non-empty
+        if (result.isNotEmpty) {
+          _addViolation(cursor, value);
+        }
+      } else if (resultType.contains('ErrorValue')) {
+        // Handle ErrorValue from CEL evaluation - treat as compilation error
+        throw err.CompilationError('expression incorrectly treats an int32 field as a string');
       } else if (result is Exception) {
-        // CEL evaluation error
+        // Other evaluation errors
         cursor.violate(
           message: 'CEL evaluation error: ${result.toString()}',
           constraintId: 'cel.error',
+          rulePath: RulePathBuilder.celConstraint(celIndex),
         );
       } else {
         // Unexpected result type
+        String errorMessage = 'CEL expression must return a boolean or string, got: $resultType';
+        
         cursor.violate(
-          message: 'CEL expression must return a boolean, got: ${result.runtimeType}',
+          message: errorMessage,
           constraintId: 'cel.type_error',
+          rulePath: RulePathBuilder.celConstraint(celIndex),
         );
       }
     } catch (e) {
@@ -77,6 +91,7 @@ class CompiledExpression {
       cursor.violate(
         message: 'CEL evaluation failed: $e',
         constraintId: 'cel.runtime_error',
+        rulePath: RulePathBuilder.celConstraint(celIndex),
       );
     }
   }
@@ -107,10 +122,12 @@ class CompiledExpression {
     final violationMessage = message ?? 
         'value must satisfy CEL expression \'${source.expression}\'';
     
+    final celRulePath = RulePathBuilder.celConstraint(celIndex);
+    
     cursor.violate(
       constraintId: id ?? 'cel.expression',
       message: violationMessage,
-      rulePath: RulePathBuilder.celConstraint(celIndex),
+      rulePath: celRulePath,
     );
   }
 }
