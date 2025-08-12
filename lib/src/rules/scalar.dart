@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
@@ -872,22 +871,24 @@ class StringRulesEvaluator implements Evaluator {
     
     // Check min bytes
     if (minBytes != null) {
-      final byteLen = stringValue.codeUnits.length;
-      if (byteLen < minBytes!) {
+      final utf8ByteLength = utf8.encode(stringValue).length;
+      if (utf8ByteLength < minBytes!) {
         cursor.violate(
           message: '',
           constraintId: 'string.min_bytes',
+          rulePath: RulePathBuilder.stringConstraint('min_bytes'),
         );
       }
     }
     
     // Check max bytes
     if (maxBytes != null) {
-      final byteLen = stringValue.codeUnits.length;
-      if (byteLen > maxBytes!) {
+      final utf8ByteLength = utf8.encode(stringValue).length;
+      if (utf8ByteLength > maxBytes!) {
         cursor.violate(
           message: '',
           constraintId: 'string.max_bytes',
+          rulePath: RulePathBuilder.stringConstraint('max_bytes'),
         );
       }
     }
@@ -913,6 +914,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: 'string.prefix',
+        rulePath: RulePathBuilder.stringConstraint('prefix'),
       );
     }
     
@@ -921,6 +923,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: 'string.suffix',
+        rulePath: RulePathBuilder.stringConstraint('suffix'),
       );
     }
     
@@ -929,6 +932,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: 'string.contains',
+        rulePath: RulePathBuilder.stringConstraint('contains'),
       );
     }
     
@@ -937,6 +941,7 @@ class StringRulesEvaluator implements Evaluator {
       cursor.violate(
         message: '',
         constraintId: 'string.not_contains',
+        rulePath: RulePathBuilder.stringConstraint('not_contains'),
       );
     }
     
@@ -1363,9 +1368,9 @@ class StringRulesEvaluator implements Evaluator {
   
   // HTTP header name validation
   bool _isValidHTTPHeaderName(String value) {
-    // For well-known regex validation, always use strict mode for header names
-    // The test cases expect strict validation by default
-    return StringValidators.isHttpHeaderName(value, true);
+    // Use the strict field to determine validation mode
+    // If strict is not specified, default to true (strict mode)
+    return StringValidators.isHttpHeaderName(value, strict ?? true);
   }
   
   // HTTP header value validation

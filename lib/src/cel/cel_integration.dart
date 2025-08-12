@@ -128,7 +128,10 @@ class ManagedCompiledExpression {
     // we need to create minimal violations with no message or rule path
     final shouldBeMinimal = _shouldCreateMinimalViolation(cursor, customMessage);
     
-    final message = shouldBeMinimal
+    // Library function violations should always have empty messages
+    final isLibraryFunction = source.id.startsWith('library.');
+    
+    final message = shouldBeMinimal || isLibraryFunction
         ? ''
         : (source.message.isNotEmpty 
             ? source.message 

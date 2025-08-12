@@ -292,7 +292,8 @@ class StringValidators {
       }
       return true;
     } else {
-      // Loose validation: just disallow \r\n\0
+      // Loose validation: allow DEL (\x07) and other control characters
+      // Just disallow \r\n\0
       return !value.contains('\r') && 
              !value.contains('\n') && 
              !value.contains('\x00');
