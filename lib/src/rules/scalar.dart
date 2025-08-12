@@ -740,6 +740,7 @@ class StringRulesEvaluator implements Evaluator {
   final bool? uriRef;
   final bool? address;
   final bool? uuid;
+  final bool? ipPrefix;
   final bool? ipv4Prefix;
   final bool? ipv6Prefix;
   final pb.KnownRegex? wellKnownRegex;
@@ -787,6 +788,7 @@ class StringRulesEvaluator implements Evaluator {
     this.uriRef,
     this.address,
     this.uuid,
+    this.ipPrefix,
     this.ipv4Prefix,
     this.ipv6Prefix,
     this.wellKnownRegex,
@@ -971,12 +973,20 @@ class StringRulesEvaluator implements Evaluator {
     }
     
     // Hostname validation
-    if (hostname == true && !_isValidHostname(value)) {
-      cursor.violate(
-        message: 'String must be a valid hostname',
-        constraintId: 'string.hostname',
-        rulePath: RulePathBuilder.stringConstraint('hostname'),
-      );
+    if (hostname == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.hostname_empty',
+          rulePath: RulePathBuilder.stringConstraint('hostname'),
+        );
+      } else if (!_isValidHostname(value)) {
+        cursor.violate(
+          message: 'String must be a valid hostname',
+          constraintId: 'string.hostname',
+          rulePath: RulePathBuilder.stringConstraint('hostname'),
+        );
+      }
     }
     
     // IP validation (v4 or v6)
@@ -1086,6 +1096,23 @@ class StringRulesEvaluator implements Evaluator {
           message: 'value must be a valid hostname or IP address',
           constraintId: 'string.address',
           rulePath: RulePathBuilder.stringConstraint('address'),
+        );
+      }
+    }
+    
+    // IP prefix validation (any version)
+    if (ipPrefix == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.ip_prefix_empty',
+          rulePath: RulePathBuilder.stringConstraint('ip_prefix'),
+        );
+      } else if (!_isValidIPPrefix(value)) {
+        cursor.violate(
+          message: 'String must be a valid IP prefix',
+          constraintId: 'string.ip_prefix',
+          rulePath: RulePathBuilder.stringConstraint('ip_prefix'),
         );
       }
     }
@@ -1292,6 +1319,11 @@ class StringRulesEvaluator implements Evaluator {
     return StringValidators.isAddress(value);
   }
   
+  // IP prefix validation (any version)
+  bool _isValidIPPrefix(String value) {
+    return StringValidators.isIpPrefix(value);
+  }
+  
   // IPv4 prefix validation
   bool _isValidIPv4Prefix(String value) {
     return StringValidators.isIpPrefix(value, 4);
@@ -1324,7 +1356,7 @@ class StringRulesEvaluator implements Evaluator {
   
   // Host and port validation
   bool _isValidHostAndPort(String value) {
-    return StringValidators.isHostAndPort(value, false);
+    return StringValidators.isHostAndPort(value, true);
   }
   
   // HTTP header name validation

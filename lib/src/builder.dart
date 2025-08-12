@@ -1061,6 +1061,7 @@ class EvaluatorBuilder {
       uriRef: rules.hasUriRef() ? rules.uriRef : null,
       address: rules.hasAddress() ? rules.address : null,
       uuid: rules.hasUuid() ? rules.uuid : null,
+      ipPrefix: rules.hasIpPrefix() ? rules.ipPrefix : null,
       ipv4Prefix: rules.hasIpv4Prefix() ? rules.ipv4Prefix : null,
       ipv6Prefix: rules.hasIpv6Prefix() ? rules.ipv6Prefix : null,
       wellKnownRegex: rules.hasWellKnownRegex() ? rules.wellKnownRegex : null,
