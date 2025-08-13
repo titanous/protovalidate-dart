@@ -124,7 +124,7 @@ class EvaluatorBuilder {
     }
 
     // Determine if field has presence
-    final hasPresence = _fieldHasPresence(field);
+    final hasPresence = _fieldHasPresence(field, message);
     
     // Build the value evaluator based on field type
     Evaluator? valueEvaluator;
@@ -169,12 +169,46 @@ class EvaluatorBuilder {
     );
   }
   
-  bool _fieldHasPresence(FieldInfo field) {
+  bool _fieldHasPresence(FieldInfo field, GeneratedMessage message) {
     // Use the new FieldPresence enum from protobuf.dart for accurate presence detection
     // This replaces the old manual field type checking approach
     
     // Check the actual presence semantics from the field info
-    return field.presence != FieldPresence.implicit;
+    if (field.presence != FieldPresence.implicit) {
+      return true;
+    }
+    
+    // Additional check: fields that are part of oneof constraints should have presence
+    // even if the protobuf library reports them as implicit
+    if (_isFieldInOneof(field, message)) {
+      return true;
+    }
+    
+    return false;
+  }
+  
+  /// Check if a field is part of any oneof constraint in the current message
+  bool _isFieldInOneof(FieldInfo field, GeneratedMessage message) {
+    if (descriptorRules == null) {
+      return false;
+    }
+    
+    final messageTypeName = descriptorRules!.getFullTypeName(message);
+    final messageRules = descriptorRules!.getMessageRules(messageTypeName);
+    
+    if (messageRules?.oneof == null || messageRules!.oneof.isEmpty) {
+      return false;
+    }
+    
+    for (final oneofRule in messageRules.oneof) {
+      // Check both field name and snake_case version
+      if (oneofRule.fields.contains(field.name) || 
+          oneofRule.fields.contains(StringUtils.toSnakeCase(field.name))) {
+        return true;
+      }
+    }
+    
+    return false;
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
