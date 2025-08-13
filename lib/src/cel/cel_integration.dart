@@ -5,9 +5,35 @@ import '../error.dart';
 import '../cursor.dart';
 import '../gen/buf/validate/validate.pb.dart';
 import '../gen/google/protobuf/timestamp.pb.dart';
+import '../gen/google/protobuf/descriptor.pbenum.dart';
 import '../evaluator.dart';
 import '../rule_paths.dart';
+import '../field_path.dart';
+import '../rules/predefined.dart';
 import 'protovalidate_library.dart';
+
+/// Context for extension-based CEL rules (predefined rules)
+/// This tracks which extension a CEL rule came from for proper rule path generation
+class ExtensionContext {
+  /// The rule type name (e.g., "bytes", "string")
+  final String ruleTypeName;
+  
+  /// The field number of the rule type in FieldRules
+  final int ruleTypeFieldNumber;
+  
+  /// The extension name (e.g., "[buf.validate.conformance.cases.bytes_valid_path_proto2]")
+  final String extensionName;
+  
+  /// The field number of the extension
+  final int extensionFieldNumber;
+  
+  const ExtensionContext({
+    required this.ruleTypeName,
+    required this.ruleTypeFieldNumber,
+    required this.extensionName,
+    required this.extensionFieldNumber,
+  });
+}
 
 /// Simplified CEL manager that integrates with existing infrastructure
 class SimpleCelManager {
@@ -64,6 +90,7 @@ class ManagedCompiledExpression {
   final Rule source;
   final SimpleCelManager manager;
   final int index;  // Index of this expression in the CEL rules list
+  final ExtensionContext? extensionContext;  // Set for predefined rules
   
   ManagedCompiledExpression._({
     this.program,
@@ -71,6 +98,7 @@ class ManagedCompiledExpression {
     required this.source,
     required this.manager,
     required this.index,
+    this.extensionContext,
   });
   
   /// Create a successfully compiled expression
@@ -79,12 +107,14 @@ class ManagedCompiledExpression {
     required Rule source,
     required SimpleCelManager manager,
     required int index,
+    ExtensionContext? extensionContext,
   }) : this._(
     program: program,
     compilationError: null,
     source: source,
     manager: manager,
     index: index,
+    extensionContext: extensionContext,
   );
   
   /// Create a failed compilation expression
@@ -93,12 +123,14 @@ class ManagedCompiledExpression {
     required Rule source,
     required SimpleCelManager manager,
     required int index,
+    ExtensionContext? extensionContext,
   }) : this._(
     program: null,
     compilationError: error,
     source: source,
     manager: manager,
     index: index,
+    extensionContext: extensionContext,
   );
   
   void evaluate(dynamic value, Cursor cursor) {
@@ -183,8 +215,21 @@ class ManagedCompiledExpression {
     cursor.violate(
       constraintId: source.id.isNotEmpty ? source.id : 'cel.expression',
       message: message,
-      rulePath: shouldBeMinimal ? null : RulePathBuilder.celConstraint(index),
+      rulePath: shouldBeMinimal ? null : _createRulePath(),
     );
+  }
+  
+  /// Create the appropriate rule path for this CEL expression
+  RulePath _createRulePath() {
+    // If we have extension context (predefined rule), create proper extension rule path
+    if (extensionContext != null) {
+      return RulePath.fromFieldRules()
+          .ruleType(extensionContext!.ruleTypeName, extensionContext!.ruleTypeFieldNumber)
+          .extension(extensionContext!.extensionName, extensionContext!.extensionFieldNumber);
+    }
+    
+    // For regular CEL expressions, use generic CEL rule path
+    return RulePathBuilder.celConstraint(index);
   }
   
   /// Determines if we should create a minimal violation (no message, no rule path)
@@ -221,6 +266,42 @@ class ManagedCELCompiler {
   
   ManagedCELCompiler() : manager = SimpleCelManager();
   
+  /// Compile a set of PredefinedCelRules into managed expressions with extension context
+  List<ManagedCompiledExpression> compileWithContext(List<PredefinedCelRule> predefinedRules) {
+    final compiled = <ManagedCompiledExpression>[];
+    
+    for (int i = 0; i < predefinedRules.length; i++) {
+      final predefinedRule = predefinedRules[i];
+      final rule = predefinedRule.rule;
+      if (rule.hasExpression() && rule.expression.isNotEmpty) {
+        try {
+          final program = manager.compile(rule.expression);
+          compiled.add(ManagedCompiledExpression.success(
+            program: program,
+            source: rule,
+            manager: manager,
+            index: i,
+            extensionContext: predefinedRule.extensionContext,
+          ));
+        } catch (e) {
+          // Store the compilation error instead of throwing it
+          final error = CompilationError(
+            'Failed to compile CEL expression "${rule.expression}": $e',
+          );
+          compiled.add(ManagedCompiledExpression.error(
+            error: error,
+            source: rule,
+            manager: manager,
+            index: i,
+            extensionContext: predefinedRule.extensionContext,
+          ));
+        }
+      }
+    }
+    
+    return compiled;
+  }
+
   /// Compile a set of Rules into managed expressions
   List<ManagedCompiledExpression> compile(List<Rule> rules) {
     final compiled = <ManagedCompiledExpression>[];

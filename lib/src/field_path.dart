@@ -263,6 +263,16 @@ class RulePath {
     return newPath;
   }
   
+  /// Adds an extension with the given name and field number
+  RulePath extension(String extensionName, int fieldNumber) {
+    final newPath = clone();
+    newPath._elements.add(pb.FieldPathElement()
+      ..fieldNumber = fieldNumber
+      ..fieldName = extensionName
+      ..fieldType = FieldDescriptorProto_Type.TYPE_BOOL);
+    return newPath;
+  }
+  
   /// Helper to append a RulePathElement to this path
   RulePath append(RulePathElement element) {
     final newPath = clone();

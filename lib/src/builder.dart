@@ -19,6 +19,7 @@ import 'rules/predefined.dart';
 import 'cel/cel_integration.dart';
 import 'error.dart';
 import 'cursor.dart';
+import 'utils/string_utils.dart';
 
 /// Builds evaluators from validation rules.
 class EvaluatorBuilder {
@@ -110,7 +111,7 @@ class EvaluatorBuilder {
       // If not found, try with snake_case field name (proto field names are snake_case,
       // but Dart field names are camelCase)
       if (fieldRules == null) {
-        final snakeCaseName = _toSnakeCase(field.name);
+        final snakeCaseName = StringUtils.toSnakeCase(field.name);
         fieldRules = descriptorRules!.getFieldRules(messageTypeName, snakeCaseName);
       }
     }
@@ -172,21 +173,6 @@ class EvaluatorBuilder {
     
     // Check the actual presence semantics from the field info
     return field.presence != FieldPresence.implicit;
-  }
-  
-  String _toSnakeCase(String camelCase) {
-    // Convert camelCase to snake_case
-    final result = StringBuffer();
-    for (int i = 0; i < camelCase.length; i++) {
-      final char = camelCase[i];
-      if (i > 0 && char.toUpperCase() == char && char.toLowerCase() != char) {
-        result.write('_');
-        result.write(char.toLowerCase());
-      } else {
-        result.write(char.toLowerCase());
-      }
-    }
-    return result.toString();
   }
   
   Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
@@ -1157,6 +1143,23 @@ class EvaluatorBuilder {
       rethrow;
     }
   }
+
+  /// Build CEL evaluator for predefined rules with extension context
+  Evaluator? _buildPredefinedCELEvaluator(List<PredefinedCelRule> predefinedRules) {
+    if (predefinedRules.isEmpty) {
+      return null;
+    }
+    try {
+      final expressions = _managedCelCompiler.compileWithContext(predefinedRules);
+      if (expressions.isEmpty) {
+        return null;
+      }
+      return ManagedCELEvaluator(expressions: expressions);
+    } catch (e) {
+      // Rethrow compilation error - don't catch and hide it
+      rethrow;
+    }
+  }
   
   /// Validates that rule types are compatible with the field type.
   void _validateRuleTypeCompatibility(FieldInfo field, FieldRules rules) {
@@ -1346,9 +1349,9 @@ class EvaluatorBuilder {
   /// Adds predefined CEL evaluator to evaluators list if CEL rules exist.
   /// This consolidates the repeated pattern across multiple builder methods.
   void _addPredefinedCelEvaluator(List<Evaluator> evaluators, GeneratedMessage rules) {
-    final predefinedCelRules = _getPredefinedCelRules(rules);
+    final predefinedCelRules = PredefinedRulesManager.getPredefinedCelRulesWithContext(rules);
     if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      final celEvaluator = _buildPredefinedCELEvaluator(predefinedCelRules);
       if (celEvaluator != null) {
         evaluators.add(celEvaluator);
       }

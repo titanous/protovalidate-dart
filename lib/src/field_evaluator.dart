@@ -74,7 +74,18 @@ class FieldEvaluator implements Evaluator {
     // No need to manually provide defaults since the protobuf library handles this now
     
     // Check required constraint first
-    if (required && !hasValue) {
+    bool isRequiredViolation = false;
+    if (required) {
+      if (field.isMapField) {
+        // For maps, treat empty maps as "not set" for required validation
+        isRequiredViolation = !hasValue || ZeroValueChecker.isZeroValue(fieldValue);
+      } else {
+        // For other fields, use normal presence check
+        isRequiredViolation = !hasValue;
+      }
+    }
+    
+    if (isRequiredViolation) {
       // Add the field to the cursor before violating
       final fieldCursor = cursor.field(field);
       fieldCursor.violate(
