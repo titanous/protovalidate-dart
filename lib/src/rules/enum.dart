@@ -18,16 +18,26 @@ class EnumRulesEvaluator implements Evaluator {
   void evaluate(dynamic value, Cursor cursor) {
     // Handle both ProtobufEnum and raw int values
     int enumValue;
+    bool isUnknownEnum = false;
+    
     if (value is ProtobufEnum) {
       enumValue = value.value;
     } else if (value is int) {
       enumValue = value;
     } else {
-      cursor.violate(
-        message: 'Expected an enum value',
-        constraintId: 'enum.type',
-      );
-      return;
+      // Check if this is an unknown enum value by checking the string representation
+      final valueStr = value.toString();
+      if (valueStr.startsWith('UNKNOWN_ENUM_VALUE_')) {
+        isUnknownEnum = true;
+        // Extract the integer value from the unknown enum
+        enumValue = (value as dynamic).value as int;
+      } else {
+        cursor.violate(
+          message: 'Expected an enum value',
+          constraintId: 'enum.type',
+        );
+        return;
+      }
     }
     
     // Check const rule
@@ -43,8 +53,14 @@ class EnumRulesEvaluator implements Evaluator {
     
     // Check defined_only rule
     if (rules.definedOnly == true) {
-      // If we have the enum value names map, use it to check if the value is defined
-      if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
+      // If we detected an unknown enum value, it's definitely not defined
+      if (isUnknownEnum) {
+        cursor.violate(
+          message: 'value must be one of the defined enum values',
+          constraintId: 'enum.defined_only',
+          rulePath: RulePathBuilder.enumConstraint('defined_only'),
+        );
+      } else if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
           message: 'value must be one of the defined enum values',
           constraintId: 'enum.defined_only',

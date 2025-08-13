@@ -4,6 +4,7 @@ import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
 import '../cursor.dart';
 import '../evaluator.dart';
+import '../error.dart';
 import '../rule_paths.dart';
 import '../shared/string_validators.dart';
 
@@ -1383,8 +1384,8 @@ class StringRulesEvaluator implements Evaluator {
   
   // HTTP header value validation
   bool _isValidHTTPHeaderValue(String value) {
-    // For header values, use the strict field if available, otherwise default to false (loose)
-    return StringValidators.isHttpHeaderValue(value, strict ?? false);
+    // For header values, use the strict field if available, otherwise default to true (strict)
+    return StringValidators.isHttpHeaderValue(value, strict ?? true);
   }
 
   List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {
@@ -1532,7 +1533,7 @@ class BytesEvaluator implements Evaluator {
       );
     }
     
-    // Check pattern (on hex representation)
+    // Check pattern (on UTF-8 string representation)
     if (pattern != null) {
       if (_compiledPattern == null) {
         cursor.violate(
@@ -1541,10 +1542,16 @@ class BytesEvaluator implements Evaluator {
           rulePath: RulePathBuilder.bytesConstraint('pattern'),
         );
       } else {
-        final hexString = _toHexString(bytesValue);
-        if (!_compiledPattern!.hasMatch(hexString)) {
+        // Check if bytes are valid UTF-8
+        if (!_isValidUtf8(bytesValue)) {
+          throw RuntimeError('value must be valid UTF-8 to apply regexp');
+        }
+        
+        // Convert bytes to UTF-8 string for pattern matching
+        final stringValue = String.fromCharCodes(bytesValue);
+        if (!_compiledPattern!.hasMatch(stringValue)) {
           cursor.violate(
-            message: '',
+            message: 'value must match regex pattern `$pattern`',
             constraintId: 'bytes.pattern',
             rulePath: RulePathBuilder.bytesConstraint('pattern'),
           );
@@ -1689,6 +1696,18 @@ class BytesEvaluator implements Evaluator {
       if (found) return true;
     }
     return false;
+  }
+  
+  /// Check if bytes represent valid UTF-8
+  bool _isValidUtf8(List<int> bytes) {
+    try {
+      // Use Dart's built-in UTF-8 decoder which throws on invalid sequences
+      const utf8Decoder = Utf8Decoder(allowMalformed: false);
+      utf8Decoder.convert(bytes);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
   
   String _toHexString(List<int> bytes) {

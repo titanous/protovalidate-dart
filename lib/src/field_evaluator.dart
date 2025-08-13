@@ -10,6 +10,7 @@ import 'rule_paths.dart';
 import 'ignore_conditions.dart';
 import 'utils/zero_value_checker.dart';
 import 'utils/field_type_mapper.dart';
+import 'rules/enum.dart';
 
 /// FieldEvaluator performs validation on a single message field.
 /// This architecture matches the Go/ES implementations for proper field handling.
@@ -65,9 +66,11 @@ class FieldEvaluator implements Evaluator {
     // For enum fields with defined_only validation, we need to check unknown fields
     // for raw integer values that were not recognized during deserialization
     final unknownField = message.unknownFields.getField(field.tagNumber);
+    bool hasUnknownEnumValue = false;
     if (unknownField != null && unknownField.varints.isNotEmpty) {
       // There's an unknown raw value for this field, use the first one
       fieldValue = unknownField.varints.first.toInt();
+      hasUnknownEnumValue = true;
     }
     
     // For proto3 implicit presence fields, getField() returns the default value automatically
@@ -138,10 +141,32 @@ class FieldEvaluator implements Evaluator {
     // Create a cursor for this field
     final fieldCursor = cursor.field(field);
     
+    // Special handling for unknown enum values with defined_only validation
+    if (hasUnknownEnumValue && _isEnumFieldWithDefinedOnly(valueEvaluator)) {
+      fieldCursor.violate(
+        message: 'value must be one of the defined enum values',
+        constraintId: 'enum.defined_only',
+        rulePath: RulePath.fromFieldRules()
+            .ruleType('enum', 16)
+            .constraint('defined_only', 2, FieldDescriptorProto_Type.TYPE_BOOL),
+      );
+      return;
+    }
+    
     // Evaluate the field value
     valueEvaluator.evaluate(fieldValue, fieldCursor);
   }
   
+  /// Check if the value evaluator is an enum evaluator with defined_only rule
+  bool _isEnumFieldWithDefinedOnly(Evaluator evaluator) {
+    if (evaluator is EnumRulesEvaluator) {
+      return evaluator.rules.definedOnly == true;
+    }
+    if (evaluator is EnumEvaluator) {
+      return evaluator.definedOnly;
+    }
+    return false;
+  }
 }
 
 /// Items-only evaluator for repeated fields following Go/ES architecture

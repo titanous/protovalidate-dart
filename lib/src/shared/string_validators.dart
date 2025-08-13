@@ -265,32 +265,65 @@ class StringValidators {
     if (strict) {
       // RFC 7230 compliant: field-name = token
       // Token chars are: !#$%&'*+-.0-9A-Z^_`a-z|~
-      // Explicitly exclude: ()<>@,;:\\"/[]?={} SPACE TAB and CTLs
-      for (int i = 0; i < value.length; i++) {
-        final char = value.codeUnitAt(i);
-        // Check if char is a valid token character
-        if (!((char >= 0x30 && char <= 0x39) || // 0-9
-              (char >= 0x41 && char <= 0x5A) || // A-Z
-              (char >= 0x61 && char <= 0x7A) || // a-z
-              char == 0x21 || // !
-              char == 0x23 || // #
-              char == 0x24 || // $
-              char == 0x25 || // %
-              char == 0x26 || // &
-              char == 0x27 || // '
-              char == 0x2A || // *
-              char == 0x2B || // +
-              char == 0x2D || // -
-              char == 0x2E || // .
-              char == 0x5E || // ^
-              char == 0x5F || // _
-              char == 0x60 || // `
-              char == 0x7C || // |
-              char == 0x7E)) { // ~
-          return false;
+      // Special case for pseudo-headers: allow ':' only at the beginning followed by token chars
+      
+      if (value.startsWith(':')) {
+        // Pseudo-header: must start with ':' and have at least one character after
+        if (value.length == 1) {
+          return false; // Just ':' is invalid
         }
+        // Check remaining characters are valid token chars (no more colons)
+        for (int i = 1; i < value.length; i++) {
+          final char = value.codeUnitAt(i);
+          if (!((char >= 0x30 && char <= 0x39) || // 0-9
+                (char >= 0x41 && char <= 0x5A) || // A-Z
+                (char >= 0x61 && char <= 0x7A) || // a-z
+                char == 0x21 || // !
+                char == 0x23 || // #
+                char == 0x24 || // $
+                char == 0x25 || // %
+                char == 0x26 || // &
+                char == 0x27 || // '
+                char == 0x2A || // *
+                char == 0x2B || // +
+                char == 0x2D || // -
+                char == 0x2E || // .
+                char == 0x5E || // ^
+                char == 0x5F || // _
+                char == 0x60 || // `
+                char == 0x7C || // |
+                char == 0x7E)) { // ~
+            return false;
+          }
+        }
+        return true;
+      } else {
+        // Regular header: only token characters allowed
+        for (int i = 0; i < value.length; i++) {
+          final char = value.codeUnitAt(i);
+          if (!((char >= 0x30 && char <= 0x39) || // 0-9
+                (char >= 0x41 && char <= 0x5A) || // A-Z
+                (char >= 0x61 && char <= 0x7A) || // a-z
+                char == 0x21 || // !
+                char == 0x23 || // #
+                char == 0x24 || // $
+                char == 0x25 || // %
+                char == 0x26 || // &
+                char == 0x27 || // '
+                char == 0x2A || // *
+                char == 0x2B || // +
+                char == 0x2D || // -
+                char == 0x2E || // .
+                char == 0x5E || // ^
+                char == 0x5F || // _
+                char == 0x60 || // `
+                char == 0x7C || // |
+                char == 0x7E)) { // ~
+            return false;
+          }
+        }
+        return true;
       }
-      return true;
     } else {
       // Loose validation: allow DEL (\x07) and other control characters
       // Just disallow \r\n\0
