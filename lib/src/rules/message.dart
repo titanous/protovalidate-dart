@@ -4,6 +4,7 @@ import '../cursor.dart';
 import '../gen/buf/validate/validate.pb.dart';
 import '../builder.dart';
 import '../cel/cel_integration.dart';
+import '../utils/string_utils.dart';
 
 /// Evaluator for message field validation.
 class MessageFieldEvaluator implements Evaluator {
@@ -125,29 +126,38 @@ class MessageRulesEvaluator implements MessageEvaluator {
     for (final fieldName in rule.fields) {
       // Need to find the field by name
       final fieldInfo = _findFieldByName(message, fieldName);
-      if (fieldInfo != null && message.hasField(fieldInfo.tagNumber)) {
-        setCount++;
-        setFields.add(fieldName);
+      if (fieldInfo != null) {
+        final hasValue = message.hasField(fieldInfo.tagNumber);
+        if (hasValue) {
+          setCount++;
+          setFields.add(fieldName);
+        }
       }
     }
     
     // Check constraints
-    if (rule.required && setCount == 0) {
+    if (setCount > 1) {
+      final oneofNames = rule.fields.join(', ');
       cursor.violate(
-        message: 'At least one of ${rule.fields} must be set',
-        constraintId: 'message.oneof.required',
+        message: 'only one of $oneofNames can be set',
+        constraintId: 'message.oneof',
       );
-    } else if (setCount > 1) {
+    }
+    if (rule.required && setCount == 0) {
+      final oneofNames = rule.fields.join(', ');
       cursor.violate(
-        message: 'Only one of ${rule.fields} can be set, but found: $setFields',
-        constraintId: 'message.oneof.exclusive',
+        message: 'one of $oneofNames must be set',
+        constraintId: 'message.oneof',
       );
     }
   }
   
   FieldInfo? _findFieldByName(GeneratedMessage message, String name) {
+    // Convert snake_case to camelCase for Dart field names
+    final camelCaseName = StringUtils.toCamelCase(name);
+    
     for (final field in message.info_.fieldInfo.values) {
-      if (field.name == name) {
+      if (field.name == camelCaseName) {
         return field;
       }
     }

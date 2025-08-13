@@ -854,7 +854,7 @@ class StringRulesEvaluator implements Evaluator {
     // Check min length (count runes, not UTF-16 code units)
     if (minLen != null && stringValue.runes.length < minLen!) {
       cursor.violate(
-        message: 'String must be at least $minLen characters',
+        message: 'value length must be at least $minLen characters',
         constraintId: 'string.min_len',
         rulePath: RulePathBuilder.stringConstraint('min_len'),
       );
@@ -863,7 +863,7 @@ class StringRulesEvaluator implements Evaluator {
     // Check max length (count runes, not UTF-16 code units)
     if (maxLen != null && stringValue.runes.length > maxLen!) {
       cursor.violate(
-        message: 'String must be at most $maxLen characters',
+        message: 'value length must be at most $maxLen characters',
         constraintId: 'string.max_len',
         rulePath: RulePathBuilder.stringConstraint('max_len'),
       );

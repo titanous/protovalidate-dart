@@ -83,11 +83,29 @@ class FieldPath {
       newElement.boolKey = key;
       newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_BOOL;
     } else if (key is int) {
-      newElement.intKey = Int64(key);
-      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT32;  // Changed default from INT64 to INT32
+      final effectiveKeyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT32;
+      // Use uintKey for unsigned types, intKey for signed types
+      if (effectiveKeyType == FieldDescriptorProto_Type.TYPE_UINT32 || 
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_UINT64 ||
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_FIXED32 ||
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_FIXED64) {
+        newElement.uintKey = Int64(key);
+      } else {
+        newElement.intKey = Int64(key);
+      }
+      newElement.keyType = effectiveKeyType;
     } else if (key is Int64) {
-      newElement.intKey = key;
-      newElement.keyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT64;
+      final effectiveKeyType = keyType ?? FieldDescriptorProto_Type.TYPE_INT64;
+      // Use uintKey for unsigned types, intKey for signed types
+      if (effectiveKeyType == FieldDescriptorProto_Type.TYPE_UINT32 || 
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_UINT64 ||
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_FIXED32 ||
+          effectiveKeyType == FieldDescriptorProto_Type.TYPE_FIXED64) {
+        newElement.uintKey = key;
+      } else {
+        newElement.intKey = key;
+      }
+      newElement.keyType = effectiveKeyType;
     } else {
       // Convert to string as fallback
       newElement.stringKey = key.toString();

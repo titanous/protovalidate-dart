@@ -14,4 +14,21 @@ class StringUtils {
     }
     return result.toString();
   }
+
+  /// Convert snake_case to camelCase for Dart field names
+  static String toCamelCase(String snakeCase) {
+    final parts = snakeCase.split('_');
+    if (parts.isEmpty) return snakeCase;
+    
+    final buffer = StringBuffer(parts.first);
+    for (int i = 1; i < parts.length; i++) {
+      if (parts[i].isNotEmpty) {
+        buffer.write(parts[i][0].toUpperCase());
+        if (parts[i].length > 1) {
+          buffer.write(parts[i].substring(1));
+        }
+      }
+    }
+    return buffer.toString();
+  }
 }

@@ -73,6 +73,8 @@ class EvaluatorBuilder {
         
         // Add oneof evaluator if there are oneof rules
         if (messageRules.oneof.isNotEmpty) {
+          // Validate oneof rules before creating evaluator
+          _validateOneofRules(messageRules.oneof, message, messageTypeName);
           evaluators.add(MessageRulesEvaluator(rules: messageRules, builder: this));
         }
       }
@@ -1375,6 +1377,34 @@ class EvaluatorBuilder {
   /// that dynamically discovers predefined rules and extracts their CEL expressions.
   List<Rule> _getPredefinedCelRules(GeneratedMessage rules) {
     return PredefinedRulesManager.getPredefinedCelRules(rules);
+  }
+  
+  /// Validates oneof rules during compilation
+  void _validateOneofRules(List<MessageOneofRule> oneofRules, GeneratedMessage message, String messageTypeName) {
+    for (final oneofRule in oneofRules) {
+      // Check for zero fields
+      if (oneofRule.fields.isEmpty) {
+        throw CompilationError('at least one field must be specified in oneof rule for the message $messageTypeName');
+      }
+      
+      // Check for duplicate fields
+      final seen = <String>{};
+      for (final fieldName in oneofRule.fields) {
+        if (seen.contains(fieldName)) {
+          throw CompilationError('duplicate $fieldName in oneof rule for the message $messageTypeName');
+        }
+        seen.add(fieldName);
+      }
+      
+      // Check for unknown fields
+      for (final fieldName in oneofRule.fields) {
+        final camelCaseName = StringUtils.toCamelCase(fieldName);
+        final fieldExists = message.info_.fieldInfo.values.any((f) => f.name == camelCaseName);
+        if (!fieldExists) {
+          throw CompilationError('field $fieldName not found in message $messageTypeName');
+        }
+      }
+    }
   }
 }
 
