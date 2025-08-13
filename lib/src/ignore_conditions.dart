@@ -1,6 +1,6 @@
 import 'package:protobuf/protobuf.dart';
-import 'package:fixnum/fixnum.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
+import 'utils/zero_value_checker.dart';
 
 /// Base condition interface for determining when to skip validation
 abstract class IgnoreCondition<T> {
@@ -42,7 +42,7 @@ class NeverIgnoreCondition<T> implements IgnoreCondition<T> {
 class ZeroValueIgnoreCondition<T> implements IgnoreCondition<T> {
   @override
   bool shouldIgnore(T value) {
-    return _isZeroValue(value);
+    return ZeroValueChecker.isZeroValue(value);
   }
   
   @override
@@ -51,20 +51,6 @@ class ZeroValueIgnoreCondition<T> implements IgnoreCondition<T> {
   @override
   bool get neverIgnore => false;
   
-  bool _isZeroValue(dynamic value) {
-    if (value == null) return true;
-    
-    // Check for zero values based on type
-    if (value is bool && !value) return true;
-    if (value is int && value == 0) return true;
-    if (value is Int64 && value == Int64.ZERO) return true;
-    if (value is double && value == 0.0) return true;
-    if (value is String && value.isEmpty) return true;
-    if (value is List && value.isEmpty) return true;
-    if (value is Map && value.isEmpty) return true;
-    
-    return false;
-  }
 }
 
 /// Create appropriate ignore condition based on Ignore enum value

@@ -73,7 +73,7 @@ void main() async {
       }
       
       response.results[caseName] = testResult;
-    } catch (e, stackTrace) {
+    } catch (e) {
       // Handle any unexpected errors
       final testResult = TestResult()
         ..unexpectedError = 'Error: $e';

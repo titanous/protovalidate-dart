@@ -193,11 +193,8 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Build CEL evaluator for field-level CEL expressions
-    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
+    if (fieldRules != null) {
+      _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
     
     // Handle explicit repeated rules if present
@@ -325,11 +322,8 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Build CEL evaluator for field-level CEL expressions
-    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
+    if (fieldRules != null) {
+      _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
     
     // Build key evaluator from rules if present
@@ -416,11 +410,8 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Build CEL evaluator for field-level CEL expressions only
-    if (fieldRules != null && fieldRules.cel.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(fieldRules.cel);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
+    if (fieldRules != null) {
+      _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
     
     // For non-wrapper messages, recursively build evaluator for the nested type
@@ -696,12 +687,7 @@ class EvaluatorBuilder {
     }
 
     // Build CEL evaluator if there are CEL expressions
-    if (rules.cel.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(rules.cel);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addDirectCelEvaluator(evaluators, rules.cel);
 
     // Return composite or single evaluator
     if (evaluators.isEmpty) {
@@ -717,13 +703,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = BoolEvaluator(
@@ -738,13 +718,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = Int32Evaluator(
@@ -801,13 +775,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = UInt64Evaluator(
@@ -828,13 +796,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = FloatEvaluator(
@@ -856,13 +818,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = DoubleEvaluator(
@@ -884,13 +840,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = SInt32Evaluator(
@@ -911,13 +861,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = SInt64Evaluator(
@@ -938,13 +882,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = Fixed32Evaluator(
@@ -965,13 +903,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = Fixed64Evaluator(
@@ -992,13 +924,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = SFixed32Evaluator(
@@ -1019,13 +945,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = SFixed64Evaluator(
@@ -1086,13 +1006,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = BytesEvaluator(
@@ -1119,13 +1033,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = EnumRulesEvaluator(
@@ -1137,48 +1045,6 @@ class EvaluatorBuilder {
     return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
   }
   
-  /// Gets enum value names from field info.
-  Map<int, String>? _getEnumValueNames(FieldInfo field) {
-    final enumValues = field.enumValues;
-    if (enumValues == null || enumValues.isEmpty) {
-      return null;
-    }
-    
-    final result = <int, String>{};
-    for (final enumValue in enumValues) {
-      result[enumValue.value] = enumValue.name;
-    }
-    return result;
-  }
-
-  Evaluator _buildRepeatedEvaluator(RepeatedRules rules) {
-    // Note: This method is called from buildFromFieldRules when processing repeated rules
-    // In the new architecture, repeated field handling should primarily go through _buildRepeatedFieldEvaluator
-    // This method exists for compatibility when repeated rules appear in other contexts
-    
-    final evaluators = <Evaluator>[];
-    
-    // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
-
-    // Use field evaluator for field-level constraints only
-    final standardEvaluator = field_eval.RepeatedFieldEvaluator(
-      minItems: rules.hasMinItems() ? rules.minItems.toInt() : null,
-      maxItems: rules.hasMaxItems() ? rules.maxItems.toInt() : null,
-      unique: rules.hasUnique() ? rules.unique : null,
-      itemEvaluator: null, // No item evaluator in this context
-    );
-    evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
-  }
-
   Evaluator _buildMapEvaluator(MapRules rules) {
     // Build key and value evaluators from rules if present
     Evaluator? keyEvaluator;
@@ -1212,13 +1078,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = DurationEvaluator(rules: rules);
@@ -1231,13 +1091,7 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
     
     // Check for predefined CEL rules via extensions
-    final predefinedCelRules = _getPredefinedCelRules(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
-      }
-    }
+    _addPredefinedCelEvaluator(evaluators, rules);
     
     // Add standard rules
     final standardEvaluator = TimestampEvaluator(rules: rules);
@@ -1253,8 +1107,6 @@ class EvaluatorBuilder {
   /// Checks if a message type is a well-known type and builds appropriate evaluator.
   Evaluator? buildWKTEvaluator(
       GeneratedMessage message, FieldRules? fieldRules) {
-    final typeName = message.info_.messageName;
-
     // Check for wrapper types
     if (message is BoolValue) {
       return BoolValueEvaluator(rules: fieldRules?.bool_13);
@@ -1488,6 +1340,29 @@ class EvaluatorBuilder {
         return BytesWrapperEvaluator(evaluator);
       default:
         return evaluator;
+    }
+  }
+  
+  /// Adds predefined CEL evaluator to evaluators list if CEL rules exist.
+  /// This consolidates the repeated pattern across multiple builder methods.
+  void _addPredefinedCelEvaluator(List<Evaluator> evaluators, GeneratedMessage rules) {
+    final predefinedCelRules = _getPredefinedCelRules(rules);
+    if (predefinedCelRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(predefinedCelRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
+    }
+  }
+  
+  /// Adds direct CEL evaluator to evaluators list if CEL rules exist.
+  /// This consolidates the repeated pattern for field-level CEL expressions.
+  void _addDirectCelEvaluator(List<Evaluator> evaluators, List<Rule> celRules) {
+    if (celRules.isNotEmpty) {
+      final celEvaluator = _buildCELEvaluator(celRules);
+      if (celEvaluator != null) {
+        evaluators.add(celEvaluator);
+      }
     }
   }
   

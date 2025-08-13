@@ -1,4 +1,5 @@
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pbenum.dart';
+import 'utils/constraint_mappings.dart';
 import 'field_path.dart';
 
 /// Constants for field numbers in the validate.proto schema.
@@ -224,42 +225,7 @@ class RulePathBuilder {
   }
   
   static int _getStringConstraintNumber(String constraintName) {
-    switch (constraintName) {
-      case 'const': return ConstraintNumbers.const_;
-      case 'len': return ConstraintNumbers.len;
-      case 'min_len': return ConstraintNumbers.minLen;
-      case 'max_len': return ConstraintNumbers.maxLen;
-      case 'len_bytes': return ConstraintNumbers.lenBytes;
-      case 'min_bytes': return ConstraintNumbers.minBytes;
-      case 'max_bytes': return ConstraintNumbers.maxBytes;
-      case 'pattern': return ConstraintNumbers.pattern;
-      case 'prefix': return ConstraintNumbers.prefix;
-      case 'suffix': return ConstraintNumbers.suffix;
-      case 'contains': return ConstraintNumbers.contains;
-      case 'not_contains': return ConstraintNumbers.notContains;
-      case 'in': return ConstraintNumbers.stringIn;
-      case 'not_in': return ConstraintNumbers.stringNotIn;
-      case 'email': return ConstraintNumbers.email;
-      case 'hostname': return ConstraintNumbers.hostname;
-      case 'ip': return ConstraintNumbers.ip;
-      case 'ipv4': return ConstraintNumbers.ipv4;
-      case 'ipv6': return ConstraintNumbers.ipv6;
-      case 'uri': return ConstraintNumbers.uri;
-      case 'uri_ref': return ConstraintNumbers.uriRef;
-      case 'address': return ConstraintNumbers.address;
-      case 'uuid': return ConstraintNumbers.uuid;
-      case 'ipv4_prefix': return ConstraintNumbers.ipv4Prefix;
-      case 'ipv6_prefix': return ConstraintNumbers.ipv6Prefix;
-      case 'well_known_regex': return ConstraintNumbers.wellKnownRegex;
-      case 'strict': return ConstraintNumbers.strict;
-      case 'ip_with_prefixlen': return ConstraintNumbers.ipWithPrefixlen;
-      case 'ipv4_with_prefixlen': return ConstraintNumbers.ipv4WithPrefixlen;
-      case 'ipv6_with_prefixlen': return ConstraintNumbers.ipv6WithPrefixlen;
-      case 'ip_prefix': return ConstraintNumbers.ipPrefix;
-      case 'host_and_port': return ConstraintNumbers.hostAndPort;
-      case 'tuuid': return ConstraintNumbers.tuuid;
-      default: throw ArgumentError('Unknown string constraint: $constraintName');
-    }
+    return ConstraintMappings.getStringConstraintNumber(constraintName);
   }
   
   static FieldDescriptorProto_Type _getStringConstraintType(String constraintName) {
@@ -326,17 +292,7 @@ class RulePathBuilder {
   }
   
   static int _getNumericConstraintNumber(String constraintName) {
-    switch (constraintName) {
-      case 'const': return ConstraintNumbers.const_;
-      case 'lt': return ConstraintNumbers.lt;
-      case 'lte': return ConstraintNumbers.lte;
-      case 'gt': return ConstraintNumbers.gt;
-      case 'gte': return ConstraintNumbers.gte;
-      case 'in': return ConstraintNumbers.in_;
-      case 'not_in': return ConstraintNumbers.notIn;
-      case 'finite': return ConstraintNumbers.finite;
-      default: throw ArgumentError('Unknown numeric constraint: $constraintName');
-    }
+    return ConstraintMappings.getNumericConstraintNumber(constraintName);
   }
   
   static FieldDescriptorProto_Type _getNumericConstraintType(String constraintName, String ruleTypeName) {
