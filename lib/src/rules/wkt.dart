@@ -155,51 +155,70 @@ class TimestampEvaluator implements Evaluator {
       final constNanos = _timestampToNanos(rules.const_2);
       if (timestampNanos != constNanos) {
         cursor.violate(
-          message: 'value must equal ${rules.const_2.seconds}s ${rules.const_2.nanos}ns',
+          message: '',
           constraintId: 'timestamp.const',
+          rulePath: RulePathBuilder.timestampConstraint('const'),
         );
       }
     }
     
-    // Handle lt/lte/gt/gte rules
-    if (rules.hasLt()) {
-      final ltNanos = _timestampToNanos(rules.lt);
-      if (timestampNanos >= ltNanos) {
-        cursor.violate(
-          message: 'value must be less than ${rules.lt.seconds}s ${rules.lt.nanos}ns',
-          constraintId: 'timestamp.lt',
-        );
-      }
+    // Handle lt/lte/gt/gte rules with combined rule IDs
+    // Check for combined constraints first
+    final hasGteCond = rules.hasGte() && timestampNanos < _timestampToNanos(rules.gte);
+    final hasLteCond = rules.hasLte() && timestampNanos > _timestampToNanos(rules.lte);
+    final hasGtCond = rules.hasGt() && timestampNanos <= _timestampToNanos(rules.gt);
+    final hasLtCond = rules.hasLt() && timestampNanos >= _timestampToNanos(rules.lt);
+    
+    // Handle combined constraint rule IDs
+    if (hasGteCond && rules.hasLte()) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.gte_lte',
+        rulePath: RulePathBuilder.timestampConstraint('gte'),
+      );
+      return; // Don't check individual constraints
     }
     
-    if (rules.hasLte()) {
-      final lteNanos = _timestampToNanos(rules.lte);
-      if (timestampNanos > lteNanos) {
-        cursor.violate(
-          message: 'value must be less than or equal to ${rules.lte.seconds}s ${rules.lte.nanos}ns',
-          constraintId: 'timestamp.lte',
-        );
-      }
+    if (hasGtCond && rules.hasLt()) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.gt_lt',
+        rulePath: RulePathBuilder.timestampConstraint('gt'),
+      );
+      return; // Don't check individual constraints
     }
     
-    if (rules.hasGt()) {
-      final gtNanos = _timestampToNanos(rules.gt);
-      if (timestampNanos <= gtNanos) {
-        cursor.violate(
-          message: 'value must be greater than ${rules.gt.seconds}s ${rules.gt.nanos}ns',
-          constraintId: 'timestamp.gt',
-        );
-      }
+    // Handle individual constraints
+    if (hasLtCond) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.lt',
+        rulePath: RulePathBuilder.timestampConstraint('lt'),
+      );
     }
     
-    if (rules.hasGte()) {
-      final gteNanos = _timestampToNanos(rules.gte);
-      if (timestampNanos < gteNanos) {
-        cursor.violate(
-          message: 'value must be greater than or equal to ${rules.gte.seconds}s ${rules.gte.nanos}ns',
-          constraintId: 'timestamp.gte',
-        );
-      }
+    if (hasLteCond) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.lte',
+        rulePath: RulePathBuilder.timestampConstraint('lte'),
+      );
+    }
+    
+    if (hasGtCond) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.gt',
+        rulePath: RulePathBuilder.timestampConstraint('gt'),
+      );
+    }
+    
+    if (hasGteCond) {
+      cursor.violate(
+        message: '',
+        constraintId: 'timestamp.gte',
+        rulePath: RulePathBuilder.timestampConstraint('gte'),
+      );
     }
     
     // Handle lt_now/gt_now rules
@@ -207,8 +226,9 @@ class TimestampEvaluator implements Evaluator {
       final nowNanos = _nowNanos();
       if (timestampNanos >= nowNanos) {
         cursor.violate(
-          message: 'value must be less than now',
+          message: '',
           constraintId: 'timestamp.lt_now',
+          rulePath: RulePathBuilder.timestampConstraint('lt_now'),
         );
       }
     }
@@ -217,8 +237,9 @@ class TimestampEvaluator implements Evaluator {
       final nowNanos = _nowNanos();
       if (timestampNanos <= nowNanos) {
         cursor.violate(
-          message: 'value must be greater than now',
+          message: '',
           constraintId: 'timestamp.gt_now',
+          rulePath: RulePathBuilder.timestampConstraint('gt_now'),
         );
       }
     }
@@ -230,8 +251,9 @@ class TimestampEvaluator implements Evaluator {
       final diff = (timestampNanos - nowNanos).abs();
       if (diff > withinNanos) {
         cursor.violate(
-          message: 'value must be within ${rules.within.seconds}s ${rules.within.nanos}ns of now',
+          message: '',
           constraintId: 'timestamp.within',
+          rulePath: RulePathBuilder.timestampConstraint('within'),
         );
       }
     }

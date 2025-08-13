@@ -1330,6 +1330,9 @@ class EvaluatorBuilder {
     if (rules.hasString()) presentRuleTypes.add('string');
     if (rules.hasBytes()) presentRuleTypes.add('bytes');
     if (rules.hasEnum_16()) presentRuleTypes.add('enum');
+    if (rules.hasTimestamp()) presentRuleTypes.add('timestamp');
+    if (rules.hasDuration()) presentRuleTypes.add('duration');
+    if (rules.hasAny()) presentRuleTypes.add('any');
     
     // Find incompatible rule types  
     for (final ruleType in presentRuleTypes) {
@@ -1340,10 +1343,8 @@ class EvaluatorBuilder {
           return; // Skip validation for unrecognized field types
         }
         
-        // Based on the conformance test expectations, all incorrect type tests
-        // expect the message "double rules on float field" regardless of actual types.
-        // This seems to be a quirk in the test expectations.
-        throw CompilationError('double rules on float field');
+        // Based on the conformance test expectations
+        throw CompilationError('mismatched rule type and field type');
       }
     }
   }
@@ -1444,7 +1445,12 @@ class EvaluatorBuilder {
       if (message is StringValue) return 'string';
       if (message is BytesValue) return 'bytes';
       
-      // Not a wrapper type - regular message, no scalar rules expected
+      // Check for well-known types
+      if (message is pb_timestamp.Timestamp) return 'timestamp';
+      if (message is pb_duration.Duration) return 'duration';
+      if (message is pb_any.Any) return 'any';
+      
+      // Not a wrapper or WKT type - regular message, no scalar rules expected
       return null;
     } catch (e) {
       // If we can't create the message, assume it's not a wrapper type

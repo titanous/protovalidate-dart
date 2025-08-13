@@ -86,14 +86,10 @@ class MessageRulesEvaluator implements MessageEvaluator {
         : null;
   
   static List<ManagedCompiledExpression> _compileCelRules(List<Rule> rules) {
-    try {
-      final compiler = ManagedCELCompiler();
-      return compiler.compile(rules);
-    } catch (e) {
-      // If compilation fails, return empty list to avoid breaking validation
-      // TODO: Should we log this error somewhere?
-      return [];
-    }
+    // No longer catch compilation errors - they're stored in the expressions
+    // and will be thrown at evaluation time
+    final compiler = ManagedCELCompiler();
+    return compiler.compile(rules);
   }
   
   @override

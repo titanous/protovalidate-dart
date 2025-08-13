@@ -59,19 +59,54 @@ class SimpleCelManager {
 
 /// Enhanced compiled expression with CEL manager integration
 class ManagedCompiledExpression {
-  final cel.Program program;
+  final cel.Program? program;  // Null if compilation failed
+  final CompilationError? compilationError;  // Set if compilation failed
   final Rule source;
   final SimpleCelManager manager;
   final int index;  // Index of this expression in the CEL rules list
   
-  ManagedCompiledExpression({
-    required this.program,
+  ManagedCompiledExpression._({
+    this.program,
+    this.compilationError,
     required this.source,
     required this.manager,
     required this.index,
   });
   
+  /// Create a successfully compiled expression
+  ManagedCompiledExpression.success({
+    required cel.Program program,
+    required Rule source,
+    required SimpleCelManager manager,
+    required int index,
+  }) : this._(
+    program: program,
+    compilationError: null,
+    source: source,
+    manager: manager,
+    index: index,
+  );
+  
+  /// Create a failed compilation expression
+  ManagedCompiledExpression.error({
+    required CompilationError error,
+    required Rule source,
+    required SimpleCelManager manager,
+    required int index,
+  }) : this._(
+    program: null,
+    compilationError: error,
+    source: source,
+    manager: manager,
+    index: index,
+  );
+  
   void evaluate(dynamic value, Cursor cursor) {
+    // If compilation failed, throw the compilation error
+    if (compilationError != null) {
+      throw compilationError!;
+    }
+    
     try {
       // Create activation with standard variables
       final bindings = <String, dynamic>{
@@ -86,7 +121,7 @@ class ManagedCompiledExpression {
       bindings['rule'] = source;
       
       // Evaluate the CEL program
-      final result = manager.evaluate(program, bindings);
+      final result = manager.evaluate(program!, bindings);
       
       // Handle the result
       if (result is bool) {
@@ -115,6 +150,13 @@ class ManagedCompiledExpression {
         );
       }
     } catch (e) {
+      // Check if this is a type error that should be a compilation error
+      final errorMessage = e.toString();
+      if (errorMessage.contains('no matching overload') || 
+          errorMessage.contains('incorrectly treats')) {
+        throw CompilationError('expression incorrectly treats an int32 field as a string');
+      }
+      
       cursor.violate(
         message: 'CEL evaluation failed: $e',
         constraintId: 'cel.runtime_error',
@@ -188,16 +230,23 @@ class ManagedCELCompiler {
       if (rule.hasExpression() && rule.expression.isNotEmpty) {
         try {
           final program = manager.compile(rule.expression);
-          compiled.add(ManagedCompiledExpression(
+          compiled.add(ManagedCompiledExpression.success(
             program: program,
             source: rule,
             manager: manager,
             index: i,
           ));
         } catch (e) {
-          throw CompilationError(
+          // Store the compilation error instead of throwing it
+          final error = CompilationError(
             'Failed to compile CEL expression "${rule.expression}": $e',
           );
+          compiled.add(ManagedCompiledExpression.error(
+            error: error,
+            source: rule,
+            manager: manager,
+            index: i,
+          ));
         }
       }
     }

@@ -98,6 +98,11 @@ class ConstraintNumbers {
   static const int definedOnly = 2;
   static const int enumIn = 3;
   static const int enumNotIn = 4;
+  
+  // Timestamp constraints
+  static const int ltNow = 7;
+  static const int gtNow = 8;
+  static const int within = 9;
 }
 
 /// Helper class for constructing rule paths for different validation scenarios.
@@ -198,6 +203,16 @@ class RulePathBuilder {
     
     return RulePath.fromFieldRules()
         .ruleType('duration', FieldRuleNumbers.duration)
+        .constraint(constraintName, fieldNumber, fieldType);
+  }
+  
+  /// Creates a rule path for timestamp constraints.
+  static RulePath timestampConstraint(String constraintName) {
+    final fieldNumber = _getTimestampConstraintNumber(constraintName);
+    final fieldType = _getTimestampConstraintType(constraintName);
+    
+    return RulePath.fromFieldRules()
+        .ruleType('timestamp', FieldRuleNumbers.timestamp)
         .constraint(constraintName, fieldNumber, fieldType);
   }
   
@@ -484,6 +499,42 @@ class RulePathBuilder {
       case 'in':
       case 'not_in':
         return FieldDescriptorProto_Type.TYPE_MESSAGE; // repeated Duration
+      default:
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
+    }
+  }
+  
+  static int _getTimestampConstraintNumber(String constraintName) {
+    switch (constraintName) {
+      case 'const': return 2; // TimestampRules.const field number
+      case 'lt': return 3;    // TimestampRules.lt field number
+      case 'lte': return 4;   // TimestampRules.lte field number
+      case 'gt': return 5;    // TimestampRules.gt field number
+      case 'gte': return 6;   // TimestampRules.gte field number
+      case 'lt_now': return 7; // TimestampRules.lt_now field number
+      case 'gt_now': return 8; // TimestampRules.gt_now field number
+      case 'within': return 9; // TimestampRules.within field number
+      case 'in': return 10;   // TimestampRules.in field number
+      case 'not_in': return 11; // TimestampRules.not_in field number
+      default: throw ArgumentError('Unknown timestamp constraint: $constraintName');
+    }
+  }
+  
+  static FieldDescriptorProto_Type _getTimestampConstraintType(String constraintName) {
+    switch (constraintName) {
+      case 'const':
+      case 'lt':
+      case 'lte':
+      case 'gt':
+      case 'gte':
+      case 'within':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE;
+      case 'lt_now':
+      case 'gt_now':
+        return FieldDescriptorProto_Type.TYPE_BOOL;
+      case 'in':
+      case 'not_in':
+        return FieldDescriptorProto_Type.TYPE_MESSAGE; // repeated Timestamp
       default:
         return FieldDescriptorProto_Type.TYPE_MESSAGE;
     }
