@@ -137,6 +137,7 @@ class ManagedCompiledExpression {
             ? source.message 
             : customMessage ?? 'value must satisfy CEL expression \'${source.expression}\'');
     
+    // Following protovalidate-es: ALL CEL violations should include rule paths except minimal violations
     cursor.violate(
       constraintId: source.id.isNotEmpty ? source.id : 'cel.expression',
       message: message,
@@ -150,6 +151,7 @@ class ManagedCompiledExpression {
     // Based on conformance test analysis:
     // - field_expression/enum tests expect FULL violations (with message and rule)
     // - message_expression tests expect MINIMAL violations (no message, no rule)
+    // - library function tests expect MINIMAL violations (no message, no rule path)
     // 
     // The key distinction is the source.id prefix
     if (source.id.startsWith('field_expression.')) {
@@ -157,13 +159,17 @@ class ManagedCompiledExpression {
     }
     
     // For message expressions, always create minimal violations
-    // regardless of whether there's a custom message
     if (source.id.startsWith('message_expression')) {
       return true;
     }
     
-    // Default behavior for other expressions
-    return customMessage == null && source.message.isNotEmpty;
+    // Library functions also create minimal violations (no rule path)
+    if (source.id.startsWith('library.')) {
+      return true;
+    }
+    
+    // Default behavior for other expressions (like string constraint CEL)
+    return false;
   }
 }
 

@@ -969,12 +969,20 @@ class StringRulesEvaluator implements Evaluator {
   
   void _validateFormats(String value, Cursor cursor) {
     // Email validation
-    if (email == true && !_isValidEmail(value)) {
-      cursor.violate(
-        message: 'String must be a valid email address',
-        constraintId: 'string.email',
-        rulePath: RulePathBuilder.stringConstraint('email'),
-      );
+    if (email == true) {
+      if (value.isEmpty) {
+        cursor.violate(
+          message: '',
+          constraintId: 'string.email_empty',
+          rulePath: RulePathBuilder.stringConstraint('email'),
+        );
+      } else if (!_isValidEmail(value)) {
+        cursor.violate(
+          message: 'String must be a valid email address',
+          constraintId: 'string.email',
+          rulePath: RulePathBuilder.stringConstraint('email'),
+        );
+      }
     }
     
     // Hostname validation
