@@ -105,7 +105,7 @@ class OneofNone extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2], 'o')
     ..aOS(1, _omitFieldNames ? '' : 'x')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'y', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
@@ -186,7 +186,7 @@ class Oneof extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3])
+    ..oo(0, [1, 2, 3], 'o')
     ..aOS(1, _omitFieldNames ? '' : 'x')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'y', $pb.PbFieldType.O3)
     ..aOM<TestOneofMsg>(3, _omitFieldNames ? '' : 'z',
@@ -284,7 +284,7 @@ class OneofRequired extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4])
+    ..oo(0, [1, 2, 3, 4], 'o')
     ..aOS(1, _omitFieldNames ? '' : 'x')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'y', $pb.PbFieldType.O3)
     ..a<$core.int>(
@@ -388,7 +388,7 @@ class OneofRequiredWithRequiredField extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2], 'o')
     ..aOS(1, _omitFieldNames ? '' : 'a')
     ..aOS(2, _omitFieldNames ? '' : 'b')
     ..hasRequiredFields = false;

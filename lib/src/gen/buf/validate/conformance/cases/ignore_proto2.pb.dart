@@ -1607,7 +1607,7 @@ class Proto2OneofIgnoreUnspecified extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
@@ -1681,7 +1681,7 @@ class Proto2OneofIgnoreUnspecifiedWithDefault extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
         defaultOrMaker: -42)
     ..hasRequiredFields = false;
@@ -1756,7 +1756,7 @@ class Proto2OneofIgnoreEmpty extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
@@ -1828,7 +1828,7 @@ class Proto2OneofIgnoreEmptyWithDefault extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
         defaultOrMaker: -42)
     ..hasRequiredFields = false;
@@ -1903,7 +1903,7 @@ class Proto2OneofIgnoreAlways extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 
@@ -1975,7 +1975,7 @@ class Proto2OneofIgnoreAlwaysWithDefault extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3,
         defaultOrMaker: -42)
     ..hasRequiredFields = false;

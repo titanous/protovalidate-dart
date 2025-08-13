@@ -1019,8 +1019,8 @@ class EnumInsideOneof extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
-    ..oo(1, [2])
+    ..oo(0, [1], 'foo')
+    ..oo(1, [2], 'bar')
     ..e<TestEnum>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.OE,
         defaultOrMaker: TestEnum.TEST_ENUM_UNSPECIFIED,
         valueOf: TestEnum.valueOf,

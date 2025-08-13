@@ -546,7 +546,7 @@ class RequiredProto3OneOf extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2], 'val')
     ..aOS(1, _omitFieldNames ? '' : 'a')
     ..aOS(2, _omitFieldNames ? '' : 'b')
     ..hasRequiredFields = false;
@@ -628,7 +628,7 @@ class RequiredProto3OneOfIgnoreAlways extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2])
+    ..oo(0, [1, 2], 'val')
     ..aOS(1, _omitFieldNames ? '' : 'a')
     ..aOS(2, _omitFieldNames ? '' : 'b')
     ..hasRequiredFields = false;

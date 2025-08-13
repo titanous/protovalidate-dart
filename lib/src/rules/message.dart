@@ -209,14 +209,11 @@ class ProtobufOneofEvaluator implements MessageEvaluator {
   }
   
   /// Finds the index of a oneof by name in the message descriptor.
+  /// Following protobuf-es pattern for runtime oneof access.
   int _findOneofIndex(GeneratedMessage message, String oneofName) {
-    // This is a simplified approach - in a full implementation,
-    // we'd need to introspect the protobuf descriptor to map oneof names to indices
-    // For now, we'll assume index 0 for the first oneof (which works for kitchen_sink)
-    if (oneofName == 'o') {
-      return 0;
-    }
-    return -1;
+    // Use the new protobuf.dart API for oneof name lookup
+    final index = message.getOneofIndexByName(oneofName);
+    return index ?? -1;
   }
   
   /// Checks if any field in the oneof at the given index is set.

@@ -207,7 +207,7 @@ class TestResult extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.harness'),
       createEmptyInstance: create)
-    ..oo(0, [1, 2, 3, 4, 5])
+    ..oo(0, [1, 2, 3, 4, 5], 'result')
     ..aOB(1, _omitFieldNames ? '' : 'success')
     ..aOM<$2.Violations>(2, _omitFieldNames ? '' : 'validationError',
         subBuilder: $2.Violations.create)

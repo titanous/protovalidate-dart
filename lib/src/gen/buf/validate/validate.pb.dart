@@ -495,29 +495,32 @@ class FieldRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FieldRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      18,
-      19,
-      20,
-      21,
-      22
-    ])
+    ..oo(
+        0,
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        'type')
     ..aOM<FloatRules>(1, _omitFieldNames ? '' : 'float',
         subBuilder: FloatRules.create)
     ..aOM<DoubleRules>(2, _omitFieldNames ? '' : 'double',
@@ -1045,8 +1048,8 @@ class FloatRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FloatRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.double>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OF)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OF)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OF)
@@ -1304,8 +1307,8 @@ class DoubleRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'DoubleRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.double>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OD)
     ..a<$core.double>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OD)
     ..a<$core.double>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OD)
@@ -1562,8 +1565,8 @@ class Int32Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Int32Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.O3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.O3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.O3)
@@ -1807,8 +1810,8 @@ class Int64Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Int64Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..aInt64(1, _omitFieldNames ? '' : 'const')
     ..aInt64(2, _omitFieldNames ? '' : 'lt')
     ..aInt64(3, _omitFieldNames ? '' : 'lte')
@@ -2052,8 +2055,8 @@ class UInt32Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'UInt32Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OU3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OU3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OU3)
@@ -2298,8 +2301,8 @@ class UInt64Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'UInt64Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OU6,
@@ -2548,8 +2551,8 @@ class SInt32Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SInt32Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OS3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OS3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OS3)
@@ -2793,8 +2796,8 @@ class SInt64Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SInt64Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OS6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OS6,
@@ -3043,8 +3046,8 @@ class Fixed32Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Fixed32Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OF3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OF3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OF3)
@@ -3289,8 +3292,8 @@ class Fixed64Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'Fixed64Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OF6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OF6,
@@ -3540,8 +3543,8 @@ class SFixed32Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SFixed32Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OSF3)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OSF3)
     ..a<$core.int>(3, _omitFieldNames ? '' : 'lte', $pb.PbFieldType.OSF3)
@@ -3786,8 +3789,8 @@ class SFixed64Rules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'SFixed64Rules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [2, 3])
-    ..oo(1, [4, 5])
+    ..oo(0, [2, 3], 'less_than')
+    ..oo(1, [4, 5], 'greater_than')
     ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OSF6,
         defaultOrMaker: $fixnum.Int64.ZERO)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'lt', $pb.PbFieldType.OSF6,
@@ -4202,26 +4205,29 @@ class StringRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'StringRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      21,
-      22,
-      24,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33
-    ])
+    ..oo(
+        0,
+        [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          21,
+          22,
+          24,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ],
+        'well_known')
     ..aOS(1, _omitFieldNames ? '' : 'const')
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'minLen', $pb.PbFieldType.OU6,
         defaultOrMaker: $fixnum.Int64.ZERO)
@@ -5058,7 +5064,7 @@ class BytesRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'BytesRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [10, 11, 12])
+    ..oo(0, [10, 11, 12], 'well_known')
     ..a<$core.List<$core.int>>(
         1, _omitFieldNames ? '' : 'const', $pb.PbFieldType.OY)
     ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'minLen', $pb.PbFieldType.OU6,
@@ -5949,8 +5955,8 @@ class DurationRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'DurationRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [3, 4])
-    ..oo(1, [5, 6])
+    ..oo(0, [3, 4], 'less_than')
+    ..oo(1, [5, 6], 'greater_than')
     ..aOM<$0.Duration>(2, _omitFieldNames ? '' : 'const',
         subBuilder: $0.Duration.create)
     ..aOM<$0.Duration>(3, _omitFieldNames ? '' : 'lt',
@@ -6219,8 +6225,8 @@ class TimestampRules extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'TimestampRules',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [3, 4, 7])
-    ..oo(1, [5, 6, 8])
+    ..oo(0, [3, 4, 7], 'less_than')
+    ..oo(1, [5, 6, 8], 'greater_than')
     ..aOM<$1.Timestamp>(2, _omitFieldNames ? '' : 'const',
         subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(3, _omitFieldNames ? '' : 'lt',
@@ -6826,7 +6832,7 @@ class FieldPathElement extends $pb.GeneratedMessage {
       _omitMessageNames ? '' : 'FieldPathElement',
       package: const $pb.PackageName(_omitMessageNames ? '' : 'buf.validate'),
       createEmptyInstance: create)
-    ..oo(0, [6, 7, 8, 9, 10])
+    ..oo(0, [6, 7, 8, 9, 10], 'subscript')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'fieldNumber', $pb.PbFieldType.O3)
     ..aOS(2, _omitFieldNames ? '' : 'fieldName')
     ..e<$2.FieldDescriptorProto_Type>(

@@ -291,7 +291,7 @@ class IgnoreEmptyProto3Oneof extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'o')
     ..a<$core.int>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.O3)
     ..hasRequiredFields = false;
 

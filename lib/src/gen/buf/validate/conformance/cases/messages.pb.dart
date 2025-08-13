@@ -515,7 +515,7 @@ class MessageRequiredOneof extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'one')
     ..aOM<TestMsg>(1, _omitFieldNames ? '' : 'val', subBuilder: TestMsg.create)
     ..hasRequiredFields = false;
 

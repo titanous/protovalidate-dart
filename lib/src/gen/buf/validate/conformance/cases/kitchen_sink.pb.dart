@@ -86,7 +86,7 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [16, 17])
+    ..oo(0, [16, 17], 'o')
     ..aOS(1, _omitFieldNames ? '' : 'const',
         presence: $pb.FieldPresence.implicit)
     ..aOM<ComplexTestMsg>(2, _omitFieldNames ? '' : 'nested',

@@ -3297,7 +3297,7 @@ class StringInOneof extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..oo(0, [1])
+    ..oo(0, [1], 'foo')
     ..aOS(1, _omitFieldNames ? '' : 'bar')
     ..hasRequiredFields = false;
 
