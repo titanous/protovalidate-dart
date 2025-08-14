@@ -1,25 +1,31 @@
 name: protovalidate
 description: Protocol Buffer validation for Dart - provides runtime validation of protobuf messages based on rules defined in proto files.
 version: 0.1.0
-repository: https://github.com/bufbuild/protovalidate-dart
+repository: https://github.com/titanous/protovalidate-dart
+publish_to: none
 
 environment:
   sdk: ^3.0.0
 
 dependencies:
   protobuf:
-    path: ../protobuf.dart/protobuf
+    git:
+      url: https://github.com/titanous/protobuf.dart
+      ref: 460dd92405d6e66f12ec6ca5304f806a55403bc3
+      path: protobuf
   fixnum: ^1.1.1
   cel:
-    path: ../cel-dart-for-protovalidate
-  build: ^2.4.1
-  source_gen: ^1.5.0
-  glob: ^2.1.2
-  analyzer: ^6.4.1
-  path: ^1.9.0
+    git:
+      url: https://github.com/titanous/cel-dart
+      ref: e9c0cb648db5976f753e19b308cbd87f6c0cecec
 
 dev_dependencies:
   lints: ^6.0.0
   test: ^1.26.3
   build_runner: ^2.4.0
   build_test: ^2.2.2
+  build: ^2.4.1
+  source_gen: ^1.5.0
+  glob: ^2.1.2
+  analyzer: ^6.4.1
+  path: ^1.9.0
