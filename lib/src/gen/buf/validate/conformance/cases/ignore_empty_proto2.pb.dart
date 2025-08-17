@@ -43,8 +43,7 @@ class IgnoreEmptyProto2ScalarOptional extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2ScalarOptional clone() =>
-      IgnoreEmptyProto2ScalarOptional()..mergeFromMessage(this);
+  IgnoreEmptyProto2ScalarOptional clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2ScalarOptional copyWith(
           void Function(IgnoreEmptyProto2ScalarOptional) updates) =>
@@ -107,8 +106,7 @@ class IgnoreEmptyProto2ScalarOptionalWithDefault extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2ScalarOptionalWithDefault clone() =>
-      IgnoreEmptyProto2ScalarOptionalWithDefault()..mergeFromMessage(this);
+  IgnoreEmptyProto2ScalarOptionalWithDefault clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2ScalarOptionalWithDefault copyWith(
           void Function(IgnoreEmptyProto2ScalarOptionalWithDefault) updates) =>
@@ -170,8 +168,7 @@ class IgnoreEmptyProto2ScalarRequired extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.legacyRequired);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2ScalarRequired clone() =>
-      IgnoreEmptyProto2ScalarRequired()..mergeFromMessage(this);
+  IgnoreEmptyProto2ScalarRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2ScalarRequired copyWith(
           void Function(IgnoreEmptyProto2ScalarRequired) updates) =>
@@ -232,8 +229,7 @@ class IgnoreEmptyProto2Message_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2Message_Msg clone() =>
-      IgnoreEmptyProto2Message_Msg()..mergeFromMessage(this);
+  IgnoreEmptyProto2Message_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2Message_Msg copyWith(
           void Function(IgnoreEmptyProto2Message_Msg) updates) =>
@@ -294,8 +290,7 @@ class IgnoreEmptyProto2Message extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2Message clone() =>
-      IgnoreEmptyProto2Message()..mergeFromMessage(this);
+  IgnoreEmptyProto2Message clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2Message copyWith(
           void Function(IgnoreEmptyProto2Message) updates) =>
@@ -363,8 +358,7 @@ class IgnoreEmptyProto2Oneof extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2Oneof clone() =>
-      IgnoreEmptyProto2Oneof()..mergeFromMessage(this);
+  IgnoreEmptyProto2Oneof clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2Oneof copyWith(
           void Function(IgnoreEmptyProto2Oneof) updates) =>
@@ -426,8 +420,7 @@ class IgnoreEmptyProto2Repeated extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2Repeated clone() =>
-      IgnoreEmptyProto2Repeated()..mergeFromMessage(this);
+  IgnoreEmptyProto2Repeated clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2Repeated copyWith(
           void Function(IgnoreEmptyProto2Repeated) updates) =>
@@ -483,8 +476,7 @@ class IgnoreEmptyProto2Map extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IgnoreEmptyProto2Map clone() =>
-      IgnoreEmptyProto2Map()..mergeFromMessage(this);
+  IgnoreEmptyProto2Map clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IgnoreEmptyProto2Map copyWith(void Function(IgnoreEmptyProto2Map) updates) =>
       super.copyWith((message) => updates(message as IgnoreEmptyProto2Map))

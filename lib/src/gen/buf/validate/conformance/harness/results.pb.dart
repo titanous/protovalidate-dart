@@ -66,7 +66,7 @@ class ResultOptions extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResultOptions clone() => ResultOptions()..mergeFromMessage(this);
+  ResultOptions clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ResultOptions copyWith(void Function(ResultOptions) updates) =>
       super.copyWith((message) => updates(message as ResultOptions))
@@ -92,8 +92,6 @@ class ResultOptions extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set suiteFilter($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasSuiteFilter() => $_has(0);
-  @$pb.TagNumber(1)
   void clearSuiteFilter() => $_clearField(1);
 
   /// The case filter is a regex that matches against the case name.
@@ -101,8 +99,6 @@ class ResultOptions extends $pb.GeneratedMessage {
   $core.String get caseFilter => $_getSZ(1);
   @$pb.TagNumber(2)
   set caseFilter($core.String value) => $_setString(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasCaseFilter() => $_has(1);
   @$pb.TagNumber(2)
   void clearCaseFilter() => $_clearField(2);
 
@@ -112,8 +108,6 @@ class ResultOptions extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   set verbose($core.bool value) => $_setBool(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasVerbose() => $_has(2);
-  @$pb.TagNumber(3)
   void clearVerbose() => $_clearField(3);
 
   /// If the violation message must be an exact match.
@@ -122,8 +116,6 @@ class ResultOptions extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   set strictMessage($core.bool value) => $_setBool(3, value);
   @$pb.TagNumber(5)
-  $core.bool hasStrictMessage() => $_has(3);
-  @$pb.TagNumber(5)
   void clearStrictMessage() => $_clearField(5);
 
   /// If the distinction between runtime and compile time errors must be exact.
@@ -131,8 +123,6 @@ class ResultOptions extends $pb.GeneratedMessage {
   $core.bool get strictError => $_getBF(4);
   @$pb.TagNumber(6)
   set strictError($core.bool value) => $_setBool(4, value);
-  @$pb.TagNumber(6)
-  $core.bool hasStrictError() => $_has(4);
   @$pb.TagNumber(6)
   void clearStrictError() => $_clearField(6);
 }
@@ -182,7 +172,7 @@ class ResultSet extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ResultSet clone() => ResultSet()..mergeFromMessage(this);
+  ResultSet clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ResultSet copyWith(void Function(ResultSet) updates) =>
       super.copyWith((message) => updates(message as ResultSet)) as ResultSet;
@@ -206,8 +196,6 @@ class ResultSet extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set successes($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasSuccesses() => $_has(0);
-  @$pb.TagNumber(1)
   void clearSuccesses() => $_clearField(1);
 
   /// Count of failures.
@@ -215,8 +203,6 @@ class ResultSet extends $pb.GeneratedMessage {
   $core.int get failures => $_getIZ(1);
   @$pb.TagNumber(2)
   set failures($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasFailures() => $_has(1);
   @$pb.TagNumber(2)
   void clearFailures() => $_clearField(2);
 
@@ -241,8 +227,6 @@ class ResultSet extends $pb.GeneratedMessage {
   $core.int get expectedFailures => $_getIZ(4);
   @$pb.TagNumber(5)
   set expectedFailures($core.int value) => $_setSignedInt32(4, value);
-  @$pb.TagNumber(5)
-  $core.bool hasExpectedFailures() => $_has(4);
   @$pb.TagNumber(5)
   void clearExpectedFailures() => $_clearField(5);
 }
@@ -296,7 +280,7 @@ class SuiteResults extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SuiteResults clone() => SuiteResults()..mergeFromMessage(this);
+  SuiteResults clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SuiteResults copyWith(void Function(SuiteResults) updates) =>
       super.copyWith((message) => updates(message as SuiteResults))
@@ -322,8 +306,6 @@ class SuiteResults extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set name($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
   void clearName() => $_clearField(1);
 
   /// Count of successes.
@@ -332,8 +314,6 @@ class SuiteResults extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   set successes($core.int value) => $_setSignedInt32(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasSuccesses() => $_has(1);
-  @$pb.TagNumber(2)
   void clearSuccesses() => $_clearField(2);
 
   /// Count of failures.
@@ -341,8 +321,6 @@ class SuiteResults extends $pb.GeneratedMessage {
   $core.int get failures => $_getIZ(2);
   @$pb.TagNumber(3)
   set failures($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasFailures() => $_has(2);
   @$pb.TagNumber(3)
   void clearFailures() => $_clearField(3);
 
@@ -367,8 +345,6 @@ class SuiteResults extends $pb.GeneratedMessage {
   $core.int get expectedFailures => $_getIZ(5);
   @$pb.TagNumber(6)
   set expectedFailures($core.int value) => $_setSignedInt32(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasExpectedFailures() => $_has(5);
   @$pb.TagNumber(6)
   void clearExpectedFailures() => $_clearField(6);
 }
@@ -421,7 +397,7 @@ class CaseResult extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  CaseResult clone() => CaseResult()..mergeFromMessage(this);
+  CaseResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   CaseResult copyWith(void Function(CaseResult) updates) =>
       super.copyWith((message) => updates(message as CaseResult)) as CaseResult;
@@ -445,8 +421,6 @@ class CaseResult extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set name($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
   void clearName() => $_clearField(1);
 
   /// Success state of the test case. True if the test case succeeded.
@@ -454,8 +428,6 @@ class CaseResult extends $pb.GeneratedMessage {
   $core.bool get success => $_getBF(1);
   @$pb.TagNumber(2)
   set success($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasSuccess() => $_has(1);
   @$pb.TagNumber(2)
   void clearSuccess() => $_clearField(2);
 
@@ -500,8 +472,6 @@ class CaseResult extends $pb.GeneratedMessage {
   $core.bool get expectedFailure => $_getBF(5);
   @$pb.TagNumber(6)
   set expectedFailure($core.bool value) => $_setBool(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasExpectedFailure() => $_has(5);
   @$pb.TagNumber(6)
   void clearExpectedFailure() => $_clearField(6);
 }

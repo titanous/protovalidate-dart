@@ -133,8 +133,7 @@ class Timestamp extends $pb.GeneratedMessage with $mixin.TimestampMixin {
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'google.protobuf'),
       createEmptyInstance: create,
-      toProto3Json: $mixin.TimestampMixin.toProto3JsonHelper,
-      fromProto3Json: $mixin.TimestampMixin.fromProto3JsonHelper)
+      wellKnownType: $mixin.WellKnownType.timestamp)
     ..aInt64(1, _omitFieldNames ? '' : 'seconds',
         presence: $pb.FieldPresence.implicit)
     ..a<$core.int>(2, _omitFieldNames ? '' : 'nanos', $pb.PbFieldType.O3,
@@ -142,7 +141,7 @@ class Timestamp extends $pb.GeneratedMessage with $mixin.TimestampMixin {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Timestamp clone() => Timestamp()..mergeFromMessage(this);
+  Timestamp clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Timestamp copyWith(void Function(Timestamp) updates) =>
       super.copyWith((message) => updates(message as Timestamp)) as Timestamp;
@@ -168,8 +167,6 @@ class Timestamp extends $pb.GeneratedMessage with $mixin.TimestampMixin {
   @$pb.TagNumber(1)
   set seconds($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasSeconds() => $_has(0);
-  @$pb.TagNumber(1)
   void clearSeconds() => $_clearField(1);
 
   /// Non-negative fractions of a second at nanosecond resolution. Negative
@@ -180,8 +177,6 @@ class Timestamp extends $pb.GeneratedMessage with $mixin.TimestampMixin {
   $core.int get nanos => $_getIZ(1);
   @$pb.TagNumber(2)
   set nanos($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasNanos() => $_has(1);
   @$pb.TagNumber(2)
   void clearNanos() => $_clearField(2);
 

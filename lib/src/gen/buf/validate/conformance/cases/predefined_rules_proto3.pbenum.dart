@@ -14,26 +14,29 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class PredefinedEnumRuleProto3_EnumProto3 extends $pb.ProtobufEnum {
-  static const PredefinedEnumRuleProto3_EnumProto3
-      ENUM_PROTO3_ZERO_UNSPECIFIED = PredefinedEnumRuleProto3_EnumProto3._(
-          0, _omitEnumNames ? '' : 'ENUM_PROTO3_ZERO_UNSPECIFIED');
-  static const PredefinedEnumRuleProto3_EnumProto3 ENUM_PROTO3_ONE =
-      PredefinedEnumRuleProto3_EnumProto3._(
-          1, _omitEnumNames ? '' : 'ENUM_PROTO3_ONE');
+enum PredefinedEnumRuleProto3_EnumProto3 implements $pb.ProtobufEnum {
+  ENUM_PROTO3_ZERO_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'ENUM_PROTO3_ZERO_UNSPECIFIED'),
 
-  static const $core.List<PredefinedEnumRuleProto3_EnumProto3> values =
-      <PredefinedEnumRuleProto3_EnumProto3>[
-    ENUM_PROTO3_ZERO_UNSPECIFIED,
-    ENUM_PROTO3_ONE,
-  ];
+  ENUM_PROTO3_ONE(1, _omitEnumNames ? '' : 'ENUM_PROTO3_ONE'),
+  ;
 
-  static final $core.List<PredefinedEnumRuleProto3_EnumProto3?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static final $core.Map<$core.int, PredefinedEnumRuleProto3_EnumProto3>
+      _byValue = $pb.ProtobufEnum.initByValue(values);
   static PredefinedEnumRuleProto3_EnumProto3? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+      _byValue[value];
 
-  const PredefinedEnumRuleProto3_EnumProto3._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const PredefinedEnumRuleProto3_EnumProto3(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

@@ -45,8 +45,7 @@ class WktLevelOne_WktLevelTwo_WktLevelThree extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WktLevelOne_WktLevelTwo_WktLevelThree clone() =>
-      WktLevelOne_WktLevelTwo_WktLevelThree()..mergeFromMessage(this);
+  WktLevelOne_WktLevelTwo_WktLevelThree clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WktLevelOne_WktLevelTwo_WktLevelThree copyWith(
           void Function(WktLevelOne_WktLevelTwo_WktLevelThree) updates) =>
@@ -74,8 +73,6 @@ class WktLevelOne_WktLevelTwo_WktLevelThree extends $pb.GeneratedMessage {
   $core.String get uuid => $_getSZ(0);
   @$pb.TagNumber(1)
   set uuid($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasUuid() => $_has(0);
   @$pb.TagNumber(1)
   void clearUuid() => $_clearField(1);
 }
@@ -109,8 +106,7 @@ class WktLevelOne_WktLevelTwo extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WktLevelOne_WktLevelTwo clone() =>
-      WktLevelOne_WktLevelTwo()..mergeFromMessage(this);
+  WktLevelOne_WktLevelTwo clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WktLevelOne_WktLevelTwo copyWith(
           void Function(WktLevelOne_WktLevelTwo) updates) =>
@@ -172,7 +168,7 @@ class WktLevelOne extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WktLevelOne clone() => WktLevelOne()..mergeFromMessage(this);
+  WktLevelOne clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WktLevelOne copyWith(void Function(WktLevelOne) updates) =>
       super.copyWith((message) => updates(message as WktLevelOne))

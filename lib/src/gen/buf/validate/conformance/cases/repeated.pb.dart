@@ -52,7 +52,7 @@ class Embed extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Embed clone() => Embed()..mergeFromMessage(this);
+  Embed clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Embed copyWith(void Function(Embed) updates) =>
       super.copyWith((message) => updates(message as Embed)) as Embed;
@@ -74,8 +74,6 @@ class Embed extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -107,7 +105,7 @@ class RepeatedNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedNone clone() => RepeatedNone()..mergeFromMessage(this);
+  RepeatedNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedNone copyWith(void Function(RepeatedNone) updates) =>
       super.copyWith((message) => updates(message as RepeatedNone))
@@ -159,7 +157,7 @@ class RepeatedEmbedNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEmbedNone clone() => RepeatedEmbedNone()..mergeFromMessage(this);
+  RepeatedEmbedNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEmbedNone copyWith(void Function(RepeatedEmbedNone) updates) =>
       super.copyWith((message) => updates(message as RepeatedEmbedNone))
@@ -211,8 +209,7 @@ class RepeatedEmbedCrossPackageNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEmbedCrossPackageNone clone() =>
-      RepeatedEmbedCrossPackageNone()..mergeFromMessage(this);
+  RepeatedEmbedCrossPackageNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEmbedCrossPackageNone copyWith(
           void Function(RepeatedEmbedCrossPackageNone) updates) =>
@@ -267,7 +264,7 @@ class RepeatedMin extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMin clone() => RepeatedMin()..mergeFromMessage(this);
+  RepeatedMin clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMin copyWith(void Function(RepeatedMin) updates) =>
       super.copyWith((message) => updates(message as RepeatedMin))
@@ -317,7 +314,7 @@ class RepeatedMax extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMax clone() => RepeatedMax()..mergeFromMessage(this);
+  RepeatedMax clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMax copyWith(void Function(RepeatedMax) updates) =>
       super.copyWith((message) => updates(message as RepeatedMax))
@@ -367,7 +364,7 @@ class RepeatedMinMax extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMinMax clone() => RepeatedMinMax()..mergeFromMessage(this);
+  RepeatedMinMax clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMinMax copyWith(void Function(RepeatedMinMax) updates) =>
       super.copyWith((message) => updates(message as RepeatedMinMax))
@@ -418,7 +415,7 @@ class RepeatedExact extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedExact clone() => RepeatedExact()..mergeFromMessage(this);
+  RepeatedExact clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedExact copyWith(void Function(RepeatedExact) updates) =>
       super.copyWith((message) => updates(message as RepeatedExact))
@@ -469,7 +466,7 @@ class RepeatedUnique extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedUnique clone() => RepeatedUnique()..mergeFromMessage(this);
+  RepeatedUnique clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedUnique copyWith(void Function(RepeatedUnique) updates) =>
       super.copyWith((message) => updates(message as RepeatedUnique))
@@ -520,7 +517,7 @@ class RepeatedNotUnique extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedNotUnique clone() => RepeatedNotUnique()..mergeFromMessage(this);
+  RepeatedNotUnique clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedNotUnique copyWith(void Function(RepeatedNotUnique) updates) =>
       super.copyWith((message) => updates(message as RepeatedNotUnique))
@@ -574,8 +571,7 @@ class RepeatedMultipleUnique extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMultipleUnique clone() =>
-      RepeatedMultipleUnique()..mergeFromMessage(this);
+  RepeatedMultipleUnique clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMultipleUnique copyWith(
           void Function(RepeatedMultipleUnique) updates) =>
@@ -630,7 +626,7 @@ class RepeatedItemRule extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedItemRule clone() => RepeatedItemRule()..mergeFromMessage(this);
+  RepeatedItemRule clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedItemRule copyWith(void Function(RepeatedItemRule) updates) =>
       super.copyWith((message) => updates(message as RepeatedItemRule))
@@ -681,7 +677,7 @@ class RepeatedItemPattern extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedItemPattern clone() => RepeatedItemPattern()..mergeFromMessage(this);
+  RepeatedItemPattern clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedItemPattern copyWith(void Function(RepeatedItemPattern) updates) =>
       super.copyWith((message) => updates(message as RepeatedItemPattern))
@@ -733,7 +729,7 @@ class RepeatedEmbedSkip extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEmbedSkip clone() => RepeatedEmbedSkip()..mergeFromMessage(this);
+  RepeatedEmbedSkip clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEmbedSkip copyWith(void Function(RepeatedEmbedSkip) updates) =>
       super.copyWith((message) => updates(message as RepeatedEmbedSkip))
@@ -784,7 +780,7 @@ class RepeatedItemIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedItemIn clone() => RepeatedItemIn()..mergeFromMessage(this);
+  RepeatedItemIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedItemIn copyWith(void Function(RepeatedItemIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedItemIn))
@@ -835,7 +831,7 @@ class RepeatedItemNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedItemNotIn clone() => RepeatedItemNotIn()..mergeFromMessage(this);
+  RepeatedItemNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedItemNotIn copyWith(void Function(RepeatedItemNotIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedItemNotIn))
@@ -889,7 +885,7 @@ class RepeatedEnumIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEnumIn clone() => RepeatedEnumIn()..mergeFromMessage(this);
+  RepeatedEnumIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEnumIn copyWith(void Function(RepeatedEnumIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedEnumIn))
@@ -943,7 +939,7 @@ class RepeatedEnumNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEnumNotIn clone() => RepeatedEnumNotIn()..mergeFromMessage(this);
+  RepeatedEnumNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEnumNotIn copyWith(void Function(RepeatedEnumNotIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedEnumNotIn))
@@ -999,8 +995,7 @@ class RepeatedEmbeddedEnumIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEmbeddedEnumIn clone() =>
-      RepeatedEmbeddedEnumIn()..mergeFromMessage(this);
+  RepeatedEmbeddedEnumIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEmbeddedEnumIn copyWith(
           void Function(RepeatedEmbeddedEnumIn) updates) =>
@@ -1057,8 +1052,7 @@ class RepeatedEmbeddedEnumNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEmbeddedEnumNotIn clone() =>
-      RepeatedEmbeddedEnumNotIn()..mergeFromMessage(this);
+  RepeatedEmbeddedEnumNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEmbeddedEnumNotIn copyWith(
           void Function(RepeatedEmbeddedEnumNotIn) updates) =>
@@ -1112,7 +1106,7 @@ class RepeatedAnyIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedAnyIn clone() => RepeatedAnyIn()..mergeFromMessage(this);
+  RepeatedAnyIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedAnyIn copyWith(void Function(RepeatedAnyIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedAnyIn))
@@ -1164,7 +1158,7 @@ class RepeatedAnyNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedAnyNotIn clone() => RepeatedAnyNotIn()..mergeFromMessage(this);
+  RepeatedAnyNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedAnyNotIn copyWith(void Function(RepeatedAnyNotIn) updates) =>
       super.copyWith((message) => updates(message as RepeatedAnyNotIn))
@@ -1215,8 +1209,7 @@ class RepeatedMinAndItemLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMinAndItemLen clone() =>
-      RepeatedMinAndItemLen()..mergeFromMessage(this);
+  RepeatedMinAndItemLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMinAndItemLen copyWith(
           void Function(RepeatedMinAndItemLen) updates) =>
@@ -1268,8 +1261,7 @@ class RepeatedMinAndMaxItemLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedMinAndMaxItemLen clone() =>
-      RepeatedMinAndMaxItemLen()..mergeFromMessage(this);
+  RepeatedMinAndMaxItemLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedMinAndMaxItemLen copyWith(
           void Function(RepeatedMinAndMaxItemLen) updates) =>
@@ -1322,7 +1314,7 @@ class RepeatedDuration extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedDuration clone() => RepeatedDuration()..mergeFromMessage(this);
+  RepeatedDuration clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedDuration copyWith(void Function(RepeatedDuration) updates) =>
       super.copyWith((message) => updates(message as RepeatedDuration))
@@ -1373,7 +1365,7 @@ class RepeatedExactIgnore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedExactIgnore clone() => RepeatedExactIgnore()..mergeFromMessage(this);
+  RepeatedExactIgnore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedExactIgnore copyWith(void Function(RepeatedExactIgnore) updates) =>
       super.copyWith((message) => updates(message as RepeatedExactIgnore))

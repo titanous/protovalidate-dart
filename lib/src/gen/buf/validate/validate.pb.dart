@@ -71,7 +71,7 @@ class Rule extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Rule clone() => Rule()..mergeFromMessage(this);
+  Rule clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Rule copyWith(void Function(Rule) updates) =>
       super.copyWith((message) => updates(message as Rule)) as Rule;
@@ -161,7 +161,7 @@ class MessageRules extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageRules clone() => MessageRules()..mergeFromMessage(this);
+  MessageRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageRules copyWith(void Function(MessageRules) updates) =>
       super.copyWith((message) => updates(message as MessageRules))
@@ -267,7 +267,7 @@ class MessageOneofRule extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofRule clone() => MessageOneofRule()..mergeFromMessage(this);
+  MessageOneofRule clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofRule copyWith(void Function(MessageOneofRule) updates) =>
       super.copyWith((message) => updates(message as MessageOneofRule))
@@ -332,7 +332,7 @@ class OneofRules extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OneofRules clone() => OneofRules()..mergeFromMessage(this);
+  OneofRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   OneofRules copyWith(void Function(OneofRules) updates) =>
       super.copyWith((message) => updates(message as OneofRules)) as OneofRules;
@@ -572,7 +572,7 @@ class FieldRules extends $pb.GeneratedMessage {
         enumValues: Ignore.values);
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldRules clone() => FieldRules()..mergeFromMessage(this);
+  FieldRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldRules copyWith(void Function(FieldRules) updates) =>
       super.copyWith((message) => updates(message as FieldRules)) as FieldRules;
@@ -954,7 +954,7 @@ class PredefinedRules extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRules clone() => PredefinedRules()..mergeFromMessage(this);
+  PredefinedRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRules copyWith(void Function(PredefinedRules) updates) =>
       super.copyWith((message) => updates(message as PredefinedRules))
@@ -1062,7 +1062,7 @@ class FloatRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatRules clone() => FloatRules()..mergeFromMessage(this);
+  FloatRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatRules copyWith(void Function(FloatRules) updates) =>
       super.copyWith((message) => updates(message as FloatRules)) as FloatRules;
@@ -1321,7 +1321,7 @@ class DoubleRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleRules clone() => DoubleRules()..mergeFromMessage(this);
+  DoubleRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleRules copyWith(void Function(DoubleRules) updates) =>
       super.copyWith((message) => updates(message as DoubleRules))
@@ -1578,7 +1578,7 @@ class Int32Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32Rules clone() => Int32Rules()..mergeFromMessage(this);
+  Int32Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32Rules copyWith(void Function(Int32Rules) updates) =>
       super.copyWith((message) => updates(message as Int32Rules)) as Int32Rules;
@@ -1823,7 +1823,7 @@ class Int64Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64Rules clone() => Int64Rules()..mergeFromMessage(this);
+  Int64Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64Rules copyWith(void Function(Int64Rules) updates) =>
       super.copyWith((message) => updates(message as Int64Rules)) as Int64Rules;
@@ -2068,7 +2068,7 @@ class UInt32Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32Rules clone() => UInt32Rules()..mergeFromMessage(this);
+  UInt32Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32Rules copyWith(void Function(UInt32Rules) updates) =>
       super.copyWith((message) => updates(message as UInt32Rules))
@@ -2319,7 +2319,7 @@ class UInt64Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64Rules clone() => UInt64Rules()..mergeFromMessage(this);
+  UInt64Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64Rules copyWith(void Function(UInt64Rules) updates) =>
       super.copyWith((message) => updates(message as UInt64Rules))
@@ -2564,7 +2564,7 @@ class SInt32Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32Rules clone() => SInt32Rules()..mergeFromMessage(this);
+  SInt32Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32Rules copyWith(void Function(SInt32Rules) updates) =>
       super.copyWith((message) => updates(message as SInt32Rules))
@@ -2814,7 +2814,7 @@ class SInt64Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64Rules clone() => SInt64Rules()..mergeFromMessage(this);
+  SInt64Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64Rules copyWith(void Function(SInt64Rules) updates) =>
       super.copyWith((message) => updates(message as SInt64Rules))
@@ -3059,7 +3059,7 @@ class Fixed32Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32Rules clone() => Fixed32Rules()..mergeFromMessage(this);
+  Fixed32Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32Rules copyWith(void Function(Fixed32Rules) updates) =>
       super.copyWith((message) => updates(message as Fixed32Rules))
@@ -3310,7 +3310,7 @@ class Fixed64Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64Rules clone() => Fixed64Rules()..mergeFromMessage(this);
+  Fixed64Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64Rules copyWith(void Function(Fixed64Rules) updates) =>
       super.copyWith((message) => updates(message as Fixed64Rules))
@@ -3556,7 +3556,7 @@ class SFixed32Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32Rules clone() => SFixed32Rules()..mergeFromMessage(this);
+  SFixed32Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32Rules copyWith(void Function(SFixed32Rules) updates) =>
       super.copyWith((message) => updates(message as SFixed32Rules))
@@ -3808,7 +3808,7 @@ class SFixed64Rules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64Rules clone() => SFixed64Rules()..mergeFromMessage(this);
+  SFixed64Rules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64Rules copyWith(void Function(SFixed64Rules) updates) =>
       super.copyWith((message) => updates(message as SFixed64Rules))
@@ -4019,7 +4019,7 @@ class BoolRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BoolRules clone() => BoolRules()..mergeFromMessage(this);
+  BoolRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BoolRules copyWith(void Function(BoolRules) updates) =>
       super.copyWith((message) => updates(message as BoolRules)) as BoolRules;
@@ -4278,7 +4278,7 @@ class StringRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringRules clone() => StringRules()..mergeFromMessage(this);
+  StringRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringRules copyWith(void Function(StringRules) updates) =>
       super.copyWith((message) => updates(message as StringRules))
@@ -5092,7 +5092,7 @@ class BytesRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BytesRules clone() => BytesRules()..mergeFromMessage(this);
+  BytesRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BytesRules copyWith(void Function(BytesRules) updates) =>
       super.copyWith((message) => updates(message as BytesRules)) as BytesRules;
@@ -5401,7 +5401,7 @@ class EnumRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumRules clone() => EnumRules()..mergeFromMessage(this);
+  EnumRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumRules copyWith(void Function(EnumRules) updates) =>
       super.copyWith((message) => updates(message as EnumRules)) as EnumRules;
@@ -5566,7 +5566,7 @@ class RepeatedRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedRules clone() => RepeatedRules()..mergeFromMessage(this);
+  RepeatedRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedRules copyWith(void Function(RepeatedRules) updates) =>
       super.copyWith((message) => updates(message as RepeatedRules))
@@ -5717,7 +5717,7 @@ class MapRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapRules clone() => MapRules()..mergeFromMessage(this);
+  MapRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapRules copyWith(void Function(MapRules) updates) =>
       super.copyWith((message) => updates(message as MapRules)) as MapRules;
@@ -5855,7 +5855,7 @@ class AnyRules extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyRules clone() => AnyRules()..mergeFromMessage(this);
+  AnyRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyRules copyWith(void Function(AnyRules) updates) =>
       super.copyWith((message) => updates(message as AnyRules)) as AnyRules;
@@ -5976,7 +5976,7 @@ class DurationRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationRules clone() => DurationRules()..mergeFromMessage(this);
+  DurationRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationRules copyWith(void Function(DurationRules) updates) =>
       super.copyWith((message) => updates(message as DurationRules))
@@ -6246,7 +6246,7 @@ class TimestampRules extends $pb.GeneratedMessage {
     ..hasExtensions = true;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampRules clone() => TimestampRules()..mergeFromMessage(this);
+  TimestampRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampRules copyWith(void Function(TimestampRules) updates) =>
       super.copyWith((message) => updates(message as TimestampRules))
@@ -6488,7 +6488,7 @@ class Violations extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Violations clone() => Violations()..mergeFromMessage(this);
+  Violations clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Violations copyWith(void Function(Violations) updates) =>
       super.copyWith((message) => updates(message as Violations)) as Violations;
@@ -6594,7 +6594,7 @@ class Violation extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Violation clone() => Violation()..mergeFromMessage(this);
+  Violation clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Violation copyWith(void Function(Violation) updates) =>
       super.copyWith((message) => updates(message as Violation)) as Violation;
@@ -6746,7 +6746,7 @@ class FieldPath extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldPath clone() => FieldPath()..mergeFromMessage(this);
+  FieldPath clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldPath copyWith(void Function(FieldPath) updates) =>
       super.copyWith((message) => updates(message as FieldPath)) as FieldPath;
@@ -6860,7 +6860,7 @@ class FieldPathElement extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldPathElement clone() => FieldPathElement()..mergeFromMessage(this);
+  FieldPathElement clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldPathElement copyWith(void Function(FieldPathElement) updates) =>
       super.copyWith((message) => updates(message as FieldPathElement))

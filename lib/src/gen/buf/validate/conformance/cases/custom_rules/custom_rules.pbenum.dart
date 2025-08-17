@@ -14,22 +14,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Enum extends $pb.ProtobufEnum {
-  static const Enum ENUM_UNSPECIFIED =
-      Enum._(0, _omitEnumNames ? '' : 'ENUM_UNSPECIFIED');
-  static const Enum ENUM_ONE = Enum._(1, _omitEnumNames ? '' : 'ENUM_ONE');
+enum Enum implements $pb.ProtobufEnum {
+  ENUM_UNSPECIFIED(0, _omitEnumNames ? '' : 'ENUM_UNSPECIFIED'),
 
-  static const $core.List<Enum> values = <Enum>[
-    ENUM_UNSPECIFIED,
-    ENUM_ONE,
-  ];
+  ENUM_ONE(1, _omitEnumNames ? '' : 'ENUM_ONE'),
+  ;
 
-  static final $core.List<Enum?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
-  static Enum? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.Map<$core.int, Enum> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static Enum? valueOf($core.int value) => _byValue[value];
 
-  const Enum._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const Enum(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

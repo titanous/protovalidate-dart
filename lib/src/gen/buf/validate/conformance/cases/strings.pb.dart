@@ -43,7 +43,7 @@ class StringNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNone clone() => StringNone()..mergeFromMessage(this);
+  StringNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNone copyWith(void Function(StringNone) updates) =>
       super.copyWith((message) => updates(message as StringNone)) as StringNone;
@@ -65,8 +65,6 @@ class StringNone extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -98,7 +96,7 @@ class StringConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringConst clone() => StringConst()..mergeFromMessage(this);
+  StringConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringConst copyWith(void Function(StringConst) updates) =>
       super.copyWith((message) => updates(message as StringConst))
@@ -121,8 +119,6 @@ class StringConst extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -154,7 +150,7 @@ class StringIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIn clone() => StringIn()..mergeFromMessage(this);
+  StringIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIn copyWith(void Function(StringIn) updates) =>
       super.copyWith((message) => updates(message as StringIn)) as StringIn;
@@ -176,8 +172,6 @@ class StringIn extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -209,7 +203,7 @@ class StringNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIn clone() => StringNotIn()..mergeFromMessage(this);
+  StringNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIn copyWith(void Function(StringNotIn) updates) =>
       super.copyWith((message) => updates(message as StringNotIn))
@@ -232,8 +226,6 @@ class StringNotIn extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -265,7 +257,7 @@ class StringLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringLen clone() => StringLen()..mergeFromMessage(this);
+  StringLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringLen copyWith(void Function(StringLen) updates) =>
       super.copyWith((message) => updates(message as StringLen)) as StringLen;
@@ -287,8 +279,6 @@ class StringLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -320,7 +310,7 @@ class StringMinLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMinLen clone() => StringMinLen()..mergeFromMessage(this);
+  StringMinLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMinLen copyWith(void Function(StringMinLen) updates) =>
       super.copyWith((message) => updates(message as StringMinLen))
@@ -344,8 +334,6 @@ class StringMinLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -377,7 +365,7 @@ class StringMaxLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMaxLen clone() => StringMaxLen()..mergeFromMessage(this);
+  StringMaxLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMaxLen copyWith(void Function(StringMaxLen) updates) =>
       super.copyWith((message) => updates(message as StringMaxLen))
@@ -401,8 +389,6 @@ class StringMaxLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -434,7 +420,7 @@ class StringMinMaxLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMinMaxLen clone() => StringMinMaxLen()..mergeFromMessage(this);
+  StringMinMaxLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMinMaxLen copyWith(void Function(StringMinMaxLen) updates) =>
       super.copyWith((message) => updates(message as StringMinMaxLen))
@@ -458,8 +444,6 @@ class StringMinMaxLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -491,8 +475,7 @@ class StringEqualMinMaxLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringEqualMinMaxLen clone() =>
-      StringEqualMinMaxLen()..mergeFromMessage(this);
+  StringEqualMinMaxLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringEqualMinMaxLen copyWith(void Function(StringEqualMinMaxLen) updates) =>
       super.copyWith((message) => updates(message as StringEqualMinMaxLen))
@@ -516,8 +499,6 @@ class StringEqualMinMaxLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -549,7 +530,7 @@ class StringLenBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringLenBytes clone() => StringLenBytes()..mergeFromMessage(this);
+  StringLenBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringLenBytes copyWith(void Function(StringLenBytes) updates) =>
       super.copyWith((message) => updates(message as StringLenBytes))
@@ -573,8 +554,6 @@ class StringLenBytes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -606,7 +585,7 @@ class StringMinBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMinBytes clone() => StringMinBytes()..mergeFromMessage(this);
+  StringMinBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMinBytes copyWith(void Function(StringMinBytes) updates) =>
       super.copyWith((message) => updates(message as StringMinBytes))
@@ -630,8 +609,6 @@ class StringMinBytes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -663,7 +640,7 @@ class StringMaxBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMaxBytes clone() => StringMaxBytes()..mergeFromMessage(this);
+  StringMaxBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMaxBytes copyWith(void Function(StringMaxBytes) updates) =>
       super.copyWith((message) => updates(message as StringMaxBytes))
@@ -687,8 +664,6 @@ class StringMaxBytes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -720,7 +695,7 @@ class StringMinMaxBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringMinMaxBytes clone() => StringMinMaxBytes()..mergeFromMessage(this);
+  StringMinMaxBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringMinMaxBytes copyWith(void Function(StringMinMaxBytes) updates) =>
       super.copyWith((message) => updates(message as StringMinMaxBytes))
@@ -744,8 +719,6 @@ class StringMinMaxBytes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -777,8 +750,7 @@ class StringEqualMinMaxBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringEqualMinMaxBytes clone() =>
-      StringEqualMinMaxBytes()..mergeFromMessage(this);
+  StringEqualMinMaxBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringEqualMinMaxBytes copyWith(
           void Function(StringEqualMinMaxBytes) updates) =>
@@ -803,8 +775,6 @@ class StringEqualMinMaxBytes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -836,7 +806,7 @@ class StringPattern extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringPattern clone() => StringPattern()..mergeFromMessage(this);
+  StringPattern clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringPattern copyWith(void Function(StringPattern) updates) =>
       super.copyWith((message) => updates(message as StringPattern))
@@ -860,8 +830,6 @@ class StringPattern extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -893,8 +861,7 @@ class StringPatternEscapes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringPatternEscapes clone() =>
-      StringPatternEscapes()..mergeFromMessage(this);
+  StringPatternEscapes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringPatternEscapes copyWith(void Function(StringPatternEscapes) updates) =>
       super.copyWith((message) => updates(message as StringPatternEscapes))
@@ -918,8 +885,6 @@ class StringPatternEscapes extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -951,7 +916,7 @@ class StringPrefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringPrefix clone() => StringPrefix()..mergeFromMessage(this);
+  StringPrefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringPrefix copyWith(void Function(StringPrefix) updates) =>
       super.copyWith((message) => updates(message as StringPrefix))
@@ -975,8 +940,6 @@ class StringPrefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1008,7 +971,7 @@ class StringContains extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringContains clone() => StringContains()..mergeFromMessage(this);
+  StringContains clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringContains copyWith(void Function(StringContains) updates) =>
       super.copyWith((message) => updates(message as StringContains))
@@ -1032,8 +995,6 @@ class StringContains extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1065,7 +1026,7 @@ class StringNotContains extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotContains clone() => StringNotContains()..mergeFromMessage(this);
+  StringNotContains clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotContains copyWith(void Function(StringNotContains) updates) =>
       super.copyWith((message) => updates(message as StringNotContains))
@@ -1089,8 +1050,6 @@ class StringNotContains extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1122,7 +1081,7 @@ class StringSuffix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringSuffix clone() => StringSuffix()..mergeFromMessage(this);
+  StringSuffix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringSuffix copyWith(void Function(StringSuffix) updates) =>
       super.copyWith((message) => updates(message as StringSuffix))
@@ -1146,8 +1105,6 @@ class StringSuffix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1179,7 +1136,7 @@ class StringEmail extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringEmail clone() => StringEmail()..mergeFromMessage(this);
+  StringEmail clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringEmail copyWith(void Function(StringEmail) updates) =>
       super.copyWith((message) => updates(message as StringEmail))
@@ -1202,8 +1159,6 @@ class StringEmail extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1235,7 +1190,7 @@ class StringNotEmail extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotEmail clone() => StringNotEmail()..mergeFromMessage(this);
+  StringNotEmail clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotEmail copyWith(void Function(StringNotEmail) updates) =>
       super.copyWith((message) => updates(message as StringNotEmail))
@@ -1259,8 +1214,6 @@ class StringNotEmail extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1292,7 +1245,7 @@ class StringAddress extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringAddress clone() => StringAddress()..mergeFromMessage(this);
+  StringAddress clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringAddress copyWith(void Function(StringAddress) updates) =>
       super.copyWith((message) => updates(message as StringAddress))
@@ -1316,8 +1269,6 @@ class StringAddress extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1349,7 +1300,7 @@ class StringNotAddress extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotAddress clone() => StringNotAddress()..mergeFromMessage(this);
+  StringNotAddress clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotAddress copyWith(void Function(StringNotAddress) updates) =>
       super.copyWith((message) => updates(message as StringNotAddress))
@@ -1373,8 +1324,6 @@ class StringNotAddress extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1406,7 +1355,7 @@ class StringHostname extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHostname clone() => StringHostname()..mergeFromMessage(this);
+  StringHostname clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHostname copyWith(void Function(StringHostname) updates) =>
       super.copyWith((message) => updates(message as StringHostname))
@@ -1430,8 +1379,6 @@ class StringHostname extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1463,7 +1410,7 @@ class StringNotHostname extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotHostname clone() => StringNotHostname()..mergeFromMessage(this);
+  StringNotHostname clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotHostname copyWith(void Function(StringNotHostname) updates) =>
       super.copyWith((message) => updates(message as StringNotHostname))
@@ -1487,8 +1434,6 @@ class StringNotHostname extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1520,7 +1465,7 @@ class StringIP extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIP clone() => StringIP()..mergeFromMessage(this);
+  StringIP clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIP copyWith(void Function(StringIP) updates) =>
       super.copyWith((message) => updates(message as StringIP)) as StringIP;
@@ -1542,8 +1487,6 @@ class StringIP extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1575,7 +1518,7 @@ class StringNotIP extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIP clone() => StringNotIP()..mergeFromMessage(this);
+  StringNotIP clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIP copyWith(void Function(StringNotIP) updates) =>
       super.copyWith((message) => updates(message as StringNotIP))
@@ -1598,8 +1541,6 @@ class StringNotIP extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1631,7 +1572,7 @@ class StringIPv4 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv4 clone() => StringIPv4()..mergeFromMessage(this);
+  StringIPv4 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv4 copyWith(void Function(StringIPv4) updates) =>
       super.copyWith((message) => updates(message as StringIPv4)) as StringIPv4;
@@ -1653,8 +1594,6 @@ class StringIPv4 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1686,7 +1625,7 @@ class StringNotIPv4 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv4 clone() => StringNotIPv4()..mergeFromMessage(this);
+  StringNotIPv4 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv4 copyWith(void Function(StringNotIPv4) updates) =>
       super.copyWith((message) => updates(message as StringNotIPv4))
@@ -1710,8 +1649,6 @@ class StringNotIPv4 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1743,7 +1680,7 @@ class StringIPv6 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv6 clone() => StringIPv6()..mergeFromMessage(this);
+  StringIPv6 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv6 copyWith(void Function(StringIPv6) updates) =>
       super.copyWith((message) => updates(message as StringIPv6)) as StringIPv6;
@@ -1765,8 +1702,6 @@ class StringIPv6 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1798,7 +1733,7 @@ class StringNotIPv6 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv6 clone() => StringNotIPv6()..mergeFromMessage(this);
+  StringNotIPv6 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv6 copyWith(void Function(StringNotIPv6) updates) =>
       super.copyWith((message) => updates(message as StringNotIPv6))
@@ -1822,8 +1757,6 @@ class StringNotIPv6 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1855,8 +1788,7 @@ class StringIPWithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPWithPrefixLen clone() =>
-      StringIPWithPrefixLen()..mergeFromMessage(this);
+  StringIPWithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPWithPrefixLen copyWith(
           void Function(StringIPWithPrefixLen) updates) =>
@@ -1881,8 +1813,6 @@ class StringIPWithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1914,8 +1844,7 @@ class StringNotIPWithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPWithPrefixLen clone() =>
-      StringNotIPWithPrefixLen()..mergeFromMessage(this);
+  StringNotIPWithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPWithPrefixLen copyWith(
           void Function(StringNotIPWithPrefixLen) updates) =>
@@ -1940,8 +1869,6 @@ class StringNotIPWithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1973,8 +1900,7 @@ class StringIPv4WithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv4WithPrefixLen clone() =>
-      StringIPv4WithPrefixLen()..mergeFromMessage(this);
+  StringIPv4WithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv4WithPrefixLen copyWith(
           void Function(StringIPv4WithPrefixLen) updates) =>
@@ -1999,8 +1925,6 @@ class StringIPv4WithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2032,8 +1956,7 @@ class StringNotIPv4WithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv4WithPrefixLen clone() =>
-      StringNotIPv4WithPrefixLen()..mergeFromMessage(this);
+  StringNotIPv4WithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv4WithPrefixLen copyWith(
           void Function(StringNotIPv4WithPrefixLen) updates) =>
@@ -2059,8 +1982,6 @@ class StringNotIPv4WithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2092,8 +2013,7 @@ class StringIPv6WithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv6WithPrefixLen clone() =>
-      StringIPv6WithPrefixLen()..mergeFromMessage(this);
+  StringIPv6WithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv6WithPrefixLen copyWith(
           void Function(StringIPv6WithPrefixLen) updates) =>
@@ -2118,8 +2038,6 @@ class StringIPv6WithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2151,8 +2069,7 @@ class StringNotIPv6WithPrefixLen extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv6WithPrefixLen clone() =>
-      StringNotIPv6WithPrefixLen()..mergeFromMessage(this);
+  StringNotIPv6WithPrefixLen clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv6WithPrefixLen copyWith(
           void Function(StringNotIPv6WithPrefixLen) updates) =>
@@ -2178,8 +2095,6 @@ class StringNotIPv6WithPrefixLen extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2211,7 +2126,7 @@ class StringIPPrefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPPrefix clone() => StringIPPrefix()..mergeFromMessage(this);
+  StringIPPrefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPPrefix copyWith(void Function(StringIPPrefix) updates) =>
       super.copyWith((message) => updates(message as StringIPPrefix))
@@ -2235,8 +2150,6 @@ class StringIPPrefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2268,7 +2181,7 @@ class StringNotIPPrefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPPrefix clone() => StringNotIPPrefix()..mergeFromMessage(this);
+  StringNotIPPrefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPPrefix copyWith(void Function(StringNotIPPrefix) updates) =>
       super.copyWith((message) => updates(message as StringNotIPPrefix))
@@ -2292,8 +2205,6 @@ class StringNotIPPrefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2325,7 +2236,7 @@ class StringIPv4Prefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv4Prefix clone() => StringIPv4Prefix()..mergeFromMessage(this);
+  StringIPv4Prefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv4Prefix copyWith(void Function(StringIPv4Prefix) updates) =>
       super.copyWith((message) => updates(message as StringIPv4Prefix))
@@ -2349,8 +2260,6 @@ class StringIPv4Prefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2382,7 +2291,7 @@ class StringNotIPv4Prefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv4Prefix clone() => StringNotIPv4Prefix()..mergeFromMessage(this);
+  StringNotIPv4Prefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv4Prefix copyWith(void Function(StringNotIPv4Prefix) updates) =>
       super.copyWith((message) => updates(message as StringNotIPv4Prefix))
@@ -2406,8 +2315,6 @@ class StringNotIPv4Prefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2439,7 +2346,7 @@ class StringIPv6Prefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringIPv6Prefix clone() => StringIPv6Prefix()..mergeFromMessage(this);
+  StringIPv6Prefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringIPv6Prefix copyWith(void Function(StringIPv6Prefix) updates) =>
       super.copyWith((message) => updates(message as StringIPv6Prefix))
@@ -2463,8 +2370,6 @@ class StringIPv6Prefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2496,7 +2401,7 @@ class StringNotIPv6Prefix extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotIPv6Prefix clone() => StringNotIPv6Prefix()..mergeFromMessage(this);
+  StringNotIPv6Prefix clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotIPv6Prefix copyWith(void Function(StringNotIPv6Prefix) updates) =>
       super.copyWith((message) => updates(message as StringNotIPv6Prefix))
@@ -2520,8 +2425,6 @@ class StringNotIPv6Prefix extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2553,7 +2456,7 @@ class StringURI extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringURI clone() => StringURI()..mergeFromMessage(this);
+  StringURI clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringURI copyWith(void Function(StringURI) updates) =>
       super.copyWith((message) => updates(message as StringURI)) as StringURI;
@@ -2575,8 +2478,6 @@ class StringURI extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2608,7 +2509,7 @@ class StringNotURI extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotURI clone() => StringNotURI()..mergeFromMessage(this);
+  StringNotURI clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotURI copyWith(void Function(StringNotURI) updates) =>
       super.copyWith((message) => updates(message as StringNotURI))
@@ -2632,8 +2533,6 @@ class StringNotURI extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2665,7 +2564,7 @@ class StringURIRef extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringURIRef clone() => StringURIRef()..mergeFromMessage(this);
+  StringURIRef clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringURIRef copyWith(void Function(StringURIRef) updates) =>
       super.copyWith((message) => updates(message as StringURIRef))
@@ -2689,8 +2588,6 @@ class StringURIRef extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2722,7 +2619,7 @@ class StringNotURIRef extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotURIRef clone() => StringNotURIRef()..mergeFromMessage(this);
+  StringNotURIRef clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotURIRef copyWith(void Function(StringNotURIRef) updates) =>
       super.copyWith((message) => updates(message as StringNotURIRef))
@@ -2746,8 +2643,6 @@ class StringNotURIRef extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2779,7 +2674,7 @@ class StringUUID extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringUUID clone() => StringUUID()..mergeFromMessage(this);
+  StringUUID clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringUUID copyWith(void Function(StringUUID) updates) =>
       super.copyWith((message) => updates(message as StringUUID)) as StringUUID;
@@ -2801,8 +2696,6 @@ class StringUUID extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2834,7 +2727,7 @@ class StringNotUUID extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotUUID clone() => StringNotUUID()..mergeFromMessage(this);
+  StringNotUUID clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotUUID copyWith(void Function(StringNotUUID) updates) =>
       super.copyWith((message) => updates(message as StringNotUUID))
@@ -2858,8 +2751,6 @@ class StringNotUUID extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2891,7 +2782,7 @@ class StringTUUID extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringTUUID clone() => StringTUUID()..mergeFromMessage(this);
+  StringTUUID clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringTUUID copyWith(void Function(StringTUUID) updates) =>
       super.copyWith((message) => updates(message as StringTUUID))
@@ -2914,8 +2805,6 @@ class StringTUUID extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2947,7 +2836,7 @@ class StringNotTUUID extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringNotTUUID clone() => StringNotTUUID()..mergeFromMessage(this);
+  StringNotTUUID clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringNotTUUID copyWith(void Function(StringNotTUUID) updates) =>
       super.copyWith((message) => updates(message as StringNotTUUID))
@@ -2971,8 +2860,6 @@ class StringNotTUUID extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3004,8 +2891,7 @@ class StringHttpHeaderName extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHttpHeaderName clone() =>
-      StringHttpHeaderName()..mergeFromMessage(this);
+  StringHttpHeaderName clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHttpHeaderName copyWith(void Function(StringHttpHeaderName) updates) =>
       super.copyWith((message) => updates(message as StringHttpHeaderName))
@@ -3029,8 +2915,6 @@ class StringHttpHeaderName extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3062,8 +2946,7 @@ class StringHttpHeaderValue extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHttpHeaderValue clone() =>
-      StringHttpHeaderValue()..mergeFromMessage(this);
+  StringHttpHeaderValue clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHttpHeaderValue copyWith(
           void Function(StringHttpHeaderValue) updates) =>
@@ -3088,8 +2971,6 @@ class StringHttpHeaderValue extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3121,8 +3002,7 @@ class StringHttpHeaderNameLoose extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHttpHeaderNameLoose clone() =>
-      StringHttpHeaderNameLoose()..mergeFromMessage(this);
+  StringHttpHeaderNameLoose clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHttpHeaderNameLoose copyWith(
           void Function(StringHttpHeaderNameLoose) updates) =>
@@ -3147,8 +3027,6 @@ class StringHttpHeaderNameLoose extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3180,8 +3058,7 @@ class StringHttpHeaderValueLoose extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHttpHeaderValueLoose clone() =>
-      StringHttpHeaderValueLoose()..mergeFromMessage(this);
+  StringHttpHeaderValueLoose clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHttpHeaderValueLoose copyWith(
           void Function(StringHttpHeaderValueLoose) updates) =>
@@ -3207,8 +3084,6 @@ class StringHttpHeaderValueLoose extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3240,7 +3115,7 @@ class StringUUIDIgnore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringUUIDIgnore clone() => StringUUIDIgnore()..mergeFromMessage(this);
+  StringUUIDIgnore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringUUIDIgnore copyWith(void Function(StringUUIDIgnore) updates) =>
       super.copyWith((message) => updates(message as StringUUIDIgnore))
@@ -3264,8 +3139,6 @@ class StringUUIDIgnore extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3302,7 +3175,7 @@ class StringInOneof extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringInOneof clone() => StringInOneof()..mergeFromMessage(this);
+  StringInOneof clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringInOneof copyWith(void Function(StringInOneof) updates) =>
       super.copyWith((message) => updates(message as StringInOneof))
@@ -3362,7 +3235,7 @@ class StringHostAndPort extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHostAndPort clone() => StringHostAndPort()..mergeFromMessage(this);
+  StringHostAndPort clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHostAndPort copyWith(void Function(StringHostAndPort) updates) =>
       super.copyWith((message) => updates(message as StringHostAndPort))
@@ -3386,8 +3259,6 @@ class StringHostAndPort extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3419,8 +3290,7 @@ class StringHostAndOptionalPort extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringHostAndOptionalPort clone() =>
-      StringHostAndOptionalPort()..mergeFromMessage(this);
+  StringHostAndOptionalPort clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringHostAndOptionalPort copyWith(
           void Function(StringHostAndOptionalPort) updates) =>
@@ -3445,8 +3315,6 @@ class StringHostAndOptionalPort extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3478,7 +3346,7 @@ class StringExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StringExample clone() => StringExample()..mergeFromMessage(this);
+  StringExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StringExample copyWith(void Function(StringExample) updates) =>
       super.copyWith((message) => updates(message as StringExample))
@@ -3502,8 +3370,6 @@ class StringExample extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }

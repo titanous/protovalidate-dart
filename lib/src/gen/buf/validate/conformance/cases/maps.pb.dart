@@ -48,7 +48,7 @@ class MapNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapNone clone() => MapNone()..mergeFromMessage(this);
+  MapNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapNone copyWith(void Function(MapNone) updates) =>
       super.copyWith((message) => updates(message as MapNone)) as MapNone;
@@ -101,7 +101,7 @@ class MapMin extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapMin clone() => MapMin()..mergeFromMessage(this);
+  MapMin clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapMin copyWith(void Function(MapMin) updates) =>
       super.copyWith((message) => updates(message as MapMin)) as MapMin;
@@ -154,7 +154,7 @@ class MapMax extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapMax clone() => MapMax()..mergeFromMessage(this);
+  MapMax clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapMax copyWith(void Function(MapMax) updates) =>
       super.copyWith((message) => updates(message as MapMax)) as MapMax;
@@ -207,7 +207,7 @@ class MapMinMax extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapMinMax clone() => MapMinMax()..mergeFromMessage(this);
+  MapMinMax clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapMinMax copyWith(void Function(MapMinMax) updates) =>
       super.copyWith((message) => updates(message as MapMinMax)) as MapMinMax;
@@ -260,7 +260,7 @@ class MapExact extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapExact clone() => MapExact()..mergeFromMessage(this);
+  MapExact clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapExact copyWith(void Function(MapExact) updates) =>
       super.copyWith((message) => updates(message as MapExact)) as MapExact;
@@ -313,7 +313,7 @@ class MapKeys extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapKeys clone() => MapKeys()..mergeFromMessage(this);
+  MapKeys clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapKeys copyWith(void Function(MapKeys) updates) =>
       super.copyWith((message) => updates(message as MapKeys)) as MapKeys;
@@ -366,7 +366,7 @@ class MapValues extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapValues clone() => MapValues()..mergeFromMessage(this);
+  MapValues clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapValues copyWith(void Function(MapValues) updates) =>
       super.copyWith((message) => updates(message as MapValues)) as MapValues;
@@ -419,7 +419,7 @@ class MapKeysPattern extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapKeysPattern clone() => MapKeysPattern()..mergeFromMessage(this);
+  MapKeysPattern clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapKeysPattern copyWith(void Function(MapKeysPattern) updates) =>
       super.copyWith((message) => updates(message as MapKeysPattern))
@@ -474,7 +474,7 @@ class MapValuesPattern extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapValuesPattern clone() => MapValuesPattern()..mergeFromMessage(this);
+  MapValuesPattern clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapValuesPattern copyWith(void Function(MapValuesPattern) updates) =>
       super.copyWith((message) => updates(message as MapValuesPattern))
@@ -525,7 +525,7 @@ class MapRecursive_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapRecursive_Msg clone() => MapRecursive_Msg()..mergeFromMessage(this);
+  MapRecursive_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapRecursive_Msg copyWith(void Function(MapRecursive_Msg) updates) =>
       super.copyWith((message) => updates(message as MapRecursive_Msg))
@@ -549,8 +549,6 @@ class MapRecursive_Msg extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -588,7 +586,7 @@ class MapRecursive extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapRecursive clone() => MapRecursive()..mergeFromMessage(this);
+  MapRecursive clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapRecursive copyWith(void Function(MapRecursive) updates) =>
       super.copyWith((message) => updates(message as MapRecursive))
@@ -643,7 +641,7 @@ class MapExactIgnore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapExactIgnore clone() => MapExactIgnore()..mergeFromMessage(this);
+  MapExactIgnore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapExactIgnore copyWith(void Function(MapExactIgnore) updates) =>
       super.copyWith((message) => updates(message as MapExactIgnore))
@@ -712,7 +710,7 @@ class MultipleMaps extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MultipleMaps clone() => MultipleMaps()..mergeFromMessage(this);
+  MultipleMaps clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MultipleMaps copyWith(void Function(MultipleMaps) updates) =>
       super.copyWith((message) => updates(message as MultipleMaps))

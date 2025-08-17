@@ -43,7 +43,7 @@ class TestOneofMsg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TestOneofMsg clone() => TestOneofMsg()..mergeFromMessage(this);
+  TestOneofMsg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TestOneofMsg copyWith(void Function(TestOneofMsg) updates) =>
       super.copyWith((message) => updates(message as TestOneofMsg))
@@ -67,8 +67,6 @@ class TestOneofMsg extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -111,7 +109,7 @@ class OneofNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OneofNone clone() => OneofNone()..mergeFromMessage(this);
+  OneofNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   OneofNone copyWith(void Function(OneofNone) updates) =>
       super.copyWith((message) => updates(message as OneofNone)) as OneofNone;
@@ -194,7 +192,7 @@ class Oneof extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Oneof clone() => Oneof()..mergeFromMessage(this);
+  Oneof clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Oneof copyWith(void Function(Oneof) updates) =>
       super.copyWith((message) => updates(message as Oneof)) as Oneof;
@@ -295,7 +293,7 @@ class OneofRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OneofRequired clone() => OneofRequired()..mergeFromMessage(this);
+  OneofRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   OneofRequired copyWith(void Function(OneofRequired) updates) =>
       super.copyWith((message) => updates(message as OneofRequired))
@@ -394,8 +392,7 @@ class OneofRequiredWithRequiredField extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  OneofRequiredWithRequiredField clone() =>
-      OneofRequiredWithRequiredField()..mergeFromMessage(this);
+  OneofRequiredWithRequiredField clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   OneofRequiredWithRequiredField copyWith(
           void Function(OneofRequiredWithRequiredField) updates) =>

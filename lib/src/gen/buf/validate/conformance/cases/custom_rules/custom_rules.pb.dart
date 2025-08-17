@@ -42,8 +42,7 @@ class NoExpressions_Nested extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  NoExpressions_Nested clone() =>
-      NoExpressions_Nested()..mergeFromMessage(this);
+  NoExpressions_Nested clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   NoExpressions_Nested copyWith(void Function(NoExpressions_Nested) updates) =>
       super.copyWith((message) => updates(message as NoExpressions_Nested))
@@ -105,7 +104,7 @@ class NoExpressions extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  NoExpressions clone() => NoExpressions()..mergeFromMessage(this);
+  NoExpressions clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   NoExpressions copyWith(void Function(NoExpressions) updates) =>
       super.copyWith((message) => updates(message as NoExpressions))
@@ -130,16 +129,12 @@ class NoExpressions extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
-  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
   Enum get b => $_getN(1);
   @$pb.TagNumber(2)
   set b(Enum value) => $_setField(2, value);
-  @$pb.TagNumber(2)
-  $core.bool hasB() => $_has(1);
   @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
 
@@ -188,8 +183,7 @@ class MessageExpressions_Nested extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageExpressions_Nested clone() =>
-      MessageExpressions_Nested()..mergeFromMessage(this);
+  MessageExpressions_Nested clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageExpressions_Nested copyWith(
           void Function(MessageExpressions_Nested) updates) =>
@@ -215,16 +209,12 @@ class MessageExpressions_Nested extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
-  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get b => $_getIZ(1);
   @$pb.TagNumber(2)
   set b($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasB() => $_has(1);
   @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
 }
@@ -285,7 +275,7 @@ class MessageExpressions extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageExpressions clone() => MessageExpressions()..mergeFromMessage(this);
+  MessageExpressions clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageExpressions copyWith(void Function(MessageExpressions) updates) =>
       super.copyWith((message) => updates(message as MessageExpressions))
@@ -310,16 +300,12 @@ class MessageExpressions extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
-  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get b => $_getIZ(1);
   @$pb.TagNumber(2)
   set b($core.int value) => $_setSignedInt32(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasB() => $_has(1);
   @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
 
@@ -328,16 +314,12 @@ class MessageExpressions extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   set c(Enum value) => $_setField(3, value);
   @$pb.TagNumber(3)
-  $core.bool hasC() => $_has(2);
-  @$pb.TagNumber(3)
   void clearC() => $_clearField(3);
 
   @$pb.TagNumber(4)
   Enum get d => $_getN(3);
   @$pb.TagNumber(4)
   set d(Enum value) => $_setField(4, value);
-  @$pb.TagNumber(4)
-  $core.bool hasD() => $_has(3);
   @$pb.TagNumber(4)
   void clearD() => $_clearField(4);
 
@@ -393,7 +375,7 @@ class MissingField extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MissingField clone() => MissingField()..mergeFromMessage(this);
+  MissingField clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MissingField copyWith(void Function(MissingField) updates) =>
       super.copyWith((message) => updates(message as MissingField))
@@ -417,8 +399,6 @@ class MissingField extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -452,7 +432,7 @@ class IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  IncorrectType clone() => IncorrectType()..mergeFromMessage(this);
+  IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   IncorrectType copyWith(void Function(IncorrectType) updates) =>
       super.copyWith((message) => updates(message as IncorrectType))
@@ -476,8 +456,6 @@ class IncorrectType extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -511,7 +489,7 @@ class DynRuntimeError extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DynRuntimeError clone() => DynRuntimeError()..mergeFromMessage(this);
+  DynRuntimeError clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DynRuntimeError copyWith(void Function(DynRuntimeError) updates) =>
       super.copyWith((message) => updates(message as DynRuntimeError))
@@ -535,8 +513,6 @@ class DynRuntimeError extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -562,7 +538,7 @@ class NowEqualsNow extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  NowEqualsNow clone() => NowEqualsNow()..mergeFromMessage(this);
+  NowEqualsNow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   NowEqualsNow copyWith(void Function(NowEqualsNow) updates) =>
       super.copyWith((message) => updates(message as NowEqualsNow))
@@ -612,8 +588,7 @@ class FieldExpressionMultipleScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMultipleScalar clone() =>
-      FieldExpressionMultipleScalar()..mergeFromMessage(this);
+  FieldExpressionMultipleScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMultipleScalar copyWith(
           void Function(FieldExpressionMultipleScalar) updates) =>
@@ -640,8 +615,6 @@ class FieldExpressionMultipleScalar extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -675,8 +648,7 @@ class FieldExpressionNestedScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionNestedScalar clone() =>
-      FieldExpressionNestedScalar()..mergeFromMessage(this);
+  FieldExpressionNestedScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionNestedScalar copyWith(
           void Function(FieldExpressionNestedScalar) updates) =>
@@ -739,8 +711,7 @@ class FieldExpressionOptionalScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionOptionalScalar clone() =>
-      FieldExpressionOptionalScalar()..mergeFromMessage(this);
+  FieldExpressionOptionalScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionOptionalScalar copyWith(
           void Function(FieldExpressionOptionalScalar) updates) =>
@@ -802,8 +773,7 @@ class FieldExpressionScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionScalar clone() =>
-      FieldExpressionScalar()..mergeFromMessage(this);
+  FieldExpressionScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionScalar copyWith(
           void Function(FieldExpressionScalar) updates) =>
@@ -828,8 +798,6 @@ class FieldExpressionScalar extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -866,7 +834,7 @@ class FieldExpressionEnum extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionEnum clone() => FieldExpressionEnum()..mergeFromMessage(this);
+  FieldExpressionEnum clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionEnum copyWith(void Function(FieldExpressionEnum) updates) =>
       super.copyWith((message) => updates(message as FieldExpressionEnum))
@@ -890,8 +858,6 @@ class FieldExpressionEnum extends $pb.GeneratedMessage {
   Enum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(Enum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -925,8 +891,7 @@ class FieldExpressionMessage_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMessage_Msg clone() =>
-      FieldExpressionMessage_Msg()..mergeFromMessage(this);
+  FieldExpressionMessage_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMessage_Msg copyWith(
           void Function(FieldExpressionMessage_Msg) updates) =>
@@ -952,8 +917,6 @@ class FieldExpressionMessage_Msg extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -987,8 +950,7 @@ class FieldExpressionMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMessage clone() =>
-      FieldExpressionMessage()..mergeFromMessage(this);
+  FieldExpressionMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMessage copyWith(
           void Function(FieldExpressionMessage) updates) =>
@@ -1054,8 +1016,7 @@ class FieldExpressionMapInt32 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapInt32 clone() =>
-      FieldExpressionMapInt32()..mergeFromMessage(this);
+  FieldExpressionMapInt32 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapInt32 copyWith(
           void Function(FieldExpressionMapInt32) updates) =>
@@ -1113,8 +1074,7 @@ class FieldExpressionMapInt64 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapInt64 clone() =>
-      FieldExpressionMapInt64()..mergeFromMessage(this);
+  FieldExpressionMapInt64 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapInt64 copyWith(
           void Function(FieldExpressionMapInt64) updates) =>
@@ -1172,8 +1132,7 @@ class FieldExpressionMapUint32 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapUint32 clone() =>
-      FieldExpressionMapUint32()..mergeFromMessage(this);
+  FieldExpressionMapUint32 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapUint32 copyWith(
           void Function(FieldExpressionMapUint32) updates) =>
@@ -1231,8 +1190,7 @@ class FieldExpressionMapUint64 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapUint64 clone() =>
-      FieldExpressionMapUint64()..mergeFromMessage(this);
+  FieldExpressionMapUint64 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapUint64 copyWith(
           void Function(FieldExpressionMapUint64) updates) =>
@@ -1290,8 +1248,7 @@ class FieldExpressionMapBool extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapBool clone() =>
-      FieldExpressionMapBool()..mergeFromMessage(this);
+  FieldExpressionMapBool clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapBool copyWith(
           void Function(FieldExpressionMapBool) updates) =>
@@ -1349,8 +1306,7 @@ class FieldExpressionMapString extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapString clone() =>
-      FieldExpressionMapString()..mergeFromMessage(this);
+  FieldExpressionMapString clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapString copyWith(
           void Function(FieldExpressionMapString) updates) =>
@@ -1412,8 +1368,7 @@ class FieldExpressionMapEnum extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapEnum clone() =>
-      FieldExpressionMapEnum()..mergeFromMessage(this);
+  FieldExpressionMapEnum clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapEnum copyWith(
           void Function(FieldExpressionMapEnum) updates) =>
@@ -1467,8 +1422,7 @@ class FieldExpressionMapMessage_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapMessage_Msg clone() =>
-      FieldExpressionMapMessage_Msg()..mergeFromMessage(this);
+  FieldExpressionMapMessage_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapMessage_Msg copyWith(
           void Function(FieldExpressionMapMessage_Msg) updates) =>
@@ -1495,8 +1449,6 @@ class FieldExpressionMapMessage_Msg extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -1538,8 +1490,7 @@ class FieldExpressionMapMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapMessage clone() =>
-      FieldExpressionMapMessage()..mergeFromMessage(this);
+  FieldExpressionMapMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapMessage copyWith(
           void Function(FieldExpressionMapMessage) updates) =>
@@ -1597,8 +1548,7 @@ class FieldExpressionMapKeys extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapKeys clone() =>
-      FieldExpressionMapKeys()..mergeFromMessage(this);
+  FieldExpressionMapKeys clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapKeys copyWith(
           void Function(FieldExpressionMapKeys) updates) =>
@@ -1656,8 +1606,7 @@ class FieldExpressionMapScalarValues extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapScalarValues clone() =>
-      FieldExpressionMapScalarValues()..mergeFromMessage(this);
+  FieldExpressionMapScalarValues clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapScalarValues copyWith(
           void Function(FieldExpressionMapScalarValues) updates) =>
@@ -1721,8 +1670,7 @@ class FieldExpressionMapEnumValues extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapEnumValues clone() =>
-      FieldExpressionMapEnumValues()..mergeFromMessage(this);
+  FieldExpressionMapEnumValues clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapEnumValues copyWith(
           void Function(FieldExpressionMapEnumValues) updates) =>
@@ -1779,8 +1727,7 @@ class FieldExpressionMapMessageValues_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapMessageValues_Msg clone() =>
-      FieldExpressionMapMessageValues_Msg()..mergeFromMessage(this);
+  FieldExpressionMapMessageValues_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapMessageValues_Msg copyWith(
           void Function(FieldExpressionMapMessageValues_Msg) updates) =>
@@ -1808,8 +1755,6 @@ class FieldExpressionMapMessageValues_Msg extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -1852,8 +1797,7 @@ class FieldExpressionMapMessageValues extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionMapMessageValues clone() =>
-      FieldExpressionMapMessageValues()..mergeFromMessage(this);
+  FieldExpressionMapMessageValues clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionMapMessageValues copyWith(
           void Function(FieldExpressionMapMessageValues) updates) =>
@@ -1910,8 +1854,7 @@ class FieldExpressionRepeatedScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedScalar clone() =>
-      FieldExpressionRepeatedScalar()..mergeFromMessage(this);
+  FieldExpressionRepeatedScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedScalar copyWith(
           void Function(FieldExpressionRepeatedScalar) updates) =>
@@ -1969,8 +1912,7 @@ class FieldExpressionRepeatedEnum extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedEnum clone() =>
-      FieldExpressionRepeatedEnum()..mergeFromMessage(this);
+  FieldExpressionRepeatedEnum clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedEnum copyWith(
           void Function(FieldExpressionRepeatedEnum) updates) =>
@@ -2027,8 +1969,7 @@ class FieldExpressionRepeatedMessage_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedMessage_Msg clone() =>
-      FieldExpressionRepeatedMessage_Msg()..mergeFromMessage(this);
+  FieldExpressionRepeatedMessage_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedMessage_Msg copyWith(
           void Function(FieldExpressionRepeatedMessage_Msg) updates) =>
@@ -2056,8 +1997,6 @@ class FieldExpressionRepeatedMessage_Msg extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -2092,8 +2031,7 @@ class FieldExpressionRepeatedMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedMessage clone() =>
-      FieldExpressionRepeatedMessage()..mergeFromMessage(this);
+  FieldExpressionRepeatedMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedMessage copyWith(
           void Function(FieldExpressionRepeatedMessage) updates) =>
@@ -2149,8 +2087,7 @@ class FieldExpressionRepeatedScalarItems extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedScalarItems clone() =>
-      FieldExpressionRepeatedScalarItems()..mergeFromMessage(this);
+  FieldExpressionRepeatedScalarItems clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedScalarItems copyWith(
           void Function(FieldExpressionRepeatedScalarItems) updates) =>
@@ -2210,8 +2147,7 @@ class FieldExpressionRepeatedEnumItems extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedEnumItems clone() =>
-      FieldExpressionRepeatedEnumItems()..mergeFromMessage(this);
+  FieldExpressionRepeatedEnumItems clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedEnumItems copyWith(
           void Function(FieldExpressionRepeatedEnumItems) updates) =>
@@ -2269,8 +2205,7 @@ class FieldExpressionRepeatedMessageItems_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedMessageItems_Msg clone() =>
-      FieldExpressionRepeatedMessageItems_Msg()..mergeFromMessage(this);
+  FieldExpressionRepeatedMessageItems_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedMessageItems_Msg copyWith(
           void Function(FieldExpressionRepeatedMessageItems_Msg) updates) =>
@@ -2298,8 +2233,6 @@ class FieldExpressionRepeatedMessageItems_Msg extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -2335,8 +2268,7 @@ class FieldExpressionRepeatedMessageItems extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FieldExpressionRepeatedMessageItems clone() =>
-      FieldExpressionRepeatedMessageItems()..mergeFromMessage(this);
+  FieldExpressionRepeatedMessageItems clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FieldExpressionRepeatedMessageItems copyWith(
           void Function(FieldExpressionRepeatedMessageItems) updates) =>

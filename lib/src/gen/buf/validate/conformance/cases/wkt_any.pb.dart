@@ -47,7 +47,7 @@ class AnyNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyNone clone() => AnyNone()..mergeFromMessage(this);
+  AnyNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyNone copyWith(void Function(AnyNone) updates) =>
       super.copyWith((message) => updates(message as AnyNone)) as AnyNone;
@@ -104,7 +104,7 @@ class AnyRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyRequired clone() => AnyRequired()..mergeFromMessage(this);
+  AnyRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyRequired copyWith(void Function(AnyRequired) updates) =>
       super.copyWith((message) => updates(message as AnyRequired))
@@ -162,7 +162,7 @@ class AnyIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyIn clone() => AnyIn()..mergeFromMessage(this);
+  AnyIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyIn copyWith(void Function(AnyIn) updates) =>
       super.copyWith((message) => updates(message as AnyIn)) as AnyIn;
@@ -219,7 +219,7 @@ class AnyNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyNotIn clone() => AnyNotIn()..mergeFromMessage(this);
+  AnyNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyNotIn copyWith(void Function(AnyNotIn) updates) =>
       super.copyWith((message) => updates(message as AnyNotIn)) as AnyNotIn;
@@ -277,7 +277,7 @@ class AnyWrongTypeScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyWrongTypeScalar clone() => AnyWrongTypeScalar()..mergeFromMessage(this);
+  AnyWrongTypeScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyWrongTypeScalar copyWith(void Function(AnyWrongTypeScalar) updates) =>
       super.copyWith((message) => updates(message as AnyWrongTypeScalar))
@@ -301,8 +301,6 @@ class AnyWrongTypeScalar extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -335,8 +333,7 @@ class AnyWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyWrongTypeMessage_WrongType clone() =>
-      AnyWrongTypeMessage_WrongType()..mergeFromMessage(this);
+  AnyWrongTypeMessage_WrongType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyWrongTypeMessage_WrongType copyWith(
           void Function(AnyWrongTypeMessage_WrongType) updates) =>
@@ -363,8 +360,6 @@ class AnyWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -397,7 +392,7 @@ class AnyWrongTypeMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyWrongTypeMessage clone() => AnyWrongTypeMessage()..mergeFromMessage(this);
+  AnyWrongTypeMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyWrongTypeMessage copyWith(void Function(AnyWrongTypeMessage) updates) =>
       super.copyWith((message) => updates(message as AnyWrongTypeMessage))
@@ -457,7 +452,7 @@ class AnyWrongTypeWrapper extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyWrongTypeWrapper clone() => AnyWrongTypeWrapper()..mergeFromMessage(this);
+  AnyWrongTypeWrapper clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyWrongTypeWrapper copyWith(void Function(AnyWrongTypeWrapper) updates) =>
       super.copyWith((message) => updates(message as AnyWrongTypeWrapper))
@@ -517,7 +512,7 @@ class AnyWrongTypeWKT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  AnyWrongTypeWKT clone() => AnyWrongTypeWKT()..mergeFromMessage(this);
+  AnyWrongTypeWKT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   AnyWrongTypeWKT copyWith(void Function(AnyWrongTypeWKT) updates) =>
       super.copyWith((message) => updates(message as AnyWrongTypeWKT))

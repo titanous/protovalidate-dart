@@ -14,45 +14,52 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class Embed_Enumerated extends $pb.ProtobufEnum {
-  static const Embed_Enumerated ENUMERATED_UNSPECIFIED =
-      Embed_Enumerated._(0, _omitEnumNames ? '' : 'ENUMERATED_UNSPECIFIED');
-  static const Embed_Enumerated ENUMERATED_VALUE =
-      Embed_Enumerated._(1, _omitEnumNames ? '' : 'ENUMERATED_VALUE');
+enum Embed_Enumerated implements $pb.ProtobufEnum {
+  ENUMERATED_UNSPECIFIED(0, _omitEnumNames ? '' : 'ENUMERATED_UNSPECIFIED'),
 
-  static const $core.List<Embed_Enumerated> values = <Embed_Enumerated>[
-    ENUMERATED_UNSPECIFIED,
-    ENUMERATED_VALUE,
-  ];
+  ENUMERATED_VALUE(1, _omitEnumNames ? '' : 'ENUMERATED_VALUE'),
+  ;
 
-  static final $core.List<Embed_Enumerated?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
-  static Embed_Enumerated? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  static final $core.Map<$core.int, Embed_Enumerated> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static Embed_Enumerated? valueOf($core.int value) => _byValue[value];
 
-  const Embed_Enumerated._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const Embed_Enumerated(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
-class Embed_DoubleEmbed_DoubleEnumerated extends $pb.ProtobufEnum {
-  static const Embed_DoubleEmbed_DoubleEnumerated
-      DOUBLE_ENUMERATED_UNSPECIFIED = Embed_DoubleEmbed_DoubleEnumerated._(
-          0, _omitEnumNames ? '' : 'DOUBLE_ENUMERATED_UNSPECIFIED');
-  static const Embed_DoubleEmbed_DoubleEnumerated DOUBLE_ENUMERATED_VALUE =
-      Embed_DoubleEmbed_DoubleEnumerated._(
-          1, _omitEnumNames ? '' : 'DOUBLE_ENUMERATED_VALUE');
+enum Embed_DoubleEmbed_DoubleEnumerated implements $pb.ProtobufEnum {
+  DOUBLE_ENUMERATED_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'DOUBLE_ENUMERATED_UNSPECIFIED'),
 
-  static const $core.List<Embed_DoubleEmbed_DoubleEnumerated> values =
-      <Embed_DoubleEmbed_DoubleEnumerated>[
-    DOUBLE_ENUMERATED_UNSPECIFIED,
-    DOUBLE_ENUMERATED_VALUE,
-  ];
+  DOUBLE_ENUMERATED_VALUE(1, _omitEnumNames ? '' : 'DOUBLE_ENUMERATED_VALUE'),
+  ;
 
-  static final $core.List<Embed_DoubleEmbed_DoubleEnumerated?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static final $core.Map<$core.int, Embed_DoubleEmbed_DoubleEnumerated>
+      _byValue = $pb.ProtobufEnum.initByValue(values);
   static Embed_DoubleEmbed_DoubleEnumerated? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+      _byValue[value];
 
-  const Embed_DoubleEmbed_DoubleEnumerated._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const Embed_DoubleEmbed_DoubleEnumerated(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

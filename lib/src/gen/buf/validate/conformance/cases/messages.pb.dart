@@ -50,7 +50,7 @@ class TestMsg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TestMsg clone() => TestMsg()..mergeFromMessage(this);
+  TestMsg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TestMsg copyWith(void Function(TestMsg) updates) =>
       super.copyWith((message) => updates(message as TestMsg)) as TestMsg;
@@ -72,8 +72,6 @@ class TestMsg extends $pb.GeneratedMessage {
   $core.String get const_1 => $_getSZ(0);
   @$pb.TagNumber(1)
   set const_1($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasConst_1() => $_has(0);
   @$pb.TagNumber(1)
   void clearConst_1() => $_clearField(1);
 
@@ -109,7 +107,7 @@ class MessageNone_NoneMsg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageNone_NoneMsg clone() => MessageNone_NoneMsg()..mergeFromMessage(this);
+  MessageNone_NoneMsg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageNone_NoneMsg copyWith(void Function(MessageNone_NoneMsg) updates) =>
       super.copyWith((message) => updates(message as MessageNone_NoneMsg))
@@ -158,7 +156,7 @@ class MessageNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageNone clone() => MessageNone()..mergeFromMessage(this);
+  MessageNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageNone copyWith(void Function(MessageNone) updates) =>
       super.copyWith((message) => updates(message as MessageNone))
@@ -216,7 +214,7 @@ class Message extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Message clone() => Message()..mergeFromMessage(this);
+  Message clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Message copyWith(void Function(Message) updates) =>
       super.copyWith((message) => updates(message as Message)) as Message;
@@ -274,7 +272,7 @@ class MessageCrossPackage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageCrossPackage clone() => MessageCrossPackage()..mergeFromMessage(this);
+  MessageCrossPackage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageCrossPackage copyWith(void Function(MessageCrossPackage) updates) =>
       super.copyWith((message) => updates(message as MessageCrossPackage))
@@ -333,7 +331,7 @@ class MessageSkip extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageSkip clone() => MessageSkip()..mergeFromMessage(this);
+  MessageSkip clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageSkip copyWith(void Function(MessageSkip) updates) =>
       super.copyWith((message) => updates(message as MessageSkip))
@@ -391,7 +389,7 @@ class MessageRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageRequired clone() => MessageRequired()..mergeFromMessage(this);
+  MessageRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageRequired copyWith(void Function(MessageRequired) updates) =>
       super.copyWith((message) => updates(message as MessageRequired))
@@ -450,8 +448,7 @@ class MessageRequiredButOptional extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageRequiredButOptional clone() =>
-      MessageRequiredButOptional()..mergeFromMessage(this);
+  MessageRequiredButOptional clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageRequiredButOptional copyWith(
           void Function(MessageRequiredButOptional) updates) =>
@@ -520,8 +517,7 @@ class MessageRequiredOneof extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageRequiredOneof clone() =>
-      MessageRequiredOneof()..mergeFromMessage(this);
+  MessageRequiredOneof clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageRequiredOneof copyWith(void Function(MessageRequiredOneof) updates) =>
       super.copyWith((message) => updates(message as MessageRequiredOneof))
@@ -577,7 +573,7 @@ class MessageWith3dInside extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageWith3dInside clone() => MessageWith3dInside()..mergeFromMessage(this);
+  MessageWith3dInside clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageWith3dInside copyWith(void Function(MessageWith3dInside) updates) =>
       super.copyWith((message) => updates(message as MessageWith3dInside))
@@ -630,8 +626,7 @@ class MessageOneofSingleField extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofSingleField clone() =>
-      MessageOneofSingleField()..mergeFromMessage(this);
+  MessageOneofSingleField clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofSingleField copyWith(
           void Function(MessageOneofSingleField) updates) =>
@@ -657,16 +652,12 @@ class MessageOneofSingleField extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -703,8 +694,7 @@ class MessageOneofSingleFieldRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofSingleFieldRequired clone() =>
-      MessageOneofSingleFieldRequired()..mergeFromMessage(this);
+  MessageOneofSingleFieldRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofSingleFieldRequired copyWith(
           void Function(MessageOneofSingleFieldRequired) updates) =>
@@ -733,16 +723,12 @@ class MessageOneofSingleFieldRequired extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -779,8 +765,7 @@ class MessageOneofMultipleFields extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofMultipleFields clone() =>
-      MessageOneofMultipleFields()..mergeFromMessage(this);
+  MessageOneofMultipleFields clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofMultipleFields copyWith(
           void Function(MessageOneofMultipleFields) updates) =>
@@ -807,16 +792,12 @@ class MessageOneofMultipleFields extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -854,8 +835,7 @@ class MessageOneofMultipleFieldsRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofMultipleFieldsRequired clone() =>
-      MessageOneofMultipleFieldsRequired()..mergeFromMessage(this);
+  MessageOneofMultipleFieldsRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofMultipleFieldsRequired copyWith(
           void Function(MessageOneofMultipleFieldsRequired) updates) =>
@@ -884,16 +864,12 @@ class MessageOneofMultipleFieldsRequired extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -935,8 +911,7 @@ class MessageOneofMultipleSharedFields extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofMultipleSharedFields clone() =>
-      MessageOneofMultipleSharedFields()..mergeFromMessage(this);
+  MessageOneofMultipleSharedFields clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofMultipleSharedFields copyWith(
           void Function(MessageOneofMultipleSharedFields) updates) =>
@@ -965,8 +940,6 @@ class MessageOneofMultipleSharedFields extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
@@ -974,16 +947,12 @@ class MessageOneofMultipleSharedFields extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
-  @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 
   @$pb.TagNumber(3)
   $core.int get intField => $_getIZ(2);
   @$pb.TagNumber(3)
   set intField($core.int value) => $_setSignedInt32(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasIntField() => $_has(2);
   @$pb.TagNumber(3)
   void clearIntField() => $_clearField(3);
 }
@@ -1016,8 +985,7 @@ class MessageOneofUnknownFieldName extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofUnknownFieldName clone() =>
-      MessageOneofUnknownFieldName()..mergeFromMessage(this);
+  MessageOneofUnknownFieldName clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofUnknownFieldName copyWith(
           void Function(MessageOneofUnknownFieldName) updates) =>
@@ -1044,8 +1012,6 @@ class MessageOneofUnknownFieldName extends $pb.GeneratedMessage {
   $core.String get strField => $_getSZ(0);
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
   @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 }
@@ -1082,8 +1048,7 @@ class MessageOneofDuplicateField extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofDuplicateField clone() =>
-      MessageOneofDuplicateField()..mergeFromMessage(this);
+  MessageOneofDuplicateField clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofDuplicateField copyWith(
           void Function(MessageOneofDuplicateField) updates) =>
@@ -1110,16 +1075,12 @@ class MessageOneofDuplicateField extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -1156,8 +1117,7 @@ class MessageOneofZeroFields extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofZeroFields clone() =>
-      MessageOneofZeroFields()..mergeFromMessage(this);
+  MessageOneofZeroFields clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofZeroFields copyWith(
           void Function(MessageOneofZeroFields) updates) =>
@@ -1183,16 +1143,12 @@ class MessageOneofZeroFields extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -1230,8 +1186,7 @@ class MessageOneofUnsatisfiable extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofUnsatisfiable clone() =>
-      MessageOneofUnsatisfiable()..mergeFromMessage(this);
+  MessageOneofUnsatisfiable clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofUnsatisfiable copyWith(
           void Function(MessageOneofUnsatisfiable) updates) =>
@@ -1257,8 +1212,6 @@ class MessageOneofUnsatisfiable extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.bool value) => $_setBool(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
-  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
@@ -1266,16 +1219,12 @@ class MessageOneofUnsatisfiable extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   set b($core.bool value) => $_setBool(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasB() => $_has(1);
-  @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
 
   @$pb.TagNumber(3)
   $core.bool get c => $_getBF(2);
   @$pb.TagNumber(3)
   set c($core.bool value) => $_setBool(2, value);
-  @$pb.TagNumber(3)
-  $core.bool hasC() => $_has(2);
   @$pb.TagNumber(3)
   void clearC() => $_clearField(3);
 }
@@ -1312,8 +1261,7 @@ class MessageOneofIgnoreUnpopulated extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofIgnoreUnpopulated clone() =>
-      MessageOneofIgnoreUnpopulated()..mergeFromMessage(this);
+  MessageOneofIgnoreUnpopulated clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofIgnoreUnpopulated copyWith(
           void Function(MessageOneofIgnoreUnpopulated) updates) =>
@@ -1341,16 +1289,12 @@ class MessageOneofIgnoreUnpopulated extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -1388,8 +1332,7 @@ class MessageOneofIgnoreUnpopulatedRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofIgnoreUnpopulatedRequired clone() =>
-      MessageOneofIgnoreUnpopulatedRequired()..mergeFromMessage(this);
+  MessageOneofIgnoreUnpopulatedRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofIgnoreUnpopulatedRequired copyWith(
           void Function(MessageOneofIgnoreUnpopulatedRequired) updates) =>
@@ -1418,16 +1361,12 @@ class MessageOneofIgnoreUnpopulatedRequired extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set strField($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasStrField() => $_has(0);
-  @$pb.TagNumber(1)
   void clearStrField() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }
@@ -1464,8 +1403,7 @@ class MessageOneofIgnoreOverride extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MessageOneofIgnoreOverride clone() =>
-      MessageOneofIgnoreOverride()..mergeFromMessage(this);
+  MessageOneofIgnoreOverride clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MessageOneofIgnoreOverride copyWith(
           void Function(MessageOneofIgnoreOverride) updates) =>
@@ -1502,8 +1440,6 @@ class MessageOneofIgnoreOverride extends $pb.GeneratedMessage {
   $core.bool get boolField => $_getBF(1);
   @$pb.TagNumber(2)
   set boolField($core.bool value) => $_setBool(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasBoolField() => $_has(1);
   @$pb.TagNumber(2)
   void clearBoolField() => $_clearField(2);
 }

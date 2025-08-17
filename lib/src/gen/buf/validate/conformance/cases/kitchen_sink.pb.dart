@@ -132,7 +132,7 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  ComplexTestMsg clone() => ComplexTestMsg()..mergeFromMessage(this);
+  ComplexTestMsg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   ComplexTestMsg copyWith(void Function(ComplexTestMsg) updates) =>
       super.copyWith((message) => updates(message as ComplexTestMsg))
@@ -160,8 +160,6 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set const_1($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasConst_1() => $_has(0);
-  @$pb.TagNumber(1)
   void clearConst_1() => $_clearField(1);
 
   @$pb.TagNumber(2)
@@ -180,16 +178,12 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   set intConst($core.int value) => $_setSignedInt32(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasIntConst() => $_has(2);
-  @$pb.TagNumber(3)
   void clearIntConst() => $_clearField(3);
 
   @$pb.TagNumber(4)
   $core.bool get boolConst => $_getBF(3);
   @$pb.TagNumber(4)
   set boolConst($core.bool value) => $_setBool(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasBoolConst() => $_has(3);
   @$pb.TagNumber(4)
   void clearBoolConst() => $_clearField(4);
 
@@ -242,8 +236,6 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   set floatConst($core.double value) => $_setFloat(8, value);
   @$pb.TagNumber(9)
-  $core.bool hasFloatConst() => $_has(8);
-  @$pb.TagNumber(9)
   void clearFloatConst() => $_clearField(9);
 
   @$pb.TagNumber(10)
@@ -251,16 +243,12 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
   @$pb.TagNumber(10)
   set doubleIn($core.double value) => $_setDouble(9, value);
   @$pb.TagNumber(10)
-  $core.bool hasDoubleIn() => $_has(9);
-  @$pb.TagNumber(10)
   void clearDoubleIn() => $_clearField(10);
 
   @$pb.TagNumber(11)
   ComplexTestEnum get enumConst => $_getN(10);
   @$pb.TagNumber(11)
   set enumConst(ComplexTestEnum value) => $_setField(11, value);
-  @$pb.TagNumber(11)
-  $core.bool hasEnumConst() => $_has(10);
   @$pb.TagNumber(11)
   void clearEnumConst() => $_clearField(11);
 
@@ -285,8 +273,6 @@ class ComplexTestMsg extends $pb.GeneratedMessage {
   $core.List<$core.int> get bytesVal => $_getN(14);
   @$pb.TagNumber(15)
   set bytesVal($core.List<$core.int> value) => $_setBytes(14, value);
-  @$pb.TagNumber(15)
-  $core.bool hasBytesVal() => $_has(14);
   @$pb.TagNumber(15)
   void clearBytesVal() => $_clearField(15);
 
@@ -337,7 +323,7 @@ class KitchenSinkMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  KitchenSinkMessage clone() => KitchenSinkMessage()..mergeFromMessage(this);
+  KitchenSinkMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   KitchenSinkMessage copyWith(void Function(KitchenSinkMessage) updates) =>
       super.copyWith((message) => updates(message as KitchenSinkMessage))

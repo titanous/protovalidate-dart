@@ -59,8 +59,7 @@ class TestConformanceRequest extends $pb.GeneratedMessage {
         packageName: const $pb.PackageName('buf.validate.conformance.harness'));
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TestConformanceRequest clone() =>
-      TestConformanceRequest()..mergeFromMessage(this);
+  TestConformanceRequest clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TestConformanceRequest copyWith(
           void Function(TestConformanceRequest) updates) =>
@@ -131,8 +130,7 @@ class TestConformanceResponse extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TestConformanceResponse clone() =>
-      TestConformanceResponse()..mergeFromMessage(this);
+  TestConformanceResponse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TestConformanceResponse copyWith(
           void Function(TestConformanceResponse) updates) =>
@@ -217,7 +215,7 @@ class TestResult extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TestResult clone() => TestResult()..mergeFromMessage(this);
+  TestResult clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TestResult copyWith(void Function(TestResult) updates) =>
       super.copyWith((message) => updates(message as TestResult)) as TestResult;

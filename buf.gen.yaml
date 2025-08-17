@@ -35,7 +35,8 @@ inputs:
       - buf/validate/conformance/cases/wkt_wrappers.proto
       - buf/validate/conformance/cases/yet_another_package
 plugins:
-  - local: protoc-gen-dart
+  - local: ["dart", "run", "protoc_plugin"]
+    opt: default_api_level=API_LEVEL_HYBRID
     out: lib/src/gen
     include_imports: true
     include_wkt: true

@@ -43,7 +43,7 @@ class BoolNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BoolNone clone() => BoolNone()..mergeFromMessage(this);
+  BoolNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BoolNone copyWith(void Function(BoolNone) updates) =>
       super.copyWith((message) => updates(message as BoolNone)) as BoolNone;
@@ -65,8 +65,6 @@ class BoolNone extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -98,7 +96,7 @@ class BoolConstTrue extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BoolConstTrue clone() => BoolConstTrue()..mergeFromMessage(this);
+  BoolConstTrue clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BoolConstTrue copyWith(void Function(BoolConstTrue) updates) =>
       super.copyWith((message) => updates(message as BoolConstTrue))
@@ -122,8 +120,6 @@ class BoolConstTrue extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -155,7 +151,7 @@ class BoolConstFalse extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BoolConstFalse clone() => BoolConstFalse()..mergeFromMessage(this);
+  BoolConstFalse clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BoolConstFalse copyWith(void Function(BoolConstFalse) updates) =>
       super.copyWith((message) => updates(message as BoolConstFalse))
@@ -179,8 +175,6 @@ class BoolConstFalse extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -212,7 +206,7 @@ class BoolExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  BoolExample clone() => BoolExample()..mergeFromMessage(this);
+  BoolExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   BoolExample copyWith(void Function(BoolExample) updates) =>
       super.copyWith((message) => updates(message as BoolExample))
@@ -235,8 +229,6 @@ class BoolExample extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }

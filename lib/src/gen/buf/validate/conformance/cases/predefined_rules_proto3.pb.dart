@@ -54,8 +54,7 @@ class PredefinedFloatRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFloatRuleProto3 clone() =>
-      PredefinedFloatRuleProto3()..mergeFromMessage(this);
+  PredefinedFloatRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFloatRuleProto3 copyWith(
           void Function(PredefinedFloatRuleProto3) updates) =>
@@ -80,8 +79,6 @@ class PredefinedFloatRuleProto3 extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -114,8 +111,7 @@ class PredefinedDoubleRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedDoubleRuleProto3 clone() =>
-      PredefinedDoubleRuleProto3()..mergeFromMessage(this);
+  PredefinedDoubleRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedDoubleRuleProto3 copyWith(
           void Function(PredefinedDoubleRuleProto3) updates) =>
@@ -141,8 +137,6 @@ class PredefinedDoubleRuleProto3 extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -175,8 +169,7 @@ class PredefinedInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedInt32RuleProto3 clone() =>
-      PredefinedInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedInt32RuleProto3 copyWith(
           void Function(PredefinedInt32RuleProto3) updates) =>
@@ -201,8 +194,6 @@ class PredefinedInt32RuleProto3 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -235,8 +226,7 @@ class PredefinedInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedInt64RuleProto3 clone() =>
-      PredefinedInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedInt64RuleProto3 copyWith(
           void Function(PredefinedInt64RuleProto3) updates) =>
@@ -261,8 +251,6 @@ class PredefinedInt64RuleProto3 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -295,8 +283,7 @@ class PredefinedUInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedUInt32RuleProto3 clone() =>
-      PredefinedUInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedUInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedUInt32RuleProto3 copyWith(
           void Function(PredefinedUInt32RuleProto3) updates) =>
@@ -322,8 +309,6 @@ class PredefinedUInt32RuleProto3 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -357,8 +342,7 @@ class PredefinedUInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedUInt64RuleProto3 clone() =>
-      PredefinedUInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedUInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedUInt64RuleProto3 copyWith(
           void Function(PredefinedUInt64RuleProto3) updates) =>
@@ -384,8 +368,6 @@ class PredefinedUInt64RuleProto3 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -418,8 +400,7 @@ class PredefinedSInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSInt32RuleProto3 clone() =>
-      PredefinedSInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedSInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSInt32RuleProto3 copyWith(
           void Function(PredefinedSInt32RuleProto3) updates) =>
@@ -445,8 +426,6 @@ class PredefinedSInt32RuleProto3 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -480,8 +459,7 @@ class PredefinedSInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSInt64RuleProto3 clone() =>
-      PredefinedSInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedSInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSInt64RuleProto3 copyWith(
           void Function(PredefinedSInt64RuleProto3) updates) =>
@@ -507,8 +485,6 @@ class PredefinedSInt64RuleProto3 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -541,8 +517,7 @@ class PredefinedFixed32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFixed32RuleProto3 clone() =>
-      PredefinedFixed32RuleProto3()..mergeFromMessage(this);
+  PredefinedFixed32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFixed32RuleProto3 copyWith(
           void Function(PredefinedFixed32RuleProto3) updates) =>
@@ -569,8 +544,6 @@ class PredefinedFixed32RuleProto3 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -604,8 +577,7 @@ class PredefinedFixed64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFixed64RuleProto3 clone() =>
-      PredefinedFixed64RuleProto3()..mergeFromMessage(this);
+  PredefinedFixed64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFixed64RuleProto3 copyWith(
           void Function(PredefinedFixed64RuleProto3) updates) =>
@@ -632,8 +604,6 @@ class PredefinedFixed64RuleProto3 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -666,8 +636,7 @@ class PredefinedSFixed32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSFixed32RuleProto3 clone() =>
-      PredefinedSFixed32RuleProto3()..mergeFromMessage(this);
+  PredefinedSFixed32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSFixed32RuleProto3 copyWith(
           void Function(PredefinedSFixed32RuleProto3) updates) =>
@@ -694,8 +663,6 @@ class PredefinedSFixed32RuleProto3 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -729,8 +696,7 @@ class PredefinedSFixed64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSFixed64RuleProto3 clone() =>
-      PredefinedSFixed64RuleProto3()..mergeFromMessage(this);
+  PredefinedSFixed64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSFixed64RuleProto3 copyWith(
           void Function(PredefinedSFixed64RuleProto3) updates) =>
@@ -757,8 +723,6 @@ class PredefinedSFixed64RuleProto3 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -790,8 +754,7 @@ class PredefinedBoolRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedBoolRuleProto3 clone() =>
-      PredefinedBoolRuleProto3()..mergeFromMessage(this);
+  PredefinedBoolRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedBoolRuleProto3 copyWith(
           void Function(PredefinedBoolRuleProto3) updates) =>
@@ -816,8 +779,6 @@ class PredefinedBoolRuleProto3 extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -849,8 +810,7 @@ class PredefinedStringRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedStringRuleProto3 clone() =>
-      PredefinedStringRuleProto3()..mergeFromMessage(this);
+  PredefinedStringRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedStringRuleProto3 copyWith(
           void Function(PredefinedStringRuleProto3) updates) =>
@@ -876,8 +836,6 @@ class PredefinedStringRuleProto3 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -911,8 +869,7 @@ class PredefinedBytesRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedBytesRuleProto3 clone() =>
-      PredefinedBytesRuleProto3()..mergeFromMessage(this);
+  PredefinedBytesRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedBytesRuleProto3 copyWith(
           void Function(PredefinedBytesRuleProto3) updates) =>
@@ -937,8 +894,6 @@ class PredefinedBytesRuleProto3 extends $pb.GeneratedMessage {
   $core.List<$core.int> get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.List<$core.int> value) => $_setBytes(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -976,8 +931,7 @@ class PredefinedEnumRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedEnumRuleProto3 clone() =>
-      PredefinedEnumRuleProto3()..mergeFromMessage(this);
+  PredefinedEnumRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedEnumRuleProto3 copyWith(
           void Function(PredefinedEnumRuleProto3) updates) =>
@@ -1002,8 +956,6 @@ class PredefinedEnumRuleProto3 extends $pb.GeneratedMessage {
   PredefinedEnumRuleProto3_EnumProto3 get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(PredefinedEnumRuleProto3_EnumProto3 value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1039,8 +991,7 @@ class PredefinedMapRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedMapRuleProto3 clone() =>
-      PredefinedMapRuleProto3()..mergeFromMessage(this);
+  PredefinedMapRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedMapRuleProto3 copyWith(
           void Function(PredefinedMapRuleProto3) updates) =>
@@ -1092,8 +1043,7 @@ class PredefinedRepeatedRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedRuleProto3 clone() =>
-      PredefinedRepeatedRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedRuleProto3 copyWith(
           void Function(PredefinedRepeatedRuleProto3) updates) =>
@@ -1148,8 +1098,7 @@ class PredefinedDurationRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedDurationRuleProto3 clone() =>
-      PredefinedDurationRuleProto3()..mergeFromMessage(this);
+  PredefinedDurationRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedDurationRuleProto3 copyWith(
           void Function(PredefinedDurationRuleProto3) updates) =>
@@ -1212,8 +1161,7 @@ class PredefinedTimestampRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedTimestampRuleProto3 clone() =>
-      PredefinedTimestampRuleProto3()..mergeFromMessage(this);
+  PredefinedTimestampRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedTimestampRuleProto3 copyWith(
           void Function(PredefinedTimestampRuleProto3) updates) =>
@@ -1277,8 +1225,7 @@ class PredefinedWrappedFloatRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedFloatRuleProto3 clone() =>
-      PredefinedWrappedFloatRuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedFloatRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedFloatRuleProto3 copyWith(
           void Function(PredefinedWrappedFloatRuleProto3) updates) =>
@@ -1343,8 +1290,7 @@ class PredefinedWrappedDoubleRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedDoubleRuleProto3 clone() =>
-      PredefinedWrappedDoubleRuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedDoubleRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedDoubleRuleProto3 copyWith(
           void Function(PredefinedWrappedDoubleRuleProto3) updates) =>
@@ -1409,8 +1355,7 @@ class PredefinedWrappedInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedInt32RuleProto3 clone() =>
-      PredefinedWrappedInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedInt32RuleProto3 copyWith(
           void Function(PredefinedWrappedInt32RuleProto3) updates) =>
@@ -1475,8 +1420,7 @@ class PredefinedWrappedInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedInt64RuleProto3 clone() =>
-      PredefinedWrappedInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedInt64RuleProto3 copyWith(
           void Function(PredefinedWrappedInt64RuleProto3) updates) =>
@@ -1541,8 +1485,7 @@ class PredefinedWrappedUInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedUInt32RuleProto3 clone() =>
-      PredefinedWrappedUInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedUInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedUInt32RuleProto3 copyWith(
           void Function(PredefinedWrappedUInt32RuleProto3) updates) =>
@@ -1607,8 +1550,7 @@ class PredefinedWrappedUInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedUInt64RuleProto3 clone() =>
-      PredefinedWrappedUInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedUInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedUInt64RuleProto3 copyWith(
           void Function(PredefinedWrappedUInt64RuleProto3) updates) =>
@@ -1672,8 +1614,7 @@ class PredefinedWrappedBoolRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedBoolRuleProto3 clone() =>
-      PredefinedWrappedBoolRuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedBoolRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedBoolRuleProto3 copyWith(
           void Function(PredefinedWrappedBoolRuleProto3) updates) =>
@@ -1738,8 +1679,7 @@ class PredefinedWrappedStringRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedStringRuleProto3 clone() =>
-      PredefinedWrappedStringRuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedStringRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedStringRuleProto3 copyWith(
           void Function(PredefinedWrappedStringRuleProto3) updates) =>
@@ -1804,8 +1744,7 @@ class PredefinedWrappedBytesRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedBytesRuleProto3 clone() =>
-      PredefinedWrappedBytesRuleProto3()..mergeFromMessage(this);
+  PredefinedWrappedBytesRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedBytesRuleProto3 copyWith(
           void Function(PredefinedWrappedBytesRuleProto3) updates) =>
@@ -1870,8 +1809,7 @@ class PredefinedRepeatedWrappedFloatRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedFloatRuleProto3 clone() =>
-      PredefinedRepeatedWrappedFloatRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedFloatRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedFloatRuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedFloatRuleProto3) updates) =>
@@ -1929,8 +1867,7 @@ class PredefinedRepeatedWrappedDoubleRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedDoubleRuleProto3 clone() =>
-      PredefinedRepeatedWrappedDoubleRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedDoubleRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedDoubleRuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedDoubleRuleProto3) updates) =>
@@ -1988,8 +1925,7 @@ class PredefinedRepeatedWrappedInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedInt32RuleProto3 clone() =>
-      PredefinedRepeatedWrappedInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedInt32RuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedInt32RuleProto3) updates) =>
@@ -2047,8 +1983,7 @@ class PredefinedRepeatedWrappedInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedInt64RuleProto3 clone() =>
-      PredefinedRepeatedWrappedInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedInt64RuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedInt64RuleProto3) updates) =>
@@ -2106,8 +2041,7 @@ class PredefinedRepeatedWrappedUInt32RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedUInt32RuleProto3 clone() =>
-      PredefinedRepeatedWrappedUInt32RuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedUInt32RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedUInt32RuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedUInt32RuleProto3) updates) =>
@@ -2165,8 +2099,7 @@ class PredefinedRepeatedWrappedUInt64RuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedUInt64RuleProto3 clone() =>
-      PredefinedRepeatedWrappedUInt64RuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedUInt64RuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedUInt64RuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedUInt64RuleProto3) updates) =>
@@ -2224,8 +2157,7 @@ class PredefinedRepeatedWrappedBoolRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedBoolRuleProto3 clone() =>
-      PredefinedRepeatedWrappedBoolRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedBoolRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedBoolRuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedBoolRuleProto3) updates) =>
@@ -2282,8 +2214,7 @@ class PredefinedRepeatedWrappedStringRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedStringRuleProto3 clone() =>
-      PredefinedRepeatedWrappedStringRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedStringRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedStringRuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedStringRuleProto3) updates) =>
@@ -2341,8 +2272,7 @@ class PredefinedRepeatedWrappedBytesRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedBytesRuleProto3 clone() =>
-      PredefinedRepeatedWrappedBytesRuleProto3()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedBytesRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedBytesRuleProto3 copyWith(
           void Function(PredefinedRepeatedWrappedBytesRuleProto3) updates) =>
@@ -2400,8 +2330,7 @@ class PredefinedAndCustomRuleProto3_Nested extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedAndCustomRuleProto3_Nested clone() =>
-      PredefinedAndCustomRuleProto3_Nested()..mergeFromMessage(this);
+  PredefinedAndCustomRuleProto3_Nested clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedAndCustomRuleProto3_Nested copyWith(
           void Function(PredefinedAndCustomRuleProto3_Nested) updates) =>
@@ -2429,8 +2358,6 @@ class PredefinedAndCustomRuleProto3_Nested extends $pb.GeneratedMessage {
   $core.int get c => $_getIZ(0);
   @$pb.TagNumber(1)
   set c($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => $_clearField(1);
 }
@@ -2467,8 +2394,7 @@ class PredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedAndCustomRuleProto3 clone() =>
-      PredefinedAndCustomRuleProto3()..mergeFromMessage(this);
+  PredefinedAndCustomRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedAndCustomRuleProto3 copyWith(
           void Function(PredefinedAndCustomRuleProto3) updates) =>
@@ -2495,8 +2421,6 @@ class PredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
@@ -2541,8 +2465,7 @@ class StandardPredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StandardPredefinedAndCustomRuleProto3 clone() =>
-      StandardPredefinedAndCustomRuleProto3()..mergeFromMessage(this);
+  StandardPredefinedAndCustomRuleProto3 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StandardPredefinedAndCustomRuleProto3 copyWith(
           void Function(StandardPredefinedAndCustomRuleProto3) updates) =>
@@ -2570,8 +2493,6 @@ class StandardPredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -2617,8 +2538,7 @@ class PredefinedRulesProto3UnusedImportBugWorkaround
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRulesProto3UnusedImportBugWorkaround clone() =>
-      PredefinedRulesProto3UnusedImportBugWorkaround()..mergeFromMessage(this);
+  PredefinedRulesProto3UnusedImportBugWorkaround clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRulesProto3UnusedImportBugWorkaround copyWith(
           void Function(PredefinedRulesProto3UnusedImportBugWorkaround)

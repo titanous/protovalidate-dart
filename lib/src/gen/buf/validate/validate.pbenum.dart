@@ -16,7 +16,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 /// Specifies how `FieldRules.ignore` behaves, depending on the field's value, and
 /// whether the field tracks presence.
-class Ignore extends $pb.ProtobufEnum {
+enum Ignore implements $pb.ProtobufEnum {
   /// Ignore rules if the field tracks presence and is unset. This is the default
   /// behavior.
   ///
@@ -68,8 +68,7 @@ class Ignore extends $pb.ProtobufEnum {
   ///
   /// To learn which fields track presence, see the
   /// [Field Presence cheat sheet](https://protobuf.dev/programming-guides/field_presence/#cheat).
-  static const Ignore IGNORE_UNSPECIFIED =
-      Ignore._(0, _omitEnumNames ? '' : 'IGNORE_UNSPECIFIED');
+  IGNORE_UNSPECIFIED(0, _omitEnumNames ? '' : 'IGNORE_UNSPECIFIED'),
 
   /// Ignore rules if the field is unset, or set to the zero value.
   ///
@@ -85,8 +84,7 @@ class Ignore extends $pb.ProtobufEnum {
   ///
   /// For fields that track presence (e.g. adding the `optional` label in proto3),
   /// this a no-op and behavior is the same as the default `IGNORE_UNSPECIFIED`.
-  static const Ignore IGNORE_IF_ZERO_VALUE =
-      Ignore._(1, _omitEnumNames ? '' : 'IGNORE_IF_ZERO_VALUE');
+  IGNORE_IF_ZERO_VALUE(1, _omitEnumNames ? '' : 'IGNORE_IF_ZERO_VALUE'),
 
   /// Always ignore rules, including the `required` rule.
   ///
@@ -101,48 +99,54 @@ class Ignore extends $pb.ProtobufEnum {
   ///     (buf.validate.field).ignore = IGNORE_ALWAYS];
   /// }
   /// ```
-  static const Ignore IGNORE_ALWAYS =
-      Ignore._(3, _omitEnumNames ? '' : 'IGNORE_ALWAYS');
+  IGNORE_ALWAYS(3, _omitEnumNames ? '' : 'IGNORE_ALWAYS'),
+  ;
 
-  static const $core.List<Ignore> values = <Ignore>[
-    IGNORE_UNSPECIFIED,
-    IGNORE_IF_ZERO_VALUE,
-    IGNORE_ALWAYS,
-  ];
+  static final $core.Map<$core.int, Ignore> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static Ignore? valueOf($core.int value) => _byValue[value];
 
-  static final $core.List<Ignore?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 3);
-  static Ignore? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  @$core.override
+  final $core.int value;
 
-  const Ignore._(super.value, super.name);
+  @$core.override
+  final $core.String name;
+
+  const Ignore(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 /// KnownRegex contains some well-known patterns.
-class KnownRegex extends $pb.ProtobufEnum {
-  static const KnownRegex KNOWN_REGEX_UNSPECIFIED =
-      KnownRegex._(0, _omitEnumNames ? '' : 'KNOWN_REGEX_UNSPECIFIED');
+enum KnownRegex implements $pb.ProtobufEnum {
+  KNOWN_REGEX_UNSPECIFIED(0, _omitEnumNames ? '' : 'KNOWN_REGEX_UNSPECIFIED'),
 
   /// HTTP header name as defined by [RFC 7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2).
-  static const KnownRegex KNOWN_REGEX_HTTP_HEADER_NAME =
-      KnownRegex._(1, _omitEnumNames ? '' : 'KNOWN_REGEX_HTTP_HEADER_NAME');
+  KNOWN_REGEX_HTTP_HEADER_NAME(
+      1, _omitEnumNames ? '' : 'KNOWN_REGEX_HTTP_HEADER_NAME'),
 
   /// HTTP header value as defined by [RFC 7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.4).
-  static const KnownRegex KNOWN_REGEX_HTTP_HEADER_VALUE =
-      KnownRegex._(2, _omitEnumNames ? '' : 'KNOWN_REGEX_HTTP_HEADER_VALUE');
+  KNOWN_REGEX_HTTP_HEADER_VALUE(
+      2, _omitEnumNames ? '' : 'KNOWN_REGEX_HTTP_HEADER_VALUE'),
+  ;
 
-  static const $core.List<KnownRegex> values = <KnownRegex>[
-    KNOWN_REGEX_UNSPECIFIED,
-    KNOWN_REGEX_HTTP_HEADER_NAME,
-    KNOWN_REGEX_HTTP_HEADER_VALUE,
-  ];
+  static final $core.Map<$core.int, KnownRegex> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static KnownRegex? valueOf($core.int value) => _byValue[value];
 
-  static final $core.List<KnownRegex?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static KnownRegex? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  @$core.override
+  final $core.int value;
 
-  const KnownRegex._(super.value, super.name);
+  @$core.override
+  final $core.String name;
+
+  const KnownRegex(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

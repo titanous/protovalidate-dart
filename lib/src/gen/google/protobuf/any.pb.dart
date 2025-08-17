@@ -128,8 +128,7 @@ class Any extends $pb.GeneratedMessage with $mixin.AnyMixin {
       package:
           const $pb.PackageName(_omitMessageNames ? '' : 'google.protobuf'),
       createEmptyInstance: create,
-      toProto3Json: $mixin.AnyMixin.toProto3JsonHelper,
-      fromProto3Json: $mixin.AnyMixin.fromProto3JsonHelper)
+      wellKnownType: $mixin.WellKnownType.any)
     ..aOS(1, _omitFieldNames ? '' : 'typeUrl',
         presence: $pb.FieldPresence.implicit)
     ..a<$core.List<$core.int>>(
@@ -138,7 +137,7 @@ class Any extends $pb.GeneratedMessage with $mixin.AnyMixin {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Any clone() => Any()..mergeFromMessage(this);
+  Any clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Any copyWith(void Function(Any) updates) =>
       super.copyWith((message) => updates(message as Any)) as Any;
@@ -189,8 +188,6 @@ class Any extends $pb.GeneratedMessage with $mixin.AnyMixin {
   @$pb.TagNumber(1)
   set typeUrl($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasTypeUrl() => $_has(0);
-  @$pb.TagNumber(1)
   void clearTypeUrl() => $_clearField(1);
 
   /// Must be a valid serialized protocol buffer of the above specified type.
@@ -198,8 +195,6 @@ class Any extends $pb.GeneratedMessage with $mixin.AnyMixin {
   $core.List<$core.int> get value => $_getN(1);
   @$pb.TagNumber(2)
   set value($core.List<$core.int> value) => $_setBytes(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasValue() => $_has(1);
   @$pb.TagNumber(2)
   void clearValue() => $_clearField(2);
 

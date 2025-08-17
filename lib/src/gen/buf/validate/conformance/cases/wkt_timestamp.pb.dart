@@ -48,7 +48,7 @@ class TimestampNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampNone clone() => TimestampNone()..mergeFromMessage(this);
+  TimestampNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampNone copyWith(void Function(TimestampNone) updates) =>
       super.copyWith((message) => updates(message as TimestampNone))
@@ -108,7 +108,7 @@ class TimestampRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampRequired clone() => TimestampRequired()..mergeFromMessage(this);
+  TimestampRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampRequired copyWith(void Function(TimestampRequired) updates) =>
       super.copyWith((message) => updates(message as TimestampRequired))
@@ -168,7 +168,7 @@ class TimestampConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampConst clone() => TimestampConst()..mergeFromMessage(this);
+  TimestampConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampConst copyWith(void Function(TimestampConst) updates) =>
       super.copyWith((message) => updates(message as TimestampConst))
@@ -228,7 +228,7 @@ class TimestampLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampLT clone() => TimestampLT()..mergeFromMessage(this);
+  TimestampLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampLT copyWith(void Function(TimestampLT) updates) =>
       super.copyWith((message) => updates(message as TimestampLT))
@@ -287,7 +287,7 @@ class TimestampLTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampLTE clone() => TimestampLTE()..mergeFromMessage(this);
+  TimestampLTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampLTE copyWith(void Function(TimestampLTE) updates) =>
       super.copyWith((message) => updates(message as TimestampLTE))
@@ -347,7 +347,7 @@ class TimestampGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGT clone() => TimestampGT()..mergeFromMessage(this);
+  TimestampGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGT copyWith(void Function(TimestampGT) updates) =>
       super.copyWith((message) => updates(message as TimestampGT))
@@ -406,7 +406,7 @@ class TimestampGTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGTE clone() => TimestampGTE()..mergeFromMessage(this);
+  TimestampGTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGTE copyWith(void Function(TimestampGTE) updates) =>
       super.copyWith((message) => updates(message as TimestampGTE))
@@ -466,7 +466,7 @@ class TimestampGTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGTLT clone() => TimestampGTLT()..mergeFromMessage(this);
+  TimestampGTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGTLT copyWith(void Function(TimestampGTLT) updates) =>
       super.copyWith((message) => updates(message as TimestampGTLT))
@@ -526,7 +526,7 @@ class TimestampExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampExLTGT clone() => TimestampExLTGT()..mergeFromMessage(this);
+  TimestampExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampExLTGT copyWith(void Function(TimestampExLTGT) updates) =>
       super.copyWith((message) => updates(message as TimestampExLTGT))
@@ -586,7 +586,7 @@ class TimestampGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGTELTE clone() => TimestampGTELTE()..mergeFromMessage(this);
+  TimestampGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGTELTE copyWith(void Function(TimestampGTELTE) updates) =>
       super.copyWith((message) => updates(message as TimestampGTELTE))
@@ -646,7 +646,7 @@ class TimestampExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampExGTELTE clone() => TimestampExGTELTE()..mergeFromMessage(this);
+  TimestampExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampExGTELTE copyWith(void Function(TimestampExGTELTE) updates) =>
       super.copyWith((message) => updates(message as TimestampExGTELTE))
@@ -706,7 +706,7 @@ class TimestampLTNow extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampLTNow clone() => TimestampLTNow()..mergeFromMessage(this);
+  TimestampLTNow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampLTNow copyWith(void Function(TimestampLTNow) updates) =>
       super.copyWith((message) => updates(message as TimestampLTNow))
@@ -766,7 +766,7 @@ class TimestampNotLTNow extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampNotLTNow clone() => TimestampNotLTNow()..mergeFromMessage(this);
+  TimestampNotLTNow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampNotLTNow copyWith(void Function(TimestampNotLTNow) updates) =>
       super.copyWith((message) => updates(message as TimestampNotLTNow))
@@ -826,7 +826,7 @@ class TimestampGTNow extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGTNow clone() => TimestampGTNow()..mergeFromMessage(this);
+  TimestampGTNow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGTNow copyWith(void Function(TimestampGTNow) updates) =>
       super.copyWith((message) => updates(message as TimestampGTNow))
@@ -886,7 +886,7 @@ class TimestampNotGTNow extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampNotGTNow clone() => TimestampNotGTNow()..mergeFromMessage(this);
+  TimestampNotGTNow clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampNotGTNow copyWith(void Function(TimestampNotGTNow) updates) =>
       super.copyWith((message) => updates(message as TimestampNotGTNow))
@@ -946,7 +946,7 @@ class TimestampWithin extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWithin clone() => TimestampWithin()..mergeFromMessage(this);
+  TimestampWithin clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWithin copyWith(void Function(TimestampWithin) updates) =>
       super.copyWith((message) => updates(message as TimestampWithin))
@@ -1006,8 +1006,7 @@ class TimestampLTNowWithin extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampLTNowWithin clone() =>
-      TimestampLTNowWithin()..mergeFromMessage(this);
+  TimestampLTNowWithin clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampLTNowWithin copyWith(void Function(TimestampLTNowWithin) updates) =>
       super.copyWith((message) => updates(message as TimestampLTNowWithin))
@@ -1067,8 +1066,7 @@ class TimestampGTNowWithin extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampGTNowWithin clone() =>
-      TimestampGTNowWithin()..mergeFromMessage(this);
+  TimestampGTNowWithin clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampGTNowWithin copyWith(void Function(TimestampGTNowWithin) updates) =>
       super.copyWith((message) => updates(message as TimestampGTNowWithin))
@@ -1128,7 +1126,7 @@ class TimestampExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampExample clone() => TimestampExample()..mergeFromMessage(this);
+  TimestampExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampExample copyWith(void Function(TimestampExample) updates) =>
       super.copyWith((message) => updates(message as TimestampExample))
@@ -1189,8 +1187,7 @@ class TimestampWrongTypeScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWrongTypeScalar clone() =>
-      TimestampWrongTypeScalar()..mergeFromMessage(this);
+  TimestampWrongTypeScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWrongTypeScalar copyWith(
           void Function(TimestampWrongTypeScalar) updates) =>
@@ -1215,8 +1212,6 @@ class TimestampWrongTypeScalar extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1250,8 +1245,7 @@ class TimestampWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWrongTypeMessage_WrongType clone() =>
-      TimestampWrongTypeMessage_WrongType()..mergeFromMessage(this);
+  TimestampWrongTypeMessage_WrongType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWrongTypeMessage_WrongType copyWith(
           void Function(TimestampWrongTypeMessage_WrongType) updates) =>
@@ -1279,8 +1273,6 @@ class TimestampWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1313,8 +1305,7 @@ class TimestampWrongTypeMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWrongTypeMessage clone() =>
-      TimestampWrongTypeMessage()..mergeFromMessage(this);
+  TimestampWrongTypeMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWrongTypeMessage copyWith(
           void Function(TimestampWrongTypeMessage) updates) =>
@@ -1375,8 +1366,7 @@ class TimestampWrongTypeWrapper extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWrongTypeWrapper clone() =>
-      TimestampWrongTypeWrapper()..mergeFromMessage(this);
+  TimestampWrongTypeWrapper clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWrongTypeWrapper copyWith(
           void Function(TimestampWrongTypeWrapper) updates) =>
@@ -1437,8 +1427,7 @@ class TimestampWrongTypeWKT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  TimestampWrongTypeWKT clone() =>
-      TimestampWrongTypeWKT()..mergeFromMessage(this);
+  TimestampWrongTypeWKT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   TimestampWrongTypeWKT copyWith(
           void Function(TimestampWrongTypeWKT) updates) =>

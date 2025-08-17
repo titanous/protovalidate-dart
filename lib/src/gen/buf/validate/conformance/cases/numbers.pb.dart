@@ -45,7 +45,7 @@ class FloatNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatNone clone() => FloatNone()..mergeFromMessage(this);
+  FloatNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatNone copyWith(void Function(FloatNone) updates) =>
       super.copyWith((message) => updates(message as FloatNone)) as FloatNone;
@@ -67,8 +67,6 @@ class FloatNone extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -101,7 +99,7 @@ class FloatConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatConst clone() => FloatConst()..mergeFromMessage(this);
+  FloatConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatConst copyWith(void Function(FloatConst) updates) =>
       super.copyWith((message) => updates(message as FloatConst)) as FloatConst;
@@ -123,8 +121,6 @@ class FloatConst extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -157,7 +153,7 @@ class FloatIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatIn clone() => FloatIn()..mergeFromMessage(this);
+  FloatIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatIn copyWith(void Function(FloatIn) updates) =>
       super.copyWith((message) => updates(message as FloatIn)) as FloatIn;
@@ -179,8 +175,6 @@ class FloatIn extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -213,7 +207,7 @@ class FloatNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatNotIn clone() => FloatNotIn()..mergeFromMessage(this);
+  FloatNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatNotIn copyWith(void Function(FloatNotIn) updates) =>
       super.copyWith((message) => updates(message as FloatNotIn)) as FloatNotIn;
@@ -235,8 +229,6 @@ class FloatNotIn extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -269,7 +261,7 @@ class FloatLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatLT clone() => FloatLT()..mergeFromMessage(this);
+  FloatLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatLT copyWith(void Function(FloatLT) updates) =>
       super.copyWith((message) => updates(message as FloatLT)) as FloatLT;
@@ -291,8 +283,6 @@ class FloatLT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -325,7 +315,7 @@ class FloatLTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatLTE clone() => FloatLTE()..mergeFromMessage(this);
+  FloatLTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatLTE copyWith(void Function(FloatLTE) updates) =>
       super.copyWith((message) => updates(message as FloatLTE)) as FloatLTE;
@@ -347,8 +337,6 @@ class FloatLTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -381,7 +369,7 @@ class FloatGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatGT clone() => FloatGT()..mergeFromMessage(this);
+  FloatGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatGT copyWith(void Function(FloatGT) updates) =>
       super.copyWith((message) => updates(message as FloatGT)) as FloatGT;
@@ -403,8 +391,6 @@ class FloatGT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -437,7 +423,7 @@ class FloatGTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatGTE clone() => FloatGTE()..mergeFromMessage(this);
+  FloatGTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatGTE copyWith(void Function(FloatGTE) updates) =>
       super.copyWith((message) => updates(message as FloatGTE)) as FloatGTE;
@@ -459,8 +445,6 @@ class FloatGTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -493,7 +477,7 @@ class FloatGTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatGTLT clone() => FloatGTLT()..mergeFromMessage(this);
+  FloatGTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatGTLT copyWith(void Function(FloatGTLT) updates) =>
       super.copyWith((message) => updates(message as FloatGTLT)) as FloatGTLT;
@@ -515,8 +499,6 @@ class FloatGTLT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -549,7 +531,7 @@ class FloatExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatExLTGT clone() => FloatExLTGT()..mergeFromMessage(this);
+  FloatExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatExLTGT copyWith(void Function(FloatExLTGT) updates) =>
       super.copyWith((message) => updates(message as FloatExLTGT))
@@ -572,8 +554,6 @@ class FloatExLTGT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -606,7 +586,7 @@ class FloatGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatGTELTE clone() => FloatGTELTE()..mergeFromMessage(this);
+  FloatGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatGTELTE copyWith(void Function(FloatGTELTE) updates) =>
       super.copyWith((message) => updates(message as FloatGTELTE))
@@ -629,8 +609,6 @@ class FloatGTELTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -663,7 +641,7 @@ class FloatExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatExGTELTE clone() => FloatExGTELTE()..mergeFromMessage(this);
+  FloatExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatExGTELTE copyWith(void Function(FloatExGTELTE) updates) =>
       super.copyWith((message) => updates(message as FloatExGTELTE))
@@ -687,8 +665,6 @@ class FloatExGTELTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -721,7 +697,7 @@ class FloatFinite extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatFinite clone() => FloatFinite()..mergeFromMessage(this);
+  FloatFinite clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatFinite copyWith(void Function(FloatFinite) updates) =>
       super.copyWith((message) => updates(message as FloatFinite))
@@ -744,8 +720,6 @@ class FloatFinite extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -778,7 +752,7 @@ class FloatNotFinite extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatNotFinite clone() => FloatNotFinite()..mergeFromMessage(this);
+  FloatNotFinite clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatNotFinite copyWith(void Function(FloatNotFinite) updates) =>
       super.copyWith((message) => updates(message as FloatNotFinite))
@@ -802,8 +776,6 @@ class FloatNotFinite extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -836,7 +808,7 @@ class FloatIgnore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatIgnore clone() => FloatIgnore()..mergeFromMessage(this);
+  FloatIgnore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatIgnore copyWith(void Function(FloatIgnore) updates) =>
       super.copyWith((message) => updates(message as FloatIgnore))
@@ -859,8 +831,6 @@ class FloatIgnore extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -893,7 +863,7 @@ class FloatIncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatIncorrectType clone() => FloatIncorrectType()..mergeFromMessage(this);
+  FloatIncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatIncorrectType copyWith(void Function(FloatIncorrectType) updates) =>
       super.copyWith((message) => updates(message as FloatIncorrectType))
@@ -917,8 +887,6 @@ class FloatIncorrectType extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -951,7 +919,7 @@ class FloatExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  FloatExample clone() => FloatExample()..mergeFromMessage(this);
+  FloatExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   FloatExample copyWith(void Function(FloatExample) updates) =>
       super.copyWith((message) => updates(message as FloatExample))
@@ -975,8 +943,6 @@ class FloatExample extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1009,7 +975,7 @@ class DoubleNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleNone clone() => DoubleNone()..mergeFromMessage(this);
+  DoubleNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleNone copyWith(void Function(DoubleNone) updates) =>
       super.copyWith((message) => updates(message as DoubleNone)) as DoubleNone;
@@ -1031,8 +997,6 @@ class DoubleNone extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1065,7 +1029,7 @@ class DoubleConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleConst clone() => DoubleConst()..mergeFromMessage(this);
+  DoubleConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleConst copyWith(void Function(DoubleConst) updates) =>
       super.copyWith((message) => updates(message as DoubleConst))
@@ -1088,8 +1052,6 @@ class DoubleConst extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1122,7 +1084,7 @@ class DoubleIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleIn clone() => DoubleIn()..mergeFromMessage(this);
+  DoubleIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleIn copyWith(void Function(DoubleIn) updates) =>
       super.copyWith((message) => updates(message as DoubleIn)) as DoubleIn;
@@ -1144,8 +1106,6 @@ class DoubleIn extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1178,7 +1138,7 @@ class DoubleNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleNotIn clone() => DoubleNotIn()..mergeFromMessage(this);
+  DoubleNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleNotIn copyWith(void Function(DoubleNotIn) updates) =>
       super.copyWith((message) => updates(message as DoubleNotIn))
@@ -1201,8 +1161,6 @@ class DoubleNotIn extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1235,7 +1193,7 @@ class DoubleLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleLT clone() => DoubleLT()..mergeFromMessage(this);
+  DoubleLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleLT copyWith(void Function(DoubleLT) updates) =>
       super.copyWith((message) => updates(message as DoubleLT)) as DoubleLT;
@@ -1257,8 +1215,6 @@ class DoubleLT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1291,7 +1247,7 @@ class DoubleLTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleLTE clone() => DoubleLTE()..mergeFromMessage(this);
+  DoubleLTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleLTE copyWith(void Function(DoubleLTE) updates) =>
       super.copyWith((message) => updates(message as DoubleLTE)) as DoubleLTE;
@@ -1313,8 +1269,6 @@ class DoubleLTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1347,7 +1301,7 @@ class DoubleGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleGT clone() => DoubleGT()..mergeFromMessage(this);
+  DoubleGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleGT copyWith(void Function(DoubleGT) updates) =>
       super.copyWith((message) => updates(message as DoubleGT)) as DoubleGT;
@@ -1369,8 +1323,6 @@ class DoubleGT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1403,7 +1355,7 @@ class DoubleGTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleGTE clone() => DoubleGTE()..mergeFromMessage(this);
+  DoubleGTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleGTE copyWith(void Function(DoubleGTE) updates) =>
       super.copyWith((message) => updates(message as DoubleGTE)) as DoubleGTE;
@@ -1425,8 +1377,6 @@ class DoubleGTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1459,7 +1409,7 @@ class DoubleGTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleGTLT clone() => DoubleGTLT()..mergeFromMessage(this);
+  DoubleGTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleGTLT copyWith(void Function(DoubleGTLT) updates) =>
       super.copyWith((message) => updates(message as DoubleGTLT)) as DoubleGTLT;
@@ -1481,8 +1431,6 @@ class DoubleGTLT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1515,7 +1463,7 @@ class DoubleExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleExLTGT clone() => DoubleExLTGT()..mergeFromMessage(this);
+  DoubleExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleExLTGT copyWith(void Function(DoubleExLTGT) updates) =>
       super.copyWith((message) => updates(message as DoubleExLTGT))
@@ -1539,8 +1487,6 @@ class DoubleExLTGT extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1573,7 +1519,7 @@ class DoubleGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleGTELTE clone() => DoubleGTELTE()..mergeFromMessage(this);
+  DoubleGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleGTELTE copyWith(void Function(DoubleGTELTE) updates) =>
       super.copyWith((message) => updates(message as DoubleGTELTE))
@@ -1597,8 +1543,6 @@ class DoubleGTELTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1631,7 +1575,7 @@ class DoubleExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleExGTELTE clone() => DoubleExGTELTE()..mergeFromMessage(this);
+  DoubleExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleExGTELTE copyWith(void Function(DoubleExGTELTE) updates) =>
       super.copyWith((message) => updates(message as DoubleExGTELTE))
@@ -1655,8 +1599,6 @@ class DoubleExGTELTE extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1689,7 +1631,7 @@ class DoubleFinite extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleFinite clone() => DoubleFinite()..mergeFromMessage(this);
+  DoubleFinite clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleFinite copyWith(void Function(DoubleFinite) updates) =>
       super.copyWith((message) => updates(message as DoubleFinite))
@@ -1713,8 +1655,6 @@ class DoubleFinite extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1747,7 +1687,7 @@ class DoubleNotFinite extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleNotFinite clone() => DoubleNotFinite()..mergeFromMessage(this);
+  DoubleNotFinite clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleNotFinite copyWith(void Function(DoubleNotFinite) updates) =>
       super.copyWith((message) => updates(message as DoubleNotFinite))
@@ -1771,8 +1711,6 @@ class DoubleNotFinite extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1805,7 +1743,7 @@ class DoubleIgnore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleIgnore clone() => DoubleIgnore()..mergeFromMessage(this);
+  DoubleIgnore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleIgnore copyWith(void Function(DoubleIgnore) updates) =>
       super.copyWith((message) => updates(message as DoubleIgnore))
@@ -1829,8 +1767,6 @@ class DoubleIgnore extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1863,7 +1799,7 @@ class DoubleIncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleIncorrectType clone() => DoubleIncorrectType()..mergeFromMessage(this);
+  DoubleIncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleIncorrectType copyWith(void Function(DoubleIncorrectType) updates) =>
       super.copyWith((message) => updates(message as DoubleIncorrectType))
@@ -1887,8 +1823,6 @@ class DoubleIncorrectType extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1921,7 +1855,7 @@ class DoubleExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DoubleExample clone() => DoubleExample()..mergeFromMessage(this);
+  DoubleExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DoubleExample copyWith(void Function(DoubleExample) updates) =>
       super.copyWith((message) => updates(message as DoubleExample))
@@ -1945,8 +1879,6 @@ class DoubleExample extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1979,7 +1911,7 @@ class Int32None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32None clone() => Int32None()..mergeFromMessage(this);
+  Int32None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32None copyWith(void Function(Int32None) updates) =>
       super.copyWith((message) => updates(message as Int32None)) as Int32None;
@@ -2001,8 +1933,6 @@ class Int32None extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2035,7 +1965,7 @@ class Int32Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32Const clone() => Int32Const()..mergeFromMessage(this);
+  Int32Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32Const copyWith(void Function(Int32Const) updates) =>
       super.copyWith((message) => updates(message as Int32Const)) as Int32Const;
@@ -2057,8 +1987,6 @@ class Int32Const extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2091,7 +2019,7 @@ class Int32In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32In clone() => Int32In()..mergeFromMessage(this);
+  Int32In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32In copyWith(void Function(Int32In) updates) =>
       super.copyWith((message) => updates(message as Int32In)) as Int32In;
@@ -2113,8 +2041,6 @@ class Int32In extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2147,7 +2073,7 @@ class Int32NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32NotIn clone() => Int32NotIn()..mergeFromMessage(this);
+  Int32NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32NotIn copyWith(void Function(Int32NotIn) updates) =>
       super.copyWith((message) => updates(message as Int32NotIn)) as Int32NotIn;
@@ -2169,8 +2095,6 @@ class Int32NotIn extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2203,7 +2127,7 @@ class Int32LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32LT clone() => Int32LT()..mergeFromMessage(this);
+  Int32LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32LT copyWith(void Function(Int32LT) updates) =>
       super.copyWith((message) => updates(message as Int32LT)) as Int32LT;
@@ -2225,8 +2149,6 @@ class Int32LT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2259,7 +2181,7 @@ class Int32LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32LTE clone() => Int32LTE()..mergeFromMessage(this);
+  Int32LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32LTE copyWith(void Function(Int32LTE) updates) =>
       super.copyWith((message) => updates(message as Int32LTE)) as Int32LTE;
@@ -2281,8 +2203,6 @@ class Int32LTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2315,7 +2235,7 @@ class Int32GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32GT clone() => Int32GT()..mergeFromMessage(this);
+  Int32GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32GT copyWith(void Function(Int32GT) updates) =>
       super.copyWith((message) => updates(message as Int32GT)) as Int32GT;
@@ -2337,8 +2257,6 @@ class Int32GT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2371,7 +2289,7 @@ class Int32GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32GTE clone() => Int32GTE()..mergeFromMessage(this);
+  Int32GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32GTE copyWith(void Function(Int32GTE) updates) =>
       super.copyWith((message) => updates(message as Int32GTE)) as Int32GTE;
@@ -2393,8 +2311,6 @@ class Int32GTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2427,7 +2343,7 @@ class Int32GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32GTLT clone() => Int32GTLT()..mergeFromMessage(this);
+  Int32GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32GTLT copyWith(void Function(Int32GTLT) updates) =>
       super.copyWith((message) => updates(message as Int32GTLT)) as Int32GTLT;
@@ -2449,8 +2365,6 @@ class Int32GTLT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2483,7 +2397,7 @@ class Int32ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32ExLTGT clone() => Int32ExLTGT()..mergeFromMessage(this);
+  Int32ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32ExLTGT copyWith(void Function(Int32ExLTGT) updates) =>
       super.copyWith((message) => updates(message as Int32ExLTGT))
@@ -2506,8 +2420,6 @@ class Int32ExLTGT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2540,7 +2452,7 @@ class Int32GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32GTELTE clone() => Int32GTELTE()..mergeFromMessage(this);
+  Int32GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32GTELTE copyWith(void Function(Int32GTELTE) updates) =>
       super.copyWith((message) => updates(message as Int32GTELTE))
@@ -2563,8 +2475,6 @@ class Int32GTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2597,7 +2507,7 @@ class Int32ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32ExGTELTE clone() => Int32ExGTELTE()..mergeFromMessage(this);
+  Int32ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32ExGTELTE copyWith(void Function(Int32ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as Int32ExGTELTE))
@@ -2621,8 +2531,6 @@ class Int32ExGTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2655,7 +2563,7 @@ class Int32Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32Ignore clone() => Int32Ignore()..mergeFromMessage(this);
+  Int32Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32Ignore copyWith(void Function(Int32Ignore) updates) =>
       super.copyWith((message) => updates(message as Int32Ignore))
@@ -2678,8 +2586,6 @@ class Int32Ignore extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2712,7 +2618,7 @@ class Int32IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32IncorrectType clone() => Int32IncorrectType()..mergeFromMessage(this);
+  Int32IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32IncorrectType copyWith(void Function(Int32IncorrectType) updates) =>
       super.copyWith((message) => updates(message as Int32IncorrectType))
@@ -2736,8 +2642,6 @@ class Int32IncorrectType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2770,7 +2674,7 @@ class Int32Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int32Example clone() => Int32Example()..mergeFromMessage(this);
+  Int32Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int32Example copyWith(void Function(Int32Example) updates) =>
       super.copyWith((message) => updates(message as Int32Example))
@@ -2794,8 +2698,6 @@ class Int32Example extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2828,7 +2730,7 @@ class Int64None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64None clone() => Int64None()..mergeFromMessage(this);
+  Int64None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64None copyWith(void Function(Int64None) updates) =>
       super.copyWith((message) => updates(message as Int64None)) as Int64None;
@@ -2850,8 +2752,6 @@ class Int64None extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2884,7 +2784,7 @@ class Int64Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64Const clone() => Int64Const()..mergeFromMessage(this);
+  Int64Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64Const copyWith(void Function(Int64Const) updates) =>
       super.copyWith((message) => updates(message as Int64Const)) as Int64Const;
@@ -2906,8 +2806,6 @@ class Int64Const extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2940,7 +2838,7 @@ class Int64In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64In clone() => Int64In()..mergeFromMessage(this);
+  Int64In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64In copyWith(void Function(Int64In) updates) =>
       super.copyWith((message) => updates(message as Int64In)) as Int64In;
@@ -2962,8 +2860,6 @@ class Int64In extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -2996,7 +2892,7 @@ class Int64NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64NotIn clone() => Int64NotIn()..mergeFromMessage(this);
+  Int64NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64NotIn copyWith(void Function(Int64NotIn) updates) =>
       super.copyWith((message) => updates(message as Int64NotIn)) as Int64NotIn;
@@ -3018,8 +2914,6 @@ class Int64NotIn extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3052,7 +2946,7 @@ class Int64LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64LT clone() => Int64LT()..mergeFromMessage(this);
+  Int64LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64LT copyWith(void Function(Int64LT) updates) =>
       super.copyWith((message) => updates(message as Int64LT)) as Int64LT;
@@ -3074,8 +2968,6 @@ class Int64LT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3108,7 +3000,7 @@ class Int64LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64LTE clone() => Int64LTE()..mergeFromMessage(this);
+  Int64LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64LTE copyWith(void Function(Int64LTE) updates) =>
       super.copyWith((message) => updates(message as Int64LTE)) as Int64LTE;
@@ -3130,8 +3022,6 @@ class Int64LTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3164,7 +3054,7 @@ class Int64GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64GT clone() => Int64GT()..mergeFromMessage(this);
+  Int64GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64GT copyWith(void Function(Int64GT) updates) =>
       super.copyWith((message) => updates(message as Int64GT)) as Int64GT;
@@ -3186,8 +3076,6 @@ class Int64GT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3220,7 +3108,7 @@ class Int64GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64GTE clone() => Int64GTE()..mergeFromMessage(this);
+  Int64GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64GTE copyWith(void Function(Int64GTE) updates) =>
       super.copyWith((message) => updates(message as Int64GTE)) as Int64GTE;
@@ -3242,8 +3130,6 @@ class Int64GTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3276,7 +3162,7 @@ class Int64GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64GTLT clone() => Int64GTLT()..mergeFromMessage(this);
+  Int64GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64GTLT copyWith(void Function(Int64GTLT) updates) =>
       super.copyWith((message) => updates(message as Int64GTLT)) as Int64GTLT;
@@ -3298,8 +3184,6 @@ class Int64GTLT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3332,7 +3216,7 @@ class Int64ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64ExLTGT clone() => Int64ExLTGT()..mergeFromMessage(this);
+  Int64ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64ExLTGT copyWith(void Function(Int64ExLTGT) updates) =>
       super.copyWith((message) => updates(message as Int64ExLTGT))
@@ -3355,8 +3239,6 @@ class Int64ExLTGT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3389,7 +3271,7 @@ class Int64GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64GTELTE clone() => Int64GTELTE()..mergeFromMessage(this);
+  Int64GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64GTELTE copyWith(void Function(Int64GTELTE) updates) =>
       super.copyWith((message) => updates(message as Int64GTELTE))
@@ -3412,8 +3294,6 @@ class Int64GTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3446,7 +3326,7 @@ class Int64ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64ExGTELTE clone() => Int64ExGTELTE()..mergeFromMessage(this);
+  Int64ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64ExGTELTE copyWith(void Function(Int64ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as Int64ExGTELTE))
@@ -3470,8 +3350,6 @@ class Int64ExGTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3504,7 +3382,7 @@ class Int64Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64Ignore clone() => Int64Ignore()..mergeFromMessage(this);
+  Int64Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64Ignore copyWith(void Function(Int64Ignore) updates) =>
       super.copyWith((message) => updates(message as Int64Ignore))
@@ -3527,8 +3405,6 @@ class Int64Ignore extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3605,7 +3481,7 @@ class Int64BigRules extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64BigRules clone() => Int64BigRules()..mergeFromMessage(this);
+  Int64BigRules clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64BigRules copyWith(void Function(Int64BigRules) updates) =>
       super.copyWith((message) => updates(message as Int64BigRules))
@@ -3631,16 +3507,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set ltPos($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasLtPos() => $_has(0);
-  @$pb.TagNumber(1)
   void clearLtPos() => $_clearField(1);
 
   @$pb.TagNumber(2)
   $fixnum.Int64 get ltNeg => $_getI64(1);
   @$pb.TagNumber(2)
   set ltNeg($fixnum.Int64 value) => $_setInt64(1, value);
-  @$pb.TagNumber(2)
-  $core.bool hasLtNeg() => $_has(1);
   @$pb.TagNumber(2)
   void clearLtNeg() => $_clearField(2);
 
@@ -3649,16 +3521,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(3)
   set gtPos($fixnum.Int64 value) => $_setInt64(2, value);
   @$pb.TagNumber(3)
-  $core.bool hasGtPos() => $_has(2);
-  @$pb.TagNumber(3)
   void clearGtPos() => $_clearField(3);
 
   @$pb.TagNumber(4)
   $fixnum.Int64 get gtNeg => $_getI64(3);
   @$pb.TagNumber(4)
   set gtNeg($fixnum.Int64 value) => $_setInt64(3, value);
-  @$pb.TagNumber(4)
-  $core.bool hasGtNeg() => $_has(3);
   @$pb.TagNumber(4)
   void clearGtNeg() => $_clearField(4);
 
@@ -3667,16 +3535,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(5)
   set ltePos($fixnum.Int64 value) => $_setInt64(4, value);
   @$pb.TagNumber(5)
-  $core.bool hasLtePos() => $_has(4);
-  @$pb.TagNumber(5)
   void clearLtePos() => $_clearField(5);
 
   @$pb.TagNumber(6)
   $fixnum.Int64 get lteNeg => $_getI64(5);
   @$pb.TagNumber(6)
   set lteNeg($fixnum.Int64 value) => $_setInt64(5, value);
-  @$pb.TagNumber(6)
-  $core.bool hasLteNeg() => $_has(5);
   @$pb.TagNumber(6)
   void clearLteNeg() => $_clearField(6);
 
@@ -3685,16 +3549,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(7)
   set gtePos($fixnum.Int64 value) => $_setInt64(6, value);
   @$pb.TagNumber(7)
-  $core.bool hasGtePos() => $_has(6);
-  @$pb.TagNumber(7)
   void clearGtePos() => $_clearField(7);
 
   @$pb.TagNumber(8)
   $fixnum.Int64 get gteNeg => $_getI64(7);
   @$pb.TagNumber(8)
   set gteNeg($fixnum.Int64 value) => $_setInt64(7, value);
-  @$pb.TagNumber(8)
-  $core.bool hasGteNeg() => $_has(7);
   @$pb.TagNumber(8)
   void clearGteNeg() => $_clearField(8);
 
@@ -3703,16 +3563,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(9)
   set constantPos($fixnum.Int64 value) => $_setInt64(8, value);
   @$pb.TagNumber(9)
-  $core.bool hasConstantPos() => $_has(8);
-  @$pb.TagNumber(9)
   void clearConstantPos() => $_clearField(9);
 
   @$pb.TagNumber(10)
   $fixnum.Int64 get constantNeg => $_getI64(9);
   @$pb.TagNumber(10)
   set constantNeg($fixnum.Int64 value) => $_setInt64(9, value);
-  @$pb.TagNumber(10)
-  $core.bool hasConstantNeg() => $_has(9);
   @$pb.TagNumber(10)
   void clearConstantNeg() => $_clearField(10);
 
@@ -3721,16 +3577,12 @@ class Int64BigRules extends $pb.GeneratedMessage {
   @$pb.TagNumber(11)
   set in_11($fixnum.Int64 value) => $_setInt64(10, value);
   @$pb.TagNumber(11)
-  $core.bool hasIn_11() => $_has(10);
-  @$pb.TagNumber(11)
   void clearIn_11() => $_clearField(11);
 
   @$pb.TagNumber(12)
   $fixnum.Int64 get notin => $_getI64(11);
   @$pb.TagNumber(12)
   set notin($fixnum.Int64 value) => $_setInt64(11, value);
-  @$pb.TagNumber(12)
-  $core.bool hasNotin() => $_has(11);
   @$pb.TagNumber(12)
   void clearNotin() => $_clearField(12);
 }
@@ -3763,7 +3615,7 @@ class Int64IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64IncorrectType clone() => Int64IncorrectType()..mergeFromMessage(this);
+  Int64IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64IncorrectType copyWith(void Function(Int64IncorrectType) updates) =>
       super.copyWith((message) => updates(message as Int64IncorrectType))
@@ -3787,8 +3639,6 @@ class Int64IncorrectType extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3821,7 +3671,7 @@ class Int64Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64Example clone() => Int64Example()..mergeFromMessage(this);
+  Int64Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64Example copyWith(void Function(Int64Example) updates) =>
       super.copyWith((message) => updates(message as Int64Example))
@@ -3845,8 +3695,6 @@ class Int64Example extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3879,7 +3727,7 @@ class UInt32None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32None clone() => UInt32None()..mergeFromMessage(this);
+  UInt32None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32None copyWith(void Function(UInt32None) updates) =>
       super.copyWith((message) => updates(message as UInt32None)) as UInt32None;
@@ -3901,8 +3749,6 @@ class UInt32None extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3935,7 +3781,7 @@ class UInt32Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32Const clone() => UInt32Const()..mergeFromMessage(this);
+  UInt32Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32Const copyWith(void Function(UInt32Const) updates) =>
       super.copyWith((message) => updates(message as UInt32Const))
@@ -3958,8 +3804,6 @@ class UInt32Const extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -3992,7 +3836,7 @@ class UInt32In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32In clone() => UInt32In()..mergeFromMessage(this);
+  UInt32In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32In copyWith(void Function(UInt32In) updates) =>
       super.copyWith((message) => updates(message as UInt32In)) as UInt32In;
@@ -4014,8 +3858,6 @@ class UInt32In extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4048,7 +3890,7 @@ class UInt32NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32NotIn clone() => UInt32NotIn()..mergeFromMessage(this);
+  UInt32NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32NotIn copyWith(void Function(UInt32NotIn) updates) =>
       super.copyWith((message) => updates(message as UInt32NotIn))
@@ -4071,8 +3913,6 @@ class UInt32NotIn extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4105,7 +3945,7 @@ class UInt32LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32LT clone() => UInt32LT()..mergeFromMessage(this);
+  UInt32LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32LT copyWith(void Function(UInt32LT) updates) =>
       super.copyWith((message) => updates(message as UInt32LT)) as UInt32LT;
@@ -4127,8 +3967,6 @@ class UInt32LT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4161,7 +3999,7 @@ class UInt32LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32LTE clone() => UInt32LTE()..mergeFromMessage(this);
+  UInt32LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32LTE copyWith(void Function(UInt32LTE) updates) =>
       super.copyWith((message) => updates(message as UInt32LTE)) as UInt32LTE;
@@ -4183,8 +4021,6 @@ class UInt32LTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4217,7 +4053,7 @@ class UInt32GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32GT clone() => UInt32GT()..mergeFromMessage(this);
+  UInt32GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32GT copyWith(void Function(UInt32GT) updates) =>
       super.copyWith((message) => updates(message as UInt32GT)) as UInt32GT;
@@ -4239,8 +4075,6 @@ class UInt32GT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4273,7 +4107,7 @@ class UInt32GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32GTE clone() => UInt32GTE()..mergeFromMessage(this);
+  UInt32GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32GTE copyWith(void Function(UInt32GTE) updates) =>
       super.copyWith((message) => updates(message as UInt32GTE)) as UInt32GTE;
@@ -4295,8 +4129,6 @@ class UInt32GTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4329,7 +4161,7 @@ class UInt32GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32GTLT clone() => UInt32GTLT()..mergeFromMessage(this);
+  UInt32GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32GTLT copyWith(void Function(UInt32GTLT) updates) =>
       super.copyWith((message) => updates(message as UInt32GTLT)) as UInt32GTLT;
@@ -4351,8 +4183,6 @@ class UInt32GTLT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4385,7 +4215,7 @@ class UInt32ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32ExLTGT clone() => UInt32ExLTGT()..mergeFromMessage(this);
+  UInt32ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32ExLTGT copyWith(void Function(UInt32ExLTGT) updates) =>
       super.copyWith((message) => updates(message as UInt32ExLTGT))
@@ -4409,8 +4239,6 @@ class UInt32ExLTGT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4443,7 +4271,7 @@ class UInt32GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32GTELTE clone() => UInt32GTELTE()..mergeFromMessage(this);
+  UInt32GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32GTELTE copyWith(void Function(UInt32GTELTE) updates) =>
       super.copyWith((message) => updates(message as UInt32GTELTE))
@@ -4467,8 +4295,6 @@ class UInt32GTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4501,7 +4327,7 @@ class UInt32ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32ExGTELTE clone() => UInt32ExGTELTE()..mergeFromMessage(this);
+  UInt32ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32ExGTELTE copyWith(void Function(UInt32ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as UInt32ExGTELTE))
@@ -4525,8 +4351,6 @@ class UInt32ExGTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4559,7 +4383,7 @@ class UInt32Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32Ignore clone() => UInt32Ignore()..mergeFromMessage(this);
+  UInt32Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32Ignore copyWith(void Function(UInt32Ignore) updates) =>
       super.copyWith((message) => updates(message as UInt32Ignore))
@@ -4583,8 +4407,6 @@ class UInt32Ignore extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4617,7 +4439,7 @@ class UInt32IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32IncorrectType clone() => UInt32IncorrectType()..mergeFromMessage(this);
+  UInt32IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32IncorrectType copyWith(void Function(UInt32IncorrectType) updates) =>
       super.copyWith((message) => updates(message as UInt32IncorrectType))
@@ -4641,8 +4463,6 @@ class UInt32IncorrectType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4675,7 +4495,7 @@ class UInt32Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt32Example clone() => UInt32Example()..mergeFromMessage(this);
+  UInt32Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt32Example copyWith(void Function(UInt32Example) updates) =>
       super.copyWith((message) => updates(message as UInt32Example))
@@ -4699,8 +4519,6 @@ class UInt32Example extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4734,7 +4552,7 @@ class UInt64None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64None clone() => UInt64None()..mergeFromMessage(this);
+  UInt64None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64None copyWith(void Function(UInt64None) updates) =>
       super.copyWith((message) => updates(message as UInt64None)) as UInt64None;
@@ -4756,8 +4574,6 @@ class UInt64None extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4791,7 +4607,7 @@ class UInt64Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64Const clone() => UInt64Const()..mergeFromMessage(this);
+  UInt64Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64Const copyWith(void Function(UInt64Const) updates) =>
       super.copyWith((message) => updates(message as UInt64Const))
@@ -4814,8 +4630,6 @@ class UInt64Const extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4849,7 +4663,7 @@ class UInt64In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64In clone() => UInt64In()..mergeFromMessage(this);
+  UInt64In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64In copyWith(void Function(UInt64In) updates) =>
       super.copyWith((message) => updates(message as UInt64In)) as UInt64In;
@@ -4871,8 +4685,6 @@ class UInt64In extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4906,7 +4718,7 @@ class UInt64NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64NotIn clone() => UInt64NotIn()..mergeFromMessage(this);
+  UInt64NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64NotIn copyWith(void Function(UInt64NotIn) updates) =>
       super.copyWith((message) => updates(message as UInt64NotIn))
@@ -4929,8 +4741,6 @@ class UInt64NotIn extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -4964,7 +4774,7 @@ class UInt64LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64LT clone() => UInt64LT()..mergeFromMessage(this);
+  UInt64LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64LT copyWith(void Function(UInt64LT) updates) =>
       super.copyWith((message) => updates(message as UInt64LT)) as UInt64LT;
@@ -4986,8 +4796,6 @@ class UInt64LT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5021,7 +4829,7 @@ class UInt64LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64LTE clone() => UInt64LTE()..mergeFromMessage(this);
+  UInt64LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64LTE copyWith(void Function(UInt64LTE) updates) =>
       super.copyWith((message) => updates(message as UInt64LTE)) as UInt64LTE;
@@ -5043,8 +4851,6 @@ class UInt64LTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5078,7 +4884,7 @@ class UInt64GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64GT clone() => UInt64GT()..mergeFromMessage(this);
+  UInt64GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64GT copyWith(void Function(UInt64GT) updates) =>
       super.copyWith((message) => updates(message as UInt64GT)) as UInt64GT;
@@ -5100,8 +4906,6 @@ class UInt64GT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5135,7 +4939,7 @@ class UInt64GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64GTE clone() => UInt64GTE()..mergeFromMessage(this);
+  UInt64GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64GTE copyWith(void Function(UInt64GTE) updates) =>
       super.copyWith((message) => updates(message as UInt64GTE)) as UInt64GTE;
@@ -5157,8 +4961,6 @@ class UInt64GTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5192,7 +4994,7 @@ class UInt64GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64GTLT clone() => UInt64GTLT()..mergeFromMessage(this);
+  UInt64GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64GTLT copyWith(void Function(UInt64GTLT) updates) =>
       super.copyWith((message) => updates(message as UInt64GTLT)) as UInt64GTLT;
@@ -5214,8 +5016,6 @@ class UInt64GTLT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5249,7 +5049,7 @@ class UInt64ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64ExLTGT clone() => UInt64ExLTGT()..mergeFromMessage(this);
+  UInt64ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64ExLTGT copyWith(void Function(UInt64ExLTGT) updates) =>
       super.copyWith((message) => updates(message as UInt64ExLTGT))
@@ -5273,8 +5073,6 @@ class UInt64ExLTGT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5308,7 +5106,7 @@ class UInt64GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64GTELTE clone() => UInt64GTELTE()..mergeFromMessage(this);
+  UInt64GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64GTELTE copyWith(void Function(UInt64GTELTE) updates) =>
       super.copyWith((message) => updates(message as UInt64GTELTE))
@@ -5332,8 +5130,6 @@ class UInt64GTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5367,7 +5163,7 @@ class UInt64ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64ExGTELTE clone() => UInt64ExGTELTE()..mergeFromMessage(this);
+  UInt64ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64ExGTELTE copyWith(void Function(UInt64ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as UInt64ExGTELTE))
@@ -5391,8 +5187,6 @@ class UInt64ExGTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5426,7 +5220,7 @@ class UInt64Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64Ignore clone() => UInt64Ignore()..mergeFromMessage(this);
+  UInt64Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64Ignore copyWith(void Function(UInt64Ignore) updates) =>
       super.copyWith((message) => updates(message as UInt64Ignore))
@@ -5450,8 +5244,6 @@ class UInt64Ignore extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5485,7 +5277,7 @@ class UInt64IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64IncorrectType clone() => UInt64IncorrectType()..mergeFromMessage(this);
+  UInt64IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64IncorrectType copyWith(void Function(UInt64IncorrectType) updates) =>
       super.copyWith((message) => updates(message as UInt64IncorrectType))
@@ -5509,8 +5301,6 @@ class UInt64IncorrectType extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5544,7 +5334,7 @@ class UInt64Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  UInt64Example clone() => UInt64Example()..mergeFromMessage(this);
+  UInt64Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   UInt64Example copyWith(void Function(UInt64Example) updates) =>
       super.copyWith((message) => updates(message as UInt64Example))
@@ -5568,8 +5358,6 @@ class UInt64Example extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5602,7 +5390,7 @@ class SInt32None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32None clone() => SInt32None()..mergeFromMessage(this);
+  SInt32None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32None copyWith(void Function(SInt32None) updates) =>
       super.copyWith((message) => updates(message as SInt32None)) as SInt32None;
@@ -5624,8 +5412,6 @@ class SInt32None extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5658,7 +5444,7 @@ class SInt32Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32Const clone() => SInt32Const()..mergeFromMessage(this);
+  SInt32Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32Const copyWith(void Function(SInt32Const) updates) =>
       super.copyWith((message) => updates(message as SInt32Const))
@@ -5681,8 +5467,6 @@ class SInt32Const extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5715,7 +5499,7 @@ class SInt32In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32In clone() => SInt32In()..mergeFromMessage(this);
+  SInt32In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32In copyWith(void Function(SInt32In) updates) =>
       super.copyWith((message) => updates(message as SInt32In)) as SInt32In;
@@ -5737,8 +5521,6 @@ class SInt32In extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5771,7 +5553,7 @@ class SInt32NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32NotIn clone() => SInt32NotIn()..mergeFromMessage(this);
+  SInt32NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32NotIn copyWith(void Function(SInt32NotIn) updates) =>
       super.copyWith((message) => updates(message as SInt32NotIn))
@@ -5794,8 +5576,6 @@ class SInt32NotIn extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5828,7 +5608,7 @@ class SInt32LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32LT clone() => SInt32LT()..mergeFromMessage(this);
+  SInt32LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32LT copyWith(void Function(SInt32LT) updates) =>
       super.copyWith((message) => updates(message as SInt32LT)) as SInt32LT;
@@ -5850,8 +5630,6 @@ class SInt32LT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5884,7 +5662,7 @@ class SInt32LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32LTE clone() => SInt32LTE()..mergeFromMessage(this);
+  SInt32LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32LTE copyWith(void Function(SInt32LTE) updates) =>
       super.copyWith((message) => updates(message as SInt32LTE)) as SInt32LTE;
@@ -5906,8 +5684,6 @@ class SInt32LTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5940,7 +5716,7 @@ class SInt32GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32GT clone() => SInt32GT()..mergeFromMessage(this);
+  SInt32GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32GT copyWith(void Function(SInt32GT) updates) =>
       super.copyWith((message) => updates(message as SInt32GT)) as SInt32GT;
@@ -5962,8 +5738,6 @@ class SInt32GT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -5996,7 +5770,7 @@ class SInt32GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32GTE clone() => SInt32GTE()..mergeFromMessage(this);
+  SInt32GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32GTE copyWith(void Function(SInt32GTE) updates) =>
       super.copyWith((message) => updates(message as SInt32GTE)) as SInt32GTE;
@@ -6018,8 +5792,6 @@ class SInt32GTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6052,7 +5824,7 @@ class SInt32GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32GTLT clone() => SInt32GTLT()..mergeFromMessage(this);
+  SInt32GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32GTLT copyWith(void Function(SInt32GTLT) updates) =>
       super.copyWith((message) => updates(message as SInt32GTLT)) as SInt32GTLT;
@@ -6074,8 +5846,6 @@ class SInt32GTLT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6108,7 +5878,7 @@ class SInt32ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32ExLTGT clone() => SInt32ExLTGT()..mergeFromMessage(this);
+  SInt32ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32ExLTGT copyWith(void Function(SInt32ExLTGT) updates) =>
       super.copyWith((message) => updates(message as SInt32ExLTGT))
@@ -6132,8 +5902,6 @@ class SInt32ExLTGT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6166,7 +5934,7 @@ class SInt32GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32GTELTE clone() => SInt32GTELTE()..mergeFromMessage(this);
+  SInt32GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32GTELTE copyWith(void Function(SInt32GTELTE) updates) =>
       super.copyWith((message) => updates(message as SInt32GTELTE))
@@ -6190,8 +5958,6 @@ class SInt32GTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6224,7 +5990,7 @@ class SInt32ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32ExGTELTE clone() => SInt32ExGTELTE()..mergeFromMessage(this);
+  SInt32ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32ExGTELTE copyWith(void Function(SInt32ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as SInt32ExGTELTE))
@@ -6248,8 +6014,6 @@ class SInt32ExGTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6282,7 +6046,7 @@ class SInt32Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32Ignore clone() => SInt32Ignore()..mergeFromMessage(this);
+  SInt32Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32Ignore copyWith(void Function(SInt32Ignore) updates) =>
       super.copyWith((message) => updates(message as SInt32Ignore))
@@ -6306,8 +6070,6 @@ class SInt32Ignore extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6340,7 +6102,7 @@ class SInt32IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32IncorrectType clone() => SInt32IncorrectType()..mergeFromMessage(this);
+  SInt32IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32IncorrectType copyWith(void Function(SInt32IncorrectType) updates) =>
       super.copyWith((message) => updates(message as SInt32IncorrectType))
@@ -6364,8 +6126,6 @@ class SInt32IncorrectType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6398,7 +6158,7 @@ class SInt32Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt32Example clone() => SInt32Example()..mergeFromMessage(this);
+  SInt32Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt32Example copyWith(void Function(SInt32Example) updates) =>
       super.copyWith((message) => updates(message as SInt32Example))
@@ -6422,8 +6182,6 @@ class SInt32Example extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6457,7 +6215,7 @@ class SInt64None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64None clone() => SInt64None()..mergeFromMessage(this);
+  SInt64None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64None copyWith(void Function(SInt64None) updates) =>
       super.copyWith((message) => updates(message as SInt64None)) as SInt64None;
@@ -6479,8 +6237,6 @@ class SInt64None extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6514,7 +6270,7 @@ class SInt64Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64Const clone() => SInt64Const()..mergeFromMessage(this);
+  SInt64Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64Const copyWith(void Function(SInt64Const) updates) =>
       super.copyWith((message) => updates(message as SInt64Const))
@@ -6537,8 +6293,6 @@ class SInt64Const extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6572,7 +6326,7 @@ class SInt64In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64In clone() => SInt64In()..mergeFromMessage(this);
+  SInt64In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64In copyWith(void Function(SInt64In) updates) =>
       super.copyWith((message) => updates(message as SInt64In)) as SInt64In;
@@ -6594,8 +6348,6 @@ class SInt64In extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6629,7 +6381,7 @@ class SInt64NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64NotIn clone() => SInt64NotIn()..mergeFromMessage(this);
+  SInt64NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64NotIn copyWith(void Function(SInt64NotIn) updates) =>
       super.copyWith((message) => updates(message as SInt64NotIn))
@@ -6652,8 +6404,6 @@ class SInt64NotIn extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6687,7 +6437,7 @@ class SInt64LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64LT clone() => SInt64LT()..mergeFromMessage(this);
+  SInt64LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64LT copyWith(void Function(SInt64LT) updates) =>
       super.copyWith((message) => updates(message as SInt64LT)) as SInt64LT;
@@ -6709,8 +6459,6 @@ class SInt64LT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6744,7 +6492,7 @@ class SInt64LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64LTE clone() => SInt64LTE()..mergeFromMessage(this);
+  SInt64LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64LTE copyWith(void Function(SInt64LTE) updates) =>
       super.copyWith((message) => updates(message as SInt64LTE)) as SInt64LTE;
@@ -6766,8 +6514,6 @@ class SInt64LTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6801,7 +6547,7 @@ class SInt64GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64GT clone() => SInt64GT()..mergeFromMessage(this);
+  SInt64GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64GT copyWith(void Function(SInt64GT) updates) =>
       super.copyWith((message) => updates(message as SInt64GT)) as SInt64GT;
@@ -6823,8 +6569,6 @@ class SInt64GT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6858,7 +6602,7 @@ class SInt64GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64GTE clone() => SInt64GTE()..mergeFromMessage(this);
+  SInt64GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64GTE copyWith(void Function(SInt64GTE) updates) =>
       super.copyWith((message) => updates(message as SInt64GTE)) as SInt64GTE;
@@ -6880,8 +6624,6 @@ class SInt64GTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6915,7 +6657,7 @@ class SInt64GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64GTLT clone() => SInt64GTLT()..mergeFromMessage(this);
+  SInt64GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64GTLT copyWith(void Function(SInt64GTLT) updates) =>
       super.copyWith((message) => updates(message as SInt64GTLT)) as SInt64GTLT;
@@ -6937,8 +6679,6 @@ class SInt64GTLT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -6972,7 +6712,7 @@ class SInt64ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64ExLTGT clone() => SInt64ExLTGT()..mergeFromMessage(this);
+  SInt64ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64ExLTGT copyWith(void Function(SInt64ExLTGT) updates) =>
       super.copyWith((message) => updates(message as SInt64ExLTGT))
@@ -6996,8 +6736,6 @@ class SInt64ExLTGT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7031,7 +6769,7 @@ class SInt64GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64GTELTE clone() => SInt64GTELTE()..mergeFromMessage(this);
+  SInt64GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64GTELTE copyWith(void Function(SInt64GTELTE) updates) =>
       super.copyWith((message) => updates(message as SInt64GTELTE))
@@ -7055,8 +6793,6 @@ class SInt64GTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7090,7 +6826,7 @@ class SInt64ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64ExGTELTE clone() => SInt64ExGTELTE()..mergeFromMessage(this);
+  SInt64ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64ExGTELTE copyWith(void Function(SInt64ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as SInt64ExGTELTE))
@@ -7114,8 +6850,6 @@ class SInt64ExGTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7149,7 +6883,7 @@ class SInt64Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64Ignore clone() => SInt64Ignore()..mergeFromMessage(this);
+  SInt64Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64Ignore copyWith(void Function(SInt64Ignore) updates) =>
       super.copyWith((message) => updates(message as SInt64Ignore))
@@ -7173,8 +6907,6 @@ class SInt64Ignore extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7208,7 +6940,7 @@ class SInt64IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64IncorrectType clone() => SInt64IncorrectType()..mergeFromMessage(this);
+  SInt64IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64IncorrectType copyWith(void Function(SInt64IncorrectType) updates) =>
       super.copyWith((message) => updates(message as SInt64IncorrectType))
@@ -7232,8 +6964,6 @@ class SInt64IncorrectType extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7267,7 +6997,7 @@ class SInt64Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SInt64Example clone() => SInt64Example()..mergeFromMessage(this);
+  SInt64Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SInt64Example copyWith(void Function(SInt64Example) updates) =>
       super.copyWith((message) => updates(message as SInt64Example))
@@ -7291,8 +7021,6 @@ class SInt64Example extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7325,7 +7053,7 @@ class Fixed32None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32None clone() => Fixed32None()..mergeFromMessage(this);
+  Fixed32None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32None copyWith(void Function(Fixed32None) updates) =>
       super.copyWith((message) => updates(message as Fixed32None))
@@ -7348,8 +7076,6 @@ class Fixed32None extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7382,7 +7108,7 @@ class Fixed32Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32Const clone() => Fixed32Const()..mergeFromMessage(this);
+  Fixed32Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32Const copyWith(void Function(Fixed32Const) updates) =>
       super.copyWith((message) => updates(message as Fixed32Const))
@@ -7406,8 +7132,6 @@ class Fixed32Const extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7440,7 +7164,7 @@ class Fixed32In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32In clone() => Fixed32In()..mergeFromMessage(this);
+  Fixed32In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32In copyWith(void Function(Fixed32In) updates) =>
       super.copyWith((message) => updates(message as Fixed32In)) as Fixed32In;
@@ -7462,8 +7186,6 @@ class Fixed32In extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7496,7 +7218,7 @@ class Fixed32NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32NotIn clone() => Fixed32NotIn()..mergeFromMessage(this);
+  Fixed32NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32NotIn copyWith(void Function(Fixed32NotIn) updates) =>
       super.copyWith((message) => updates(message as Fixed32NotIn))
@@ -7520,8 +7242,6 @@ class Fixed32NotIn extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7554,7 +7274,7 @@ class Fixed32LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32LT clone() => Fixed32LT()..mergeFromMessage(this);
+  Fixed32LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32LT copyWith(void Function(Fixed32LT) updates) =>
       super.copyWith((message) => updates(message as Fixed32LT)) as Fixed32LT;
@@ -7576,8 +7296,6 @@ class Fixed32LT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7610,7 +7328,7 @@ class Fixed32LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32LTE clone() => Fixed32LTE()..mergeFromMessage(this);
+  Fixed32LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32LTE copyWith(void Function(Fixed32LTE) updates) =>
       super.copyWith((message) => updates(message as Fixed32LTE)) as Fixed32LTE;
@@ -7632,8 +7350,6 @@ class Fixed32LTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7666,7 +7382,7 @@ class Fixed32GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32GT clone() => Fixed32GT()..mergeFromMessage(this);
+  Fixed32GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32GT copyWith(void Function(Fixed32GT) updates) =>
       super.copyWith((message) => updates(message as Fixed32GT)) as Fixed32GT;
@@ -7688,8 +7404,6 @@ class Fixed32GT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7722,7 +7436,7 @@ class Fixed32GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32GTE clone() => Fixed32GTE()..mergeFromMessage(this);
+  Fixed32GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32GTE copyWith(void Function(Fixed32GTE) updates) =>
       super.copyWith((message) => updates(message as Fixed32GTE)) as Fixed32GTE;
@@ -7744,8 +7458,6 @@ class Fixed32GTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7778,7 +7490,7 @@ class Fixed32GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32GTLT clone() => Fixed32GTLT()..mergeFromMessage(this);
+  Fixed32GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32GTLT copyWith(void Function(Fixed32GTLT) updates) =>
       super.copyWith((message) => updates(message as Fixed32GTLT))
@@ -7801,8 +7513,6 @@ class Fixed32GTLT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7835,7 +7545,7 @@ class Fixed32ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32ExLTGT clone() => Fixed32ExLTGT()..mergeFromMessage(this);
+  Fixed32ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32ExLTGT copyWith(void Function(Fixed32ExLTGT) updates) =>
       super.copyWith((message) => updates(message as Fixed32ExLTGT))
@@ -7859,8 +7569,6 @@ class Fixed32ExLTGT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7893,7 +7601,7 @@ class Fixed32GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32GTELTE clone() => Fixed32GTELTE()..mergeFromMessage(this);
+  Fixed32GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32GTELTE copyWith(void Function(Fixed32GTELTE) updates) =>
       super.copyWith((message) => updates(message as Fixed32GTELTE))
@@ -7917,8 +7625,6 @@ class Fixed32GTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -7951,7 +7657,7 @@ class Fixed32ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32ExGTELTE clone() => Fixed32ExGTELTE()..mergeFromMessage(this);
+  Fixed32ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32ExGTELTE copyWith(void Function(Fixed32ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as Fixed32ExGTELTE))
@@ -7975,8 +7681,6 @@ class Fixed32ExGTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8009,7 +7713,7 @@ class Fixed32Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32Ignore clone() => Fixed32Ignore()..mergeFromMessage(this);
+  Fixed32Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32Ignore copyWith(void Function(Fixed32Ignore) updates) =>
       super.copyWith((message) => updates(message as Fixed32Ignore))
@@ -8033,8 +7737,6 @@ class Fixed32Ignore extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8067,8 +7769,7 @@ class Fixed32IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32IncorrectType clone() =>
-      Fixed32IncorrectType()..mergeFromMessage(this);
+  Fixed32IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32IncorrectType copyWith(void Function(Fixed32IncorrectType) updates) =>
       super.copyWith((message) => updates(message as Fixed32IncorrectType))
@@ -8092,8 +7793,6 @@ class Fixed32IncorrectType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8126,7 +7825,7 @@ class Fixed32Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed32Example clone() => Fixed32Example()..mergeFromMessage(this);
+  Fixed32Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed32Example copyWith(void Function(Fixed32Example) updates) =>
       super.copyWith((message) => updates(message as Fixed32Example))
@@ -8150,8 +7849,6 @@ class Fixed32Example extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8185,7 +7882,7 @@ class Fixed64None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64None clone() => Fixed64None()..mergeFromMessage(this);
+  Fixed64None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64None copyWith(void Function(Fixed64None) updates) =>
       super.copyWith((message) => updates(message as Fixed64None))
@@ -8208,8 +7905,6 @@ class Fixed64None extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8243,7 +7938,7 @@ class Fixed64Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64Const clone() => Fixed64Const()..mergeFromMessage(this);
+  Fixed64Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64Const copyWith(void Function(Fixed64Const) updates) =>
       super.copyWith((message) => updates(message as Fixed64Const))
@@ -8267,8 +7962,6 @@ class Fixed64Const extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8302,7 +7995,7 @@ class Fixed64In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64In clone() => Fixed64In()..mergeFromMessage(this);
+  Fixed64In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64In copyWith(void Function(Fixed64In) updates) =>
       super.copyWith((message) => updates(message as Fixed64In)) as Fixed64In;
@@ -8324,8 +8017,6 @@ class Fixed64In extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8359,7 +8050,7 @@ class Fixed64NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64NotIn clone() => Fixed64NotIn()..mergeFromMessage(this);
+  Fixed64NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64NotIn copyWith(void Function(Fixed64NotIn) updates) =>
       super.copyWith((message) => updates(message as Fixed64NotIn))
@@ -8383,8 +8074,6 @@ class Fixed64NotIn extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8418,7 +8107,7 @@ class Fixed64LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64LT clone() => Fixed64LT()..mergeFromMessage(this);
+  Fixed64LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64LT copyWith(void Function(Fixed64LT) updates) =>
       super.copyWith((message) => updates(message as Fixed64LT)) as Fixed64LT;
@@ -8440,8 +8129,6 @@ class Fixed64LT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8475,7 +8162,7 @@ class Fixed64LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64LTE clone() => Fixed64LTE()..mergeFromMessage(this);
+  Fixed64LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64LTE copyWith(void Function(Fixed64LTE) updates) =>
       super.copyWith((message) => updates(message as Fixed64LTE)) as Fixed64LTE;
@@ -8497,8 +8184,6 @@ class Fixed64LTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8532,7 +8217,7 @@ class Fixed64GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64GT clone() => Fixed64GT()..mergeFromMessage(this);
+  Fixed64GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64GT copyWith(void Function(Fixed64GT) updates) =>
       super.copyWith((message) => updates(message as Fixed64GT)) as Fixed64GT;
@@ -8554,8 +8239,6 @@ class Fixed64GT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8589,7 +8272,7 @@ class Fixed64GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64GTE clone() => Fixed64GTE()..mergeFromMessage(this);
+  Fixed64GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64GTE copyWith(void Function(Fixed64GTE) updates) =>
       super.copyWith((message) => updates(message as Fixed64GTE)) as Fixed64GTE;
@@ -8611,8 +8294,6 @@ class Fixed64GTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8646,7 +8327,7 @@ class Fixed64GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64GTLT clone() => Fixed64GTLT()..mergeFromMessage(this);
+  Fixed64GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64GTLT copyWith(void Function(Fixed64GTLT) updates) =>
       super.copyWith((message) => updates(message as Fixed64GTLT))
@@ -8669,8 +8350,6 @@ class Fixed64GTLT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8704,7 +8383,7 @@ class Fixed64ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64ExLTGT clone() => Fixed64ExLTGT()..mergeFromMessage(this);
+  Fixed64ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64ExLTGT copyWith(void Function(Fixed64ExLTGT) updates) =>
       super.copyWith((message) => updates(message as Fixed64ExLTGT))
@@ -8728,8 +8407,6 @@ class Fixed64ExLTGT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8763,7 +8440,7 @@ class Fixed64GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64GTELTE clone() => Fixed64GTELTE()..mergeFromMessage(this);
+  Fixed64GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64GTELTE copyWith(void Function(Fixed64GTELTE) updates) =>
       super.copyWith((message) => updates(message as Fixed64GTELTE))
@@ -8787,8 +8464,6 @@ class Fixed64GTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8822,7 +8497,7 @@ class Fixed64ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64ExGTELTE clone() => Fixed64ExGTELTE()..mergeFromMessage(this);
+  Fixed64ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64ExGTELTE copyWith(void Function(Fixed64ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as Fixed64ExGTELTE))
@@ -8846,8 +8521,6 @@ class Fixed64ExGTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8881,7 +8554,7 @@ class Fixed64Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64Ignore clone() => Fixed64Ignore()..mergeFromMessage(this);
+  Fixed64Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64Ignore copyWith(void Function(Fixed64Ignore) updates) =>
       super.copyWith((message) => updates(message as Fixed64Ignore))
@@ -8905,8 +8578,6 @@ class Fixed64Ignore extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -8940,8 +8611,7 @@ class Fixed64IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64IncorrectType clone() =>
-      Fixed64IncorrectType()..mergeFromMessage(this);
+  Fixed64IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64IncorrectType copyWith(void Function(Fixed64IncorrectType) updates) =>
       super.copyWith((message) => updates(message as Fixed64IncorrectType))
@@ -8965,8 +8635,6 @@ class Fixed64IncorrectType extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9000,7 +8668,7 @@ class Fixed64Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Fixed64Example clone() => Fixed64Example()..mergeFromMessage(this);
+  Fixed64Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Fixed64Example copyWith(void Function(Fixed64Example) updates) =>
       super.copyWith((message) => updates(message as Fixed64Example))
@@ -9024,8 +8692,6 @@ class Fixed64Example extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9058,7 +8724,7 @@ class SFixed32None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32None clone() => SFixed32None()..mergeFromMessage(this);
+  SFixed32None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32None copyWith(void Function(SFixed32None) updates) =>
       super.copyWith((message) => updates(message as SFixed32None))
@@ -9082,8 +8748,6 @@ class SFixed32None extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9116,7 +8780,7 @@ class SFixed32Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32Const clone() => SFixed32Const()..mergeFromMessage(this);
+  SFixed32Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32Const copyWith(void Function(SFixed32Const) updates) =>
       super.copyWith((message) => updates(message as SFixed32Const))
@@ -9140,8 +8804,6 @@ class SFixed32Const extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9174,7 +8836,7 @@ class SFixed32In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32In clone() => SFixed32In()..mergeFromMessage(this);
+  SFixed32In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32In copyWith(void Function(SFixed32In) updates) =>
       super.copyWith((message) => updates(message as SFixed32In)) as SFixed32In;
@@ -9196,8 +8858,6 @@ class SFixed32In extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9230,7 +8890,7 @@ class SFixed32NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32NotIn clone() => SFixed32NotIn()..mergeFromMessage(this);
+  SFixed32NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32NotIn copyWith(void Function(SFixed32NotIn) updates) =>
       super.copyWith((message) => updates(message as SFixed32NotIn))
@@ -9254,8 +8914,6 @@ class SFixed32NotIn extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9288,7 +8946,7 @@ class SFixed32LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32LT clone() => SFixed32LT()..mergeFromMessage(this);
+  SFixed32LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32LT copyWith(void Function(SFixed32LT) updates) =>
       super.copyWith((message) => updates(message as SFixed32LT)) as SFixed32LT;
@@ -9310,8 +8968,6 @@ class SFixed32LT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9344,7 +9000,7 @@ class SFixed32LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32LTE clone() => SFixed32LTE()..mergeFromMessage(this);
+  SFixed32LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32LTE copyWith(void Function(SFixed32LTE) updates) =>
       super.copyWith((message) => updates(message as SFixed32LTE))
@@ -9367,8 +9023,6 @@ class SFixed32LTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9401,7 +9055,7 @@ class SFixed32GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32GT clone() => SFixed32GT()..mergeFromMessage(this);
+  SFixed32GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32GT copyWith(void Function(SFixed32GT) updates) =>
       super.copyWith((message) => updates(message as SFixed32GT)) as SFixed32GT;
@@ -9423,8 +9077,6 @@ class SFixed32GT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9457,7 +9109,7 @@ class SFixed32GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32GTE clone() => SFixed32GTE()..mergeFromMessage(this);
+  SFixed32GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32GTE copyWith(void Function(SFixed32GTE) updates) =>
       super.copyWith((message) => updates(message as SFixed32GTE))
@@ -9480,8 +9132,6 @@ class SFixed32GTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9514,7 +9164,7 @@ class SFixed32GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32GTLT clone() => SFixed32GTLT()..mergeFromMessage(this);
+  SFixed32GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32GTLT copyWith(void Function(SFixed32GTLT) updates) =>
       super.copyWith((message) => updates(message as SFixed32GTLT))
@@ -9538,8 +9188,6 @@ class SFixed32GTLT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9572,7 +9220,7 @@ class SFixed32ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32ExLTGT clone() => SFixed32ExLTGT()..mergeFromMessage(this);
+  SFixed32ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32ExLTGT copyWith(void Function(SFixed32ExLTGT) updates) =>
       super.copyWith((message) => updates(message as SFixed32ExLTGT))
@@ -9596,8 +9244,6 @@ class SFixed32ExLTGT extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9630,7 +9276,7 @@ class SFixed32GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32GTELTE clone() => SFixed32GTELTE()..mergeFromMessage(this);
+  SFixed32GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32GTELTE copyWith(void Function(SFixed32GTELTE) updates) =>
       super.copyWith((message) => updates(message as SFixed32GTELTE))
@@ -9654,8 +9300,6 @@ class SFixed32GTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9688,7 +9332,7 @@ class SFixed32ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32ExGTELTE clone() => SFixed32ExGTELTE()..mergeFromMessage(this);
+  SFixed32ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32ExGTELTE copyWith(void Function(SFixed32ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as SFixed32ExGTELTE))
@@ -9712,8 +9356,6 @@ class SFixed32ExGTELTE extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9746,7 +9388,7 @@ class SFixed32Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32Ignore clone() => SFixed32Ignore()..mergeFromMessage(this);
+  SFixed32Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32Ignore copyWith(void Function(SFixed32Ignore) updates) =>
       super.copyWith((message) => updates(message as SFixed32Ignore))
@@ -9770,8 +9412,6 @@ class SFixed32Ignore extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9804,8 +9444,7 @@ class SFixed32IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32IncorrectType clone() =>
-      SFixed32IncorrectType()..mergeFromMessage(this);
+  SFixed32IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32IncorrectType copyWith(
           void Function(SFixed32IncorrectType) updates) =>
@@ -9830,8 +9469,6 @@ class SFixed32IncorrectType extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9864,7 +9501,7 @@ class SFixed32Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed32Example clone() => SFixed32Example()..mergeFromMessage(this);
+  SFixed32Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed32Example copyWith(void Function(SFixed32Example) updates) =>
       super.copyWith((message) => updates(message as SFixed32Example))
@@ -9888,8 +9525,6 @@ class SFixed32Example extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9923,7 +9558,7 @@ class SFixed64None extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64None clone() => SFixed64None()..mergeFromMessage(this);
+  SFixed64None clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64None copyWith(void Function(SFixed64None) updates) =>
       super.copyWith((message) => updates(message as SFixed64None))
@@ -9947,8 +9582,6 @@ class SFixed64None extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -9982,7 +9615,7 @@ class SFixed64Const extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64Const clone() => SFixed64Const()..mergeFromMessage(this);
+  SFixed64Const clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64Const copyWith(void Function(SFixed64Const) updates) =>
       super.copyWith((message) => updates(message as SFixed64Const))
@@ -10006,8 +9639,6 @@ class SFixed64Const extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10041,7 +9672,7 @@ class SFixed64In extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64In clone() => SFixed64In()..mergeFromMessage(this);
+  SFixed64In clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64In copyWith(void Function(SFixed64In) updates) =>
       super.copyWith((message) => updates(message as SFixed64In)) as SFixed64In;
@@ -10063,8 +9694,6 @@ class SFixed64In extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10098,7 +9727,7 @@ class SFixed64NotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64NotIn clone() => SFixed64NotIn()..mergeFromMessage(this);
+  SFixed64NotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64NotIn copyWith(void Function(SFixed64NotIn) updates) =>
       super.copyWith((message) => updates(message as SFixed64NotIn))
@@ -10122,8 +9751,6 @@ class SFixed64NotIn extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10157,7 +9784,7 @@ class SFixed64LT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64LT clone() => SFixed64LT()..mergeFromMessage(this);
+  SFixed64LT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64LT copyWith(void Function(SFixed64LT) updates) =>
       super.copyWith((message) => updates(message as SFixed64LT)) as SFixed64LT;
@@ -10179,8 +9806,6 @@ class SFixed64LT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10214,7 +9839,7 @@ class SFixed64LTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64LTE clone() => SFixed64LTE()..mergeFromMessage(this);
+  SFixed64LTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64LTE copyWith(void Function(SFixed64LTE) updates) =>
       super.copyWith((message) => updates(message as SFixed64LTE))
@@ -10237,8 +9862,6 @@ class SFixed64LTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10272,7 +9895,7 @@ class SFixed64GT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64GT clone() => SFixed64GT()..mergeFromMessage(this);
+  SFixed64GT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64GT copyWith(void Function(SFixed64GT) updates) =>
       super.copyWith((message) => updates(message as SFixed64GT)) as SFixed64GT;
@@ -10294,8 +9917,6 @@ class SFixed64GT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10329,7 +9950,7 @@ class SFixed64GTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64GTE clone() => SFixed64GTE()..mergeFromMessage(this);
+  SFixed64GTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64GTE copyWith(void Function(SFixed64GTE) updates) =>
       super.copyWith((message) => updates(message as SFixed64GTE))
@@ -10352,8 +9973,6 @@ class SFixed64GTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10387,7 +10006,7 @@ class SFixed64GTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64GTLT clone() => SFixed64GTLT()..mergeFromMessage(this);
+  SFixed64GTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64GTLT copyWith(void Function(SFixed64GTLT) updates) =>
       super.copyWith((message) => updates(message as SFixed64GTLT))
@@ -10411,8 +10030,6 @@ class SFixed64GTLT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10446,7 +10063,7 @@ class SFixed64ExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64ExLTGT clone() => SFixed64ExLTGT()..mergeFromMessage(this);
+  SFixed64ExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64ExLTGT copyWith(void Function(SFixed64ExLTGT) updates) =>
       super.copyWith((message) => updates(message as SFixed64ExLTGT))
@@ -10470,8 +10087,6 @@ class SFixed64ExLTGT extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10505,7 +10120,7 @@ class SFixed64GTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64GTELTE clone() => SFixed64GTELTE()..mergeFromMessage(this);
+  SFixed64GTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64GTELTE copyWith(void Function(SFixed64GTELTE) updates) =>
       super.copyWith((message) => updates(message as SFixed64GTELTE))
@@ -10529,8 +10144,6 @@ class SFixed64GTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10564,7 +10177,7 @@ class SFixed64ExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64ExGTELTE clone() => SFixed64ExGTELTE()..mergeFromMessage(this);
+  SFixed64ExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64ExGTELTE copyWith(void Function(SFixed64ExGTELTE) updates) =>
       super.copyWith((message) => updates(message as SFixed64ExGTELTE))
@@ -10588,8 +10201,6 @@ class SFixed64ExGTELTE extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10623,7 +10234,7 @@ class SFixed64Ignore extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64Ignore clone() => SFixed64Ignore()..mergeFromMessage(this);
+  SFixed64Ignore clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64Ignore copyWith(void Function(SFixed64Ignore) updates) =>
       super.copyWith((message) => updates(message as SFixed64Ignore))
@@ -10647,8 +10258,6 @@ class SFixed64Ignore extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10682,8 +10291,7 @@ class SFixed64IncorrectType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64IncorrectType clone() =>
-      SFixed64IncorrectType()..mergeFromMessage(this);
+  SFixed64IncorrectType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64IncorrectType copyWith(
           void Function(SFixed64IncorrectType) updates) =>
@@ -10708,8 +10316,6 @@ class SFixed64IncorrectType extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10743,7 +10349,7 @@ class SFixed64Example extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  SFixed64Example clone() => SFixed64Example()..mergeFromMessage(this);
+  SFixed64Example clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   SFixed64Example copyWith(void Function(SFixed64Example) updates) =>
       super.copyWith((message) => updates(message as SFixed64Example))
@@ -10767,8 +10373,6 @@ class SFixed64Example extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -10800,7 +10404,7 @@ class Int64LTEOptional extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Int64LTEOptional clone() => Int64LTEOptional()..mergeFromMessage(this);
+  Int64LTEOptional clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Int64LTEOptional copyWith(void Function(Int64LTEOptional) updates) =>
       super.copyWith((message) => updates(message as Int64LTEOptional))

@@ -53,7 +53,7 @@ class EnumNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumNone clone() => EnumNone()..mergeFromMessage(this);
+  EnumNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumNone copyWith(void Function(EnumNone) updates) =>
       super.copyWith((message) => updates(message as EnumNone)) as EnumNone;
@@ -75,8 +75,6 @@ class EnumNone extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -112,7 +110,7 @@ class EnumConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumConst clone() => EnumConst()..mergeFromMessage(this);
+  EnumConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumConst copyWith(void Function(EnumConst) updates) =>
       super.copyWith((message) => updates(message as EnumConst)) as EnumConst;
@@ -134,8 +132,6 @@ class EnumConst extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -167,11 +163,12 @@ class EnumAliasConst extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
-        enumValues: TestEnumAlias.values)
+        enumValues: TestEnumAlias.valuesWithAliases,
+        valueByName: TestEnumAlias.valueByName)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumAliasConst clone() => EnumAliasConst()..mergeFromMessage(this);
+  EnumAliasConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumAliasConst copyWith(void Function(EnumAliasConst) updates) =>
       super.copyWith((message) => updates(message as EnumAliasConst))
@@ -195,8 +192,6 @@ class EnumAliasConst extends $pb.GeneratedMessage {
   TestEnumAlias get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnumAlias value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -232,7 +227,7 @@ class EnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumDefined clone() => EnumDefined()..mergeFromMessage(this);
+  EnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumDefined copyWith(void Function(EnumDefined) updates) =>
       super.copyWith((message) => updates(message as EnumDefined))
@@ -255,8 +250,6 @@ class EnumDefined extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -288,11 +281,12 @@ class EnumAliasDefined extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
-        enumValues: TestEnumAlias.values)
+        enumValues: TestEnumAlias.valuesWithAliases,
+        valueByName: TestEnumAlias.valueByName)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumAliasDefined clone() => EnumAliasDefined()..mergeFromMessage(this);
+  EnumAliasDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumAliasDefined copyWith(void Function(EnumAliasDefined) updates) =>
       super.copyWith((message) => updates(message as EnumAliasDefined))
@@ -316,8 +310,6 @@ class EnumAliasDefined extends $pb.GeneratedMessage {
   TestEnumAlias get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnumAlias value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -353,7 +345,7 @@ class EnumIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumIn clone() => EnumIn()..mergeFromMessage(this);
+  EnumIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumIn copyWith(void Function(EnumIn) updates) =>
       super.copyWith((message) => updates(message as EnumIn)) as EnumIn;
@@ -375,8 +367,6 @@ class EnumIn extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -408,11 +398,12 @@ class EnumAliasIn extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
-        enumValues: TestEnumAlias.values)
+        enumValues: TestEnumAlias.valuesWithAliases,
+        valueByName: TestEnumAlias.valueByName)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumAliasIn clone() => EnumAliasIn()..mergeFromMessage(this);
+  EnumAliasIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumAliasIn copyWith(void Function(EnumAliasIn) updates) =>
       super.copyWith((message) => updates(message as EnumAliasIn))
@@ -435,8 +426,6 @@ class EnumAliasIn extends $pb.GeneratedMessage {
   TestEnumAlias get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnumAlias value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -472,7 +461,7 @@ class EnumNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumNotIn clone() => EnumNotIn()..mergeFromMessage(this);
+  EnumNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumNotIn copyWith(void Function(EnumNotIn) updates) =>
       super.copyWith((message) => updates(message as EnumNotIn)) as EnumNotIn;
@@ -494,8 +483,6 @@ class EnumNotIn extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -527,11 +514,12 @@ class EnumAliasNotIn extends $pb.GeneratedMessage {
         presence: $pb.FieldPresence.implicit,
         defaultOrMaker: TestEnumAlias.TEST_ENUM_ALIAS_UNSPECIFIED,
         valueOf: TestEnumAlias.valueOf,
-        enumValues: TestEnumAlias.values)
+        enumValues: TestEnumAlias.valuesWithAliases,
+        valueByName: TestEnumAlias.valueByName)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumAliasNotIn clone() => EnumAliasNotIn()..mergeFromMessage(this);
+  EnumAliasNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumAliasNotIn copyWith(void Function(EnumAliasNotIn) updates) =>
       super.copyWith((message) => updates(message as EnumAliasNotIn))
@@ -555,8 +543,6 @@ class EnumAliasNotIn extends $pb.GeneratedMessage {
   TestEnumAlias get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnumAlias value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -593,7 +579,7 @@ class EnumExternal extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumExternal clone() => EnumExternal()..mergeFromMessage(this);
+  EnumExternal clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumExternal copyWith(void Function(EnumExternal) updates) =>
       super.copyWith((message) => updates(message as EnumExternal))
@@ -617,8 +603,6 @@ class EnumExternal extends $pb.GeneratedMessage {
   $0.Embed_Enumerated get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($0.Embed_Enumerated value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -656,7 +640,7 @@ class EnumExternal2 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumExternal2 clone() => EnumExternal2()..mergeFromMessage(this);
+  EnumExternal2 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumExternal2 copyWith(void Function(EnumExternal2) updates) =>
       super.copyWith((message) => updates(message as EnumExternal2))
@@ -680,8 +664,6 @@ class EnumExternal2 extends $pb.GeneratedMessage {
   $0.Embed_DoubleEmbed_DoubleEnumerated get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($0.Embed_DoubleEmbed_DoubleEnumerated value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -716,7 +698,7 @@ class RepeatedEnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedEnumDefined clone() => RepeatedEnumDefined()..mergeFromMessage(this);
+  RepeatedEnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedEnumDefined copyWith(void Function(RepeatedEnumDefined) updates) =>
       super.copyWith((message) => updates(message as RepeatedEnumDefined))
@@ -771,8 +753,7 @@ class RepeatedExternalEnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedExternalEnumDefined clone() =>
-      RepeatedExternalEnumDefined()..mergeFromMessage(this);
+  RepeatedExternalEnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedExternalEnumDefined copyWith(
           void Function(RepeatedExternalEnumDefined) updates) =>
@@ -831,8 +812,7 @@ class RepeatedYetAnotherExternalEnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RepeatedYetAnotherExternalEnumDefined clone() =>
-      RepeatedYetAnotherExternalEnumDefined()..mergeFromMessage(this);
+  RepeatedYetAnotherExternalEnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RepeatedYetAnotherExternalEnumDefined copyWith(
           void Function(RepeatedYetAnotherExternalEnumDefined) updates) =>
@@ -895,7 +875,7 @@ class MapEnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapEnumDefined clone() => MapEnumDefined()..mergeFromMessage(this);
+  MapEnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapEnumDefined copyWith(void Function(MapEnumDefined) updates) =>
       super.copyWith((message) => updates(message as MapEnumDefined))
@@ -954,8 +934,7 @@ class MapExternalEnumDefined extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  MapExternalEnumDefined clone() =>
-      MapExternalEnumDefined()..mergeFromMessage(this);
+  MapExternalEnumDefined clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   MapExternalEnumDefined copyWith(
           void Function(MapExternalEnumDefined) updates) =>
@@ -1032,7 +1011,7 @@ class EnumInsideOneof extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumInsideOneof clone() => EnumInsideOneof()..mergeFromMessage(this);
+  EnumInsideOneof clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumInsideOneof copyWith(void Function(EnumInsideOneof) updates) =>
       super.copyWith((message) => updates(message as EnumInsideOneof))
@@ -1108,7 +1087,7 @@ class EnumExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  EnumExample clone() => EnumExample()..mergeFromMessage(this);
+  EnumExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   EnumExample copyWith(void Function(EnumExample) updates) =>
       super.copyWith((message) => updates(message as EnumExample))
@@ -1131,8 +1110,6 @@ class EnumExample extends $pb.GeneratedMessage {
   TestEnum get val => $_getN(0);
   @$pb.TagNumber(1)
   set val(TestEnum value) => $_setField(1, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }

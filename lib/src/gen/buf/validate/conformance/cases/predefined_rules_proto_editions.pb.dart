@@ -51,8 +51,7 @@ class PredefinedFloatRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFloatRuleEdition2023 clone() =>
-      PredefinedFloatRuleEdition2023()..mergeFromMessage(this);
+  PredefinedFloatRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFloatRuleEdition2023 copyWith(
           void Function(PredefinedFloatRuleEdition2023) updates) =>
@@ -79,8 +78,6 @@ class PredefinedFloatRuleEdition2023 extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -112,8 +109,7 @@ class PredefinedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedDoubleRuleEdition2023 clone() =>
-      PredefinedDoubleRuleEdition2023()..mergeFromMessage(this);
+  PredefinedDoubleRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedDoubleRuleEdition2023 copyWith(
           void Function(PredefinedDoubleRuleEdition2023) updates) =>
@@ -141,8 +137,6 @@ class PredefinedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
   $core.double get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -174,8 +168,7 @@ class PredefinedInt32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedInt32RuleEdition2023 clone() =>
-      PredefinedInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedInt32RuleEdition2023 copyWith(
           void Function(PredefinedInt32RuleEdition2023) updates) =>
@@ -202,8 +195,6 @@ class PredefinedInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -235,8 +226,7 @@ class PredefinedInt64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedInt64RuleEdition2023 clone() =>
-      PredefinedInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedInt64RuleEdition2023 copyWith(
           void Function(PredefinedInt64RuleEdition2023) updates) =>
@@ -263,8 +253,6 @@ class PredefinedInt64RuleEdition2023 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -296,8 +284,7 @@ class PredefinedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedUInt32RuleEdition2023 clone() =>
-      PredefinedUInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedUInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedUInt32RuleEdition2023 copyWith(
           void Function(PredefinedUInt32RuleEdition2023) updates) =>
@@ -325,8 +312,6 @@ class PredefinedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -359,8 +344,7 @@ class PredefinedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedUInt64RuleEdition2023 clone() =>
-      PredefinedUInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedUInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedUInt64RuleEdition2023 copyWith(
           void Function(PredefinedUInt64RuleEdition2023) updates) =>
@@ -388,8 +372,6 @@ class PredefinedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -421,8 +403,7 @@ class PredefinedSInt32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSInt32RuleEdition2023 clone() =>
-      PredefinedSInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedSInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSInt32RuleEdition2023 copyWith(
           void Function(PredefinedSInt32RuleEdition2023) updates) =>
@@ -450,8 +431,6 @@ class PredefinedSInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -484,8 +463,7 @@ class PredefinedSInt64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSInt64RuleEdition2023 clone() =>
-      PredefinedSInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedSInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSInt64RuleEdition2023 copyWith(
           void Function(PredefinedSInt64RuleEdition2023) updates) =>
@@ -513,8 +491,6 @@ class PredefinedSInt64RuleEdition2023 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -547,8 +523,7 @@ class PredefinedFixed32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFixed32RuleEdition2023 clone() =>
-      PredefinedFixed32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedFixed32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFixed32RuleEdition2023 copyWith(
           void Function(PredefinedFixed32RuleEdition2023) updates) =>
@@ -576,8 +551,6 @@ class PredefinedFixed32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -611,8 +584,7 @@ class PredefinedFixed64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedFixed64RuleEdition2023 clone() =>
-      PredefinedFixed64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedFixed64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedFixed64RuleEdition2023 copyWith(
           void Function(PredefinedFixed64RuleEdition2023) updates) =>
@@ -640,8 +612,6 @@ class PredefinedFixed64RuleEdition2023 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -674,8 +644,7 @@ class PredefinedSFixed32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSFixed32RuleEdition2023 clone() =>
-      PredefinedSFixed32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedSFixed32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSFixed32RuleEdition2023 copyWith(
           void Function(PredefinedSFixed32RuleEdition2023) updates) =>
@@ -703,8 +672,6 @@ class PredefinedSFixed32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -738,8 +705,7 @@ class PredefinedSFixed64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedSFixed64RuleEdition2023 clone() =>
-      PredefinedSFixed64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedSFixed64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedSFixed64RuleEdition2023 copyWith(
           void Function(PredefinedSFixed64RuleEdition2023) updates) =>
@@ -767,8 +733,6 @@ class PredefinedSFixed64RuleEdition2023 extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -800,8 +764,7 @@ class PredefinedBoolRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedBoolRuleEdition2023 clone() =>
-      PredefinedBoolRuleEdition2023()..mergeFromMessage(this);
+  PredefinedBoolRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedBoolRuleEdition2023 copyWith(
           void Function(PredefinedBoolRuleEdition2023) updates) =>
@@ -828,8 +791,6 @@ class PredefinedBoolRuleEdition2023 extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -861,8 +822,7 @@ class PredefinedStringRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedStringRuleEdition2023 clone() =>
-      PredefinedStringRuleEdition2023()..mergeFromMessage(this);
+  PredefinedStringRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedStringRuleEdition2023 copyWith(
           void Function(PredefinedStringRuleEdition2023) updates) =>
@@ -890,8 +850,6 @@ class PredefinedStringRuleEdition2023 extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -924,8 +882,7 @@ class PredefinedBytesRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedBytesRuleEdition2023 clone() =>
-      PredefinedBytesRuleEdition2023()..mergeFromMessage(this);
+  PredefinedBytesRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedBytesRuleEdition2023 copyWith(
           void Function(PredefinedBytesRuleEdition2023) updates) =>
@@ -952,8 +909,6 @@ class PredefinedBytesRuleEdition2023 extends $pb.GeneratedMessage {
   $core.List<$core.int> get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.List<$core.int> value) => $_setBytes(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -990,8 +945,7 @@ class PredefinedEnumRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedEnumRuleEdition2023 clone() =>
-      PredefinedEnumRuleEdition2023()..mergeFromMessage(this);
+  PredefinedEnumRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedEnumRuleEdition2023 copyWith(
           void Function(PredefinedEnumRuleEdition2023) updates) =>
@@ -1020,8 +974,6 @@ class PredefinedEnumRuleEdition2023 extends $pb.GeneratedMessage {
   set val(PredefinedEnumRuleEdition2023_EnumEdition2023 value) =>
       $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -1049,12 +1001,11 @@ class PredefinedRepeatedRuleEdition2023 extends $pb.GeneratedMessage {
       package: const $pb.PackageName(
           _omitMessageNames ? '' : 'buf.validate.conformance.cases'),
       createEmptyInstance: create)
-    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.PU6)
+    ..p<$fixnum.Int64>(1, _omitFieldNames ? '' : 'val', $pb.PbFieldType.KU6)
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedRuleEdition2023 clone() =>
-      PredefinedRepeatedRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedRuleEdition2023) updates) =>
@@ -1113,8 +1064,7 @@ class PredefinedMapRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedMapRuleEdition2023 clone() =>
-      PredefinedMapRuleEdition2023()..mergeFromMessage(this);
+  PredefinedMapRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedMapRuleEdition2023 copyWith(
           void Function(PredefinedMapRuleEdition2023) updates) =>
@@ -1170,8 +1120,7 @@ class PredefinedDurationRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedDurationRuleEdition2023 clone() =>
-      PredefinedDurationRuleEdition2023()..mergeFromMessage(this);
+  PredefinedDurationRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedDurationRuleEdition2023 copyWith(
           void Function(PredefinedDurationRuleEdition2023) updates) =>
@@ -1200,11 +1149,7 @@ class PredefinedDurationRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($0.Duration value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $0.Duration ensureVal() => $_ensure(0);
 }
 
 class PredefinedTimestampRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1236,8 +1181,7 @@ class PredefinedTimestampRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedTimestampRuleEdition2023 clone() =>
-      PredefinedTimestampRuleEdition2023()..mergeFromMessage(this);
+  PredefinedTimestampRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedTimestampRuleEdition2023 copyWith(
           void Function(PredefinedTimestampRuleEdition2023) updates) =>
@@ -1266,11 +1210,7 @@ class PredefinedTimestampRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($1.Timestamp value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $1.Timestamp ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedFloatRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1302,8 +1242,7 @@ class PredefinedWrappedFloatRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedFloatRuleEdition2023 clone() =>
-      PredefinedWrappedFloatRuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedFloatRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedFloatRuleEdition2023 copyWith(
           void Function(PredefinedWrappedFloatRuleEdition2023) updates) =>
@@ -1332,11 +1271,7 @@ class PredefinedWrappedFloatRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.FloatValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.FloatValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1368,8 +1303,7 @@ class PredefinedWrappedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedDoubleRuleEdition2023 clone() =>
-      PredefinedWrappedDoubleRuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedDoubleRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedDoubleRuleEdition2023 copyWith(
           void Function(PredefinedWrappedDoubleRuleEdition2023) updates) =>
@@ -1398,11 +1332,7 @@ class PredefinedWrappedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.DoubleValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.DoubleValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedInt32RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1434,8 +1364,7 @@ class PredefinedWrappedInt32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedInt32RuleEdition2023 clone() =>
-      PredefinedWrappedInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedInt32RuleEdition2023 copyWith(
           void Function(PredefinedWrappedInt32RuleEdition2023) updates) =>
@@ -1464,11 +1393,7 @@ class PredefinedWrappedInt32RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.Int32Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.Int32Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedInt64RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1500,8 +1425,7 @@ class PredefinedWrappedInt64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedInt64RuleEdition2023 clone() =>
-      PredefinedWrappedInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedInt64RuleEdition2023 copyWith(
           void Function(PredefinedWrappedInt64RuleEdition2023) updates) =>
@@ -1530,11 +1454,7 @@ class PredefinedWrappedInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.Int64Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.Int64Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1566,8 +1486,7 @@ class PredefinedWrappedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedUInt32RuleEdition2023 clone() =>
-      PredefinedWrappedUInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedUInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedUInt32RuleEdition2023 copyWith(
           void Function(PredefinedWrappedUInt32RuleEdition2023) updates) =>
@@ -1596,11 +1515,7 @@ class PredefinedWrappedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.UInt32Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.UInt32Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1632,8 +1547,7 @@ class PredefinedWrappedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedUInt64RuleEdition2023 clone() =>
-      PredefinedWrappedUInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedUInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedUInt64RuleEdition2023 copyWith(
           void Function(PredefinedWrappedUInt64RuleEdition2023) updates) =>
@@ -1662,11 +1576,7 @@ class PredefinedWrappedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.UInt64Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.UInt64Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedBoolRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1698,8 +1608,7 @@ class PredefinedWrappedBoolRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedBoolRuleEdition2023 clone() =>
-      PredefinedWrappedBoolRuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedBoolRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedBoolRuleEdition2023 copyWith(
           void Function(PredefinedWrappedBoolRuleEdition2023) updates) =>
@@ -1728,11 +1637,7 @@ class PredefinedWrappedBoolRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.BoolValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.BoolValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedStringRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1764,8 +1669,7 @@ class PredefinedWrappedStringRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedStringRuleEdition2023 clone() =>
-      PredefinedWrappedStringRuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedStringRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedStringRuleEdition2023 copyWith(
           void Function(PredefinedWrappedStringRuleEdition2023) updates) =>
@@ -1794,11 +1698,7 @@ class PredefinedWrappedStringRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.StringValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.StringValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedBytesRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1830,8 +1730,7 @@ class PredefinedWrappedBytesRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedWrappedBytesRuleEdition2023 clone() =>
-      PredefinedWrappedBytesRuleEdition2023()..mergeFromMessage(this);
+  PredefinedWrappedBytesRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedWrappedBytesRuleEdition2023 copyWith(
           void Function(PredefinedWrappedBytesRuleEdition2023) updates) =>
@@ -1860,11 +1759,7 @@ class PredefinedWrappedBytesRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.BytesValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
-  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
-  @$pb.TagNumber(1)
-  $2.BytesValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedRepeatedWrappedFloatRuleEdition2023
@@ -1898,8 +1793,7 @@ class PredefinedRepeatedWrappedFloatRuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedFloatRuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedFloatRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedFloatRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedFloatRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedFloatRuleEdition2023)
@@ -1961,8 +1855,7 @@ class PredefinedRepeatedWrappedDoubleRuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedDoubleRuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedDoubleRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedDoubleRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedDoubleRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedDoubleRuleEdition2023)
@@ -2024,8 +1917,7 @@ class PredefinedRepeatedWrappedInt32RuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedInt32RuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedInt32RuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedInt32RuleEdition2023)
@@ -2087,8 +1979,7 @@ class PredefinedRepeatedWrappedInt64RuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedInt64RuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedInt64RuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedInt64RuleEdition2023)
@@ -2150,8 +2041,7 @@ class PredefinedRepeatedWrappedUInt32RuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedUInt32RuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedUInt32RuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedUInt32RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedUInt32RuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedUInt32RuleEdition2023)
@@ -2213,8 +2103,7 @@ class PredefinedRepeatedWrappedUInt64RuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedUInt64RuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedUInt64RuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedUInt64RuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedUInt64RuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedUInt64RuleEdition2023)
@@ -2276,8 +2165,7 @@ class PredefinedRepeatedWrappedBoolRuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedBoolRuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedBoolRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedBoolRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedBoolRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedBoolRuleEdition2023)
@@ -2339,8 +2227,7 @@ class PredefinedRepeatedWrappedStringRuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedStringRuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedStringRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedStringRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedStringRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedStringRuleEdition2023)
@@ -2402,8 +2289,7 @@ class PredefinedRepeatedWrappedBytesRuleEdition2023
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedRepeatedWrappedBytesRuleEdition2023 clone() =>
-      PredefinedRepeatedWrappedBytesRuleEdition2023()..mergeFromMessage(this);
+  PredefinedRepeatedWrappedBytesRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedRepeatedWrappedBytesRuleEdition2023 copyWith(
           void Function(PredefinedRepeatedWrappedBytesRuleEdition2023)
@@ -2462,8 +2348,7 @@ class PredefinedAndCustomRuleEdition2023_Nested extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedAndCustomRuleEdition2023_Nested clone() =>
-      PredefinedAndCustomRuleEdition2023_Nested()..mergeFromMessage(this);
+  PredefinedAndCustomRuleEdition2023_Nested clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedAndCustomRuleEdition2023_Nested copyWith(
           void Function(PredefinedAndCustomRuleEdition2023_Nested) updates) =>
@@ -2492,8 +2377,6 @@ class PredefinedAndCustomRuleEdition2023_Nested extends $pb.GeneratedMessage {
   $core.int get c => $_getIZ(0);
   @$pb.TagNumber(1)
   set c($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => $_clearField(1);
 }
@@ -2531,8 +2414,7 @@ class PredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  PredefinedAndCustomRuleEdition2023 clone() =>
-      PredefinedAndCustomRuleEdition2023()..mergeFromMessage(this);
+  PredefinedAndCustomRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   PredefinedAndCustomRuleEdition2023 copyWith(
           void Function(PredefinedAndCustomRuleEdition2023) updates) =>
@@ -2561,8 +2443,6 @@ class PredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
-  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
@@ -2571,11 +2451,7 @@ class PredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   set b(PredefinedAndCustomRuleEdition2023_Nested value) =>
       $_setField(2, value);
   @$pb.TagNumber(2)
-  $core.bool hasB() => $_has(1);
-  @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
-  @$pb.TagNumber(2)
-  PredefinedAndCustomRuleEdition2023_Nested ensureB() => $_ensure(1);
 }
 
 class StandardPredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
@@ -2606,8 +2482,7 @@ class StandardPredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  StandardPredefinedAndCustomRuleEdition2023 clone() =>
-      StandardPredefinedAndCustomRuleEdition2023()..mergeFromMessage(this);
+  StandardPredefinedAndCustomRuleEdition2023 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   StandardPredefinedAndCustomRuleEdition2023 copyWith(
           void Function(StandardPredefinedAndCustomRuleEdition2023) updates) =>
@@ -2636,8 +2511,6 @@ class StandardPredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get a => $_getIZ(0);
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasA() => $_has(0);
   @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
@@ -2855,9 +2728,9 @@ class Predefined_rules_proto_editions {
       _omitMessageNames ? '' : 'buf.validate.Int32Rules',
       _omitFieldNames ? '' : 'int32AbsInEdition2023',
       1162,
-      $pb.PbFieldType.P3,
+      $pb.PbFieldType.K3,
       protoName: 'int32_abs_in_edition_2023',
-      check: $pb.getCheckFunction($pb.PbFieldType.P3),
+      check: $pb.getCheckFunction($pb.PbFieldType.K3),
       optionsBytes: <$core.int>[
         194,
         72,

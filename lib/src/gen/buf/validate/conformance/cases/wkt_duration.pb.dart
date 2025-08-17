@@ -48,7 +48,7 @@ class DurationNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationNone clone() => DurationNone()..mergeFromMessage(this);
+  DurationNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationNone copyWith(void Function(DurationNone) updates) =>
       super.copyWith((message) => updates(message as DurationNone))
@@ -108,7 +108,7 @@ class DurationRequired extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationRequired clone() => DurationRequired()..mergeFromMessage(this);
+  DurationRequired clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationRequired copyWith(void Function(DurationRequired) updates) =>
       super.copyWith((message) => updates(message as DurationRequired))
@@ -168,7 +168,7 @@ class DurationConst extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationConst clone() => DurationConst()..mergeFromMessage(this);
+  DurationConst clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationConst copyWith(void Function(DurationConst) updates) =>
       super.copyWith((message) => updates(message as DurationConst))
@@ -228,7 +228,7 @@ class DurationIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationIn clone() => DurationIn()..mergeFromMessage(this);
+  DurationIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationIn copyWith(void Function(DurationIn) updates) =>
       super.copyWith((message) => updates(message as DurationIn)) as DurationIn;
@@ -286,7 +286,7 @@ class DurationNotIn extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationNotIn clone() => DurationNotIn()..mergeFromMessage(this);
+  DurationNotIn clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationNotIn copyWith(void Function(DurationNotIn) updates) =>
       super.copyWith((message) => updates(message as DurationNotIn))
@@ -346,7 +346,7 @@ class DurationLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationLT clone() => DurationLT()..mergeFromMessage(this);
+  DurationLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationLT copyWith(void Function(DurationLT) updates) =>
       super.copyWith((message) => updates(message as DurationLT)) as DurationLT;
@@ -404,7 +404,7 @@ class DurationLTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationLTE clone() => DurationLTE()..mergeFromMessage(this);
+  DurationLTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationLTE copyWith(void Function(DurationLTE) updates) =>
       super.copyWith((message) => updates(message as DurationLTE))
@@ -463,7 +463,7 @@ class DurationGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationGT clone() => DurationGT()..mergeFromMessage(this);
+  DurationGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationGT copyWith(void Function(DurationGT) updates) =>
       super.copyWith((message) => updates(message as DurationGT)) as DurationGT;
@@ -521,7 +521,7 @@ class DurationGTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationGTE clone() => DurationGTE()..mergeFromMessage(this);
+  DurationGTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationGTE copyWith(void Function(DurationGTE) updates) =>
       super.copyWith((message) => updates(message as DurationGTE))
@@ -580,7 +580,7 @@ class DurationGTLT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationGTLT clone() => DurationGTLT()..mergeFromMessage(this);
+  DurationGTLT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationGTLT copyWith(void Function(DurationGTLT) updates) =>
       super.copyWith((message) => updates(message as DurationGTLT))
@@ -640,7 +640,7 @@ class DurationExLTGT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationExLTGT clone() => DurationExLTGT()..mergeFromMessage(this);
+  DurationExLTGT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationExLTGT copyWith(void Function(DurationExLTGT) updates) =>
       super.copyWith((message) => updates(message as DurationExLTGT))
@@ -700,7 +700,7 @@ class DurationGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationGTELTE clone() => DurationGTELTE()..mergeFromMessage(this);
+  DurationGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationGTELTE copyWith(void Function(DurationGTELTE) updates) =>
       super.copyWith((message) => updates(message as DurationGTELTE))
@@ -760,7 +760,7 @@ class DurationExGTELTE extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationExGTELTE clone() => DurationExGTELTE()..mergeFromMessage(this);
+  DurationExGTELTE clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationExGTELTE copyWith(void Function(DurationExGTELTE) updates) =>
       super.copyWith((message) => updates(message as DurationExGTELTE))
@@ -826,8 +826,7 @@ class DurationFieldWithOtherFields extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationFieldWithOtherFields clone() =>
-      DurationFieldWithOtherFields()..mergeFromMessage(this);
+  DurationFieldWithOtherFields clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationFieldWithOtherFields copyWith(
           void Function(DurationFieldWithOtherFields) updates) =>
@@ -866,8 +865,6 @@ class DurationFieldWithOtherFields extends $pb.GeneratedMessage {
   @$pb.TagNumber(2)
   set intVal($core.int value) => $_setSignedInt32(1, value);
   @$pb.TagNumber(2)
-  $core.bool hasIntVal() => $_has(1);
-  @$pb.TagNumber(2)
   void clearIntVal() => $_clearField(2);
 }
 
@@ -899,7 +896,7 @@ class DurationExample extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationExample clone() => DurationExample()..mergeFromMessage(this);
+  DurationExample clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationExample copyWith(void Function(DurationExample) updates) =>
       super.copyWith((message) => updates(message as DurationExample))
@@ -960,8 +957,7 @@ class DurationWrongTypeScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationWrongTypeScalar clone() =>
-      DurationWrongTypeScalar()..mergeFromMessage(this);
+  DurationWrongTypeScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationWrongTypeScalar copyWith(
           void Function(DurationWrongTypeScalar) updates) =>
@@ -986,8 +982,6 @@ class DurationWrongTypeScalar extends $pb.GeneratedMessage {
   $core.int get seconds => $_getIZ(0);
   @$pb.TagNumber(1)
   set seconds($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSeconds() => $_has(0);
   @$pb.TagNumber(1)
   void clearSeconds() => $_clearField(1);
 }
@@ -1021,8 +1015,7 @@ class DurationWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationWrongTypeMessage_WrongType clone() =>
-      DurationWrongTypeMessage_WrongType()..mergeFromMessage(this);
+  DurationWrongTypeMessage_WrongType clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationWrongTypeMessage_WrongType copyWith(
           void Function(DurationWrongTypeMessage_WrongType) updates) =>
@@ -1050,8 +1043,6 @@ class DurationWrongTypeMessage_WrongType extends $pb.GeneratedMessage {
   $core.int get seconds => $_getIZ(0);
   @$pb.TagNumber(1)
   set seconds($core.int value) => $_setSignedInt32(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasSeconds() => $_has(0);
   @$pb.TagNumber(1)
   void clearSeconds() => $_clearField(1);
 }
@@ -1084,8 +1075,7 @@ class DurationWrongTypeMessage extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationWrongTypeMessage clone() =>
-      DurationWrongTypeMessage()..mergeFromMessage(this);
+  DurationWrongTypeMessage clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationWrongTypeMessage copyWith(
           void Function(DurationWrongTypeMessage) updates) =>
@@ -1146,8 +1136,7 @@ class DurationWrongTypeWrapper extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationWrongTypeWrapper clone() =>
-      DurationWrongTypeWrapper()..mergeFromMessage(this);
+  DurationWrongTypeWrapper clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationWrongTypeWrapper copyWith(
           void Function(DurationWrongTypeWrapper) updates) =>
@@ -1208,8 +1197,7 @@ class DurationWrongTypeWKT extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  DurationWrongTypeWKT clone() =>
-      DurationWrongTypeWKT()..mergeFromMessage(this);
+  DurationWrongTypeWKT clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   DurationWrongTypeWKT copyWith(void Function(DurationWrongTypeWKT) updates) =>
       super.copyWith((message) => updates(message as DurationWrongTypeWKT))

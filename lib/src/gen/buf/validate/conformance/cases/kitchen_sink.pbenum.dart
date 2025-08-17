@@ -14,27 +14,30 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class ComplexTestEnum extends $pb.ProtobufEnum {
-  static const ComplexTestEnum COMPLEX_TEST_ENUM_UNSPECIFIED =
-      ComplexTestEnum._(
-          0, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_UNSPECIFIED');
-  static const ComplexTestEnum COMPLEX_TEST_ENUM_ONE =
-      ComplexTestEnum._(1, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_ONE');
-  static const ComplexTestEnum COMPLEX_TEST_ENUM_TWO =
-      ComplexTestEnum._(2, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_TWO');
+enum ComplexTestEnum implements $pb.ProtobufEnum {
+  COMPLEX_TEST_ENUM_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_UNSPECIFIED'),
 
-  static const $core.List<ComplexTestEnum> values = <ComplexTestEnum>[
-    COMPLEX_TEST_ENUM_UNSPECIFIED,
-    COMPLEX_TEST_ENUM_ONE,
-    COMPLEX_TEST_ENUM_TWO,
-  ];
+  COMPLEX_TEST_ENUM_ONE(1, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_ONE'),
 
-  static final $core.List<ComplexTestEnum?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static ComplexTestEnum? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  COMPLEX_TEST_ENUM_TWO(2, _omitEnumNames ? '' : 'COMPLEX_TEST_ENUM_TWO'),
+  ;
 
-  const ComplexTestEnum._(super.value, super.name);
+  static final $core.Map<$core.int, ComplexTestEnum> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static ComplexTestEnum? valueOf($core.int value) => _byValue[value];
+
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const ComplexTestEnum(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

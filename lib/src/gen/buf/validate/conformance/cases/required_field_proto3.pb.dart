@@ -43,8 +43,7 @@ class RequiredProto3Scalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3Scalar clone() =>
-      RequiredProto3Scalar()..mergeFromMessage(this);
+  RequiredProto3Scalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3Scalar copyWith(void Function(RequiredProto3Scalar) updates) =>
       super.copyWith((message) => updates(message as RequiredProto3Scalar))
@@ -68,8 +67,6 @@ class RequiredProto3Scalar extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -102,8 +99,7 @@ class RequiredProto3ScalarIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3ScalarIgnoreAlways clone() =>
-      RequiredProto3ScalarIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3ScalarIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3ScalarIgnoreAlways copyWith(
           void Function(RequiredProto3ScalarIgnoreAlways) updates) =>
@@ -131,8 +127,6 @@ class RequiredProto3ScalarIgnoreAlways extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -164,8 +158,7 @@ class RequiredProto3OptionalScalar extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3OptionalScalar clone() =>
-      RequiredProto3OptionalScalar()..mergeFromMessage(this);
+  RequiredProto3OptionalScalar clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3OptionalScalar copyWith(
           void Function(RequiredProto3OptionalScalar) updates) =>
@@ -226,8 +219,7 @@ class RequiredProto3OptionalScalarIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3OptionalScalarIgnoreAlways clone() =>
-      RequiredProto3OptionalScalarIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3OptionalScalarIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3OptionalScalarIgnoreAlways copyWith(
           void Function(RequiredProto3OptionalScalarIgnoreAlways) updates) =>
@@ -289,8 +281,7 @@ class RequiredProto3Message_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3Message_Msg clone() =>
-      RequiredProto3Message_Msg()..mergeFromMessage(this);
+  RequiredProto3Message_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3Message_Msg copyWith(
           void Function(RequiredProto3Message_Msg) updates) =>
@@ -315,8 +306,6 @@ class RequiredProto3Message_Msg extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -349,8 +338,7 @@ class RequiredProto3Message extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3Message clone() =>
-      RequiredProto3Message()..mergeFromMessage(this);
+  RequiredProto3Message clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3Message copyWith(
           void Function(RequiredProto3Message) updates) =>
@@ -411,8 +399,7 @@ class RequiredProto3MessageIgnoreAlways_Msg extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3MessageIgnoreAlways_Msg clone() =>
-      RequiredProto3MessageIgnoreAlways_Msg()..mergeFromMessage(this);
+  RequiredProto3MessageIgnoreAlways_Msg clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3MessageIgnoreAlways_Msg copyWith(
           void Function(RequiredProto3MessageIgnoreAlways_Msg) updates) =>
@@ -440,8 +427,6 @@ class RequiredProto3MessageIgnoreAlways_Msg extends $pb.GeneratedMessage {
   $core.String get val => $_getSZ(0);
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -476,8 +461,7 @@ class RequiredProto3MessageIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3MessageIgnoreAlways clone() =>
-      RequiredProto3MessageIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3MessageIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3MessageIgnoreAlways copyWith(
           void Function(RequiredProto3MessageIgnoreAlways) updates) =>
@@ -552,7 +536,7 @@ class RequiredProto3OneOf extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3OneOf clone() => RequiredProto3OneOf()..mergeFromMessage(this);
+  RequiredProto3OneOf clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3OneOf copyWith(void Function(RequiredProto3OneOf) updates) =>
       super.copyWith((message) => updates(message as RequiredProto3OneOf))
@@ -634,8 +618,7 @@ class RequiredProto3OneOfIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3OneOfIgnoreAlways clone() =>
-      RequiredProto3OneOfIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3OneOfIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3OneOfIgnoreAlways copyWith(
           void Function(RequiredProto3OneOfIgnoreAlways) updates) =>
@@ -709,8 +692,7 @@ class RequiredProto3Repeated extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3Repeated clone() =>
-      RequiredProto3Repeated()..mergeFromMessage(this);
+  RequiredProto3Repeated clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3Repeated copyWith(
           void Function(RequiredProto3Repeated) updates) =>
@@ -763,8 +745,7 @@ class RequiredProto3RepeatedIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3RepeatedIgnoreAlways clone() =>
-      RequiredProto3RepeatedIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3RepeatedIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3RepeatedIgnoreAlways copyWith(
           void Function(RequiredProto3RepeatedIgnoreAlways) updates) =>
@@ -823,7 +804,7 @@ class RequiredProto3Map extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3Map clone() => RequiredProto3Map()..mergeFromMessage(this);
+  RequiredProto3Map clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3Map copyWith(void Function(RequiredProto3Map) updates) =>
       super.copyWith((message) => updates(message as RequiredProto3Map))
@@ -878,8 +859,7 @@ class RequiredProto3MapIgnoreAlways extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3MapIgnoreAlways clone() =>
-      RequiredProto3MapIgnoreAlways()..mergeFromMessage(this);
+  RequiredProto3MapIgnoreAlways clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3MapIgnoreAlways copyWith(
           void Function(RequiredProto3MapIgnoreAlways) updates) =>
@@ -937,8 +917,7 @@ class RequiredProto3MapKey extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3MapKey clone() =>
-      RequiredProto3MapKey()..mergeFromMessage(this);
+  RequiredProto3MapKey clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3MapKey copyWith(void Function(RequiredProto3MapKey) updates) =>
       super.copyWith((message) => updates(message as RequiredProto3MapKey))
@@ -993,8 +972,7 @@ class RequiredProto3MapValue extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3MapValue clone() =>
-      RequiredProto3MapValue()..mergeFromMessage(this);
+  RequiredProto3MapValue clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3MapValue copyWith(
           void Function(RequiredProto3MapValue) updates) =>
@@ -1046,8 +1024,7 @@ class RequiredProto3RepeatedItem extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  RequiredProto3RepeatedItem clone() =>
-      RequiredProto3RepeatedItem()..mergeFromMessage(this);
+  RequiredProto3RepeatedItem clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   RequiredProto3RepeatedItem copyWith(
           void Function(RequiredProto3RepeatedItem) updates) =>

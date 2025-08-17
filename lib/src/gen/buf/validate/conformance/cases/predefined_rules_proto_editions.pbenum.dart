@@ -14,29 +14,31 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class PredefinedEnumRuleEdition2023_EnumEdition2023 extends $pb.ProtobufEnum {
-  static const PredefinedEnumRuleEdition2023_EnumEdition2023
-      ENUM_EDITION2023_ZERO_UNSPECIFIED =
-      PredefinedEnumRuleEdition2023_EnumEdition2023._(
-          0, _omitEnumNames ? '' : 'ENUM_EDITION2023_ZERO_UNSPECIFIED');
-  static const PredefinedEnumRuleEdition2023_EnumEdition2023
-      ENUM_EDITION2023_ONE = PredefinedEnumRuleEdition2023_EnumEdition2023._(
-          1, _omitEnumNames ? '' : 'ENUM_EDITION2023_ONE');
+enum PredefinedEnumRuleEdition2023_EnumEdition2023 implements $pb.ProtobufEnum {
+  ENUM_EDITION2023_ZERO_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'ENUM_EDITION2023_ZERO_UNSPECIFIED'),
 
-  static const $core.List<PredefinedEnumRuleEdition2023_EnumEdition2023>
-      values = <PredefinedEnumRuleEdition2023_EnumEdition2023>[
-    ENUM_EDITION2023_ZERO_UNSPECIFIED,
-    ENUM_EDITION2023_ONE,
-  ];
+  ENUM_EDITION2023_ONE(1, _omitEnumNames ? '' : 'ENUM_EDITION2023_ONE'),
+  ;
 
-  static final $core.List<PredefinedEnumRuleEdition2023_EnumEdition2023?>
-      _byValue = $pb.ProtobufEnum.$_initByValueList(values, 1);
+  static final $core
+      .Map<$core.int, PredefinedEnumRuleEdition2023_EnumEdition2023> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
   static PredefinedEnumRuleEdition2023_EnumEdition2023? valueOf(
           $core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+      _byValue[value];
 
-  const PredefinedEnumRuleEdition2023_EnumEdition2023._(
-      super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const PredefinedEnumRuleEdition2023_EnumEdition2023(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =

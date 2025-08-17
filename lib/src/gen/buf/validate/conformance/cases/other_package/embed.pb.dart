@@ -40,7 +40,7 @@ class Embed_DoubleEmbed extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Embed_DoubleEmbed clone() => Embed_DoubleEmbed()..mergeFromMessage(this);
+  Embed_DoubleEmbed clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Embed_DoubleEmbed copyWith(void Function(Embed_DoubleEmbed) updates) =>
       super.copyWith((message) => updates(message as Embed_DoubleEmbed))
@@ -91,7 +91,7 @@ class Embed extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  Embed clone() => Embed()..mergeFromMessage(this);
+  Embed clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   Embed copyWith(void Function(Embed) updates) =>
       super.copyWith((message) => updates(message as Embed)) as Embed;
@@ -113,8 +113,6 @@ class Embed extends $pb.GeneratedMessage {
   $fixnum.Int64 get val => $_getI64(0);
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
-  @$pb.TagNumber(1)
-  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }

@@ -46,7 +46,7 @@ class WrapperNone extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperNone clone() => WrapperNone()..mergeFromMessage(this);
+  WrapperNone clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperNone copyWith(void Function(WrapperNone) updates) =>
       super.copyWith((message) => updates(message as WrapperNone))
@@ -105,7 +105,7 @@ class WrapperFloat extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperFloat clone() => WrapperFloat()..mergeFromMessage(this);
+  WrapperFloat clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperFloat copyWith(void Function(WrapperFloat) updates) =>
       super.copyWith((message) => updates(message as WrapperFloat))
@@ -165,7 +165,7 @@ class WrapperDouble extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperDouble clone() => WrapperDouble()..mergeFromMessage(this);
+  WrapperDouble clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperDouble copyWith(void Function(WrapperDouble) updates) =>
       super.copyWith((message) => updates(message as WrapperDouble))
@@ -225,7 +225,7 @@ class WrapperInt64 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperInt64 clone() => WrapperInt64()..mergeFromMessage(this);
+  WrapperInt64 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperInt64 copyWith(void Function(WrapperInt64) updates) =>
       super.copyWith((message) => updates(message as WrapperInt64))
@@ -285,7 +285,7 @@ class WrapperInt32 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperInt32 clone() => WrapperInt32()..mergeFromMessage(this);
+  WrapperInt32 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperInt32 copyWith(void Function(WrapperInt32) updates) =>
       super.copyWith((message) => updates(message as WrapperInt32))
@@ -345,7 +345,7 @@ class WrapperUInt64 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperUInt64 clone() => WrapperUInt64()..mergeFromMessage(this);
+  WrapperUInt64 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperUInt64 copyWith(void Function(WrapperUInt64) updates) =>
       super.copyWith((message) => updates(message as WrapperUInt64))
@@ -405,7 +405,7 @@ class WrapperUInt32 extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperUInt32 clone() => WrapperUInt32()..mergeFromMessage(this);
+  WrapperUInt32 clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperUInt32 copyWith(void Function(WrapperUInt32) updates) =>
       super.copyWith((message) => updates(message as WrapperUInt32))
@@ -465,7 +465,7 @@ class WrapperBool extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperBool clone() => WrapperBool()..mergeFromMessage(this);
+  WrapperBool clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperBool copyWith(void Function(WrapperBool) updates) =>
       super.copyWith((message) => updates(message as WrapperBool))
@@ -524,7 +524,7 @@ class WrapperString extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperString clone() => WrapperString()..mergeFromMessage(this);
+  WrapperString clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperString copyWith(void Function(WrapperString) updates) =>
       super.copyWith((message) => updates(message as WrapperString))
@@ -584,7 +584,7 @@ class WrapperBytes extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperBytes clone() => WrapperBytes()..mergeFromMessage(this);
+  WrapperBytes clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperBytes copyWith(void Function(WrapperBytes) updates) =>
       super.copyWith((message) => updates(message as WrapperBytes))
@@ -644,8 +644,7 @@ class WrapperRequiredString extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperRequiredString clone() =>
-      WrapperRequiredString()..mergeFromMessage(this);
+  WrapperRequiredString clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperRequiredString copyWith(
           void Function(WrapperRequiredString) updates) =>
@@ -706,8 +705,7 @@ class WrapperRequiredEmptyString extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperRequiredEmptyString clone() =>
-      WrapperRequiredEmptyString()..mergeFromMessage(this);
+  WrapperRequiredEmptyString clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperRequiredEmptyString copyWith(
           void Function(WrapperRequiredEmptyString) updates) =>
@@ -769,8 +767,7 @@ class WrapperOptionalUuidString extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperOptionalUuidString clone() =>
-      WrapperOptionalUuidString()..mergeFromMessage(this);
+  WrapperOptionalUuidString clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperOptionalUuidString copyWith(
           void Function(WrapperOptionalUuidString) updates) =>
@@ -831,8 +828,7 @@ class WrapperRequiredFloat extends $pb.GeneratedMessage {
     ..hasRequiredFields = false;
 
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
-  WrapperRequiredFloat clone() =>
-      WrapperRequiredFloat()..mergeFromMessage(this);
+  WrapperRequiredFloat clone() => deepCopy();
   @$core.Deprecated('See https://github.com/google/protobuf.dart/issues/998.')
   WrapperRequiredFloat copyWith(void Function(WrapperRequiredFloat) updates) =>
       super.copyWith((message) => updates(message as WrapperRequiredFloat))

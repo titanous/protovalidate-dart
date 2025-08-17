@@ -14,79 +14,83 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-class AnEnum extends $pb.ProtobufEnum {
-  static const AnEnum AN_ENUM_UNSPECIFIED =
-      AnEnum._(0, _omitEnumNames ? '' : 'AN_ENUM_UNSPECIFIED');
-  static const AnEnum AN_ENUM_X =
-      AnEnum._(1, _omitEnumNames ? '' : 'AN_ENUM_X');
-  static const AnEnum AN_ENUM_Y =
-      AnEnum._(2, _omitEnumNames ? '' : 'AN_ENUM_Y');
+enum AnEnum implements $pb.ProtobufEnum {
+  AN_ENUM_UNSPECIFIED(0, _omitEnumNames ? '' : 'AN_ENUM_UNSPECIFIED'),
 
-  static const $core.List<AnEnum> values = <AnEnum>[
-    AN_ENUM_UNSPECIFIED,
-    AN_ENUM_X,
-    AN_ENUM_Y,
-  ];
+  AN_ENUM_X(1, _omitEnumNames ? '' : 'AN_ENUM_X'),
 
-  static final $core.List<AnEnum?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
-  static AnEnum? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+  AN_ENUM_Y(2, _omitEnumNames ? '' : 'AN_ENUM_Y'),
+  ;
 
-  const AnEnum._(super.value, super.name);
+  static final $core.Map<$core.int, AnEnum> _byValue =
+      $pb.ProtobufEnum.initByValue(values);
+  static AnEnum? valueOf($core.int value) => _byValue[value];
+
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const AnEnum(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
-class RepeatedEmbeddedEnumIn_AnotherInEnum extends $pb.ProtobufEnum {
-  static const RepeatedEmbeddedEnumIn_AnotherInEnum
-      ANOTHER_IN_ENUM_UNSPECIFIED = RepeatedEmbeddedEnumIn_AnotherInEnum._(
-          0, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_UNSPECIFIED');
-  static const RepeatedEmbeddedEnumIn_AnotherInEnum ANOTHER_IN_ENUM_A =
-      RepeatedEmbeddedEnumIn_AnotherInEnum._(
-          1, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_A');
-  static const RepeatedEmbeddedEnumIn_AnotherInEnum ANOTHER_IN_ENUM_B =
-      RepeatedEmbeddedEnumIn_AnotherInEnum._(
-          2, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_B');
+enum RepeatedEmbeddedEnumIn_AnotherInEnum implements $pb.ProtobufEnum {
+  ANOTHER_IN_ENUM_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_UNSPECIFIED'),
 
-  static const $core.List<RepeatedEmbeddedEnumIn_AnotherInEnum> values =
-      <RepeatedEmbeddedEnumIn_AnotherInEnum>[
-    ANOTHER_IN_ENUM_UNSPECIFIED,
-    ANOTHER_IN_ENUM_A,
-    ANOTHER_IN_ENUM_B,
-  ];
+  ANOTHER_IN_ENUM_A(1, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_A'),
 
-  static final $core.List<RepeatedEmbeddedEnumIn_AnotherInEnum?> _byValue =
-      $pb.ProtobufEnum.$_initByValueList(values, 2);
+  ANOTHER_IN_ENUM_B(2, _omitEnumNames ? '' : 'ANOTHER_IN_ENUM_B'),
+  ;
+
+  static final $core.Map<$core.int, RepeatedEmbeddedEnumIn_AnotherInEnum>
+      _byValue = $pb.ProtobufEnum.initByValue(values);
   static RepeatedEmbeddedEnumIn_AnotherInEnum? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+      _byValue[value];
 
-  const RepeatedEmbeddedEnumIn_AnotherInEnum._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const RepeatedEmbeddedEnumIn_AnotherInEnum(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
-class RepeatedEmbeddedEnumNotIn_AnotherNotInEnum extends $pb.ProtobufEnum {
-  static const RepeatedEmbeddedEnumNotIn_AnotherNotInEnum
-      ANOTHER_NOT_IN_ENUM_UNSPECIFIED =
-      RepeatedEmbeddedEnumNotIn_AnotherNotInEnum._(
-          0, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_UNSPECIFIED');
-  static const RepeatedEmbeddedEnumNotIn_AnotherNotInEnum
-      ANOTHER_NOT_IN_ENUM_A = RepeatedEmbeddedEnumNotIn_AnotherNotInEnum._(
-          1, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_A');
-  static const RepeatedEmbeddedEnumNotIn_AnotherNotInEnum
-      ANOTHER_NOT_IN_ENUM_B = RepeatedEmbeddedEnumNotIn_AnotherNotInEnum._(
-          2, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_B');
+enum RepeatedEmbeddedEnumNotIn_AnotherNotInEnum implements $pb.ProtobufEnum {
+  ANOTHER_NOT_IN_ENUM_UNSPECIFIED(
+      0, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_UNSPECIFIED'),
 
-  static const $core.List<RepeatedEmbeddedEnumNotIn_AnotherNotInEnum> values =
-      <RepeatedEmbeddedEnumNotIn_AnotherNotInEnum>[
-    ANOTHER_NOT_IN_ENUM_UNSPECIFIED,
-    ANOTHER_NOT_IN_ENUM_A,
-    ANOTHER_NOT_IN_ENUM_B,
-  ];
+  ANOTHER_NOT_IN_ENUM_A(1, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_A'),
 
-  static final $core.List<RepeatedEmbeddedEnumNotIn_AnotherNotInEnum?>
-      _byValue = $pb.ProtobufEnum.$_initByValueList(values, 2);
+  ANOTHER_NOT_IN_ENUM_B(2, _omitEnumNames ? '' : 'ANOTHER_NOT_IN_ENUM_B'),
+  ;
+
+  static final $core.Map<$core.int, RepeatedEmbeddedEnumNotIn_AnotherNotInEnum>
+      _byValue = $pb.ProtobufEnum.initByValue(values);
   static RepeatedEmbeddedEnumNotIn_AnotherNotInEnum? valueOf($core.int value) =>
-      value < 0 || value >= _byValue.length ? null : _byValue[value];
+      _byValue[value];
 
-  const RepeatedEmbeddedEnumNotIn_AnotherNotInEnum._(super.value, super.name);
+  @$core.override
+  final $core.int value;
+
+  @$core.override
+  final $core.String name;
+
+  const RepeatedEmbeddedEnumNotIn_AnotherNotInEnum(this.value, this.name);
+
+  /// Returns this enum's [name] or the [value] if names are not represented.
+  @$core.override
+  $core.String toString() => name == '' ? value.toString() : name;
 }
 
 const $core.bool _omitEnumNames =
