@@ -1,6 +1,6 @@
-import 'package:protovalidate_dart/protovalidate_dart.dart';
+import 'package:protovalidate/protovalidate.dart';
 
 void main() {
-  var awesome = Awesome();
-  print('awesome: ${awesome.isAwesome}');
+  final validator = Validator();
+  print('Protovalidate library initialized successfully');
 }

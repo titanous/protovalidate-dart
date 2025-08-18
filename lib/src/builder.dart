@@ -247,8 +247,7 @@ class EvaluatorBuilder {
       // Extract item evaluator if there are item rules
       Evaluator? itemEvaluator;
       Ignore itemIgnoreRule = Ignore.IGNORE_UNSPECIFIED;
-      bool hasExplicitItemValidation =
-          false; // Track if item rules define actual validation
+      bool hasExplicitItemValidation = false;
 
       if (repeatedRules.hasItems()) {
         final itemRules = repeatedRules.items;
@@ -293,10 +292,8 @@ class EvaluatorBuilder {
           final nestedMessage = field.subBuilder!();
           final nestedEvaluator = buildForMessage(nestedMessage);
 
-          if (nestedEvaluator != null) {
-            // Use the nested evaluator directly as item evaluator
-            itemEvaluator = nestedEvaluator;
-          }
+          // Use the nested evaluator directly as item evaluator
+          itemEvaluator = nestedEvaluator;
         } catch (e) {
           // If we can't create the message, continue without item validation
         }
@@ -325,17 +322,15 @@ class EvaluatorBuilder {
           final nestedMessage = field.subBuilder!();
           final nestedEvaluator = buildForMessage(nestedMessage);
 
-          if (nestedEvaluator != null) {
-            // Use RepeatedItemsOnlyEvaluator for just item validation
-            // No rule prefix for implicit message validation (no explicit repeated.items rules)
-            final itemsEvaluator = field_eval.RepeatedItemsOnlyEvaluator(
-              itemEvaluator: EmbeddedMessageEvaluator(nestedEvaluator),
-              unwrapWrapperTypes: _isWrapperType(field),
-              ignoreRule: Ignore.IGNORE_UNSPECIFIED,
-              addItemsRulePrefix: false,
-            );
-            evaluators.add(itemsEvaluator);
-          }
+          // Use RepeatedItemsOnlyEvaluator for just item validation
+          // No rule prefix for implicit message validation (no explicit repeated.items rules)
+          final itemsEvaluator = field_eval.RepeatedItemsOnlyEvaluator(
+            itemEvaluator: EmbeddedMessageEvaluator(nestedEvaluator),
+            unwrapWrapperTypes: _isWrapperType(field),
+            ignoreRule: Ignore.IGNORE_UNSPECIFIED,
+            addItemsRulePrefix: false,
+          );
+          evaluators.add(itemsEvaluator);
         } catch (e) {
           // If we can't create the message, continue without item validation
         }
@@ -359,7 +354,7 @@ class EvaluatorBuilder {
       return null;
     }
 
-    final mapField = field as MapFieldInfo;
+    final mapField = field;
     final mapRules = fieldRules?.map;
 
     final evaluators = <Evaluator>[];
@@ -416,8 +411,8 @@ class EvaluatorBuilder {
             mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
         keyFieldType: mapField.keyFieldType,
         valueFieldType: mapField.valueFieldType,
-        keyIgnoreCondition: createIgnoreCondition(mapRules?.keys?.ignore),
-        valueIgnoreCondition: createIgnoreCondition(mapRules?.values?.ignore),
+        keyIgnoreCondition: createIgnoreCondition(mapRules?.keys.ignore),
+        valueIgnoreCondition: createIgnoreCondition(mapRules?.values.ignore),
       );
       evaluators.add(mapFieldEvaluator);
     }
