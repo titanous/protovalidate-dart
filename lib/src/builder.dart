@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart'
@@ -799,17 +798,22 @@ class EvaluatorBuilder {
   Evaluator _buildInt64Evaluator(Int64Rules rules) {
     final evaluators = <Evaluator>[];
 
-    // Add standard rules
-    final standardEvaluator = Int64Evaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Check for predefined CEL rules via extensions
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
+
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = Int64Evaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first
@@ -819,17 +823,22 @@ class EvaluatorBuilder {
   Evaluator _buildUInt32Evaluator(UInt32Rules rules) {
     final evaluators = <Evaluator>[];
 
-    // Add standard rules
-    final standardEvaluator = UInt32Evaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Check for predefined CEL rules via extensions
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
+
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = UInt32Evaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first
@@ -840,19 +849,21 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
 
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
 
-    // Add standard rules
-    final standardEvaluator = UInt64Evaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = UInt64Evaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first
@@ -863,20 +874,22 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
 
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
 
-    // Add standard rules
-    final standardEvaluator = FloatEvaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-      finite: rules.hasFinite() ? rules.finite : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = FloatEvaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+        finite: rules.hasFinite() ? rules.finite : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first
@@ -887,20 +900,22 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
 
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
 
-    // Add standard rules
-    final standardEvaluator = DoubleEvaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-      finite: rules.hasFinite() ? rules.finite : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = DoubleEvaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+        finite: rules.hasFinite() ? rules.finite : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first

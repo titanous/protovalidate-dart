@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
@@ -44,7 +43,6 @@ class PredefinedRulesManager {
 
     // Get extensions for this message type from the registry
     final extensions = _getExtensionsForMessage(rulesMessage, registry);
-    
 
     // Iterate through all extensions to find ones with predefined rules
     for (final extension in extensions) {
