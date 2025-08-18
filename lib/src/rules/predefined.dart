@@ -13,9 +13,13 @@ class PredefinedCelRule {
   /// Extension context for rule path generation
   final ExtensionContext extensionContext;
 
+  /// The extension value that should be bound to the 'rule' variable in CEL
+  final dynamic extensionValue;
+
   const PredefinedCelRule({
     required this.rule,
     required this.extensionContext,
+    required this.extensionValue,
   });
 }
 
@@ -44,17 +48,21 @@ class PredefinedRulesManager {
     for (final extension in extensions) {
       // Check if this extension is set on the rules message
       if (rulesMessage.hasExtension(extension)) {
+        // Get the extension value (this is what should be bound to 'rule' in CEL)
+        final extensionValue = rulesMessage.getExtension(extension);
+        
         // Extract predefined CEL rules from the extension's field descriptor options
         final predefinedRules = _extractPredefinedRulesFromExtension(extension);
         if (predefinedRules != null) {
           // Create extension context for this extension
           final extensionContext = _createExtensionContext(extension);
           if (extensionContext != null) {
-            // Add CEL rules with their extension context
+            // Add CEL rules with their extension context and value
             for (final rule in predefinedRules.cel) {
               celRules.add(PredefinedCelRule(
                 rule: rule,
                 extensionContext: extensionContext,
+                extensionValue: extensionValue,
               ));
             }
           }

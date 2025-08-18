@@ -91,6 +91,7 @@ class ManagedCompiledExpression {
   final SimpleCelManager manager;
   final int index; // Index of this expression in the CEL rules list
   final ExtensionContext? extensionContext; // Set for predefined rules
+  final dynamic extensionValue; // Extension value for predefined rules
 
   ManagedCompiledExpression._({
     this.program,
@@ -99,6 +100,7 @@ class ManagedCompiledExpression {
     required this.manager,
     required this.index,
     this.extensionContext,
+    this.extensionValue,
   });
 
   /// Create a successfully compiled expression
@@ -108,6 +110,7 @@ class ManagedCompiledExpression {
     required SimpleCelManager manager,
     required int index,
     ExtensionContext? extensionContext,
+    dynamic extensionValue,
   }) : this._(
           program: program,
           compilationError: null,
@@ -115,6 +118,7 @@ class ManagedCompiledExpression {
           manager: manager,
           index: index,
           extensionContext: extensionContext,
+          extensionValue: extensionValue,
         );
 
   /// Create a failed compilation expression
@@ -124,6 +128,7 @@ class ManagedCompiledExpression {
     required SimpleCelManager manager,
     required int index,
     ExtensionContext? extensionContext,
+    dynamic extensionValue,
   }) : this._(
           program: null,
           compilationError: error,
@@ -131,6 +136,7 @@ class ManagedCompiledExpression {
           manager: manager,
           index: index,
           extensionContext: extensionContext,
+          extensionValue: extensionValue,
         );
 
   void evaluate(dynamic value, Cursor cursor) {
@@ -146,11 +152,18 @@ class ManagedCompiledExpression {
         'now': Timestamp.fromDateTime(DateTime.now()),
       };
 
-      // Add rules and rule if available
-      if (source.hasMessage()) {
-        bindings['rules'] = source;
+      // Set up CEL bindings to match protovalidate-es behavior
+      // For standard CEL rules: rules = null, rule = null
+      // For predefined extension rules: rule should be the extension value
+      bindings['rules'] = null;
+      
+      if (extensionContext != null) {
+        // For predefined rules, bind 'rule' to the extension value
+        bindings['rule'] = extensionValue;
+      } else {
+        // For standard rules, rule should be null
+        bindings['rule'] = null;
       }
-      bindings['rule'] = source;
 
       // Evaluate the CEL program
       final result = manager.evaluate(program!, bindings);
@@ -289,6 +302,7 @@ class ManagedCELCompiler {
             manager: manager,
             index: i,
             extensionContext: predefinedRule.extensionContext,
+            extensionValue: predefinedRule.extensionValue,
           ));
         } catch (e) {
           // Store the compilation error instead of throwing it
@@ -301,6 +315,7 @@ class ManagedCELCompiler {
             manager: manager,
             index: i,
             extensionContext: predefinedRule.extensionContext,
+            extensionValue: predefinedRule.extensionValue,
           ));
         }
       }
