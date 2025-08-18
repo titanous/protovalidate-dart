@@ -364,6 +364,11 @@ class EvaluatorBuilder {
       _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
 
+    // Check for predefined CEL rules on map rules
+    if (mapRules != null) {
+      _addPredefinedCelEvaluator(evaluators, mapRules);
+    }
+
     // Build key evaluator from rules if present
     Evaluator? keyEvaluator;
     if (mapRules?.hasKeys() == true) {
@@ -1154,6 +1159,11 @@ class EvaluatorBuilder {
   }
 
   Evaluator _buildMapEvaluator(MapRules rules) {
+    final evaluators = <Evaluator>[];
+
+    // Check for predefined CEL rules via extensions
+    _addPredefinedCelEvaluator(evaluators, rules);
+
     // Build key and value evaluators from rules if present
     Evaluator? keyEvaluator;
     if (rules.hasKeys()) {
@@ -1171,8 +1181,8 @@ class EvaluatorBuilder {
       }
     }
 
-    // Create map field evaluator with all rules
-    return field_eval.MapFieldEvaluator(
+    // Add standard map evaluator with all rules
+    final standardEvaluator = field_eval.MapFieldEvaluator(
       keyEvaluator: keyEvaluator,
       valueEvaluator: valueEvaluator,
       minPairs: rules.hasMinPairs() ? rules.minPairs.toInt() : null,
@@ -1180,6 +1190,11 @@ class EvaluatorBuilder {
       keyIgnoreCondition: createIgnoreCondition(rules.keys?.ignore),
       valueIgnoreCondition: createIgnoreCondition(rules.values?.ignore),
     );
+    evaluators.add(standardEvaluator);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildDurationEvaluator(DurationRules rules) {
