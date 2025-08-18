@@ -253,6 +253,8 @@ class FieldPath {
         baseType == PbFieldType.PM ||
         baseType == PbFieldType.QM) {
       return FieldDescriptorProto_Type.TYPE_MESSAGE;
+    } else if ((baseType & 0x400) != 0) { // GROUP_BIT
+      return FieldDescriptorProto_Type.TYPE_GROUP;
     } else if (field.isRepeated) {
       // For repeated fields, we need to check the value type
       // This is a fallback - ideally we'd have more type info

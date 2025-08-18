@@ -46,8 +46,65 @@ class DurationEvaluator implements Evaluator {
       }
     }
 
-    // Handle lt/lte/gt/gte rules
-    if (rules.hasLt()) {
+    // Handle exclusive range combinations first
+    if (rules.hasGt() && rules.hasLt()) {
+      final gtNanos = _durationToNanos(rules.gt);
+      final ltNanos = _durationToNanos(rules.lt);
+      
+      // Check for exclusive range (value must be > gt OR < lt)
+      if (gtNanos >= ltNanos) {
+        // This is an exclusive range: value must be > gt OR < lt
+        if (durationNanos <= gtNanos && durationNanos >= ltNanos) {
+          cursor.violate(
+            message: 'value must be greater than ${_formatDuration(rules.gt)} or less than ${_formatDuration(rules.lt)}',
+            constraintId: 'duration.gt_lt_exclusive',
+            rulePath: RulePathBuilder.durationConstraint('gt'),
+          );
+          return; // Don't check individual constraints
+        }
+      } else {
+        // This is an inclusive range: value must be > gt AND < lt
+        if (durationNanos <= gtNanos || durationNanos >= ltNanos) {
+          cursor.violate(
+            message: 'value must be greater than ${_formatDuration(rules.gt)} and less than ${_formatDuration(rules.lt)}',
+            constraintId: 'duration.gt_lt',
+            rulePath: RulePathBuilder.durationConstraint('gt'),
+          );
+          return; // Don't check individual constraints
+        }
+      }
+    }
+    
+    if (rules.hasGte() && rules.hasLte()) {
+      final gteNanos = _durationToNanos(rules.gte);
+      final lteNanos = _durationToNanos(rules.lte);
+      
+      // Check for exclusive range (value must be >= gte OR <= lte)
+      if (gteNanos > lteNanos) {
+        // This is an exclusive range: value must be >= gte OR <= lte
+        if (durationNanos < gteNanos && durationNanos > lteNanos) {
+          cursor.violate(
+            message: 'value must be greater than or equal to ${_formatDuration(rules.gte)} or less than or equal to ${_formatDuration(rules.lte)}',
+            constraintId: 'duration.gte_lte_exclusive',
+            rulePath: RulePathBuilder.durationConstraint('gte'),
+          );
+          return; // Don't check individual constraints
+        }
+      } else {
+        // This is an inclusive range: value must be >= gte AND <= lte
+        if (durationNanos < gteNanos || durationNanos > lteNanos) {
+          cursor.violate(
+            message: 'value must be greater than or equal to ${_formatDuration(rules.gte)} and less than or equal to ${_formatDuration(rules.lte)}',
+            constraintId: 'duration.gte_lte',
+            rulePath: RulePathBuilder.durationConstraint('gte'),
+          );
+          return; // Don't check individual constraints
+        }
+      }
+    }
+
+    // Handle individual lt/lte/gt/gte rules (only if no combination was handled above)
+    if (rules.hasLt() && !rules.hasGt()) {
       final ltNanos = _durationToNanos(rules.lt);
       if (durationNanos >= ltNanos) {
         cursor.violate(
@@ -58,7 +115,7 @@ class DurationEvaluator implements Evaluator {
       }
     }
 
-    if (rules.hasLte()) {
+    if (rules.hasLte() && !rules.hasGte()) {
       final lteNanos = _durationToNanos(rules.lte);
       if (durationNanos > lteNanos) {
         cursor.violate(
@@ -69,7 +126,7 @@ class DurationEvaluator implements Evaluator {
       }
     }
 
-    if (rules.hasGt()) {
+    if (rules.hasGt() && !rules.hasLt()) {
       final gtNanos = _durationToNanos(rules.gt);
       if (durationNanos <= gtNanos) {
         cursor.violate(
@@ -80,7 +137,7 @@ class DurationEvaluator implements Evaluator {
       }
     }
 
-    if (rules.hasGte()) {
+    if (rules.hasGte() && !rules.hasLte()) {
       final gteNanos = _durationToNanos(rules.gte);
       if (durationNanos < gteNanos) {
         cursor.violate(

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/descriptor.pb.dart';
@@ -59,18 +60,17 @@ class FieldEvaluator implements Evaluator {
       return;
     }
 
-    // Get field value
+    // Get field value - use getFieldOrNull for enums to preserve unknown values
     var fieldValue = message.getField(field.tagNumber);
     final hasValue = message.hasField(field.tagNumber);
-
-    // For enum fields with defined_only validation, we need to check unknown fields
-    // for raw integer values that were not recognized during deserialization
-    final unknownField = message.unknownFields.getField(field.tagNumber);
-    bool hasUnknownEnumValue = false;
-    if (unknownField != null && unknownField.varints.isNotEmpty) {
-      // There's an unknown raw value for this field, use the first one
-      fieldValue = unknownField.varints.first.toInt();
-      hasUnknownEnumValue = true;
+    
+    // For enum fields, check for unknown enum values using getFieldOrNull
+    if ((field.type == PbFieldType.OE || field.type == PbFieldType.PE) && hasValue) {
+      final rawValue = message.getFieldOrNull(field.tagNumber);
+      if (rawValue != null && rawValue.toString().contains('UNKNOWN_ENUM_VALUE_')) {
+        // This is an unknown enum value, extract the raw integer
+        fieldValue = (rawValue as dynamic).value as int;
+      }
     }
 
     // For proto3 implicit presence fields, getField() returns the default value automatically
@@ -143,32 +143,10 @@ class FieldEvaluator implements Evaluator {
     // Create a cursor for this field
     final fieldCursor = cursor.field(field);
 
-    // Special handling for unknown enum values with defined_only validation
-    if (hasUnknownEnumValue && _isEnumFieldWithDefinedOnly(valueEvaluator)) {
-      fieldCursor.violate(
-        message: 'value must be one of the defined enum values',
-        constraintId: 'enum.defined_only',
-        rulePath: RulePath.fromFieldRules()
-            .ruleType('enum', 16)
-            .constraint('defined_only', 2, FieldDescriptorProto_Type.TYPE_BOOL),
-      );
-      return;
-    }
-
     // Evaluate the field value
     valueEvaluator.evaluate(fieldValue, fieldCursor);
   }
 
-  /// Check if the value evaluator is an enum evaluator with defined_only rule
-  bool _isEnumFieldWithDefinedOnly(Evaluator evaluator) {
-    if (evaluator is EnumRulesEvaluator) {
-      return evaluator.rules.definedOnly == true;
-    }
-    if (evaluator is EnumEvaluator) {
-      return evaluator.definedOnly;
-    }
-    return false;
-  }
 }
 
 /// Items-only evaluator for repeated fields following Go/ES architecture

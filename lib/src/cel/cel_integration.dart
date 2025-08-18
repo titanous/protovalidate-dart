@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cel/cel.dart' as cel;
 import 'package:cel/src/common/types/error.dart' as cel_error;
 import 'package:protobuf/protobuf.dart';
@@ -147,6 +148,9 @@ class ManagedCompiledExpression {
 
     try {
       // Create activation with standard variables
+      if (extensionContext?.ruleTypeName == 'fixed32') {
+        stderr.writeln('DEBUG: CEL value type: ${value.runtimeType}, value: $value');
+      }
       final bindings = <String, dynamic>{
         'this': value,
         'now': Timestamp.fromDateTime(DateTime.now()),

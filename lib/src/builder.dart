@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
 import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart'
@@ -518,7 +519,12 @@ class EvaluatorBuilder {
     // Use the general field rule evaluator which handles all rule types,
     // including enum rules and CEL expressions
     if (fieldRules != null) {
-      return buildFromFieldRules(fieldRules);
+      // For enum fields, we need to handle enum rules specially to pass enum value names
+      if (fieldRules.hasEnum_16()) {
+        return _buildEnumEvaluator(fieldRules.enum_16, enumValueNames);
+      } else {
+        return buildFromFieldRules(fieldRules);
+      }
     }
 
     return null;
@@ -951,19 +957,21 @@ class EvaluatorBuilder {
     final evaluators = <Evaluator>[];
 
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
 
-    // Add standard rules
-    final standardEvaluator = Fixed32Evaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-    );
-    evaluators.add(standardEvaluator);
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = Fixed32Evaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
 
     return evaluators.length == 1
         ? evaluators.first
