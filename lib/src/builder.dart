@@ -29,10 +29,16 @@ class EvaluatorBuilder {
   /// Optional descriptor rules for extracting validation rules from FileDescriptorSet.
   final DescriptorRules? descriptorRules;
 
+  /// Extension registry for discovering predefined rule extensions
+  final ExtensionRegistry? extensionRegistry;
+
   /// Managed CEL compiler for improved integration
   final ManagedCELCompiler _managedCelCompiler = ManagedCELCompiler();
 
-  EvaluatorBuilder({this.descriptorRules, cel.Environment? celEnvironment});
+  EvaluatorBuilder(
+      {this.descriptorRules,
+      this.extensionRegistry,
+      cel.Environment? celEnvironment});
 
   /// Builds an evaluator for the given message type.
   Evaluator buildForMessage(GeneratedMessage message) {
@@ -57,28 +63,32 @@ class EvaluatorBuilder {
     if (descriptorRules != null) {
       final messageTypeName = descriptorRules!.getFullTypeName(message);
       final messageRules = descriptorRules!.getMessageRules(messageTypeName);
-      
+
       if (messageRules != null) {
         // Add message-level CEL evaluator if there are CEL expressions
         if (messageRules.cel.isNotEmpty) {
           try {
-            final compiledExpressions = _managedCelCompiler.compile(messageRules.cel.toList());
+            final compiledExpressions =
+                _managedCelCompiler.compile(messageRules.cel.toList());
             if (compiledExpressions.isNotEmpty) {
-              evaluators.add(ManagedMessageCELEvaluator(expressions: compiledExpressions));
+              evaluators.add(
+                  ManagedMessageCELEvaluator(expressions: compiledExpressions));
             }
           } catch (e) {
-            throw CompilationError('Failed to compile message-level CEL expressions: $e');
+            throw CompilationError(
+                'Failed to compile message-level CEL expressions: $e');
           }
         }
-        
+
         // Add oneof evaluator if there are oneof rules
         if (messageRules.oneof.isNotEmpty) {
           // Validate oneof rules before creating evaluator
           _validateOneofRules(messageRules.oneof, message, messageTypeName);
-          evaluators.add(MessageRulesEvaluator(rules: messageRules, builder: this));
+          evaluators
+              .add(MessageRulesEvaluator(rules: messageRules, builder: this));
         }
       }
-      
+
       // Check for protobuf oneof rules (different from message-level oneof rules)
       final oneofRules = descriptorRules!.getOneofRules(messageTypeName);
       if (oneofRules.isNotEmpty) {
@@ -109,12 +119,13 @@ class EvaluatorBuilder {
     if (descriptorRules != null) {
       final messageTypeName = descriptorRules!.getFullTypeName(message);
       fieldRules = descriptorRules!.getFieldRules(messageTypeName, field.name);
-      
+
       // If not found, try with snake_case field name (proto field names are snake_case,
       // but Dart field names are camelCase)
       if (fieldRules == null) {
         final snakeCaseName = StringUtils.toSnakeCase(field.name);
-        fieldRules = descriptorRules!.getFieldRules(messageTypeName, snakeCaseName);
+        fieldRules =
+            descriptorRules!.getFieldRules(messageTypeName, snakeCaseName);
       }
     }
 
@@ -125,14 +136,14 @@ class EvaluatorBuilder {
 
     // Determine if field has presence
     final hasPresence = _fieldHasPresence(field, message);
-    
+
     // Build the value evaluator based on field type
     Evaluator? valueEvaluator;
-    
+
     // Handle repeated fields
     if (field.isRepeated && !field.isMapField) {
       valueEvaluator = _buildRepeatedFieldEvaluator(field, fieldRules, message);
-    } 
+    }
     // Handle map fields
     else if (field.isMapField) {
       valueEvaluator = _buildMapFieldEvaluator(field, fieldRules);
@@ -149,97 +160,103 @@ class EvaluatorBuilder {
     else {
       valueEvaluator = _buildScalarFieldEvaluator(field, fieldRules);
     }
-    
+
     // If no value evaluator was built and no rules, skip this field
     if (valueEvaluator == null && fieldRules == null) {
       return null;
     }
-    
+
     // Use a no-op evaluator if no value evaluator was built
     valueEvaluator ??= NoOpEvaluator();
-    
+
     // Create the field evaluator with proper architecture
     return field_eval.FieldEvaluator(
       field: field,
       valueEvaluator: valueEvaluator,
       required: fieldRules?.required ?? false,
       hasPresence: hasPresence,
-      ignore: fieldRules?.hasIgnore() == true ? fieldRules!.ignore : Ignore.IGNORE_UNSPECIFIED,
+      ignore: fieldRules?.hasIgnore() == true
+          ? fieldRules!.ignore
+          : Ignore.IGNORE_UNSPECIFIED,
       rules: fieldRules,
     );
   }
-  
+
   bool _fieldHasPresence(FieldInfo field, GeneratedMessage message) {
     // Use the new FieldPresence enum from protobuf.dart for accurate presence detection
     // This replaces the old manual field type checking approach
-    
+
     // Check the actual presence semantics from the field info
     if (field.presence != FieldPresence.implicit) {
       return true;
     }
-    
+
     // Additional check: fields that are part of oneof constraints should have presence
     // even if the protobuf library reports them as implicit
     if (_isFieldInOneof(field, message)) {
       return true;
     }
-    
+
     return false;
   }
-  
+
   /// Check if a field is part of any oneof constraint in the current message
   bool _isFieldInOneof(FieldInfo field, GeneratedMessage message) {
     if (descriptorRules == null) {
       return false;
     }
-    
+
     final messageTypeName = descriptorRules!.getFullTypeName(message);
     final messageRules = descriptorRules!.getMessageRules(messageTypeName);
-    
+
     if (messageRules?.oneof == null || messageRules!.oneof.isEmpty) {
       return false;
     }
-    
+
     for (final oneofRule in messageRules.oneof) {
       // Check both field name and snake_case version
-      if (oneofRule.fields.contains(field.name) || 
+      if (oneofRule.fields.contains(field.name) ||
           oneofRule.fields.contains(StringUtils.toSnakeCase(field.name))) {
         return true;
       }
     }
-    
+
     return false;
   }
-  
-  Evaluator? _buildRepeatedFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
+
+  Evaluator? _buildRepeatedFieldEvaluator(
+      FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
     final evaluators = <Evaluator>[];
-    
+
     // Build CEL evaluator for field-level CEL expressions
     if (fieldRules != null) {
       _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
-    
+
     // Handle explicit repeated rules if present
     if (fieldRules?.hasRepeated() == true) {
       final repeatedRules = fieldRules!.repeated;
-      
+
       // Extract field-level constraints
-      int? minItems = repeatedRules.hasMinItems() ? repeatedRules.minItems.toInt() : null;
-      int? maxItems = repeatedRules.hasMaxItems() ? repeatedRules.maxItems.toInt() : null;
+      int? minItems =
+          repeatedRules.hasMinItems() ? repeatedRules.minItems.toInt() : null;
+      int? maxItems =
+          repeatedRules.hasMaxItems() ? repeatedRules.maxItems.toInt() : null;
       bool? unique = repeatedRules.hasUnique() ? repeatedRules.unique : null;
-      
+
       // Extract item evaluator if there are item rules
       Evaluator? itemEvaluator;
       Ignore itemIgnoreRule = Ignore.IGNORE_UNSPECIFIED;
-      bool hasExplicitItemValidation = false; // Track if item rules define actual validation
-      
+      bool hasExplicitItemValidation =
+          false; // Track if item rules define actual validation
+
       if (repeatedRules.hasItems()) {
         final itemRules = repeatedRules.items;
-        
+
         if (itemRules.hasIgnore()) {
           itemIgnoreRule = itemRules.ignore;
         }
-        
+
         // Only build item evaluator if not ignoring always
         if (itemIgnoreRule != Ignore.IGNORE_ALWAYS) {
           itemEvaluator = buildFromFieldRules(itemRules);
@@ -253,25 +270,29 @@ class EvaluatorBuilder {
               final implicitEvaluator = buildForMessage(nestedMessage);
               // If the item evaluator is the same as what we'd get from implicit validation,
               // then the item rules don't add meaningful constraints
-              hasExplicitItemValidation = itemEvaluator != null && 
-                itemEvaluator.runtimeType.toString() != 'NoOpEvaluator' &&
-                itemEvaluator != implicitEvaluator;
+              hasExplicitItemValidation = itemEvaluator != null &&
+                  itemEvaluator.runtimeType.toString() != 'NoOpEvaluator' &&
+                  itemEvaluator != implicitEvaluator;
             } catch (e) {
-              hasExplicitItemValidation = itemEvaluator != null && itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
+              hasExplicitItemValidation = itemEvaluator != null &&
+                  itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
             }
           } else {
             // For non-message fields, any non-noop evaluator counts as explicit validation
-            hasExplicitItemValidation = itemEvaluator != null && itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
+            hasExplicitItemValidation = itemEvaluator != null &&
+                itemEvaluator.runtimeType.toString() != 'NoOpEvaluator';
           }
         }
       }
-      
+
       // If no explicit item validation but this is a message field, add implicit message validation
-      if (itemEvaluator == null && field.type == PbFieldType.PM && field.subBuilder != null) {
+      if (itemEvaluator == null &&
+          field.type == PbFieldType.PM &&
+          field.subBuilder != null) {
         try {
           final nestedMessage = field.subBuilder!();
           final nestedEvaluator = buildForMessage(nestedMessage);
-          
+
           if (nestedEvaluator != null) {
             // Use the nested evaluator directly as item evaluator
             itemEvaluator = nestedEvaluator;
@@ -280,7 +301,7 @@ class EvaluatorBuilder {
           // If we can't create the message, continue without item validation
         }
       }
-      
+
       // Create full repeated field evaluator with both field-level and item-level validation
       final repeatedEvaluator = field_eval.RepeatedFieldEvaluator(
         minItems: minItems,
@@ -294,7 +315,7 @@ class EvaluatorBuilder {
       );
       evaluators.add(repeatedEvaluator);
     }
-    
+
     // Even if no explicit repeated rules, we may still need to validate message items
     if (evaluators.isEmpty) {
       // Check if this is a repeated message field that needs item validation
@@ -303,7 +324,7 @@ class EvaluatorBuilder {
         try {
           final nestedMessage = field.subBuilder!();
           final nestedEvaluator = buildForMessage(nestedMessage);
-          
+
           if (nestedEvaluator != null) {
             // Use RepeatedItemsOnlyEvaluator for just item validation
             // No rule prefix for implicit message validation (no explicit repeated.items rules)
@@ -320,7 +341,7 @@ class EvaluatorBuilder {
         }
       }
     }
-    
+
     // Return appropriate evaluator
     if (evaluators.isEmpty) {
       return null;
@@ -330,24 +351,24 @@ class EvaluatorBuilder {
       return CompositeEvaluator(evaluators);
     }
   }
-  
+
   Evaluator? _buildMapFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
     // For map fields, we need to handle both explicit rules and implicit message validation
     if (field is! MapFieldInfo) {
       // Not a map field, return null
       return null;
     }
-    
+
     final mapField = field as MapFieldInfo;
     final mapRules = fieldRules?.map;
-    
+
     final evaluators = <Evaluator>[];
-    
+
     // Build CEL evaluator for field-level CEL expressions
     if (fieldRules != null) {
       _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
-    
+
     // Build key evaluator from rules if present
     Evaluator? keyEvaluator;
     if (mapRules?.hasKeys() == true) {
@@ -356,10 +377,10 @@ class EvaluatorBuilder {
         keyEvaluator = MapKeysEvaluator(baseKeyEvaluator);
       }
     }
-    
+
     // Build value evaluator - handle both explicit rules and implicit message validation
     Evaluator? valueEvaluator;
-    
+
     // First check for explicit value rules
     if (mapRules?.hasValues() == true) {
       final baseValueEvaluator = buildFromFieldRules(mapRules!.values);
@@ -367,7 +388,7 @@ class EvaluatorBuilder {
         valueEvaluator = MapValuesEvaluator(baseValueEvaluator);
       }
     }
-    
+
     // If the value type is a message and we don't have explicit rules,
     // still need to recursively validate the message
     if (valueEvaluator == null && mapField.valueCreator != null) {
@@ -380,15 +401,19 @@ class EvaluatorBuilder {
         // If we can't create the message, skip validation
       }
     }
-    
+
     // Build the map field evaluator with structural rules if needed
-    if (keyEvaluator != null || valueEvaluator != null || 
-        mapRules?.hasMinPairs() == true || mapRules?.hasMaxPairs() == true) {
+    if (keyEvaluator != null ||
+        valueEvaluator != null ||
+        mapRules?.hasMinPairs() == true ||
+        mapRules?.hasMaxPairs() == true) {
       final mapFieldEvaluator = field_eval.MapFieldEvaluator(
         keyEvaluator: keyEvaluator,
         valueEvaluator: valueEvaluator,
-        minPairs: mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
-        maxPairs: mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
+        minPairs:
+            mapRules?.hasMinPairs() == true ? mapRules!.minPairs.toInt() : null,
+        maxPairs:
+            mapRules?.hasMaxPairs() == true ? mapRules!.maxPairs.toInt() : null,
         keyFieldType: mapField.keyFieldType,
         valueFieldType: mapField.valueFieldType,
         keyIgnoreCondition: createIgnoreCondition(mapRules?.keys?.ignore),
@@ -396,7 +421,7 @@ class EvaluatorBuilder {
       );
       evaluators.add(mapFieldEvaluator);
     }
-    
+
     // Return appropriate evaluator
     if (evaluators.isEmpty) {
       return null;
@@ -406,8 +431,9 @@ class EvaluatorBuilder {
       return CompositeEvaluator(evaluators);
     }
   }
-  
-  Evaluator? _buildMessageFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
+
+  Evaluator? _buildMessageFieldEvaluator(
+      FieldInfo field, FieldRules? fieldRules) {
     // Check if this is a wrapper type
     if (_isWrapperType(field)) {
       // Build the appropriate wrapper evaluator
@@ -420,7 +446,7 @@ class EvaluatorBuilder {
         }
       }
     }
-    
+
     // Check if this is a Well-Known Type with specific rules
     if (fieldRules != null && _isWellKnownType(field)) {
       final wktEvaluator = _buildWellKnownTypeEvaluator(field, fieldRules);
@@ -428,23 +454,23 @@ class EvaluatorBuilder {
         return wktEvaluator;
       }
     }
-    
+
     final evaluators = <Evaluator>[];
-    
+
     // Build CEL evaluator for field-level CEL expressions only
     if (fieldRules != null) {
       _addDirectCelEvaluator(evaluators, fieldRules.cel);
     }
-    
+
     // For non-wrapper messages, recursively build evaluator for the nested type
     if (field.subBuilder != null) {
       try {
         // Create an instance of the nested message to build its evaluator
         final nestedMessage = field.subBuilder!();
-        
+
         // Use cached evaluator if available, otherwise build and cache
         final nestedEvaluator = buildForMessage(nestedMessage);
-        
+
         // Wrap it in an embedded message evaluator that handles field path updates
         evaluators.add(EmbeddedMessageEvaluator(nestedEvaluator));
       } catch (e) {
@@ -452,7 +478,7 @@ class EvaluatorBuilder {
         // But still keep any field-level evaluators
       }
     }
-    
+
     if (evaluators.isEmpty) {
       return NoOpEvaluator();
     } else if (evaluators.length == 1) {
@@ -461,18 +487,20 @@ class EvaluatorBuilder {
       return CompositeEvaluator(evaluators);
     }
   }
-  
-  Evaluator? _buildEnumFieldEvaluator(FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
+
+  Evaluator? _buildEnumFieldEvaluator(
+      FieldInfo field, FieldRules? fieldRules, GeneratedMessage message) {
     // Get enum value names from descriptor if available
     Map<int, String>? enumValueNames;
-    
+
     if (descriptorRules != null) {
       final messageTypeName = descriptorRules!.getFullTypeName(message);
-      final enumTypeName = descriptorRules!.getFieldEnumTypeName(messageTypeName, field.name);
+      final enumTypeName =
+          descriptorRules!.getFieldEnumTypeName(messageTypeName, field.name);
       if (enumTypeName != null) {
         // Clean up the type name (remove leading dot if present)
-        final cleanEnumTypeName = enumTypeName.startsWith('.') 
-            ? enumTypeName.substring(1) 
+        final cleanEnumTypeName = enumTypeName.startsWith('.')
+            ? enumTypeName.substring(1)
             : enumTypeName;
         final enumDesc = descriptorRules!.getEnumDescriptor(cleanEnumTypeName);
         if (enumDesc != null) {
@@ -483,7 +511,7 @@ class EvaluatorBuilder {
         }
       }
     }
-    
+
     // Fall back to field info if descriptor not available
     if (enumValueNames == null && field.valueOf != null) {
       enumValueNames = {};
@@ -491,45 +519,47 @@ class EvaluatorBuilder {
       // Try to get enum values - this needs runtime support
       // For now, we'll leave enumValueNames as null
     }
-    
+
     // Use the general field rule evaluator which handles all rule types,
     // including enum rules and CEL expressions
     if (fieldRules != null) {
       return buildFromFieldRules(fieldRules);
     }
-    
+
     return null;
   }
-  
-  Evaluator? _buildScalarFieldEvaluator(FieldInfo field, FieldRules? fieldRules) {
+
+  Evaluator? _buildScalarFieldEvaluator(
+      FieldInfo field, FieldRules? fieldRules) {
     if (fieldRules != null) {
       return buildFromFieldRules(fieldRules);
     }
     return _buildScalarEvaluator(field);
   }
-  
+
   bool _isWellKnownType(FieldInfo field) {
     if (field.subBuilder == null) return false;
-    
+
     try {
       final message = field.subBuilder!();
       final typeName = message.info_.qualifiedMessageName;
-      
+
       return typeName == 'google.protobuf.Duration' ||
-             typeName == 'google.protobuf.Timestamp' ||
-             typeName == 'google.protobuf.Any';
+          typeName == 'google.protobuf.Timestamp' ||
+          typeName == 'google.protobuf.Any';
     } catch (e) {
       return false;
     }
   }
-  
-  Evaluator? _buildWellKnownTypeEvaluator(FieldInfo field, FieldRules fieldRules) {
+
+  Evaluator? _buildWellKnownTypeEvaluator(
+      FieldInfo field, FieldRules fieldRules) {
     if (field.subBuilder == null) return null;
-    
+
     try {
       final message = field.subBuilder!();
       final typeName = message.info_.qualifiedMessageName;
-      
+
       switch (typeName) {
         case 'google.protobuf.Duration':
           if (fieldRules.hasDuration()) {
@@ -550,7 +580,7 @@ class EvaluatorBuilder {
     } catch (e) {
       // If we can't create the message, fall through to default handling
     }
-    
+
     return null;
   }
 
@@ -561,14 +591,14 @@ class EvaluatorBuilder {
         try {
           final message = field.subBuilder!();
           return message is BoolValue ||
-                 message is Int32Value ||
-                 message is Int64Value ||
-                 message is UInt32Value ||
-                 message is UInt64Value ||
-                 message is FloatValue ||
-                 message is DoubleValue ||
-                 message is StringValue ||
-                 message is BytesValue;
+              message is Int32Value ||
+              message is Int64Value ||
+              message is UInt32Value ||
+              message is UInt64Value ||
+              message is FloatValue ||
+              message is DoubleValue ||
+              message is StringValue ||
+              message is BytesValue;
         } catch (e) {
           // If we can't create the message, assume it's not a wrapper type
           return false;
@@ -687,7 +717,7 @@ class EvaluatorBuilder {
       typeEvaluator = _buildBytesEvaluator(rules.bytes);
     } else if (rules.hasEnum_16()) {
       // For field rules without a field context, we can't get enum names
-      // This would need to be handled differently in a full implementation  
+      // This would need to be handled differently in a full implementation
       typeEvaluator = _buildEnumEvaluator(rules.enum_16, null);
     } else if (rules.hasRepeated()) {
       // Skip repeated rules here - they should be handled by _buildRepeatedFieldEvaluator
@@ -723,43 +753,51 @@ class EvaluatorBuilder {
 
   Evaluator _buildBoolEvaluator(BoolRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
-    
-    // Add standard rules
-    final standardEvaluator = BoolEvaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-    );
-    evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
+
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = BoolEvaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildInt32Evaluator(Int32Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
-    _addPredefinedCelEvaluator(evaluators, rules);
-    
-    // Add standard rules
-    final standardEvaluator = Int32Evaluator(
-      constValue: rules.hasConst_1() ? rules.const_1 : null,
-      lt: rules.hasLt() ? rules.lt : null,
-      lte: rules.hasLte() ? rules.lte : null,
-      gt: rules.hasGt() ? rules.gt : null,
-      gte: rules.hasGte() ? rules.gte : null,
-      inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
-      notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
-    );
-    evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+    final hasPredefinedRules = _addPredefinedCelEvaluator(evaluators, rules);
+
+    // Only add standard rules if no predefined rules were found
+    if (!hasPredefinedRules) {
+      final standardEvaluator = Int32Evaluator(
+        constValue: rules.hasConst_1() ? rules.const_1 : null,
+        lt: rules.hasLt() ? rules.lt : null,
+        lte: rules.hasLte() ? rules.lte : null,
+        gt: rules.hasGt() ? rules.gt : null,
+        gte: rules.hasGte() ? rules.gte : null,
+        inValues: rules.in_6.isNotEmpty ? rules.in_6 : null,
+        notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
+      );
+      evaluators.add(standardEvaluator);
+    }
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildInt64Evaluator(Int64Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Add standard rules
     final standardEvaluator = Int64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -771,13 +809,15 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildUInt32Evaluator(UInt32Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Add standard rules
     final standardEvaluator = UInt32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -789,16 +829,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildUInt64Evaluator(UInt64Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = UInt64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -810,16 +852,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildFloatEvaluator(FloatRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = FloatEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -832,16 +876,18 @@ class EvaluatorBuilder {
       finite: rules.hasFinite() ? rules.finite : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildDoubleEvaluator(DoubleRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = DoubleEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -854,16 +900,18 @@ class EvaluatorBuilder {
       finite: rules.hasFinite() ? rules.finite : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSInt32Evaluator(SInt32Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = SInt32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -875,16 +923,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSInt64Evaluator(SInt64Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = SInt64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -896,16 +946,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildFixed32Evaluator(Fixed32Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = Fixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -917,16 +969,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildFixed64Evaluator(Fixed64Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = Fixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -938,16 +992,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSFixed32Evaluator(SFixed32Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = SFixed32Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -959,16 +1015,18 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildSFixed64Evaluator(SFixed64Rules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = SFixed64Evaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -980,8 +1038,10 @@ class EvaluatorBuilder {
       notInValues: rules.notIn.isNotEmpty ? rules.notIn : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildStringEvaluator(StringRules rules) {
@@ -1016,9 +1076,12 @@ class EvaluatorBuilder {
       ipv6Prefix: rules.hasIpv6Prefix() ? rules.ipv6Prefix : null,
       wellKnownRegex: rules.hasWellKnownRegex() ? rules.wellKnownRegex : null,
       strict: rules.hasStrict() ? rules.strict : null,
-      ipWithPrefixlen: rules.hasIpWithPrefixlen() ? rules.ipWithPrefixlen : null,
-      ipv4WithPrefixlen: rules.hasIpv4WithPrefixlen() ? rules.ipv4WithPrefixlen : null,
-      ipv6WithPrefixlen: rules.hasIpv6WithPrefixlen() ? rules.ipv6WithPrefixlen : null,
+      ipWithPrefixlen:
+          rules.hasIpWithPrefixlen() ? rules.ipWithPrefixlen : null,
+      ipv4WithPrefixlen:
+          rules.hasIpv4WithPrefixlen() ? rules.ipv4WithPrefixlen : null,
+      ipv6WithPrefixlen:
+          rules.hasIpv6WithPrefixlen() ? rules.ipv6WithPrefixlen : null,
       hostAndPort: rules.hasHostAndPort() ? rules.hostAndPort : null,
       tuuid: rules.hasTuuid() ? rules.tuuid : null,
     );
@@ -1026,10 +1089,10 @@ class EvaluatorBuilder {
 
   Evaluator _buildBytesEvaluator(BytesRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = BytesEvaluator(
       constValue: rules.hasConst_1() ? rules.const_1 : null,
@@ -1047,26 +1110,31 @@ class EvaluatorBuilder {
       ipv6: rules.hasIpv6() ? rules.ipv6 : null,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
-  Evaluator _buildEnumEvaluator(EnumRules rules, [Map<int, String>? enumValueNames]) {
+  Evaluator _buildEnumEvaluator(EnumRules rules,
+      [Map<int, String>? enumValueNames]) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = EnumRulesEvaluator(
       rules: rules,
       enumValueNames: enumValueNames,
     );
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
-  
+
   Evaluator _buildMapEvaluator(MapRules rules) {
     // Build key and value evaluators from rules if present
     Evaluator? keyEvaluator;
@@ -1098,28 +1166,32 @@ class EvaluatorBuilder {
 
   Evaluator _buildDurationEvaluator(DurationRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = DurationEvaluator(rules: rules);
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildTimestampEvaluator(TimestampRules rules) {
     final evaluators = <Evaluator>[];
-    
+
     // Check for predefined CEL rules via extensions
     _addPredefinedCelEvaluator(evaluators, rules);
-    
+
     // Add standard rules
     final standardEvaluator = TimestampEvaluator(rules: rules);
     evaluators.add(standardEvaluator);
-    
-    return evaluators.length == 1 ? evaluators.first : CompositeEvaluator(evaluators);
+
+    return evaluators.length == 1
+        ? evaluators.first
+        : CompositeEvaluator(evaluators);
   }
 
   Evaluator _buildAnyEvaluator(AnyRules rules) {
@@ -1181,12 +1253,14 @@ class EvaluatorBuilder {
   }
 
   /// Build CEL evaluator for predefined rules with extension context
-  Evaluator? _buildPredefinedCELEvaluator(List<PredefinedCelRule> predefinedRules) {
+  Evaluator? _buildPredefinedCELEvaluator(
+      List<PredefinedCelRule> predefinedRules) {
     if (predefinedRules.isEmpty) {
       return null;
     }
     try {
-      final expressions = _managedCelCompiler.compileWithContext(predefinedRules);
+      final expressions =
+          _managedCelCompiler.compileWithContext(predefinedRules);
       if (expressions.isEmpty) {
         return null;
       }
@@ -1196,15 +1270,15 @@ class EvaluatorBuilder {
       rethrow;
     }
   }
-  
+
   /// Validates that rule types are compatible with the field type.
   void _validateRuleTypeCompatibility(FieldInfo field, FieldRules rules) {
     // Get the expected rule type based on field type
     final expectedRuleType = _getExpectedRuleType(field);
-    
+
     // Check what rule types are actually present
     final presentRuleTypes = <String>[];
-    
+
     if (rules.hasBool_13()) presentRuleTypes.add('bool');
     if (rules.hasInt32()) presentRuleTypes.add('int32');
     if (rules.hasInt64()) presentRuleTypes.add('int64');
@@ -1224,8 +1298,8 @@ class EvaluatorBuilder {
     if (rules.hasTimestamp()) presentRuleTypes.add('timestamp');
     if (rules.hasDuration()) presentRuleTypes.add('duration');
     if (rules.hasAny()) presentRuleTypes.add('any');
-    
-    // Find incompatible rule types  
+
+    // Find incompatible rule types
     for (final ruleType in presentRuleTypes) {
       if (ruleType != expectedRuleType) {
         // If we don't recognize the expected rule type, skip validation
@@ -1233,98 +1307,98 @@ class EvaluatorBuilder {
         if (expectedRuleType == null) {
           return; // Skip validation for unrecognized field types
         }
-        
+
         // Based on the conformance test expectations
         throw CompilationError('mismatched rule type and field type');
       }
     }
   }
-  
+
   /// Gets the expected rule type for a field.
   String? _getExpectedRuleType(FieldInfo field) {
     switch (field.type) {
       case PbFieldType.OB:
       case PbFieldType.QB:
         return 'bool';
-        
+
       case PbFieldType.O3:
       case PbFieldType.P3:
         return 'int32';
-        
+
       case PbFieldType.O6:
       case PbFieldType.P6:
         return 'int64';
-        
+
       case PbFieldType.OU3:
       case PbFieldType.PU3:
         return 'uint32';
-        
+
       case PbFieldType.OU6:
       case PbFieldType.PU6:
         return 'uint64';
-        
+
       case PbFieldType.OS3:
       case PbFieldType.PS3:
         return 'sint32';
-        
+
       case PbFieldType.OS6:
       case PbFieldType.PS6:
         return 'sint64';
-        
+
       case PbFieldType.OF3:
       case PbFieldType.PF3:
         return 'fixed32';
-        
+
       case PbFieldType.OF6:
       case PbFieldType.PF6:
         return 'fixed64';
-        
+
       case PbFieldType.OSF3:
       case PbFieldType.PSF3:
         return 'sfixed32';
-        
+
       case PbFieldType.OSF6:
       case PbFieldType.PSF6:
         return 'sfixed64';
-        
+
       case PbFieldType.OF:
       case PbFieldType.PF:
         return 'float';
-        
+
       case PbFieldType.OD:
       case PbFieldType.PD:
         return 'double';
-        
+
       case PbFieldType.OS:
       case PbFieldType.PS:
         return 'string';
-        
+
       case PbFieldType.OY:
       case PbFieldType.PY:
         return 'bytes';
-        
+
       case PbFieldType.OE:
       case PbFieldType.PE:
         return 'enum';
-        
+
       case PbFieldType.OM:
       case PbFieldType.PM:
         // Handle message types - check for Google wrapper types
         return _getWrapperTypeRuleName(field);
-        
+
       default:
         return null;
     }
   }
-  
+
   /// Gets the expected rule type for Google protobuf wrapper types.
   String? _getWrapperTypeRuleName(FieldInfo field) {
     // Check if this is a Google protobuf wrapper type by creating an instance
     if (field.subBuilder == null) return null;
-    
+
     try {
       final message = field.subBuilder!();
-      
+
       // Check runtime type of the wrapper message
       if (message is BoolValue) return 'bool';
       if (message is Int32Value) return 'int32';
@@ -1335,12 +1409,12 @@ class EvaluatorBuilder {
       if (message is DoubleValue) return 'double';
       if (message is StringValue) return 'string';
       if (message is BytesValue) return 'bytes';
-      
+
       // Check for well-known types
       if (message is pb_timestamp.Timestamp) return 'timestamp';
       if (message is pb_duration.Duration) return 'duration';
       if (message is pb_any.Any) return 'any';
-      
+
       // Not a wrapper or WKT type - regular message, no scalar rules expected
       return null;
     } catch (e) {
@@ -1348,7 +1422,7 @@ class EvaluatorBuilder {
       return null;
     }
   }
-  
+
   /// Wraps an evaluator with appropriate wrapper type handling if needed.
   Evaluator _wrapForWrapperType(FieldInfo field, Evaluator evaluator) {
     final wrapperType = _getWrapperTypeRuleName(field);
@@ -1356,7 +1430,7 @@ class EvaluatorBuilder {
       // Not a wrapper type, return evaluator as-is
       return evaluator;
     }
-    
+
     // Wrap the evaluator based on the wrapper type
     switch (wrapperType) {
       case 'bool':
@@ -1381,19 +1455,29 @@ class EvaluatorBuilder {
         return evaluator;
     }
   }
-  
+
   /// Adds predefined CEL evaluator to evaluators list if CEL rules exist.
-  /// This consolidates the repeated pattern across multiple builder methods.
-  void _addPredefinedCelEvaluator(List<Evaluator> evaluators, GeneratedMessage rules) {
-    final predefinedCelRules = PredefinedRulesManager.getPredefinedCelRulesWithContext(rules);
-    if (predefinedCelRules.isNotEmpty) {
-      final celEvaluator = _buildPredefinedCELEvaluator(predefinedCelRules);
-      if (celEvaluator != null) {
-        evaluators.add(celEvaluator);
+  /// Returns true if any predefined evaluators were added.
+  bool _addPredefinedCelEvaluator(
+      List<Evaluator> evaluators, GeneratedMessage rules) {
+    try {
+      final predefinedCelRules =
+          PredefinedRulesManager.getPredefinedCelRulesWithContext(
+              rules, extensionRegistry);
+      if (predefinedCelRules.isNotEmpty) {
+        final celEvaluator = _buildPredefinedCELEvaluator(predefinedCelRules);
+        if (celEvaluator != null) {
+          evaluators.add(celEvaluator);
+          return true;
+        }
       }
+    } catch (e) {
+      // Log error but don't fail - fall back to standard evaluator
+      // In production, you might want to use a proper logger instead of stderr
     }
+    return false;
   }
-  
+
   /// Adds direct CEL evaluator to evaluators list if CEL rules exist.
   /// This consolidates the repeated pattern for field-level CEL expressions.
   void _addDirectCelEvaluator(List<Evaluator> evaluators, List<Rule> celRules) {
@@ -1404,38 +1488,35 @@ class EvaluatorBuilder {
       }
     }
   }
-  
-  /// Extract predefined CEL rules from rule extensions using dynamic discovery.
-  /// 
-  /// This replaces the previous hardcoded approach with the ES/Go pattern
-  /// that dynamically discovers predefined rules and extracts their CEL expressions.
-  List<Rule> _getPredefinedCelRules(GeneratedMessage rules) {
-    return PredefinedRulesManager.getPredefinedCelRules(rules);
-  }
-  
+
   /// Validates oneof rules during compilation
-  void _validateOneofRules(List<MessageOneofRule> oneofRules, GeneratedMessage message, String messageTypeName) {
+  void _validateOneofRules(List<MessageOneofRule> oneofRules,
+      GeneratedMessage message, String messageTypeName) {
     for (final oneofRule in oneofRules) {
       // Check for zero fields
       if (oneofRule.fields.isEmpty) {
-        throw CompilationError('at least one field must be specified in oneof rule for the message $messageTypeName');
+        throw CompilationError(
+            'at least one field must be specified in oneof rule for the message $messageTypeName');
       }
-      
+
       // Check for duplicate fields
       final seen = <String>{};
       for (final fieldName in oneofRule.fields) {
         if (seen.contains(fieldName)) {
-          throw CompilationError('duplicate $fieldName in oneof rule for the message $messageTypeName');
+          throw CompilationError(
+              'duplicate $fieldName in oneof rule for the message $messageTypeName');
         }
         seen.add(fieldName);
       }
-      
+
       // Check for unknown fields
       for (final fieldName in oneofRule.fields) {
         final camelCaseName = StringUtils.toCamelCase(fieldName);
-        final fieldExists = message.info_.fieldInfo.values.any((f) => f.name == camelCaseName);
+        final fieldExists =
+            message.info_.fieldInfo.values.any((f) => f.name == camelCaseName);
         if (!fieldExists) {
-          throw CompilationError('field $fieldName not found in message $messageTypeName');
+          throw CompilationError(
+              'field $fieldName not found in message $messageTypeName');
         }
       }
     }

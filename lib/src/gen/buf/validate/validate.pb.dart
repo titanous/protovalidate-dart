@@ -7005,28 +7005,32 @@ class Validate {
       1159,
       $pb.PbFieldType.OM,
       defaultOrMaker: MessageRules.getDefault,
-      subBuilder: MessageRules.create);
+      subBuilder: MessageRules.create,
+      typeName: 'buf.validate.message');
   static final oneof = $pb.Extension<OneofRules>(
       _omitMessageNames ? '' : 'google.protobuf.OneofOptions',
       _omitFieldNames ? '' : 'oneof',
       1159,
       $pb.PbFieldType.OM,
       defaultOrMaker: OneofRules.getDefault,
-      subBuilder: OneofRules.create);
+      subBuilder: OneofRules.create,
+      typeName: 'buf.validate.oneof');
   static final field_1159 = $pb.Extension<FieldRules>(
       _omitMessageNames ? '' : 'google.protobuf.FieldOptions',
       _omitFieldNames ? '' : 'field_1159',
       1159,
       $pb.PbFieldType.OM,
       defaultOrMaker: FieldRules.getDefault,
-      subBuilder: FieldRules.create);
+      subBuilder: FieldRules.create,
+      typeName: 'buf.validate.field_1159');
   static final predefined = $pb.Extension<PredefinedRules>(
       _omitMessageNames ? '' : 'google.protobuf.FieldOptions',
       _omitFieldNames ? '' : 'predefined',
       1160,
       $pb.PbFieldType.OM,
       defaultOrMaker: PredefinedRules.getDefault,
-      subBuilder: PredefinedRules.create);
+      subBuilder: PredefinedRules.create,
+      typeName: 'buf.validate.predefined');
   static void registerAllExtensions($pb.ExtensionRegistry registry) {
     registry.add(message);
     registry.add(oneof);

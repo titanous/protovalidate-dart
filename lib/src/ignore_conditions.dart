@@ -6,10 +6,10 @@ import 'utils/zero_value_checker.dart';
 abstract class IgnoreCondition<T> {
   /// Check if validation should be skipped for the given value
   bool shouldIgnore(T value);
-  
+
   /// True if validation should always be skipped
   bool get alwaysIgnore;
-  
+
   /// True if validation should never be skipped
   bool get neverIgnore;
 }
@@ -18,10 +18,10 @@ abstract class IgnoreCondition<T> {
 class AlwaysIgnoreCondition<T> implements IgnoreCondition<T> {
   @override
   bool shouldIgnore(T value) => true;
-  
+
   @override
   bool get alwaysIgnore => true;
-  
+
   @override
   bool get neverIgnore => false;
 }
@@ -30,10 +30,10 @@ class AlwaysIgnoreCondition<T> implements IgnoreCondition<T> {
 class NeverIgnoreCondition<T> implements IgnoreCondition<T> {
   @override
   bool shouldIgnore(T value) => false;
-  
+
   @override
   bool get alwaysIgnore => false;
-  
+
   @override
   bool get neverIgnore => true;
 }
@@ -44,13 +44,12 @@ class ZeroValueIgnoreCondition<T> implements IgnoreCondition<T> {
   bool shouldIgnore(T value) {
     return ZeroValueChecker.isZeroValue(value);
   }
-  
+
   @override
   bool get alwaysIgnore => false;
-  
+
   @override
   bool get neverIgnore => false;
-  
 }
 
 /// Create appropriate ignore condition based on Ignore enum value

@@ -19,7 +19,7 @@ class StringUtils {
   static String toCamelCase(String snakeCase) {
     final parts = snakeCase.split('_');
     if (parts.isEmpty) return snakeCase;
-    
+
     final buffer = StringBuffer(parts.first);
     for (int i = 1; i < parts.length; i++) {
       if (parts[i].isNotEmpty) {

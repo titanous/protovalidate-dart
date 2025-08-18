@@ -23,7 +23,8 @@ void main() {
     test('with prefix', () {
       expect(Ipv4Parser('192.168.1.0/24').addressPrefix(), isTrue);
       expect(Ipv4Parser('10.0.0.0/8').addressPrefix(), isTrue);
-      expect(Ipv4Parser('192.168.1.0/33').addressPrefix(), isFalse); // invalid prefix
+      expect(Ipv4Parser('192.168.1.0/33').addressPrefix(),
+          isFalse); // invalid prefix
     });
 
     test('strict prefix (host bits must be zero)', () {
@@ -60,7 +61,8 @@ void main() {
     test('with prefix', () {
       expect(Ipv6Parser('2001:db8::/32').addressPrefix(), isTrue);
       expect(Ipv6Parser('fe80::/10').addressPrefix(), isTrue);
-      expect(Ipv6Parser('2001:db8::/129').addressPrefix(), isFalse); // invalid prefix
+      expect(Ipv6Parser('2001:db8::/129').addressPrefix(),
+          isFalse); // invalid prefix
     });
   });
 
@@ -114,8 +116,10 @@ void main() {
     test('IP prefix validation', () {
       expect(StringValidators.isIpPrefix('192.168.1.0/24'), isTrue);
       expect(StringValidators.isIpPrefix('2001:db8::/32'), isTrue);
-      expect(StringValidators.isIpPrefix('192.168.1.1/24', null, true), isFalse); // strict mode
-      expect(StringValidators.isIpPrefix('192.168.1.0/24', null, true), isTrue); // strict mode
+      expect(StringValidators.isIpPrefix('192.168.1.1/24', null, true),
+          isFalse); // strict mode
+      expect(StringValidators.isIpPrefix('192.168.1.0/24', null, true),
+          isTrue); // strict mode
     });
   });
 }

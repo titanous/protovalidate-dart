@@ -5,16 +5,16 @@ import '../rule_paths.dart';
 abstract class StringFormatValidator {
   /// The name of the format being validated
   String get formatName;
-  
+
   /// Error message for empty values
   String get emptyMessage;
-  
+
   /// Error message for invalid format
   String get invalidMessage;
-  
+
   /// Validates the format (implemented by subclasses)
   bool isValidFormat(String value);
-  
+
   /// Default implementation that handles empty check and format validation
   void validate(String value, Cursor cursor) {
     if (value.isEmpty) {
@@ -37,17 +37,18 @@ abstract class StringFormatValidator {
 class EmailValidator extends StringFormatValidator {
   @override
   String get formatName => 'email';
-  
+
   @override
   String get emptyMessage => '';
-  
+
   @override
   String get invalidMessage => 'String must be a valid email address';
-  
+
   @override
   bool isValidFormat(String value) {
     // Simple email validation regex
-    final emailRegex = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
     return emailRegex.hasMatch(value);
   }
 }
@@ -56,13 +57,13 @@ class EmailValidator extends StringFormatValidator {
 class HostnameValidator extends StringFormatValidator {
   @override
   String get formatName => 'hostname';
-  
+
   @override
   String get emptyMessage => '';
-  
+
   @override
   String get invalidMessage => 'String must be a valid hostname';
-  
+
   @override
   bool isValidFormat(String value) {
     // Simple hostname validation
@@ -70,7 +71,8 @@ class HostnameValidator extends StringFormatValidator {
     final parts = value.split('.');
     for (final part in parts) {
       if (part.isEmpty || part.length > 63) return false;
-      if (!RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$').hasMatch(part)) return false;
+      if (!RegExp(r'^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$').hasMatch(part))
+        return false;
     }
     return true;
   }
@@ -80,18 +82,18 @@ class HostnameValidator extends StringFormatValidator {
 class IpValidator extends StringFormatValidator {
   @override
   String get formatName => 'ip';
-  
+
   @override
   String get emptyMessage => 'value is empty, which is not a valid IP address';
-  
+
   @override
   String get invalidMessage => 'String must be a valid IP address';
-  
+
   @override
   bool isValidFormat(String value) {
     return _isValidIPv4(value) || _isValidIPv6(value);
   }
-  
+
   bool _isValidIPv4(String value) {
     final parts = value.split('.');
     if (parts.length != 4) return false;
@@ -101,7 +103,7 @@ class IpValidator extends StringFormatValidator {
     }
     return true;
   }
-  
+
   bool _isValidIPv6(String value) {
     // Basic IPv6 validation - could be more comprehensive
     try {
@@ -123,13 +125,14 @@ class IpValidator extends StringFormatValidator {
 class Ipv4Validator extends StringFormatValidator {
   @override
   String get formatName => 'ipv4';
-  
+
   @override
-  String get emptyMessage => 'value is empty, which is not a valid IPv4 address';
-  
+  String get emptyMessage =>
+      'value is empty, which is not a valid IPv4 address';
+
   @override
   String get invalidMessage => 'String must be a valid IPv4 address';
-  
+
   @override
   bool isValidFormat(String value) {
     final parts = value.split('.');
@@ -146,13 +149,14 @@ class Ipv4Validator extends StringFormatValidator {
 class Ipv6Validator extends StringFormatValidator {
   @override
   String get formatName => 'ipv6';
-  
+
   @override
-  String get emptyMessage => 'value is empty, which is not a valid IPv6 address';
-  
+  String get emptyMessage =>
+      'value is empty, which is not a valid IPv6 address';
+
   @override
   String get invalidMessage => 'String must be a valid IPv6 address';
-  
+
   @override
   bool isValidFormat(String value) {
     // Basic IPv6 validation - could be more comprehensive
@@ -175,13 +179,13 @@ class Ipv6Validator extends StringFormatValidator {
 class UriValidator extends StringFormatValidator {
   @override
   String get formatName => 'uri';
-  
+
   @override
   String get emptyMessage => 'value is empty, which is not a valid URI';
-  
+
   @override
   String get invalidMessage => 'String must be a valid URI';
-  
+
   @override
   bool isValidFormat(String value) {
     try {
@@ -203,14 +207,15 @@ class StringFormatValidatorRegistry {
     'ipv6': Ipv6Validator(),
     'uri': UriValidator(),
   };
-  
+
   /// Gets a validator for the specified format
   static StringFormatValidator? getValidator(String format) {
     return _validators[format];
   }
-  
+
   /// Registers a custom validator
-  static void registerValidator(String format, StringFormatValidator validator) {
+  static void registerValidator(
+      String format, StringFormatValidator validator) {
     _validators[format] = validator;
   }
 }

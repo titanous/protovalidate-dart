@@ -125,9 +125,9 @@ class IgnoreEmptyProto3OptionalScalar extends $pb.GeneratedMessage {
   static IgnoreEmptyProto3OptionalScalar? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get val => $_getIZ(0);
+  $core.int? get val => $_getINullable(0);
   @$pb.TagNumber(1)
-  set val($core.int value) => $_setSignedInt32(0, value);
+  set val($core.int? value) => $_setSignedInt32Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -242,15 +242,15 @@ class IgnoreEmptyProto3Message extends $pb.GeneratedMessage {
   static IgnoreEmptyProto3Message? _defaultInstance;
 
   @$pb.TagNumber(1)
-  IgnoreEmptyProto3Message_Msg get val => $_getN(0);
+  IgnoreEmptyProto3Message_Msg? get val => $_getNullable(0);
   @$pb.TagNumber(1)
-  set val(IgnoreEmptyProto3Message_Msg value) => $_setField(1, value);
+  set val(IgnoreEmptyProto3Message_Msg? value) => $_setFieldNullable(1, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
   @$pb.TagNumber(1)
-  IgnoreEmptyProto3Message_Msg ensureVal() => $_ensure(0);
+  IgnoreEmptyProto3Message_Msg? ensureVal() => $_ensure(0);
 }
 
 enum IgnoreEmptyProto3Oneof_O { val, notSet }

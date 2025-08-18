@@ -25,12 +25,12 @@ class FieldRuleNumbers {
   static const int message = 17;
   static const int repeated = 18;
   static const int map = 19;
-  
+
   // Well-known types
   static const int any = 20;
   static const int duration = 21;
   static const int timestamp = 22;
-  
+
   // CEL expressions field
   static const int cel = 23;
 }
@@ -41,7 +41,7 @@ class ConstraintNumbers {
   static const int const_ = 1;
   static const int in_ = 6;
   static const int notIn = 7;
-  
+
   // String constraints
   static const int len = 19;
   static const int minLen = 2;
@@ -75,31 +75,31 @@ class ConstraintNumbers {
   static const int ipPrefix = 29;
   static const int hostAndPort = 32;
   static const int tuuid = 33;
-  
+
   // Numeric constraints (lt, lte, gt, gte)
   static const int lt = 2;
   static const int lte = 3;
   static const int gt = 4;
   static const int gte = 5;
   static const int finite = 8;
-  
+
   // Repeated constraints
   static const int minItems = 1;
   static const int maxItems = 2;
   static const int unique = 3;
   static const int items = 4;
-  
-  // Map constraints  
+
+  // Map constraints
   static const int minPairs = 1;
   static const int maxPairs = 2;
   static const int keys = 4;
   static const int values = 5;
-  
+
   // Enum constraints
   static const int definedOnly = 2;
   static const int enumIn = 3;
   static const int enumNotIn = 4;
-  
+
   // Timestamp constraints
   static const int ltNow = 7;
   static const int gtNow = 8;
@@ -112,123 +112,127 @@ class RulePathBuilder {
   static RulePath stringConstraint(String constraintName) {
     final fieldNumber = _getStringConstraintNumber(constraintName);
     final fieldType = _getStringConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('string', FieldRuleNumbers.string)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for any constraints.
   static RulePath anyConstraint(String constraintName) {
     final fieldNumber = _getAnyConstraintNumber(constraintName);
     final fieldType = _getAnyConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('any', FieldRuleNumbers.any)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for numeric constraints.
-  static RulePath numericConstraint(String ruleTypeName, int ruleTypeNumber, String constraintName) {
+  static RulePath numericConstraint(
+      String ruleTypeName, int ruleTypeNumber, String constraintName) {
     final fieldNumber = _getNumericConstraintNumber(constraintName);
     final fieldType = _getNumericConstraintType(constraintName, ruleTypeName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType(ruleTypeName, ruleTypeNumber)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for repeated constraints.
   static RulePath repeatedConstraint(String constraintName) {
     final fieldNumber = _getRepeatedConstraintNumber(constraintName);
     final fieldType = _getRepeatedConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('repeated', FieldRuleNumbers.repeated)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a base rule path for repeated items (repeated.items)
   static RulePath repeatedItemsBase() {
     return RulePath.fromFieldRules()
         .ruleType('repeated', FieldRuleNumbers.repeated)
         .ruleType('items', ConstraintNumbers.items);
   }
-  
+
   /// Creates a rule path for repeated items with a specific item constraint
   static RulePath repeatedItemsConstraint(RulePath itemRulePath) {
     return repeatedItemsBase().appendPath(itemRulePath);
   }
-  
+
   /// Creates a rule path for bool constraints.
   static RulePath boolConstraint(String constraintName) {
     return RulePath.fromFieldRules()
         .ruleType('bool', FieldRuleNumbers.bool)
-        .constraint(constraintName, ConstraintNumbers.const_, FieldDescriptorProto_Type.TYPE_BOOL);
+        .constraint(constraintName, ConstraintNumbers.const_,
+            FieldDescriptorProto_Type.TYPE_BOOL);
   }
-  
+
   /// Creates a rule path for enum constraints.
   static RulePath enumConstraint(String constraintName) {
     final fieldNumber = _getEnumConstraintNumber(constraintName);
     final fieldType = _getEnumConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('enum', FieldRuleNumbers.enum_)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for bytes constraints.
   static RulePath bytesConstraint(String constraintName) {
     final fieldNumber = _getBytesConstraintNumber(constraintName);
     final fieldType = _getBytesConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('bytes', FieldRuleNumbers.bytes)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for map constraints.
   static RulePath mapConstraint(String constraintName) {
     final fieldNumber = _getMapConstraintNumber(constraintName);
     final fieldType = _getMapConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('map', FieldRuleNumbers.map)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for duration constraints.
   static RulePath durationConstraint(String constraintName) {
     final fieldNumber = _getDurationConstraintNumber(constraintName);
     final fieldType = _getDurationConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('duration', FieldRuleNumbers.duration)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for timestamp constraints.
   static RulePath timestampConstraint(String constraintName) {
     final fieldNumber = _getTimestampConstraintNumber(constraintName);
     final fieldType = _getTimestampConstraintType(constraintName);
-    
+
     return RulePath.fromFieldRules()
         .ruleType('timestamp', FieldRuleNumbers.timestamp)
         .constraint(constraintName, fieldNumber, fieldType);
   }
-  
+
   /// Creates a rule path for CEL expressions with index.
   static RulePath celConstraint(int index) {
     return RulePath.fromFieldRules()
-        .constraint('cel', FieldRuleNumbers.cel, FieldDescriptorProto_Type.TYPE_MESSAGE)
+        .constraint(
+            'cel', FieldRuleNumbers.cel, FieldDescriptorProto_Type.TYPE_MESSAGE)
         .index(index);
   }
-  
+
   static int _getStringConstraintNumber(String constraintName) {
     return ConstraintMappings.getStringConstraintNumber(constraintName);
   }
-  
-  static FieldDescriptorProto_Type _getStringConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getStringConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'const':
       case 'pattern':
@@ -273,62 +277,87 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_STRING;
     }
   }
-  
+
   static int _getAnyConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'in': return 2;  // AnyRules.in field number
-      case 'not_in': return 3;  // AnyRules.not_in field number
-      default: throw ArgumentError('Unknown any constraint: $constraintName');
+      case 'in':
+        return 2; // AnyRules.in field number
+      case 'not_in':
+        return 3; // AnyRules.not_in field number
+      default:
+        throw ArgumentError('Unknown any constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getAnyConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getAnyConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'in':
       case 'not_in':
         return FieldDescriptorProto_Type.TYPE_STRING; // repeated string
-      default: throw ArgumentError('Unknown any constraint: $constraintName');
+      default:
+        throw ArgumentError('Unknown any constraint: $constraintName');
     }
   }
-  
+
   static int _getNumericConstraintNumber(String constraintName) {
     return ConstraintMappings.getNumericConstraintNumber(constraintName);
   }
-  
-  static FieldDescriptorProto_Type _getNumericConstraintType(String constraintName, String ruleTypeName) {
+
+  static FieldDescriptorProto_Type _getNumericConstraintType(
+      String constraintName, String ruleTypeName) {
     if (constraintName == 'finite') {
       return FieldDescriptorProto_Type.TYPE_BOOL;
     }
-    
+
     // Return the same type as the rule type for value constraints
     switch (ruleTypeName) {
-      case 'float': return FieldDescriptorProto_Type.TYPE_FLOAT;
-      case 'double': return FieldDescriptorProto_Type.TYPE_DOUBLE;
-      case 'int32': return FieldDescriptorProto_Type.TYPE_INT32;
-      case 'int64': return FieldDescriptorProto_Type.TYPE_INT64;
-      case 'uint32': return FieldDescriptorProto_Type.TYPE_UINT32;
-      case 'uint64': return FieldDescriptorProto_Type.TYPE_UINT64;
-      case 'sint32': return FieldDescriptorProto_Type.TYPE_SINT32;
-      case 'sint64': return FieldDescriptorProto_Type.TYPE_SINT64;
-      case 'fixed32': return FieldDescriptorProto_Type.TYPE_FIXED32;
-      case 'fixed64': return FieldDescriptorProto_Type.TYPE_FIXED64;
-      case 'sfixed32': return FieldDescriptorProto_Type.TYPE_SFIXED32;
-      case 'sfixed64': return FieldDescriptorProto_Type.TYPE_SFIXED64;
-      default: return FieldDescriptorProto_Type.TYPE_INT32;
+      case 'float':
+        return FieldDescriptorProto_Type.TYPE_FLOAT;
+      case 'double':
+        return FieldDescriptorProto_Type.TYPE_DOUBLE;
+      case 'int32':
+        return FieldDescriptorProto_Type.TYPE_INT32;
+      case 'int64':
+        return FieldDescriptorProto_Type.TYPE_INT64;
+      case 'uint32':
+        return FieldDescriptorProto_Type.TYPE_UINT32;
+      case 'uint64':
+        return FieldDescriptorProto_Type.TYPE_UINT64;
+      case 'sint32':
+        return FieldDescriptorProto_Type.TYPE_SINT32;
+      case 'sint64':
+        return FieldDescriptorProto_Type.TYPE_SINT64;
+      case 'fixed32':
+        return FieldDescriptorProto_Type.TYPE_FIXED32;
+      case 'fixed64':
+        return FieldDescriptorProto_Type.TYPE_FIXED64;
+      case 'sfixed32':
+        return FieldDescriptorProto_Type.TYPE_SFIXED32;
+      case 'sfixed64':
+        return FieldDescriptorProto_Type.TYPE_SFIXED64;
+      default:
+        return FieldDescriptorProto_Type.TYPE_INT32;
     }
   }
-  
+
   static int _getRepeatedConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'min_items': return ConstraintNumbers.minItems;
-      case 'max_items': return ConstraintNumbers.maxItems;
-      case 'unique': return ConstraintNumbers.unique;
-      case 'items': return ConstraintNumbers.items;
-      default: throw ArgumentError('Unknown repeated constraint: $constraintName');
+      case 'min_items':
+        return ConstraintNumbers.minItems;
+      case 'max_items':
+        return ConstraintNumbers.maxItems;
+      case 'unique':
+        return ConstraintNumbers.unique;
+      case 'items':
+        return ConstraintNumbers.items;
+      default:
+        throw ArgumentError('Unknown repeated constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getRepeatedConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getRepeatedConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'min_items':
       case 'max_items':
@@ -341,18 +370,24 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_UINT64;
     }
   }
-  
+
   static int _getEnumConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'const': return ConstraintNumbers.const_;
-      case 'defined_only': return ConstraintNumbers.definedOnly;
-      case 'in': return ConstraintNumbers.enumIn;
-      case 'not_in': return ConstraintNumbers.enumNotIn;
-      default: throw ArgumentError('Unknown enum constraint: $constraintName');
+      case 'const':
+        return ConstraintNumbers.const_;
+      case 'defined_only':
+        return ConstraintNumbers.definedOnly;
+      case 'in':
+        return ConstraintNumbers.enumIn;
+      case 'not_in':
+        return ConstraintNumbers.enumNotIn;
+      default:
+        throw ArgumentError('Unknown enum constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getEnumConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getEnumConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'const':
       case 'in':
@@ -364,27 +399,42 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_INT32;
     }
   }
-  
+
   static int _getBytesConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'const': return 1;
-      case 'len': return 13;
-      case 'min_len': return 2;
-      case 'max_len': return 3;
-      case 'pattern': return 4;
-      case 'prefix': return 5;
-      case 'suffix': return 6;
-      case 'contains': return 7;
-      case 'in': return 8;
-      case 'not_in': return 9;
-      case 'ip': return 10;
-      case 'ipv4': return 11;
-      case 'ipv6': return 12;
-      default: throw ArgumentError('Unknown bytes constraint: $constraintName');
+      case 'const':
+        return 1;
+      case 'len':
+        return 13;
+      case 'min_len':
+        return 2;
+      case 'max_len':
+        return 3;
+      case 'pattern':
+        return 4;
+      case 'prefix':
+        return 5;
+      case 'suffix':
+        return 6;
+      case 'contains':
+        return 7;
+      case 'in':
+        return 8;
+      case 'not_in':
+        return 9;
+      case 'ip':
+        return 10;
+      case 'ipv4':
+        return 11;
+      case 'ipv6':
+        return 12;
+      default:
+        throw ArgumentError('Unknown bytes constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getBytesConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getBytesConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'const':
       case 'prefix':
@@ -407,18 +457,24 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_BYTES;
     }
   }
-  
+
   static int _getMapConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'min_pairs': return ConstraintNumbers.minPairs;
-      case 'max_pairs': return ConstraintNumbers.maxPairs;
-      case 'keys': return ConstraintNumbers.keys;
-      case 'values': return ConstraintNumbers.values;
-      default: throw ArgumentError('Unknown map constraint: $constraintName');
+      case 'min_pairs':
+        return ConstraintNumbers.minPairs;
+      case 'max_pairs':
+        return ConstraintNumbers.maxPairs;
+      case 'keys':
+        return ConstraintNumbers.keys;
+      case 'values':
+        return ConstraintNumbers.values;
+      default:
+        throw ArgumentError('Unknown map constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getMapConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getMapConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'min_pairs':
       case 'max_pairs':
@@ -430,21 +486,30 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_UINT64;
     }
   }
-  
+
   static int _getDurationConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'const': return 2; // DurationRules.const field number
-      case 'lt': return 3;    // DurationRules.lt field number
-      case 'lte': return 4;   // DurationRules.lte field number
-      case 'gt': return 5;    // DurationRules.gt field number
-      case 'gte': return 6;   // DurationRules.gte field number
-      case 'in': return 7;    // DurationRules.in field number
-      case 'not_in': return 8; // DurationRules.not_in field number
-      default: throw ArgumentError('Unknown duration constraint: $constraintName');
+      case 'const':
+        return 2; // DurationRules.const field number
+      case 'lt':
+        return 3; // DurationRules.lt field number
+      case 'lte':
+        return 4; // DurationRules.lte field number
+      case 'gt':
+        return 5; // DurationRules.gt field number
+      case 'gte':
+        return 6; // DurationRules.gte field number
+      case 'in':
+        return 7; // DurationRules.in field number
+      case 'not_in':
+        return 8; // DurationRules.not_in field number
+      default:
+        throw ArgumentError('Unknown duration constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getDurationConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getDurationConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'const':
       case 'lt':
@@ -459,24 +524,36 @@ class RulePathBuilder {
         return FieldDescriptorProto_Type.TYPE_MESSAGE;
     }
   }
-  
+
   static int _getTimestampConstraintNumber(String constraintName) {
     switch (constraintName) {
-      case 'const': return 2; // TimestampRules.const field number
-      case 'lt': return 3;    // TimestampRules.lt field number
-      case 'lte': return 4;   // TimestampRules.lte field number
-      case 'gt': return 5;    // TimestampRules.gt field number
-      case 'gte': return 6;   // TimestampRules.gte field number
-      case 'lt_now': return 7; // TimestampRules.lt_now field number
-      case 'gt_now': return 8; // TimestampRules.gt_now field number
-      case 'within': return 9; // TimestampRules.within field number
-      case 'in': return 10;   // TimestampRules.in field number
-      case 'not_in': return 11; // TimestampRules.not_in field number
-      default: throw ArgumentError('Unknown timestamp constraint: $constraintName');
+      case 'const':
+        return 2; // TimestampRules.const field number
+      case 'lt':
+        return 3; // TimestampRules.lt field number
+      case 'lte':
+        return 4; // TimestampRules.lte field number
+      case 'gt':
+        return 5; // TimestampRules.gt field number
+      case 'gte':
+        return 6; // TimestampRules.gte field number
+      case 'lt_now':
+        return 7; // TimestampRules.lt_now field number
+      case 'gt_now':
+        return 8; // TimestampRules.gt_now field number
+      case 'within':
+        return 9; // TimestampRules.within field number
+      case 'in':
+        return 10; // TimestampRules.in field number
+      case 'not_in':
+        return 11; // TimestampRules.not_in field number
+      default:
+        throw ArgumentError('Unknown timestamp constraint: $constraintName');
     }
   }
-  
-  static FieldDescriptorProto_Type _getTimestampConstraintType(String constraintName) {
+
+  static FieldDescriptorProto_Type _getTimestampConstraintType(
+      String constraintName) {
     switch (constraintName) {
       case 'const':
       case 'lt':

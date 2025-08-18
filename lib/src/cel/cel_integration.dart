@@ -17,16 +17,16 @@ import 'protovalidate_library.dart';
 class ExtensionContext {
   /// The rule type name (e.g., "bytes", "string")
   final String ruleTypeName;
-  
+
   /// The field number of the rule type in FieldRules
   final int ruleTypeFieldNumber;
-  
+
   /// The extension name (e.g., "[buf.validate.conformance.cases.bytes_valid_path_proto2]")
   final String extensionName;
-  
+
   /// The field number of the extension
   final int extensionFieldNumber;
-  
+
   const ExtensionContext({
     required this.ruleTypeName,
     required this.ruleTypeFieldNumber,
@@ -38,60 +38,60 @@ class ExtensionContext {
 /// Simplified CEL manager that integrates with existing infrastructure
 class SimpleCelManager {
   static SimpleCelManager? _instance;
-  
+
   /// CEL environment with protovalidate functions
   final cel.Environment env;
-  
+
   /// Cache of compiled programs by expression
   final Map<String, cel.Program> _programCache = {};
-  
+
   SimpleCelManager._() : env = _createEnvironment();
-  
+
   factory SimpleCelManager() {
     _instance ??= SimpleCelManager._();
     return _instance!;
   }
-  
+
   /// Compile a CEL expression
   cel.Program compile(String expression) {
     // Check cache
     if (_programCache.containsKey(expression)) {
       return _programCache[expression]!;
     }
-    
+
     // Compile new expression
     final ast = env.compile(expression);
     final program = env.makeProgram(ast);
     _programCache[expression] = program;
     return program;
   }
-  
+
   /// Evaluate a compiled program with bindings
   dynamic evaluate(cel.Program program, Map<String, dynamic> bindings) {
     return program.evaluate(bindings);
   }
-  
+
   static cel.Environment _createEnvironment() {
     // Create CEL environment with protovalidate functions
     final env = cel.Environment.standard();
-    
+
     // Apply the ProtovalidateLibrary to add custom validation functions
     final library = ProtovalidateLibrary();
     library.toEnvironmentOption()(env);
-    
+
     return env;
   }
 }
 
 /// Enhanced compiled expression with CEL manager integration
 class ManagedCompiledExpression {
-  final cel.Program? program;  // Null if compilation failed
-  final CompilationError? compilationError;  // Set if compilation failed
+  final cel.Program? program; // Null if compilation failed
+  final CompilationError? compilationError; // Set if compilation failed
   final Rule source;
   final SimpleCelManager manager;
-  final int index;  // Index of this expression in the CEL rules list
-  final ExtensionContext? extensionContext;  // Set for predefined rules
-  
+  final int index; // Index of this expression in the CEL rules list
+  final ExtensionContext? extensionContext; // Set for predefined rules
+
   ManagedCompiledExpression._({
     this.program,
     this.compilationError,
@@ -100,7 +100,7 @@ class ManagedCompiledExpression {
     required this.index,
     this.extensionContext,
   });
-  
+
   /// Create a successfully compiled expression
   ManagedCompiledExpression.success({
     required cel.Program program,
@@ -109,14 +109,14 @@ class ManagedCompiledExpression {
     required int index,
     ExtensionContext? extensionContext,
   }) : this._(
-    program: program,
-    compilationError: null,
-    source: source,
-    manager: manager,
-    index: index,
-    extensionContext: extensionContext,
-  );
-  
+          program: program,
+          compilationError: null,
+          source: source,
+          manager: manager,
+          index: index,
+          extensionContext: extensionContext,
+        );
+
   /// Create a failed compilation expression
   ManagedCompiledExpression.error({
     required CompilationError error,
@@ -125,36 +125,36 @@ class ManagedCompiledExpression {
     required int index,
     ExtensionContext? extensionContext,
   }) : this._(
-    program: null,
-    compilationError: error,
-    source: source,
-    manager: manager,
-    index: index,
-    extensionContext: extensionContext,
-  );
-  
+          program: null,
+          compilationError: error,
+          source: source,
+          manager: manager,
+          index: index,
+          extensionContext: extensionContext,
+        );
+
   void evaluate(dynamic value, Cursor cursor) {
     // If compilation failed, throw the compilation error
     if (compilationError != null) {
       throw compilationError!;
     }
-    
+
     try {
       // Create activation with standard variables
       final bindings = <String, dynamic>{
         'this': value,
         'now': Timestamp.fromDateTime(DateTime.now()),
       };
-      
+
       // Add rules and rule if available
       if (source.hasMessage()) {
         bindings['rules'] = source;
       }
       bindings['rule'] = source;
-      
+
       // Evaluate the CEL program
       final result = manager.evaluate(program!, bindings);
-      
+
       // Handle the result
       if (result is bool) {
         if (!result) {
@@ -176,7 +176,8 @@ class ManagedCompiledExpression {
         );
       } else {
         cursor.violate(
-          message: 'CEL expression must return a boolean or string, got: ${result.runtimeType}',
+          message:
+              'CEL expression must return a boolean or string, got: ${result.runtimeType}',
           constraintId: 'cel.type_error',
           rulePath: RulePathBuilder.celConstraint(index),
         );
@@ -184,11 +185,12 @@ class ManagedCompiledExpression {
     } catch (e) {
       // Check if this is a type error that should be a compilation error
       final errorMessage = e.toString();
-      if (errorMessage.contains('no matching overload') || 
+      if (errorMessage.contains('no matching overload') ||
           errorMessage.contains('incorrectly treats')) {
-        throw CompilationError('expression incorrectly treats an int32 field as a string');
+        throw CompilationError(
+            'expression incorrectly treats an int32 field as a string');
       }
-      
+
       cursor.violate(
         message: 'CEL evaluation failed: $e',
         constraintId: 'cel.runtime_error',
@@ -196,21 +198,23 @@ class ManagedCompiledExpression {
       );
     }
   }
-  
+
   void _addViolation(Cursor cursor, {String? customMessage}) {
     // For certain cases (especially empty messages with message-level expressions),
     // we need to create minimal violations with no message or rule path
-    final shouldBeMinimal = _shouldCreateMinimalViolation(cursor, customMessage);
-    
+    final shouldBeMinimal =
+        _shouldCreateMinimalViolation(cursor, customMessage);
+
     // Library function violations should always have empty messages
     final isLibraryFunction = source.id.startsWith('library.');
-    
+
     final message = shouldBeMinimal || isLibraryFunction
         ? ''
-        : (source.message.isNotEmpty 
-            ? source.message 
-            : customMessage ?? 'value must satisfy CEL expression \'${source.expression}\'');
-    
+        : (source.message.isNotEmpty
+            ? source.message
+            : customMessage ??
+                'value must satisfy CEL expression \'${source.expression}\'');
+
     // Following protovalidate-es: ALL CEL violations should include rule paths except minimal violations
     cursor.violate(
       constraintId: source.id.isNotEmpty ? source.id : 'cel.expression',
@@ -218,20 +222,22 @@ class ManagedCompiledExpression {
       rulePath: shouldBeMinimal ? null : _createRulePath(),
     );
   }
-  
+
   /// Create the appropriate rule path for this CEL expression
   RulePath _createRulePath() {
     // If we have extension context (predefined rule), create proper extension rule path
     if (extensionContext != null) {
       return RulePath.fromFieldRules()
-          .ruleType(extensionContext!.ruleTypeName, extensionContext!.ruleTypeFieldNumber)
-          .extension(extensionContext!.extensionName, extensionContext!.extensionFieldNumber);
+          .ruleType(extensionContext!.ruleTypeName,
+              extensionContext!.ruleTypeFieldNumber)
+          .extension(extensionContext!.extensionName,
+              extensionContext!.extensionFieldNumber);
     }
-    
+
     // For regular CEL expressions, use generic CEL rule path
     return RulePathBuilder.celConstraint(index);
   }
-  
+
   /// Determines if we should create a minimal violation (no message, no rule path)
   /// This logic matches the expected conformance behavior based on test analysis
   bool _shouldCreateMinimalViolation(Cursor cursor, String? customMessage) {
@@ -239,22 +245,22 @@ class ManagedCompiledExpression {
     // - field_expression/enum tests expect FULL violations (with message and rule)
     // - message_expression tests expect MINIMAL violations (no message, no rule)
     // - library function tests expect MINIMAL violations (no message, no rule path)
-    // 
+    //
     // The key distinction is the source.id prefix
     if (source.id.startsWith('field_expression.')) {
       return false; // Full violations for field expressions
     }
-    
+
     // For message expressions, always create minimal violations
     if (source.id.startsWith('message_expression')) {
       return true;
     }
-    
+
     // Library functions also create minimal violations (no rule path)
     if (source.id.startsWith('library.')) {
       return true;
     }
-    
+
     // Default behavior for other expressions (like string constraint CEL)
     return false;
   }
@@ -263,13 +269,14 @@ class ManagedCompiledExpression {
 /// Enhanced CEL compiler using the SimpleCelManager
 class ManagedCELCompiler {
   final SimpleCelManager manager;
-  
+
   ManagedCELCompiler() : manager = SimpleCelManager();
-  
+
   /// Compile a set of PredefinedCelRules into managed expressions with extension context
-  List<ManagedCompiledExpression> compileWithContext(List<PredefinedCelRule> predefinedRules) {
+  List<ManagedCompiledExpression> compileWithContext(
+      List<PredefinedCelRule> predefinedRules) {
     final compiled = <ManagedCompiledExpression>[];
-    
+
     for (int i = 0; i < predefinedRules.length; i++) {
       final predefinedRule = predefinedRules[i];
       final rule = predefinedRule.rule;
@@ -298,14 +305,14 @@ class ManagedCELCompiler {
         }
       }
     }
-    
+
     return compiled;
   }
 
   /// Compile a set of Rules into managed expressions
   List<ManagedCompiledExpression> compile(List<Rule> rules) {
     final compiled = <ManagedCompiledExpression>[];
-    
+
     for (int i = 0; i < rules.length; i++) {
       final rule = rules[i];
       if (rule.hasExpression() && rule.expression.isNotEmpty) {
@@ -331,7 +338,7 @@ class ManagedCELCompiler {
         }
       }
     }
-    
+
     return compiled;
   }
 }
@@ -339,9 +346,9 @@ class ManagedCELCompiler {
 /// CEL evaluator using managed expressions
 class ManagedCELEvaluator implements Evaluator {
   final List<ManagedCompiledExpression> expressions;
-  
+
   ManagedCELEvaluator({required this.expressions});
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     for (final expr in expressions) {
@@ -351,16 +358,16 @@ class ManagedCELEvaluator implements Evaluator {
       }
     }
   }
-  
+
   bool get tautology => expressions.isEmpty;
 }
 
 /// Message-level CEL evaluator using managed expressions
 class ManagedMessageCELEvaluator extends MessageEvaluator {
   final List<ManagedCompiledExpression> expressions;
-  
+
   ManagedMessageCELEvaluator({required this.expressions});
-  
+
   @override
   void evaluateMessage(GeneratedMessage message, Cursor cursor) {
     for (final expr in expressions) {
@@ -370,6 +377,6 @@ class ManagedMessageCELEvaluator extends MessageEvaluator {
       }
     }
   }
-  
+
   bool get tautology => expressions.isEmpty;
 }

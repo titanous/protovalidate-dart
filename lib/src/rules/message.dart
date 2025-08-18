@@ -11,13 +11,13 @@ class MessageFieldEvaluator implements Evaluator {
   final bool required;
   final Ignore? ignore;
   final Evaluator? nestedEvaluator;
-  
+
   MessageFieldEvaluator({
     this.required = false,
     this.ignore,
     this.nestedEvaluator,
   });
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     // Check if value is null when required
@@ -30,7 +30,7 @@ class MessageFieldEvaluator implements Evaluator {
       }
       return;
     }
-    
+
     // Check ignore rules
     if (ignore != null) {
       switch (ignore) {
@@ -47,13 +47,13 @@ class MessageFieldEvaluator implements Evaluator {
           break;
       }
     }
-    
+
     // Validate nested message if we have an evaluator
     if (nestedEvaluator != null && value is GeneratedMessage) {
       nestedEvaluator!.evaluate(value, cursor);
     }
   }
-  
+
   /// Checks if a message is unpopulated (no fields set).
   bool _isUnpopulated(GeneratedMessage message) {
     // Check if any field is set
@@ -64,7 +64,7 @@ class MessageFieldEvaluator implements Evaluator {
     }
     return true;
   }
-  
+
   /// Checks if a message has all default values.
   bool _isDefaultValue(GeneratedMessage message) {
     // For proto3, this is similar to unpopulated
@@ -78,21 +78,22 @@ class MessageRulesEvaluator implements MessageEvaluator {
   final MessageRules rules;
   final EvaluatorBuilder? builder;
   final ManagedMessageCELEvaluator? _celEvaluator;
-  
+
   MessageRulesEvaluator({
     required this.rules,
     this.builder,
-  }) : _celEvaluator = rules.cel.isNotEmpty 
-        ? ManagedMessageCELEvaluator(expressions: _compileCelRules(rules.cel))
-        : null;
-  
+  }) : _celEvaluator = rules.cel.isNotEmpty
+            ? ManagedMessageCELEvaluator(
+                expressions: _compileCelRules(rules.cel))
+            : null;
+
   static List<ManagedCompiledExpression> _compileCelRules(List<Rule> rules) {
     // No longer catch compilation errors - they're stored in the expressions
     // and will be thrown at evaluation time
     final compiler = ManagedCELCompiler();
     return compiler.compile(rules);
   }
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (value is! GeneratedMessage) {
@@ -104,24 +105,25 @@ class MessageRulesEvaluator implements MessageEvaluator {
     }
     evaluateMessage(value, cursor);
   }
-  
+
   @override
   void evaluateMessage(GeneratedMessage message, Cursor cursor) {
     // Handle oneof rules
     for (final oneofRule in rules.oneof) {
       _evaluateOneofRule(message, oneofRule, cursor);
     }
-    
+
     // Evaluate CEL rules if present
     if (_celEvaluator != null) {
       _celEvaluator!.evaluateMessage(message, cursor);
     }
   }
-  
-  void _evaluateOneofRule(GeneratedMessage message, MessageOneofRule rule, Cursor cursor) {
+
+  void _evaluateOneofRule(
+      GeneratedMessage message, MessageOneofRule rule, Cursor cursor) {
     var setCount = 0;
     final setFields = <String>[];
-    
+
     // Count how many of the specified fields are set
     for (final fieldName in rule.fields) {
       // Need to find the field by name
@@ -134,7 +136,7 @@ class MessageRulesEvaluator implements MessageEvaluator {
         }
       }
     }
-    
+
     // Check constraints
     if (setCount > 1) {
       final oneofNames = rule.fields.join(', ');
@@ -151,11 +153,11 @@ class MessageRulesEvaluator implements MessageEvaluator {
       );
     }
   }
-  
+
   FieldInfo? _findFieldByName(GeneratedMessage message, String name) {
     // Convert snake_case to camelCase for Dart field names
     final camelCaseName = StringUtils.toCamelCase(name);
-    
+
     for (final field in message.info_.fieldInfo.values) {
       if (field.name == camelCaseName) {
         return field;
@@ -168,9 +170,9 @@ class MessageRulesEvaluator implements MessageEvaluator {
 /// Evaluator for protobuf oneof validation rules.
 class ProtobufOneofEvaluator implements MessageEvaluator {
   final Map<String, OneofRules> oneofRules;
-  
+
   ProtobufOneofEvaluator({required this.oneofRules});
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (value is! GeneratedMessage) {
@@ -182,32 +184,33 @@ class ProtobufOneofEvaluator implements MessageEvaluator {
     }
     evaluateMessage(value, cursor);
   }
-  
+
   @override
   void evaluateMessage(GeneratedMessage message, Cursor cursor) {
     // Check each oneof that has validation rules
     for (final entry in oneofRules.entries) {
       final oneofName = entry.key;
       final rules = entry.value;
-      
+
       _evaluateOneofRules(message, oneofName, rules, cursor);
     }
   }
-  
-  void _evaluateOneofRules(GeneratedMessage message, String oneofName, OneofRules rules, Cursor cursor) {
+
+  void _evaluateOneofRules(GeneratedMessage message, String oneofName,
+      OneofRules rules, Cursor cursor) {
     // For protobuf oneofs, we need to check which field is set in the oneof
     // This is trickier because we need to introspect the message structure
-    
+
     // Find the oneof index by checking the message's oneof descriptors
     final oneofIndex = _findOneofIndex(message, oneofName);
     if (oneofIndex == -1) {
       // Oneof not found, skip validation
       return;
     }
-    
+
     // Check if any field in the oneof is set
     final isOneofSet = _isOneofSet(message, oneofIndex);
-    
+
     if (rules.required && !isOneofSet) {
       // Create field path for the oneof
       final oneofCursor = cursor.oneofField(oneofName);
@@ -217,7 +220,7 @@ class ProtobufOneofEvaluator implements MessageEvaluator {
       );
     }
   }
-  
+
   /// Finds the index of a oneof by name in the message descriptor.
   /// Following protobuf-es pattern for runtime oneof access.
   int _findOneofIndex(GeneratedMessage message, String oneofName) {
@@ -225,7 +228,7 @@ class ProtobufOneofEvaluator implements MessageEvaluator {
     final index = message.getOneofIndexByName(oneofName);
     return index ?? -1;
   }
-  
+
   /// Checks if any field in the oneof at the given index is set.
   bool _isOneofSet(GeneratedMessage message, int oneofIndex) {
     try {

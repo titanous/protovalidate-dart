@@ -79,6 +79,8 @@ class PredefinedFloatRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($core.double value) => $_setFloat(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -138,6 +140,8 @@ class PredefinedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($core.double value) => $_setDouble(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -195,6 +199,8 @@ class PredefinedInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -254,6 +260,8 @@ class PredefinedInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -312,6 +320,8 @@ class PredefinedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -373,6 +383,8 @@ class PredefinedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -431,6 +443,8 @@ class PredefinedSInt32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -492,6 +506,8 @@ class PredefinedSInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -551,6 +567,8 @@ class PredefinedFixed32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setUnsignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -613,6 +631,8 @@ class PredefinedFixed64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -672,6 +692,8 @@ class PredefinedSFixed32RuleEdition2023 extends $pb.GeneratedMessage {
   $core.int get val => $_getIZ(0);
   @$pb.TagNumber(1)
   set val($core.int value) => $_setSignedInt32(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -734,6 +756,8 @@ class PredefinedSFixed64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($fixnum.Int64 value) => $_setInt64(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -791,6 +815,8 @@ class PredefinedBoolRuleEdition2023 extends $pb.GeneratedMessage {
   $core.bool get val => $_getBF(0);
   @$pb.TagNumber(1)
   set val($core.bool value) => $_setBool(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -851,6 +877,8 @@ class PredefinedStringRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($core.String value) => $_setString(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
 
@@ -909,6 +937,8 @@ class PredefinedBytesRuleEdition2023 extends $pb.GeneratedMessage {
   $core.List<$core.int> get val => $_getN(0);
   @$pb.TagNumber(1)
   set val($core.List<$core.int> value) => $_setBytes(0, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -973,6 +1003,8 @@ class PredefinedEnumRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val(PredefinedEnumRuleEdition2023_EnumEdition2023 value) =>
       $_setField(1, value);
+  @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
 }
@@ -1149,7 +1181,11 @@ class PredefinedDurationRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($0.Duration value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $0.Duration ensureVal() => $_ensure(0);
 }
 
 class PredefinedTimestampRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1210,7 +1246,11 @@ class PredefinedTimestampRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($1.Timestamp value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $1.Timestamp ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedFloatRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1271,7 +1311,11 @@ class PredefinedWrappedFloatRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.FloatValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.FloatValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1332,7 +1376,11 @@ class PredefinedWrappedDoubleRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.DoubleValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.DoubleValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedInt32RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1393,7 +1441,11 @@ class PredefinedWrappedInt32RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.Int32Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.Int32Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedInt64RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1454,7 +1506,11 @@ class PredefinedWrappedInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.Int64Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.Int64Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1515,7 +1571,11 @@ class PredefinedWrappedUInt32RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.UInt32Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.UInt32Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
@@ -1576,7 +1636,11 @@ class PredefinedWrappedUInt64RuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.UInt64Value value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.UInt64Value ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedBoolRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1637,7 +1701,11 @@ class PredefinedWrappedBoolRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.BoolValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.BoolValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedStringRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1698,7 +1766,11 @@ class PredefinedWrappedStringRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.StringValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.StringValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedWrappedBytesRuleEdition2023 extends $pb.GeneratedMessage {
@@ -1759,7 +1831,11 @@ class PredefinedWrappedBytesRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set val($2.BytesValue value) => $_setField(1, value);
   @$pb.TagNumber(1)
+  $core.bool hasVal() => $_has(0);
+  @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
+  @$pb.TagNumber(1)
+  $2.BytesValue ensureVal() => $_ensure(0);
 }
 
 class PredefinedRepeatedWrappedFloatRuleEdition2023
@@ -2378,6 +2454,8 @@ class PredefinedAndCustomRuleEdition2023_Nested extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set c($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasC() => $_has(0);
+  @$pb.TagNumber(1)
   void clearC() => $_clearField(1);
 }
 
@@ -2443,6 +2521,8 @@ class PredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasA() => $_has(0);
+  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
@@ -2451,7 +2531,11 @@ class PredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   set b(PredefinedAndCustomRuleEdition2023_Nested value) =>
       $_setField(2, value);
   @$pb.TagNumber(2)
+  $core.bool hasB() => $_has(1);
+  @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
+  @$pb.TagNumber(2)
+  PredefinedAndCustomRuleEdition2023_Nested ensureB() => $_ensure(1);
 }
 
 class StandardPredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
@@ -2512,6 +2596,8 @@ class StandardPredefinedAndCustomRuleEdition2023 extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   set a($core.int value) => $_setSignedInt32(0, value);
   @$pb.TagNumber(1)
+  $core.bool hasA() => $_has(0);
+  @$pb.TagNumber(1)
   void clearA() => $_clearField(1);
 }
 
@@ -2522,6 +2608,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OF,
       protoName: 'float_abs_range_edition_2023',
+      typeName: 'buf.validate.conformance.cases.floatAbsRangeEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2625,6 +2712,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OD,
       protoName: 'double_abs_range_edition_2023',
+      typeName: 'buf.validate.conformance.cases.doubleAbsRangeEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2731,6 +2819,7 @@ class Predefined_rules_proto_editions {
       $pb.PbFieldType.K3,
       protoName: 'int32_abs_in_edition_2023',
       check: $pb.getCheckFunction($pb.PbFieldType.K3),
+      typeName: 'buf.validate.conformance.cases.int32AbsInEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2855,6 +2944,7 @@ class Predefined_rules_proto_editions {
       protoName: 'int64_abs_in_edition_2023',
       check: $pb.getCheckFunction($pb.PbFieldType.PM),
       subBuilder: $2.Int64Value.create,
+      typeName: 'buf.validate.conformance.cases.int64AbsInEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2977,6 +3067,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'uint32_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.uint32EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3059,6 +3150,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'uint64_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.uint64EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3141,6 +3233,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'sint32_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.sint32EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3221,6 +3314,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'sint64_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.sint64EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3301,6 +3395,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'fixed32_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.fixed32EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3385,6 +3480,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'fixed64_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.fixed64EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3469,6 +3565,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'sfixed32_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.sfixed32EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3553,6 +3650,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'sfixed64_even_edition_2023',
+      typeName: 'buf.validate.conformance.cases.sfixed64EvenEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3637,6 +3735,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'bool_false_edition_2023',
+      typeName: 'buf.validate.conformance.cases.boolFalseEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3715,6 +3814,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'string_valid_path_edition_2023',
+      typeName: 'buf.validate.conformance.cases.stringValidPathEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3897,6 +3997,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'bytes_valid_path_edition_2023',
+      typeName: 'buf.validate.conformance.cases.bytesValidPathEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4086,6 +4187,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'enum_non_zero_edition_2023',
+      typeName: 'buf.validate.conformance.cases.enumNonZeroEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4171,6 +4273,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'repeated_at_least_five_edition_2023',
+      typeName: 'buf.validate.conformance.cases.repeatedAtLeastFiveEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4293,6 +4396,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'map_at_least_five_edition_2023',
+      typeName: 'buf.validate.conformance.cases.mapAtLeastFiveEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4398,6 +4502,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'duration_too_long_edition_2023',
+      typeName: 'buf.validate.conformance.cases.durationTooLongEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4510,6 +4615,7 @@ class Predefined_rules_proto_editions {
       1162,
       $pb.PbFieldType.OB,
       protoName: 'timestamp_in_range_edition_2023',
+      typeName: 'buf.validate.conformance.cases.timestampInRangeEdition2023',
       optionsBytes: <$core.int>[
         194,
         72,

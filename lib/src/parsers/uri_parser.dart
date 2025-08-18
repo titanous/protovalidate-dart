@@ -239,11 +239,7 @@ class UriParser {
   /// IPv6addrz = IPv6address "%25" ZoneID
   bool ipv6addrz() {
     final start = i;
-    if (ipv6Address() &&
-        take('%') &&
-        take('2') &&
-        take('5') &&
-        zoneId()) {
+    if (ipv6Address() && take('%') && take('2') && take('5') && zoneId()) {
       return true;
     }
     i = start;
@@ -430,10 +426,10 @@ class UriParser {
   /// pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
   bool pchar() {
     return unreserved() ||
-           pctEncoded() ||
-           subDelims() ||
-           take(':') ||
-           take('@');
+        pctEncoded() ||
+        subDelims() ||
+        take(':') ||
+        take('@');
   }
 
   /// Parses the rule:
@@ -487,11 +483,11 @@ class UriParser {
   /// unreserved = ALPHA / DIGIT / "-" / "." / "_" / "~"
   bool unreserved() {
     return alpha() ||
-           digit() ||
-           take('-') ||
-           take('_') ||
-           take('.') ||
-           take('~');
+        digit() ||
+        take('-') ||
+        take('_') ||
+        take('.') ||
+        take('~');
   }
 
   /// Parses the rule:
@@ -499,16 +495,16 @@ class UriParser {
   ///             / "*" / "+" / "," / ";" / "="
   bool subDelims() {
     return take('!') ||
-           take('\$') ||
-           take('&') ||
-           take("'") ||
-           take('(') ||
-           take(')') ||
-           take('*') ||
-           take('+') ||
-           take(',') ||
-           take(';') ||
-           take('=');
+        take('\$') ||
+        take('&') ||
+        take("'") ||
+        take('(') ||
+        take(')') ||
+        take('*') ||
+        take('+') ||
+        take(',') ||
+        take(';') ||
+        take('=');
   }
 
   /// Parses the rule:

@@ -8,18 +8,18 @@ import '../rule_paths.dart';
 class EnumRulesEvaluator implements Evaluator {
   final EnumRules rules;
   final Map<int, String>? enumValueNames;
-  
+
   EnumRulesEvaluator({
     required this.rules,
     this.enumValueNames,
   });
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     // Handle both ProtobufEnum and raw int values
     int enumValue;
     bool isUnknownEnum = false;
-    
+
     if (value is ProtobufEnum) {
       enumValue = value.value;
     } else if (value is int) {
@@ -39,7 +39,7 @@ class EnumRulesEvaluator implements Evaluator {
         return;
       }
     }
-    
+
     // Check const rule
     if (rules.hasConst_1()) {
       if (enumValue != rules.const_1) {
@@ -50,7 +50,7 @@ class EnumRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check defined_only rule
     if (rules.definedOnly == true) {
       // If we detected an unknown enum value, it's definitely not defined
@@ -60,7 +60,8 @@ class EnumRulesEvaluator implements Evaluator {
           constraintId: 'enum.defined_only',
           rulePath: RulePathBuilder.enumConstraint('defined_only'),
         );
-      } else if (enumValueNames != null && !enumValueNames!.containsKey(enumValue)) {
+      } else if (enumValueNames != null &&
+          !enumValueNames!.containsKey(enumValue)) {
         cursor.violate(
           message: 'value must be one of the defined enum values',
           constraintId: 'enum.defined_only',
@@ -72,7 +73,7 @@ class EnumRulesEvaluator implements Evaluator {
         // Log a warning or skip validation
       }
     }
-    
+
     // Check in rule
     if (rules.in_3.isNotEmpty) {
       if (!rules.in_3.contains(enumValue)) {
@@ -83,7 +84,7 @@ class EnumRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check not_in rule
     if (rules.notIn.isNotEmpty) {
       if (rules.notIn.contains(enumValue)) {
@@ -101,12 +102,12 @@ class EnumRulesEvaluator implements Evaluator {
 class EnumEvaluator implements Evaluator {
   final bool definedOnly;
   final Map<int, String>? enumValueNames;
-  
+
   EnumEvaluator({
     this.definedOnly = false,
     this.enumValueNames,
   });
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     // Handle both ProtobufEnum and raw int values
@@ -122,7 +123,7 @@ class EnumEvaluator implements Evaluator {
       );
       return;
     }
-    
+
     // If definedOnly is true and we have enum info, validate
     if (definedOnly && enumValueNames != null) {
       if (!enumValueNames!.containsKey(enumValue)) {

@@ -182,9 +182,9 @@ class RequiredProto3OptionalScalar extends $pb.GeneratedMessage {
   static RequiredProto3OptionalScalar? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -245,9 +245,9 @@ class RequiredProto3OptionalScalarIgnoreAlways extends $pb.GeneratedMessage {
   static RequiredProto3OptionalScalarIgnoreAlways? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)

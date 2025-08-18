@@ -11,9 +11,9 @@ import '../shared/string_validators.dart';
 /// Evaluator for boolean field rules.
 class BoolEvaluator implements Evaluator {
   final bool? constValue;
-  
+
   BoolEvaluator({this.constValue});
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (value is! bool) {
@@ -23,10 +23,10 @@ class BoolEvaluator implements Evaluator {
       );
       return;
     }
-    
+
     if (constValue != null && value != constValue) {
       cursor.violate(
-        message: '',  // Empty message to match expected output
+        message: '', // Empty message to match expected output
         constraintId: 'bool.const',
         rulePath: RulePathBuilder.boolConstraint('const'),
       );
@@ -43,7 +43,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
   final T? gte;
   final List<T>? inValues;
   final List<T>? notInValues;
-  
+
   NumericEvaluator({
     this.constValue,
     this.lt,
@@ -53,14 +53,14 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
     this.inValues,
     this.notInValues,
   });
-  
+
   String get typeName;
   String get constraintPrefix;
   int get ruleFieldNumber;
-  
+
   bool isValidType(dynamic value);
   T toTypedValue(dynamic value);
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (!isValidType(value)) {
@@ -70,99 +70,104 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
       );
       return;
     }
-    
+
     final typedValue = toTypedValue(value);
-    
+
     // Check const first
     if (constValue != null && typedValue != constValue) {
       cursor.violate(
         message: 'value must equal $constValue',
         constraintId: '$constraintPrefix.const',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'const'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'const'),
       );
       return; // If const fails, don't check other rules
     }
-    
+
     // Check in/not_in
     if (inValues != null && !inValues!.contains(typedValue)) {
       cursor.violate(
         message: 'value must be in list $inValues',
         constraintId: '$constraintPrefix.in',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'in'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'in'),
       );
       return;
     }
-    
+
     if (notInValues != null && notInValues!.contains(typedValue)) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.not_in',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'not_in'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'not_in'),
       );
       return;
     }
-    
+
     // Handle range constraints with proper combination logic
     _evaluateRangeConstraints(typedValue, cursor);
   }
-  
+
   void _evaluateRangeConstraints(T typedValue, Cursor cursor) {
     // Determine if we have contradictory ranges (exclusive logic)
     bool hasExclusiveRange = _hasExclusiveRange();
-    
+
     if (hasExclusiveRange) {
       _evaluateExclusiveRange(typedValue, cursor);
     } else {
       _evaluateInclusiveRange(typedValue, cursor);
     }
   }
-  
+
   bool _hasExclusiveRange() {
     // Check for contradictory constraints that create exclusive ranges:
     // gt > lt (e.g., gt: 10, lt: 0) - value must be > 10 OR < 0
     // gte > lte (e.g., gte: 256, lte: 128) - value must be >= 256 OR <= 128
-    
+
     if (gt != null && lt != null && gt!.compareTo(lt!) >= 0) {
       return true;
     }
-    
+
     if (gte != null && lte != null && gte!.compareTo(lte!) > 0) {
       return true;
     }
-    
+
     return false;
   }
-  
+
   void _evaluateExclusiveRange(T typedValue, Cursor cursor) {
     // For exclusive ranges, the value is valid if it satisfies ANY constraint
     bool valid = false;
     String? primaryConstraint;
     String? fieldName;
-    
+
     if (gt != null && lt != null && gt!.compareTo(lt!) >= 0) {
       // Exclusive gt_lt: value must be > gt OR < lt
       valid = typedValue.compareTo(gt!) > 0 || typedValue.compareTo(lt!) < 0;
       primaryConstraint = 'gt_lt_exclusive';
       fieldName = 'gt';
     } else if (gte != null && lte != null && gte!.compareTo(lte!) > 0) {
-      // Exclusive gte_lte: value must be >= gte OR <= lte  
-      valid = typedValue.compareTo(gte!) >= 0 || typedValue.compareTo(lte!) <= 0;
+      // Exclusive gte_lte: value must be >= gte OR <= lte
+      valid =
+          typedValue.compareTo(gte!) >= 0 || typedValue.compareTo(lte!) <= 0;
       primaryConstraint = 'gte_lte_exclusive';
       fieldName = 'gte';
     }
-    
+
     if (!valid && primaryConstraint != null && fieldName != null) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.$primaryConstraint',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, fieldName),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, fieldName),
       );
     }
   }
-  
+
   void _evaluateInclusiveRange(T typedValue, Cursor cursor) {
     // For inclusive ranges, check each constraint individually
-    
+
     // Combined gt_lt (inclusive range): must satisfy BOTH gt AND lt
     if (gt != null && lt != null && gt!.compareTo(lt!) < 0) {
       // This is an inclusive range (e.g., gt: 0, lt: 10)
@@ -175,24 +180,27 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
+            rulePath: RulePathBuilder.numericConstraint(
+                constraintPrefix, ruleFieldNumber, 'gt'),
           );
         } else {
           // Value is below the range
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gt_lt',
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
+            rulePath: RulePathBuilder.numericConstraint(
+                constraintPrefix, ruleFieldNumber, 'gt'),
           );
         }
         return;
       }
     }
-    
+
     // Combined gte_lte (inclusive range): must satisfy BOTH gte AND lte
     if (gte != null && lte != null && gte!.compareTo(lte!) <= 0) {
       // This is an inclusive range (e.g., gte: 128, lte: 256)
-      if (!(typedValue.compareTo(gte!) >= 0 && typedValue.compareTo(lte!) <= 0)) {
+      if (!(typedValue.compareTo(gte!) >= 0 &&
+          typedValue.compareTo(lte!) <= 0)) {
         // Violates the combined constraint - report the field that was violated
         // If value > lte, it violates the range (above the range), report 'gte'
         // If value < gte, it violates the range (below the range), report 'gte'
@@ -201,54 +209,60 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gte_lte',
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
+            rulePath: RulePathBuilder.numericConstraint(
+                constraintPrefix, ruleFieldNumber, 'gte'),
           );
         } else {
           // Value is below the range
           cursor.violate(
             message: '',
             constraintId: '$constraintPrefix.gte_lte',
-            rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
+            rulePath: RulePathBuilder.numericConstraint(
+                constraintPrefix, ruleFieldNumber, 'gte'),
           );
         }
         return;
       }
     }
-    
+
     // Individual constraint checks (when not part of a range)
     if (lt != null && gt == null && typedValue.compareTo(lt!) >= 0) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.lt',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lt'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'lt'),
       );
     }
-    
+
     if (lte != null && gte == null && typedValue.compareTo(lte!) > 0) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.lte',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'lte'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'lte'),
       );
     }
-    
+
     if (gt != null && lt == null && typedValue.compareTo(gt!) <= 0) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.gt',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gt'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'gt'),
       );
     }
-    
+
     if (gte != null && lte == null && typedValue.compareTo(gte!) < 0) {
       cursor.violate(
         message: '',
         constraintId: '$constraintPrefix.gte',
-        rulePath: RulePathBuilder.numericConstraint(constraintPrefix, ruleFieldNumber, 'gte'),
+        rulePath: RulePathBuilder.numericConstraint(
+            constraintPrefix, ruleFieldNumber, 'gte'),
       );
     }
   }
-  
+
   List<pb.FieldPathElement> _buildRulePath(String fieldName, int fieldNumber) {
     return [
       pb.FieldPathElement()
@@ -261,7 +275,7 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
         ..fieldType = _getFieldTypeFromName(fieldName),
     ];
   }
-  
+
   FieldDescriptorProto_Type _getFieldTypeFromName(String fieldName) {
     // Return the appropriate type based on the field name
     switch (fieldName) {
@@ -316,17 +330,25 @@ abstract class NumericEvaluator<T extends Comparable> implements Evaluator {
         return FieldDescriptorProto_Type.TYPE_INT32;
     }
   }
-  
+
   String _getFieldNameFromNumber(int fieldNumber) {
     switch (fieldNumber) {
-      case 1: return 'const';
-      case 2: return 'lt';
-      case 3: return 'lte';
-      case 4: return 'gt';
-      case 5: return 'gte';
-      case 6: return 'in';
-      case 7: return 'not_in';
-      default: return 'unknown';
+      case 1:
+        return 'const';
+      case 2:
+        return 'lt';
+      case 3:
+        return 'lte';
+      case 4:
+        return 'gt';
+      case 5:
+        return 'gte';
+      case 6:
+        return 'in';
+      case 7:
+        return 'not_in';
+      default:
+        return 'unknown';
     }
   }
 }
@@ -342,19 +364,19 @@ class Int32Evaluator extends NumericEvaluator<int> {
     super.inValues,
     super.notInValues,
   });
-  
+
   @override
   String get typeName => 'int32';
-  
+
   @override
   String get constraintPrefix => 'int32';
-  
+
   @override
   int get ruleFieldNumber => 3; // int32 field number in validate.proto
-  
+
   @override
   bool isValidType(dynamic value) => value is int;
-  
+
   @override
   int toTypedValue(dynamic value) => value as int;
 }
@@ -370,27 +392,27 @@ class Int64Evaluator extends NumericEvaluator<Int64> {
     List<Int64>? inValues,
     List<Int64>? notInValues,
   }) : super(
-    constValue: constValue,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    inValues: inValues,
-    notInValues: notInValues,
-  );
-  
+          constValue: constValue,
+          lt: lt,
+          lte: lte,
+          gt: gt,
+          gte: gte,
+          inValues: inValues,
+          notInValues: notInValues,
+        );
+
   @override
   String get typeName => 'int64';
-  
+
   @override
   String get constraintPrefix => 'int64';
-  
+
   @override
   int get ruleFieldNumber => 4;
-  
+
   @override
   bool isValidType(dynamic value) => value is Int64;
-  
+
   @override
   Int64 toTypedValue(dynamic value) => value as Int64;
 }
@@ -406,19 +428,19 @@ class UInt32Evaluator extends NumericEvaluator<int> {
     super.inValues,
     super.notInValues,
   });
-  
+
   @override
   String get typeName => 'uint32';
-  
+
   @override
   String get constraintPrefix => 'uint32';
-  
+
   @override
   int get ruleFieldNumber => 5;
-  
+
   @override
   bool isValidType(dynamic value) => value is int && value >= 0;
-  
+
   @override
   int toTypedValue(dynamic value) => value as int;
 }
@@ -434,27 +456,27 @@ class UInt64Evaluator extends NumericEvaluator<Int64> {
     List<Int64>? inValues,
     List<Int64>? notInValues,
   }) : super(
-    constValue: constValue,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    inValues: inValues,
-    notInValues: notInValues,
-  );
-  
+          constValue: constValue,
+          lt: lt,
+          lte: lte,
+          gt: gt,
+          gte: gte,
+          inValues: inValues,
+          notInValues: notInValues,
+        );
+
   @override
   String get typeName => 'uint64';
-  
+
   @override
   String get constraintPrefix => 'uint64';
-  
+
   @override
   int get ruleFieldNumber => 6;
-  
+
   @override
   bool isValidType(dynamic value) => value is Int64 && !value.isNegative;
-  
+
   @override
   Int64 toTypedValue(dynamic value) => value as Int64;
 }
@@ -462,7 +484,7 @@ class UInt64Evaluator extends NumericEvaluator<Int64> {
 /// Evaluator for float field rules.
 class FloatEvaluator extends NumericEvaluator<double> {
   final bool? finite;
-  
+
   FloatEvaluator({
     super.constValue,
     super.lt,
@@ -473,22 +495,22 @@ class FloatEvaluator extends NumericEvaluator<double> {
     super.notInValues,
     this.finite,
   });
-  
+
   @override
   String get typeName => 'float';
-  
+
   @override
   String get constraintPrefix => 'float';
-  
+
   @override
   int get ruleFieldNumber => 1;
-  
+
   @override
   bool isValidType(dynamic value) => value is double;
-  
+
   @override
   double toTypedValue(dynamic value) => value as double;
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (!isValidType(value)) {
@@ -498,9 +520,9 @@ class FloatEvaluator extends NumericEvaluator<double> {
       );
       return;
     }
-    
+
     final floatValue = value as double;
-    
+
     // Handle NaN specially - NaN should fail all comparison constraints
     if (floatValue.isNaN) {
       // Check for combined constraints first (ranges)
@@ -536,7 +558,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
         }
         return;
       }
-      
+
       // Individual constraint checks (when not part of a range)
       if (gt != null) {
         cursor.violate(
@@ -571,10 +593,10 @@ class FloatEvaluator extends NumericEvaluator<double> {
         return;
       }
     }
-    
+
     // For non-NaN values, use the base implementation
     super.evaluate(value, cursor);
-    
+
     // Check finite
     if (finite == true && !floatValue.isFinite) {
       cursor.violate(
@@ -589,7 +611,7 @@ class FloatEvaluator extends NumericEvaluator<double> {
 /// Evaluator for double field rules.
 class DoubleEvaluator extends NumericEvaluator<double> {
   final bool? finite;
-  
+
   DoubleEvaluator({
     super.constValue,
     super.lt,
@@ -600,22 +622,22 @@ class DoubleEvaluator extends NumericEvaluator<double> {
     super.notInValues,
     this.finite,
   });
-  
+
   @override
   String get typeName => 'double';
-  
+
   @override
   String get constraintPrefix => 'double';
-  
+
   @override
   int get ruleFieldNumber => 2;
-  
+
   @override
   bool isValidType(dynamic value) => value is double;
-  
+
   @override
   double toTypedValue(dynamic value) => value as double;
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (!isValidType(value)) {
@@ -625,9 +647,9 @@ class DoubleEvaluator extends NumericEvaluator<double> {
       );
       return;
     }
-    
+
     final doubleValue = value as double;
-    
+
     // Handle NaN specially - NaN should fail all comparison constraints
     if (doubleValue.isNaN) {
       // Check for combined constraints first (ranges)
@@ -663,7 +685,7 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         }
         return;
       }
-      
+
       // Individual constraint checks (when not part of a range)
       if (gt != null) {
         cursor.violate(
@@ -698,10 +720,10 @@ class DoubleEvaluator extends NumericEvaluator<double> {
         return;
       }
     }
-    
+
     // For non-NaN values, use the base implementation
     super.evaluate(value, cursor);
-    
+
     // Check finite
     if (finite == true && !doubleValue.isFinite) {
       cursor.violate(
@@ -729,7 +751,7 @@ class StringRulesEvaluator implements Evaluator {
   final String? notContains;
   final List<String>? inValues;
   final List<String>? notInValues;
-  
+
   // Format validators
   final bool? email;
   final bool? hostname;
@@ -750,10 +772,10 @@ class StringRulesEvaluator implements Evaluator {
   final bool? ipv6WithPrefixlen;
   final bool? tuuid;
   final bool? hostAndPort;
-  
+
   // Cached compiled pattern
   RegExp? _compiledPattern;
-  
+
   /// Compiles a regex pattern, handling PCRE-style flags like (?i)
   static RegExp? _compilePattern(String pattern) {
     // Handle case-insensitive flag (?i) at the beginning
@@ -763,7 +785,7 @@ class StringRulesEvaluator implements Evaluator {
     }
     return RegExp(pattern);
   }
-  
+
   StringRulesEvaluator({
     this.constValue,
     this.len,
@@ -808,7 +830,7 @@ class StringRulesEvaluator implements Evaluator {
       }
     }
   }
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     if (value is! String) {
@@ -818,9 +840,9 @@ class StringRulesEvaluator implements Evaluator {
       );
       return;
     }
-    
+
     final stringValue = value;
-    
+
     // Check const
     if (constValue != null && stringValue != constValue) {
       cursor.violate(
@@ -829,7 +851,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('const'),
       );
     }
-    
+
     // Check exact length (count runes, not UTF-16 code units)
     final runeLength = stringValue.runes.length;
     if (len != null && runeLength != len) {
@@ -839,7 +861,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('len'),
       );
     }
-    
+
     // Check exact byte length (UTF-8 bytes)
     if (lenBytes != null) {
       final utf8ByteLength = utf8.encode(stringValue).length;
@@ -851,7 +873,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check min length (count runes, not UTF-16 code units)
     if (minLen != null && stringValue.runes.length < minLen!) {
       cursor.violate(
@@ -860,7 +882,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('min_len'),
       );
     }
-    
+
     // Check max length (count runes, not UTF-16 code units)
     if (maxLen != null && stringValue.runes.length > maxLen!) {
       cursor.violate(
@@ -869,7 +891,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('max_len'),
       );
     }
-    
+
     // Check min bytes
     if (minBytes != null) {
       final utf8ByteLength = utf8.encode(stringValue).length;
@@ -881,7 +903,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check max bytes
     if (maxBytes != null) {
       final utf8ByteLength = utf8.encode(stringValue).length;
@@ -893,7 +915,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check pattern
     if (pattern != null) {
       if (_compiledPattern == null) {
@@ -909,7 +931,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check prefix
     if (prefix != null && !stringValue.startsWith(prefix!)) {
       cursor.violate(
@@ -918,7 +940,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('prefix'),
       );
     }
-    
+
     // Check suffix
     if (suffix != null && !stringValue.endsWith(suffix!)) {
       cursor.violate(
@@ -927,7 +949,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('suffix'),
       );
     }
-    
+
     // Check contains
     if (contains != null && !stringValue.contains(contains!)) {
       cursor.violate(
@@ -936,7 +958,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('contains'),
       );
     }
-    
+
     // Check not_contains
     if (notContains != null && stringValue.contains(notContains!)) {
       cursor.violate(
@@ -945,7 +967,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('not_contains'),
       );
     }
-    
+
     // Check in
     if (inValues != null && !inValues!.contains(stringValue)) {
       cursor.violate(
@@ -954,7 +976,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('in'),
       );
     }
-    
+
     // Check not_in
     if (notInValues != null && notInValues!.contains(stringValue)) {
       cursor.violate(
@@ -963,11 +985,11 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('not_in'),
       );
     }
-    
+
     // Format validators
     _validateFormats(stringValue, cursor);
   }
-  
+
   void _validateFormats(String value, Cursor cursor) {
     // Email validation
     if (email == true) {
@@ -985,7 +1007,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Hostname validation
     if (hostname == true) {
       if (value.isEmpty) {
@@ -1002,7 +1024,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IP validation (v4 or v6)
     if (ip == true) {
       if (value.isEmpty) {
@@ -1019,7 +1041,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv4 validation
     if (ipv4 == true) {
       if (value.isEmpty) {
@@ -1036,7 +1058,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv6 validation
     if (ipv6 == true) {
       if (value.isEmpty) {
@@ -1053,7 +1075,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // URI validation
     if (uri == true) {
       if (value.isEmpty) {
@@ -1070,7 +1092,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // URI reference validation
     if (uriRef == true && !_isValidURIRef(value)) {
       cursor.violate(
@@ -1079,7 +1101,7 @@ class StringRulesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.stringConstraint('uri_ref'),
       );
     }
-    
+
     // UUID validation
     if (uuid == true) {
       if (value.isEmpty) {
@@ -1096,12 +1118,13 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Address validation (IP or hostname)
     if (address == true) {
       if (value.isEmpty) {
         cursor.violate(
-          message: 'value is empty, which is not a valid hostname or IP address',
+          message:
+              'value is empty, which is not a valid hostname or IP address',
           constraintId: 'string.address_empty',
           rulePath: RulePathBuilder.stringConstraint('address'),
         );
@@ -1113,7 +1136,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IP prefix validation (any version)
     if (ipPrefix == true) {
       if (value.isEmpty) {
@@ -1130,7 +1153,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv4 prefix validation
     if (ipv4Prefix == true) {
       if (value.isEmpty) {
@@ -1147,7 +1170,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv6 prefix validation
     if (ipv6Prefix == true) {
       if (value.isEmpty) {
@@ -1164,7 +1187,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IP with prefix length validation
     if (ipWithPrefixlen == true) {
       if (value.isEmpty) {
@@ -1181,12 +1204,13 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv4 with prefix length validation
     if (ipv4WithPrefixlen == true) {
       if (value.isEmpty) {
         cursor.violate(
-          message: 'value is empty, which is not a valid IPv4 with prefix length',
+          message:
+              'value is empty, which is not a valid IPv4 with prefix length',
           constraintId: 'string.ipv4_with_prefixlen_empty',
           rulePath: RulePathBuilder.stringConstraint('ipv4_with_prefixlen'),
         );
@@ -1198,12 +1222,13 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv6 with prefix length validation
     if (ipv6WithPrefixlen == true) {
       if (value.isEmpty) {
         cursor.violate(
-          message: 'value is empty, which is not a valid IPv6 with prefix length',
+          message:
+              'value is empty, which is not a valid IPv6 with prefix length',
           constraintId: 'string.ipv6_with_prefixlen_empty',
           rulePath: RulePathBuilder.stringConstraint('ipv6_with_prefixlen'),
         );
@@ -1215,7 +1240,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // TUUID validation
     if (tuuid == true) {
       if (value.isEmpty) {
@@ -1232,7 +1257,7 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Host and port validation
     if (hostAndPort == true) {
       if (value.isEmpty) {
@@ -1249,13 +1274,14 @@ class StringRulesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Well-known regex validation
-    if (wellKnownRegex != null && wellKnownRegex != pb.KnownRegex.KNOWN_REGEX_UNSPECIFIED) {
+    if (wellKnownRegex != null &&
+        wellKnownRegex != pb.KnownRegex.KNOWN_REGEX_UNSPECIFIED) {
       _validateWellKnownRegex(value, cursor);
     }
   }
-  
+
   void _validateWellKnownRegex(String value, Cursor cursor) {
     switch (wellKnownRegex) {
       case pb.KnownRegex.KNOWN_REGEX_HTTP_HEADER_NAME:
@@ -1287,111 +1313,112 @@ class StringRulesEvaluator implements Evaluator {
         break;
     }
   }
-  
+
   // Email validation
   bool _isValidEmail(String value) {
     return StringValidators.isEmail(value);
   }
-  
+
   // Hostname validation
   bool _isValidHostname(String value) {
     return StringValidators.isHostname(value);
   }
-  
+
   // IP validation (v4 or v6)
   bool _isValidIP(String value) {
     return StringValidators.isIp(value);
   }
-  
+
   // IPv4 validation
   bool _isValidIPv4(String value) {
     return StringValidators.isIp(value, 4);
   }
-  
+
   // IPv6 validation
   bool _isValidIPv6(String value) {
     return StringValidators.isIp(value, 6);
   }
-  
+
   // URI validation
   bool _isValidURI(String value) {
     return StringValidators.isUri(value);
   }
-  
+
   // URI reference validation (can be relative)
   bool _isValidURIRef(String value) {
     return StringValidators.isUriRef(value);
   }
-  
+
   // UUID validation
   bool _isValidUUID(String value) {
     return StringValidators.isUuid(value);
   }
-  
+
   // Address validation (IP or hostname)
   bool _isValidAddress(String value) {
     return StringValidators.isAddress(value);
   }
-  
+
   // IP prefix validation (any version)
   bool _isValidIPPrefix(String value) {
     return StringValidators.isIpPrefix(value);
   }
-  
+
   // IPv4 prefix validation
   bool _isValidIPv4Prefix(String value) {
     // IPv4 prefix validation should enforce that the host portion is zero (strict mode)
     return StringValidators.isIpPrefix(value, 4, true);
   }
-  
+
   // IPv6 prefix validation
   bool _isValidIPv6Prefix(String value) {
     // IPv6 prefix validation should enforce that the host portion is zero (strict mode)
     return StringValidators.isIpPrefix(value, 6, true);
   }
-  
+
   // IP with prefix length validation
   bool _isValidIPWithPrefixLen(String value) {
     return StringValidators.isIpPrefix(value);
   }
-  
+
   // IPv4 with prefix length validation
   bool _isValidIPv4WithPrefixLen(String value) {
     return StringValidators.isIpPrefix(value, 4);
   }
-  
+
   // IPv6 with prefix length validation
   bool _isValidIPv6WithPrefixLen(String value) {
     return StringValidators.isIpPrefix(value, 6);
   }
-  
+
   // TUUID validation
   bool _isValidTUUID(String value) {
     return StringValidators.isTuuid(value);
   }
-  
+
   // Host and port validation
   bool _isValidHostAndPort(String value) {
     return StringValidators.isHostAndPort(value, true);
   }
-  
+
   // HTTP header name validation
   bool _isValidHTTPHeaderName(String value) {
     // Use the strict field to determine validation mode
     // If strict is not specified, default to true (strict mode)
     return StringValidators.isHttpHeaderName(value, strict ?? true);
   }
-  
+
   // HTTP header value validation
   bool _isValidHTTPHeaderValue(String value) {
     // For header values, use the strict field if available, otherwise default to true (strict)
     return StringValidators.isHttpHeaderValue(value, strict ?? true);
   }
 
-  List<pb.FieldPathElement> _buildStringRulePath(String fieldName, int fieldNumber) {
+  List<pb.FieldPathElement> _buildStringRulePath(
+      String fieldName, int fieldNumber) {
     return [
       pb.FieldPathElement()
-        ..fieldNumber = 14  // string field number in FieldRules
+        ..fieldNumber = 14 // string field number in FieldRules
         ..fieldName = 'string'
         ..fieldType = FieldDescriptorProto_Type.TYPE_MESSAGE,
       pb.FieldPathElement()
@@ -1450,15 +1477,15 @@ class BytesEvaluator implements Evaluator {
   final List<int>? contains;
   final List<List<int>>? inValues;
   final List<List<int>>? notInValues;
-  
+
   // Special format validators
   final bool? ip;
   final bool? ipv4;
   final bool? ipv6;
-  
+
   // Cached compiled pattern for hex representation
   RegExp? _compiledPattern;
-  
+
   BytesEvaluator({
     this.constValue,
     this.len,
@@ -1483,7 +1510,7 @@ class BytesEvaluator implements Evaluator {
       }
     }
   }
-  
+
   @override
   void evaluate(dynamic value, Cursor cursor) {
     // Accept both List<int> and Uint8List
@@ -1494,9 +1521,9 @@ class BytesEvaluator implements Evaluator {
       );
       return;
     }
-    
+
     final bytesValue = value;
-    
+
     // Check const
     if (constValue != null && !_bytesEqual(bytesValue, constValue!)) {
       cursor.violate(
@@ -1505,7 +1532,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('const'),
       );
     }
-    
+
     // Check exact length
     if (len != null && bytesValue.length != len) {
       cursor.violate(
@@ -1514,7 +1541,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('len'),
       );
     }
-    
+
     // Check min length
     if (minLen != null && bytesValue.length < minLen!) {
       cursor.violate(
@@ -1523,7 +1550,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('min_len'),
       );
     }
-    
+
     // Check max length
     if (maxLen != null && bytesValue.length > maxLen!) {
       cursor.violate(
@@ -1532,7 +1559,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('max_len'),
       );
     }
-    
+
     // Check pattern (on UTF-8 string representation)
     if (pattern != null) {
       if (_compiledPattern == null) {
@@ -1546,7 +1573,7 @@ class BytesEvaluator implements Evaluator {
         if (!_isValidUtf8(bytesValue)) {
           throw RuntimeError('value must be valid UTF-8 to apply regexp');
         }
-        
+
         // Convert bytes to UTF-8 string for pattern matching
         final stringValue = String.fromCharCodes(bytesValue);
         if (!_compiledPattern!.hasMatch(stringValue)) {
@@ -1558,7 +1585,7 @@ class BytesEvaluator implements Evaluator {
         }
       }
     }
-    
+
     // Check prefix
     if (prefix != null && !_hasPrefix(bytesValue, prefix!)) {
       cursor.violate(
@@ -1567,7 +1594,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('prefix'),
       );
     }
-    
+
     // Check suffix
     if (suffix != null && !_hasSuffix(bytesValue, suffix!)) {
       cursor.violate(
@@ -1576,7 +1603,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('suffix'),
       );
     }
-    
+
     // Check contains
     if (contains != null && !_containsBytes(bytesValue, contains!)) {
       cursor.violate(
@@ -1585,7 +1612,7 @@ class BytesEvaluator implements Evaluator {
         rulePath: RulePathBuilder.bytesConstraint('contains'),
       );
     }
-    
+
     // Check in
     if (inValues != null) {
       bool found = false;
@@ -1603,7 +1630,7 @@ class BytesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // Check not_in
     if (notInValues != null) {
       for (final disallowedValue in notInValues!) {
@@ -1617,11 +1644,11 @@ class BytesEvaluator implements Evaluator {
         }
       }
     }
-    
+
     // Check IP formats
     _validateIPFormats(bytesValue, cursor);
   }
-  
+
   void _validateIPFormats(List<int> value, Cursor cursor) {
     // IP validation (v4 or v6)
     if (ip == true) {
@@ -1633,7 +1660,7 @@ class BytesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv4 validation
     if (ipv4 == true) {
       if (value.length != 4) {
@@ -1644,7 +1671,7 @@ class BytesEvaluator implements Evaluator {
         );
       }
     }
-    
+
     // IPv6 validation
     if (ipv6 == true) {
       if (value.length != 16) {
@@ -1656,7 +1683,7 @@ class BytesEvaluator implements Evaluator {
       }
     }
   }
-  
+
   bool _bytesEqual(List<int> a, List<int> b) {
     if (a.length != b.length) return false;
     for (int i = 0; i < a.length; i++) {
@@ -1664,7 +1691,7 @@ class BytesEvaluator implements Evaluator {
     }
     return true;
   }
-  
+
   bool _hasPrefix(List<int> bytes, List<int> prefix) {
     if (bytes.length < prefix.length) return false;
     for (int i = 0; i < prefix.length; i++) {
@@ -1672,7 +1699,7 @@ class BytesEvaluator implements Evaluator {
     }
     return true;
   }
-  
+
   bool _hasSuffix(List<int> bytes, List<int> suffix) {
     if (bytes.length < suffix.length) return false;
     final offset = bytes.length - suffix.length;
@@ -1681,10 +1708,10 @@ class BytesEvaluator implements Evaluator {
     }
     return true;
   }
-  
+
   bool _containsBytes(List<int> bytes, List<int> sequence) {
     if (bytes.length < sequence.length) return false;
-    
+
     for (int i = 0; i <= bytes.length - sequence.length; i++) {
       bool found = true;
       for (int j = 0; j < sequence.length; j++) {
@@ -1697,7 +1724,7 @@ class BytesEvaluator implements Evaluator {
     }
     return false;
   }
-  
+
   /// Check if bytes represent valid UTF-8
   bool _isValidUtf8(List<int> bytes) {
     try {
@@ -1709,13 +1736,13 @@ class BytesEvaluator implements Evaluator {
       return false;
     }
   }
-  
+
   String _toHexString(List<int> bytes) {
     return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
   }
-  
+
   String _bytesToHex(List<int> bytes) => _toHexString(bytes);
-  
+
   bool _isValidIPBytes(List<int> bytes) {
     return bytes.length == 4 || bytes.length == 16;
   }
@@ -1732,19 +1759,19 @@ class Fixed32Evaluator extends NumericEvaluator<int> {
     super.inValues,
     super.notInValues,
   });
-  
+
   @override
   String get typeName => 'fixed32';
-  
+
   @override
   String get constraintPrefix => 'fixed32';
-  
+
   @override
   int get ruleFieldNumber => 9;
-  
+
   @override
   bool isValidType(dynamic value) => value is int && value >= 0;
-  
+
   @override
   int toTypedValue(dynamic value) => value as int;
 }
@@ -1760,27 +1787,27 @@ class Fixed64Evaluator extends NumericEvaluator<Int64> {
     List<Int64>? inValues,
     List<Int64>? notInValues,
   }) : super(
-    constValue: constValue,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    inValues: inValues,
-    notInValues: notInValues,
-  );
-  
+          constValue: constValue,
+          lt: lt,
+          lte: lte,
+          gt: gt,
+          gte: gte,
+          inValues: inValues,
+          notInValues: notInValues,
+        );
+
   @override
   String get typeName => 'fixed64';
-  
+
   @override
   String get constraintPrefix => 'fixed64';
-  
+
   @override
   int get ruleFieldNumber => 10;
-  
+
   @override
   bool isValidType(dynamic value) => value is Int64 && !value.isNegative;
-  
+
   @override
   Int64 toTypedValue(dynamic value) => value as Int64;
 }
@@ -1796,19 +1823,19 @@ class SFixed32Evaluator extends NumericEvaluator<int> {
     super.inValues,
     super.notInValues,
   });
-  
+
   @override
   String get typeName => 'sfixed32';
-  
+
   @override
   String get constraintPrefix => 'sfixed32';
-  
+
   @override
   int get ruleFieldNumber => 11;
-  
+
   @override
   bool isValidType(dynamic value) => value is int;
-  
+
   @override
   int toTypedValue(dynamic value) => value as int;
 }
@@ -1824,27 +1851,27 @@ class SFixed64Evaluator extends NumericEvaluator<Int64> {
     List<Int64>? inValues,
     List<Int64>? notInValues,
   }) : super(
-    constValue: constValue,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    inValues: inValues,
-    notInValues: notInValues,
-  );
-  
+          constValue: constValue,
+          lt: lt,
+          lte: lte,
+          gt: gt,
+          gte: gte,
+          inValues: inValues,
+          notInValues: notInValues,
+        );
+
   @override
   String get typeName => 'sfixed64';
-  
+
   @override
   String get constraintPrefix => 'sfixed64';
-  
+
   @override
   int get ruleFieldNumber => 12;
-  
+
   @override
   bool isValidType(dynamic value) => value is Int64;
-  
+
   @override
   Int64 toTypedValue(dynamic value) => value as Int64;
 }
@@ -1860,19 +1887,19 @@ class SInt32Evaluator extends NumericEvaluator<int> {
     super.inValues,
     super.notInValues,
   });
-  
+
   @override
   String get typeName => 'sint32';
-  
+
   @override
   String get constraintPrefix => 'sint32';
-  
+
   @override
   int get ruleFieldNumber => 7;
-  
+
   @override
   bool isValidType(dynamic value) => value is int;
-  
+
   @override
   int toTypedValue(dynamic value) => value as int;
 }
@@ -1888,27 +1915,27 @@ class SInt64Evaluator extends NumericEvaluator<Int64> {
     List<Int64>? inValues,
     List<Int64>? notInValues,
   }) : super(
-    constValue: constValue,
-    lt: lt,
-    lte: lte,
-    gt: gt,
-    gte: gte,
-    inValues: inValues,
-    notInValues: notInValues,
-  );
-  
+          constValue: constValue,
+          lt: lt,
+          lte: lte,
+          gt: gt,
+          gte: gte,
+          inValues: inValues,
+          notInValues: notInValues,
+        );
+
   @override
   String get typeName => 'sint64';
-  
+
   @override
   String get constraintPrefix => 'sint64';
-  
+
   @override
   int get ruleFieldNumber => 8;
-  
+
   @override
   bool isValidType(dynamic value) => value is Int64;
-  
+
   @override
   Int64 toTypedValue(dynamic value) => value as Int64;
 }

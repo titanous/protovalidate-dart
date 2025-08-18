@@ -69,9 +69,9 @@ class Proto3ScalarOptionalIgnoreUnspecified extends $pb.GeneratedMessage {
   static Proto3ScalarOptionalIgnoreUnspecified? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get val => $_getIZ(0);
+  $core.int? get val => $_getINullable(0);
   @$pb.TagNumber(1)
-  set val($core.int value) => $_setSignedInt32(0, value);
+  set val($core.int? value) => $_setSignedInt32Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -130,9 +130,9 @@ class Proto3ScalarOptionalIgnoreEmpty extends $pb.GeneratedMessage {
   static Proto3ScalarOptionalIgnoreEmpty? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get val => $_getIZ(0);
+  $core.int? get val => $_getINullable(0);
   @$pb.TagNumber(1)
-  set val($core.int value) => $_setSignedInt32(0, value);
+  set val($core.int? value) => $_setSignedInt32Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -192,9 +192,9 @@ class Proto3ScalarOptionalIgnoreAlways extends $pb.GeneratedMessage {
   static Proto3ScalarOptionalIgnoreAlways? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get val => $_getIZ(0);
+  $core.int? get val => $_getINullable(0);
   @$pb.TagNumber(1)
-  set val($core.int value) => $_setSignedInt32(0, value);
+  set val($core.int? value) => $_setSignedInt32Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -428,9 +428,9 @@ class Proto3MessageOptionalIgnoreUnspecified_Msg extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreUnspecified_Msg? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -492,16 +492,16 @@ class Proto3MessageOptionalIgnoreUnspecified extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreUnspecified? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreUnspecified_Msg get val => $_getN(0);
+  Proto3MessageOptionalIgnoreUnspecified_Msg? get val => $_getNullable(0);
   @$pb.TagNumber(1)
-  set val(Proto3MessageOptionalIgnoreUnspecified_Msg value) =>
-      $_setField(1, value);
+  set val(Proto3MessageOptionalIgnoreUnspecified_Msg? value) =>
+      $_setFieldNullable(1, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreUnspecified_Msg ensureVal() => $_ensure(0);
+  Proto3MessageOptionalIgnoreUnspecified_Msg? ensureVal() => $_ensure(0);
 }
 
 class Proto3MessageOptionalIgnoreEmpty_Msg extends $pb.GeneratedMessage {
@@ -557,9 +557,9 @@ class Proto3MessageOptionalIgnoreEmpty_Msg extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreEmpty_Msg? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -620,15 +620,16 @@ class Proto3MessageOptionalIgnoreEmpty extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreEmpty? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreEmpty_Msg get val => $_getN(0);
+  Proto3MessageOptionalIgnoreEmpty_Msg? get val => $_getNullable(0);
   @$pb.TagNumber(1)
-  set val(Proto3MessageOptionalIgnoreEmpty_Msg value) => $_setField(1, value);
+  set val(Proto3MessageOptionalIgnoreEmpty_Msg? value) =>
+      $_setFieldNullable(1, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreEmpty_Msg ensureVal() => $_ensure(0);
+  Proto3MessageOptionalIgnoreEmpty_Msg? ensureVal() => $_ensure(0);
 }
 
 class Proto3MessageOptionalIgnoreAlways_Msg extends $pb.GeneratedMessage {
@@ -684,9 +685,9 @@ class Proto3MessageOptionalIgnoreAlways_Msg extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreAlways_Msg? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -748,15 +749,16 @@ class Proto3MessageOptionalIgnoreAlways extends $pb.GeneratedMessage {
   static Proto3MessageOptionalIgnoreAlways? _defaultInstance;
 
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreAlways_Msg get val => $_getN(0);
+  Proto3MessageOptionalIgnoreAlways_Msg? get val => $_getNullable(0);
   @$pb.TagNumber(1)
-  set val(Proto3MessageOptionalIgnoreAlways_Msg value) => $_setField(1, value);
+  set val(Proto3MessageOptionalIgnoreAlways_Msg? value) =>
+      $_setFieldNullable(1, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
   @$pb.TagNumber(1)
-  Proto3MessageOptionalIgnoreAlways_Msg ensureVal() => $_ensure(0);
+  Proto3MessageOptionalIgnoreAlways_Msg? ensureVal() => $_ensure(0);
 }
 
 class Proto3MessageIgnoreUnspecified_Msg extends $pb.GeneratedMessage {
@@ -812,9 +814,9 @@ class Proto3MessageIgnoreUnspecified_Msg extends $pb.GeneratedMessage {
   static Proto3MessageIgnoreUnspecified_Msg? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
@@ -935,9 +937,9 @@ class Proto3MessageIgnoreEmpty_Msg extends $pb.GeneratedMessage {
   static Proto3MessageIgnoreEmpty_Msg? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get val => $_getSZ(0);
+  $core.String? get val => $_getSNullable(0);
   @$pb.TagNumber(1)
-  set val($core.String value) => $_setString(0, value);
+  set val($core.String? value) => $_setStringNullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)

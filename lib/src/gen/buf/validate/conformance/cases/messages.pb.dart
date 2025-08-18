@@ -471,15 +471,15 @@ class MessageRequiredButOptional extends $pb.GeneratedMessage {
   static MessageRequiredButOptional? _defaultInstance;
 
   @$pb.TagNumber(1)
-  TestMsg get val => $_getN(0);
+  TestMsg? get val => $_getNullable(0);
   @$pb.TagNumber(1)
-  set val(TestMsg value) => $_setField(1, value);
+  set val(TestMsg? value) => $_setFieldNullable(1, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)
   void clearVal() => $_clearField(1);
   @$pb.TagNumber(1)
-  TestMsg ensureVal() => $_ensure(0);
+  TestMsg? ensureVal() => $_ensure(0);
 }
 
 enum MessageRequiredOneof_One { val, notSet }

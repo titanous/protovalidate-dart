@@ -194,18 +194,18 @@ class IsIpPrefix extends $pb.GeneratedMessage {
   void clearVal() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get version => $_getIZ(1);
+  $core.int? get version => $_getINullable(1);
   @$pb.TagNumber(2)
-  set version($core.int value) => $_setSignedInt32(1, value);
+  set version($core.int? value) => $_setSignedInt32Nullable(1, value);
   @$pb.TagNumber(2)
   $core.bool hasVersion() => $_has(1);
   @$pb.TagNumber(2)
   void clearVersion() => $_clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get strict => $_getBF(2);
+  $core.bool? get strict => $_getBNullable(2);
   @$pb.TagNumber(3)
-  set strict($core.bool value) => $_setBool(2, value);
+  set strict($core.bool? value) => $_setBoolNullable(2, value);
   @$pb.TagNumber(3)
   $core.bool hasStrict() => $_has(2);
   @$pb.TagNumber(3)
@@ -268,9 +268,9 @@ class IsIp extends $pb.GeneratedMessage {
   void clearVal() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get version => $_getIZ(1);
+  $core.int? get version => $_getINullable(1);
   @$pb.TagNumber(2)
-  set version($core.int value) => $_setSignedInt32(1, value);
+  set version($core.int? value) => $_setSignedInt32Nullable(1, value);
   @$pb.TagNumber(2)
   $core.bool hasVersion() => $_has(1);
   @$pb.TagNumber(2)

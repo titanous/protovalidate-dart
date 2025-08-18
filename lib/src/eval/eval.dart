@@ -5,7 +5,7 @@ import '../cursor.dart';
 abstract class Eval<V> {
   /// Evaluates the rules for the given value.
   void eval(V val, Cursor cursor);
-  
+
   /// Remove any dead code paths.
   /// Return true if this is now a no-op.
   bool prune();
@@ -14,16 +14,16 @@ abstract class Eval<V> {
 /// The no-op evaluator.
 class EvalNoop<T> implements Eval<T> {
   static final _instance = EvalNoop._();
-  
+
   EvalNoop._();
-  
+
   static EvalNoop<T> get<T>() => _instance as EvalNoop<T>;
-  
+
   @override
   void eval(T val, Cursor cursor) {
     // No-op
   }
-  
+
   @override
   bool prune() => true;
 }
@@ -31,13 +31,13 @@ class EvalNoop<T> implements Eval<T> {
 /// Evaluate many rules.
 class EvalMany<T> implements Eval<T> {
   List<Eval<T>> _many;
-  
+
   EvalMany(List<Eval<T>> evals) : _many = List.from(evals);
-  
+
   void add(List<Eval<T>> evals) {
     _many.addAll(evals);
   }
-  
+
   @override
   void eval(T val, Cursor cursor) {
     for (final e in _many) {
@@ -47,7 +47,7 @@ class EvalMany<T> implements Eval<T> {
       }
     }
   }
-  
+
   @override
   bool prune() {
     _many = _many.where((e) => !e.prune()).toList();
@@ -59,12 +59,12 @@ class EvalMany<T> implements Eval<T> {
 class EvalListItems<T> implements Eval<List<T>> {
   final Condition<T> condition;
   final Eval<T> pass;
-  
+
   EvalListItems({
     required this.condition,
     required this.pass,
   });
-  
+
   @override
   void eval(List<T> val, Cursor cursor) {
     for (int i = 0; i < val.length; i++) {
@@ -77,7 +77,7 @@ class EvalListItems<T> implements Eval<List<T>> {
       }
     }
   }
-  
+
   @override
   bool prune() {
     return pass.prune() || condition.never;
@@ -90,20 +90,20 @@ class EvalMapEntries<K, V> implements Eval<Map<K, V>> {
   final Eval<K> keyEval;
   final Condition<V> valueCondition;
   final Eval<V> valueEval;
-  
+
   EvalMapEntries({
     required this.keyCondition,
     required this.keyEval,
     required this.valueCondition,
     required this.valueEval,
   });
-  
+
   @override
   void eval(Map<K, V> val, Cursor cursor) {
     if (keyCondition.never && valueCondition.never) {
       return;
     }
-    
+
     for (final entry in val.entries) {
       final c = cursor.mapKey(entry.key);
       if (keyCondition.check(entry.key)) {
@@ -120,7 +120,7 @@ class EvalMapEntries<K, V> implements Eval<Map<K, V>> {
       }
     }
   }
-  
+
   @override
   bool prune() {
     final key = keyEval.prune() || keyCondition.never;
@@ -133,7 +133,7 @@ class EvalMapEntries<K, V> implements Eval<Map<K, V>> {
 abstract class Condition<T> {
   /// Check if the condition passes for the given value.
   bool check(T value);
-  
+
   /// True if this condition will never pass.
   bool get never;
 }
@@ -142,7 +142,7 @@ abstract class Condition<T> {
 class AlwaysCondition<T> implements Condition<T> {
   @override
   bool check(T value) => true;
-  
+
   @override
   bool get never => false;
 }
@@ -151,7 +151,7 @@ class AlwaysCondition<T> implements Condition<T> {
 class NeverCondition<T> implements Condition<T> {
   @override
   bool check(T value) => false;
-  
+
   @override
   bool get never => true;
 }
@@ -166,7 +166,7 @@ class NotEmptyCondition<T> implements Condition<T> {
     if (value is Map) return value.isNotEmpty;
     return true;
   }
-  
+
   @override
   bool get never => false;
 }
@@ -175,22 +175,22 @@ class NotEmptyCondition<T> implements Condition<T> {
 class EvalFunc<T> implements Eval<T> {
   final void Function(T value, Cursor cursor) func;
   bool _pruned = false;
-  
+
   EvalFunc(this.func);
-  
+
   @override
   void eval(T val, Cursor cursor) {
     if (!_pruned) {
       func(val, cursor);
     }
   }
-  
+
   @override
   bool prune() {
     // Simple functions are never pruned unless explicitly marked
     return _pruned;
   }
-  
+
   void markPruned() {
     _pruned = true;
   }

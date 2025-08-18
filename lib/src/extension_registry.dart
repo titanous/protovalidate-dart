@@ -1,14 +1,15 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart';
-import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto2.pb.dart';
-import 'package:protovalidate/src/gen/buf/validate/conformance/cases/predefined_rules_proto_editions.pb.dart';
 
 /// Registry for validation rule extensions.
+///
+/// This class provides a central registry for buf.validate extensions.
+/// User-defined predefined rule extensions should be registered here.
 class ValidationExtensionRegistry {
   static final ExtensionRegistry _registry = ExtensionRegistry();
-  
+
   static bool _initialized = false;
-  
+
   /// Gets the extension registry with validation extensions registered.
   static ExtensionRegistry get registry {
     if (!_initialized) {
@@ -16,31 +17,23 @@ class ValidationExtensionRegistry {
     }
     return _registry;
   }
-  
+
   static void _initialize() {
-    // Register field validation extension
+    // Register core buf.validate extensions
     _registry.add(Validate.field_1159);
-    
-    // Register message validation extension  
     _registry.add(Validate.message);
-    
-    // Register oneof validation extension
     _registry.add(Validate.oneof);
-    
-    // Register predefined validation extension
     _registry.add(Validate.predefined);
-    
-    // Register predefined rule extensions from proto2
-    Predefined_rules_proto2.registerAllExtensions(_registry);
-    
-    // Proto3 messages use proto2 extensions, no separate proto3 extensions to register
-    
-    // Register predefined rule extensions from editions
-    Predefined_rules_proto_editions.registerAllExtensions(_registry);
-    
+
     _initialized = true;
   }
-  
+
+  /// Register user-defined extensions with predefined rules.
+  /// Call this before validating messages that use custom predefined rules.
+  static void registerExtensions(void Function(ExtensionRegistry) registrar) {
+    registrar(_registry);
+  }
+
   /// Gets field rules from a field descriptor if present.
   static FieldRules? getFieldRules(FieldInfo field) {
     // For now, we'll need to implement this differently since Dart's protobuf
@@ -48,7 +41,7 @@ class ValidationExtensionRegistry {
     // This will be revisited when we integrate with the actual validation flow.
     return null;
   }
-  
+
   /// Gets message rules from a message descriptor if present.
   static MessageRules? getMessageRules(GeneratedMessage message) {
     // Similar to getFieldRules, this needs integration with descriptor access

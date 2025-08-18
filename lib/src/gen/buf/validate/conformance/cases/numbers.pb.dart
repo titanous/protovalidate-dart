@@ -10425,9 +10425,9 @@ class Int64LTEOptional extends $pb.GeneratedMessage {
   static Int64LTEOptional? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $fixnum.Int64 get val => $_getI64(0);
+  $fixnum.Int64? get val => $_getI64Nullable(0);
   @$pb.TagNumber(1)
-  set val($fixnum.Int64 value) => $_setInt64(0, value);
+  set val($fixnum.Int64? value) => $_setInt64Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)

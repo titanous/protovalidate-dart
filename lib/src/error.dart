@@ -3,9 +3,9 @@ import 'package:protovalidate/src/gen/buf/validate/validate.pb.dart' as pb;
 /// Base class for all protovalidate errors.
 abstract class ProtovalidateError implements Exception {
   final String message;
-  
+
   const ProtovalidateError(this.message);
-  
+
   @override
   String toString() => message;
 }
@@ -13,7 +13,7 @@ abstract class ProtovalidateError implements Exception {
 /// An error that occurs during compilation of validation rules.
 class CompilationError extends ProtovalidateError {
   const CompilationError(super.message);
-  
+
   @override
   String toString() => 'CompilationError: $message';
 }
@@ -21,7 +21,7 @@ class CompilationError extends ProtovalidateError {
 /// An error that occurs during runtime evaluation of validation rules.
 class RuntimeError extends ProtovalidateError {
   const RuntimeError(super.message);
-  
+
   @override
   String toString() => 'RuntimeError: $message';
 }
@@ -30,25 +30,25 @@ class RuntimeError extends ProtovalidateError {
 class Violation {
   /// The path to the field that caused the violation.
   final String fieldPath;
-  
+
   /// The field path elements for the protobuf representation.
   final List<pb.FieldPathElement>? fieldPathElements;
-  
+
   /// The constraint ID that was violated.
   final String constraintId;
-  
+
   /// A human-readable message describing the violation.
   final String message;
-  
+
   /// Optional rule path for debugging.
   final String? rulePath;
-  
+
   /// The rule path elements for the protobuf representation.
   final List<pb.FieldPathElement>? rulePathElements;
-  
+
   /// Whether this violation is for a map key.
   final bool forKey;
-  
+
   const Violation({
     required this.fieldPath,
     this.fieldPathElements,
@@ -58,17 +58,16 @@ class Violation {
     this.rulePathElements,
     this.forKey = false,
   });
-  
+
   /// Converts this violation to a protobuf Violation.
   pb.Violation toProto() {
-    final violation = pb.Violation()
-      ..ruleId = constraintId;
-    
+    final violation = pb.Violation()..ruleId = constraintId;
+
     // Only set message if it's not empty
     if (message.isNotEmpty) {
       violation.message = message;
     }
-    
+
     // Use provided field path elements if available
     if (fieldPathElements != null && fieldPathElements!.isNotEmpty) {
       violation.field_5 = pb.FieldPath()..elements.addAll(fieldPathElements!);
@@ -76,10 +75,10 @@ class Violation {
       // Fallback to parsing field path string
       final pathElements = <pb.FieldPathElement>[];
       final parts = fieldPath.split(RegExp(r'[.\[\]]'));
-      
+
       for (final part in parts) {
         if (part.isEmpty) continue;
-        
+
         // Check if it's an index
         final index = int.tryParse(part);
         if (index != null) {
@@ -88,10 +87,10 @@ class Violation {
           pathElements.add(pb.FieldPathElement()..fieldName = part);
         }
       }
-      
+
       violation.field_5 = pb.FieldPath()..elements.addAll(pathElements);
     }
-    
+
     // Add rule path if provided and not empty
     if (rulePathElements != null && rulePathElements!.isNotEmpty) {
       violation.rule = pb.FieldPath()..elements.addAll(rulePathElements!);
@@ -100,11 +99,11 @@ class Violation {
       violation.rule = pb.FieldPath()
         ..elements.add(pb.FieldPathElement()..fieldName = rulePath!);
     }
-    
+
     if (forKey) {
       violation.forKey = true;
     }
-    
+
     return violation;
   }
 }
@@ -112,10 +111,9 @@ class Violation {
 /// An error that occurs during validation.
 class ValidationError extends ProtovalidateError {
   final List<Violation> violations;
-  
-  ValidationError(this.violations) 
-      : super('Validation failed');
-  
+
+  ValidationError(this.violations) : super('Validation failed');
+
   /// Converts violations to protobuf format.
   pb.Violations toProto() {
     final result = pb.Violations();
@@ -124,7 +122,7 @@ class ValidationError extends ProtovalidateError {
     }
     return result;
   }
-  
+
   @override
   String toString() {
     final buffer = StringBuffer('ValidationError: ');

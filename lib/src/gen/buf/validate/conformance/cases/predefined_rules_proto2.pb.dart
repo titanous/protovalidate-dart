@@ -2466,6 +2466,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'floatAbsRangeProto2',
       1161,
       $pb.PbFieldType.OF,
+      typeName: 'buf.validate.conformance.cases.floatAbsRangeProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2562,6 +2563,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'doubleAbsRangeProto2',
       1161,
       $pb.PbFieldType.OD,
+      typeName: 'buf.validate.conformance.cases.doubleAbsRangeProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2661,6 +2663,7 @@ class Predefined_rules_proto2 {
       1161,
       $pb.PbFieldType.P3,
       check: $pb.getCheckFunction($pb.PbFieldType.P3),
+      typeName: 'buf.validate.conformance.cases.int32AbsInProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2778,6 +2781,7 @@ class Predefined_rules_proto2 {
       $pb.PbFieldType.PM,
       check: $pb.getCheckFunction($pb.PbFieldType.PM),
       subBuilder: $2.Int64Value.create,
+      typeName: 'buf.validate.conformance.cases.int64AbsInProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2893,6 +2897,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'uint32EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.uint32EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -2968,6 +2973,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'uint64EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.uint64EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3043,6 +3049,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'sint32EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.sint32EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3116,6 +3123,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'sint64EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.sint64EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3189,6 +3197,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'fixed32EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.fixed32EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3266,6 +3275,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'fixed64EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.fixed64EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3343,6 +3353,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'sfixed32EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.sfixed32EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3420,6 +3431,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'sfixed64EvenProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.sfixed64EvenProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3497,6 +3509,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'boolFalseProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.boolFalseProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3568,6 +3581,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'stringValidPathProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.stringValidPathProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3743,6 +3757,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'bytesValidPathProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.bytesValidPathProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -3925,6 +3940,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'enumNonZeroProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.enumNonZeroProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4003,6 +4019,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'repeatedAtLeastFiveProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.repeatedAtLeastFiveProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4118,6 +4135,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'durationTooLongProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.durationTooLongProto2',
       optionsBytes: <$core.int>[
         194,
         72,
@@ -4223,6 +4241,7 @@ class Predefined_rules_proto2 {
       _omitFieldNames ? '' : 'timestampInRangeProto2',
       1161,
       $pb.PbFieldType.OB,
+      typeName: 'buf.validate.conformance.cases.timestampInRangeProto2',
       optionsBytes: <$core.int>[
         194,
         72,

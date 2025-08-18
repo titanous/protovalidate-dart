@@ -12,15 +12,15 @@ class ValidatorOptions {
   /// To validate messages with user-defined predefined rules, pass the extensions
   /// to the validator via the registry.
   final ExtensionRegistry? extensionRegistry;
-  
+
   /// With this option enabled, validation fails on the first rule violation
   /// encountered. By default, all violations are accumulated.
   final bool failFast;
-  
+
   /// With this option enabled, proto2 fields with the `required` label are
   /// validated to be set.
   final bool legacyRequired;
-  
+
   const ValidatorOptions({
     this.extensionRegistry,
     this.failFast = false,
@@ -35,40 +35,44 @@ class Validator {
   final DescriptorRules? _descriptorRules;
   final EvaluatorBuilder _builder;
   final Map<String, Evaluator> _evaluatorCache = {};
-  
+
   Validator({
     ValidatorOptions? options,
     FileDescriptorSet? fileDescriptorSet,
-  }) : _options = options ?? const ValidatorOptions(),
-       _fileDescriptorSet = fileDescriptorSet,
-       _descriptorRules = fileDescriptorSet != null 
-         ? DescriptorRules(fileDescriptorSet, extensionRegistry: options?.extensionRegistry)
-         : null,
-       _builder = EvaluatorBuilder(
-         descriptorRules: fileDescriptorSet != null 
-           ? DescriptorRules(fileDescriptorSet, extensionRegistry: options?.extensionRegistry)
-           : null,
-       );
-  
+  })  : _options = options ?? const ValidatorOptions(),
+        _fileDescriptorSet = fileDescriptorSet,
+        _descriptorRules = fileDescriptorSet != null
+            ? DescriptorRules(fileDescriptorSet,
+                extensionRegistry: options?.extensionRegistry)
+            : null,
+        _builder = EvaluatorBuilder(
+          descriptorRules: fileDescriptorSet != null
+              ? DescriptorRules(fileDescriptorSet,
+                  extensionRegistry: options?.extensionRegistry)
+              : null,
+          extensionRegistry: options?.extensionRegistry,
+        );
+
   /// Validate the given message and return the result.
   ValidationResult validate(GeneratedMessage message) {
     try {
       // Create a cursor for tracking violations
       final cursor = Cursor.create(failFast: _options.failFast);
-      
+
       // Build evaluator for this message type (with caching)
       final messageType = message.info_.qualifiedMessageName;
-      final evaluator = _evaluatorCache[messageType] ??= _builder.buildForMessage(message);
-      
+      final evaluator =
+          _evaluatorCache[messageType] ??= _builder.buildForMessage(message);
+
       // Run validation
       evaluator.evaluate(message, cursor);
-      
+
       // Check for violations
       if (cursor.violated) {
         final validationError = ValidationError(cursor.violations);
         return ValidationResult.invalid(validationError.toProto());
       }
-      
+
       return ValidationResult.valid();
     } catch (e) {
       if (e is CompilationError) {
@@ -95,7 +99,7 @@ class ValidationResult {
   final bool isRuntimeError;
   final pb.Violations? violations;
   final ProtovalidateError? error;
-  
+
   const ValidationResult._({
     required this.isValid,
     required this.isInvalid,
@@ -104,7 +108,7 @@ class ValidationResult {
     this.violations,
     this.error,
   });
-  
+
   /// Creates a valid result.
   factory ValidationResult.valid() {
     return const ValidationResult._(
@@ -114,7 +118,7 @@ class ValidationResult {
       isRuntimeError: false,
     );
   }
-  
+
   /// Creates an invalid result with violations.
   factory ValidationResult.invalid(pb.Violations violations) {
     return ValidationResult._(
@@ -125,7 +129,7 @@ class ValidationResult {
       violations: violations,
     );
   }
-  
+
   /// Creates a compilation error result.
   factory ValidationResult.compilationError(CompilationError error) {
     return ValidationResult._(
@@ -136,7 +140,7 @@ class ValidationResult {
       error: error,
     );
   }
-  
+
   /// Creates a runtime error result.
   factory ValidationResult.runtimeError(RuntimeError error) {
     return ValidationResult._(

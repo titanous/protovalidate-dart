@@ -3,39 +3,8 @@ clean: true
 inputs:
   - module: buf.build/bufbuild/protovalidate:v0.14.0
   - module: buf.build/bufbuild/protovalidate-testing:v0.14.0
-    paths:
-      - buf/validate/conformance/harness
-      - buf/validate/conformance/cases/bool.proto
-      - buf/validate/conformance/cases/bytes.proto
-      - buf/validate/conformance/cases/custom_rules
-      - buf/validate/conformance/cases/enums.proto
-      - buf/validate/conformance/cases/filename-with-dash.proto
-      - buf/validate/conformance/cases/ignore_empty_proto2.proto
-      - buf/validate/conformance/cases/ignore_empty_proto3.proto
-      - buf/validate/conformance/cases/ignore_proto2.proto
-      - buf/validate/conformance/cases/ignore_proto3.proto
-      - buf/validate/conformance/cases/kitchen_sink.proto
-      - buf/validate/conformance/cases/library.proto
-      - buf/validate/conformance/cases/maps.proto
-      - buf/validate/conformance/cases/messages.proto
-      - buf/validate/conformance/cases/numbers.proto
-      - buf/validate/conformance/cases/oneofs.proto
-      - buf/validate/conformance/cases/other_package
-      - buf/validate/conformance/cases/predefined_rules_proto2.proto
-      - buf/validate/conformance/cases/predefined_rules_proto3.proto
-      - buf/validate/conformance/cases/repeated.proto
-      - buf/validate/conformance/cases/required_field_proto2.proto
-      - buf/validate/conformance/cases/required_field_proto3.proto
-      - buf/validate/conformance/cases/strings.proto
-      - buf/validate/conformance/cases/subdirectory
-      - buf/validate/conformance/cases/wkt_any.proto
-      - buf/validate/conformance/cases/wkt_duration.proto
-      - buf/validate/conformance/cases/wkt_nested.proto
-      - buf/validate/conformance/cases/wkt_timestamp.proto
-      - buf/validate/conformance/cases/wkt_wrappers.proto
-      - buf/validate/conformance/cases/yet_another_package
 plugins:
-  - local: ["dart", "run", "protoc_plugin"]
+  - local: ["/Users/titanous/Developer/protovalidate-dart/protobuf.dart/protoc_plugin/bin/protoc_plugin"]
     opt: default_api_level=API_LEVEL_HYBRID
     out: lib/src/gen
     include_imports: true

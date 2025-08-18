@@ -6,7 +6,8 @@ class Ipv6Parser {
   int i = 0;
   final int l;
   final List<int> pieces = []; // 16-bit pieces found
-  int doubleColonAt = -1; // number of 16-bit pieces found when double colon was found
+  int doubleColonAt =
+      -1; // number of 16-bit pieces found when double colon was found
   bool doubleColonSeen = false;
   String dottedRaw = ''; // dotted notation for right-most 32 bits
   Ipv4Parser? dottedAddr; // dotted notation successfully parsed as IPv4
@@ -74,10 +75,10 @@ class Ipv6Parser {
   /// Parse IPv6 Address Prefix following RFC 4291. Zone id is not permitted.
   bool addressPrefix() {
     return addressPart() &&
-           !zoneIdFound &&
-           take('/') &&
-           prefixLength() &&
-           i == l;
+        !zoneIdFound &&
+        take('/') &&
+        prefixLength() &&
+        i == l;
   }
 
   /// Stores value in `prefixLen`

@@ -3,7 +3,6 @@ import '../rule_paths.dart';
 /// Utility class for mapping constraint names to their corresponding numbers and types.
 /// Replaces large switch statements with efficient lookup tables.
 class ConstraintMappings {
-  
   /// Lookup table for string constraint name to number mapping
   static const Map<String, int> _stringConstraintNumbers = {
     'const': ConstraintNumbers.const_,
@@ -41,7 +40,7 @@ class ConstraintMappings {
     'tuuid': ConstraintNumbers.tuuid,
   };
 
-  /// Lookup table for numeric constraint name to number mapping  
+  /// Lookup table for numeric constraint name to number mapping
   static const Map<String, int> _numericConstraintNumbers = {
     'const': ConstraintNumbers.const_,
     'lt': ConstraintNumbers.lt,

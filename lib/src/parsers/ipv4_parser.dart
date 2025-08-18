@@ -26,9 +26,8 @@ class Ipv4Parser {
   /// returned false.
   bool isPrefixOnly() {
     final bits = getBits();
-    final mask = prefixLen == 32
-        ? 0xFFFFFFFF
-        : ~(0xFFFFFFFF >> prefixLen) & 0xFFFFFFFF;
+    final mask =
+        prefixLen == 32 ? 0xFFFFFFFF : ~(0xFFFFFFFF >> prefixLen) & 0xFFFFFFFF;
     final masked = bits & mask;
     return bits == masked;
   }
@@ -40,10 +39,7 @@ class Ipv4Parser {
 
   /// Parse IPv4 Address prefix.
   bool addressPrefix() {
-    return addressPart() && 
-           take('/') && 
-           prefixLength() && 
-           i == l;
+    return addressPart() && take('/') && prefixLength() && i == l;
   }
 
   /// Stores value in `prefixLen`

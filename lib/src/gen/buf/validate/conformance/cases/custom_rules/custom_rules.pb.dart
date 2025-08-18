@@ -735,9 +735,9 @@ class FieldExpressionOptionalScalar extends $pb.GeneratedMessage {
   static FieldExpressionOptionalScalar? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get val => $_getIZ(0);
+  $core.int? get val => $_getINullable(0);
   @$pb.TagNumber(1)
-  set val($core.int value) => $_setSignedInt32(0, value);
+  set val($core.int? value) => $_setSignedInt32Nullable(0, value);
   @$pb.TagNumber(1)
   $core.bool hasVal() => $_has(0);
   @$pb.TagNumber(1)

@@ -2425,15 +2425,16 @@ class PredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {
   void clearA() => $_clearField(1);
 
   @$pb.TagNumber(2)
-  PredefinedAndCustomRuleProto3_Nested get b => $_getN(1);
+  PredefinedAndCustomRuleProto3_Nested? get b => $_getNullable(1);
   @$pb.TagNumber(2)
-  set b(PredefinedAndCustomRuleProto3_Nested value) => $_setField(2, value);
+  set b(PredefinedAndCustomRuleProto3_Nested? value) =>
+      $_setFieldNullable(2, value);
   @$pb.TagNumber(2)
   $core.bool hasB() => $_has(1);
   @$pb.TagNumber(2)
   void clearB() => $_clearField(2);
   @$pb.TagNumber(2)
-  PredefinedAndCustomRuleProto3_Nested ensureB() => $_ensure(1);
+  PredefinedAndCustomRuleProto3_Nested? ensureB() => $_ensure(1);
 }
 
 class StandardPredefinedAndCustomRuleProto3 extends $pb.GeneratedMessage {

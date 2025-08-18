@@ -5,18 +5,17 @@ import '../parsers/uri_parser.dart';
 /// Refactored string validation functions using parser classes
 /// Following the pattern from protovalidate-es for cleaner, more maintainable code
 class StringValidators {
-  
   /// Returns true if the value is infinite, optionally limit to positive or
   /// negative infinity.
   static bool isInf(double val, [int? sign]) {
     sign ??= 0;
     return (sign >= 0 && val == double.infinity) ||
-           (sign <= 0 && val == double.negativeInfinity);
+        (sign <= 0 && val == double.negativeInfinity);
   }
 
   /// Returns true if the string is an IPv4 or IPv6 address, optionally limited to
   /// a specific version.
-  /// 
+  ///
   /// Version 0 means either 4 or 6. Passing a version other than 0, 4, or 6 always
   /// returns false.
   static bool isIp(String str, [int? version]) {
@@ -76,7 +75,8 @@ class StringValidators {
             ch != '-') {
           return false;
         }
-        allDigits = allDigits && ch.compareTo('0') >= 0 && ch.compareTo('9') <= 0;
+        allDigits =
+            allDigits && ch.compareTo('0') >= 0 && ch.compareTo('9') <= 0;
       }
     }
     // the last part cannot be all numbers
@@ -100,7 +100,8 @@ class StringValidators {
             return !portRequired && isIp(str.substring(1, end), 6);
           } else if (end + 1 == splitIdx) {
             // port
-            return isIp(str.substring(1, end), 6) && isPort(str.substring(splitIdx + 1));
+            return isIp(str.substring(1, end), 6) &&
+                isPort(str.substring(splitIdx + 1));
           } else {
             // malformed
             return false;
@@ -137,8 +138,8 @@ class StringValidators {
   static bool isEmail(String str) {
     // See https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
     return RegExp(
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-    ).hasMatch(str);
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+        .hasMatch(str);
   }
 
   /// Returns true if the string is a URI
@@ -239,9 +240,8 @@ class StringValidators {
   /// UUID validation
   static bool isUuid(String value) {
     final uuidRegex = RegExp(
-      r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
-      caseSensitive: false
-    );
+        r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+        caseSensitive: false);
     return uuidRegex.hasMatch(value);
   }
 
@@ -261,12 +261,12 @@ class StringValidators {
     if (value.isEmpty) {
       return false;
     }
-    
+
     if (strict) {
       // RFC 7230 compliant: field-name = token
       // Token chars are: !#$%&'*+-.0-9A-Z^_`a-z|~
       // Special case for pseudo-headers: allow ':' only at the beginning followed by token chars
-      
+
       if (value.startsWith(':')) {
         // Pseudo-header: must start with ':' and have at least one character after
         if (value.length == 1) {
@@ -276,23 +276,24 @@ class StringValidators {
         for (int i = 1; i < value.length; i++) {
           final char = value.codeUnitAt(i);
           if (!((char >= 0x30 && char <= 0x39) || // 0-9
-                (char >= 0x41 && char <= 0x5A) || // A-Z
-                (char >= 0x61 && char <= 0x7A) || // a-z
-                char == 0x21 || // !
-                char == 0x23 || // #
-                char == 0x24 || // $
-                char == 0x25 || // %
-                char == 0x26 || // &
-                char == 0x27 || // '
-                char == 0x2A || // *
-                char == 0x2B || // +
-                char == 0x2D || // -
-                char == 0x2E || // .
-                char == 0x5E || // ^
-                char == 0x5F || // _
-                char == 0x60 || // `
-                char == 0x7C || // |
-                char == 0x7E)) { // ~
+              (char >= 0x41 && char <= 0x5A) || // A-Z
+              (char >= 0x61 && char <= 0x7A) || // a-z
+              char == 0x21 || // !
+              char == 0x23 || // #
+              char == 0x24 || // $
+              char == 0x25 || // %
+              char == 0x26 || // &
+              char == 0x27 || // '
+              char == 0x2A || // *
+              char == 0x2B || // +
+              char == 0x2D || // -
+              char == 0x2E || // .
+              char == 0x5E || // ^
+              char == 0x5F || // _
+              char == 0x60 || // `
+              char == 0x7C || // |
+              char == 0x7E)) {
+            // ~
             return false;
           }
         }
@@ -302,23 +303,24 @@ class StringValidators {
         for (int i = 0; i < value.length; i++) {
           final char = value.codeUnitAt(i);
           if (!((char >= 0x30 && char <= 0x39) || // 0-9
-                (char >= 0x41 && char <= 0x5A) || // A-Z
-                (char >= 0x61 && char <= 0x7A) || // a-z
-                char == 0x21 || // !
-                char == 0x23 || // #
-                char == 0x24 || // $
-                char == 0x25 || // %
-                char == 0x26 || // &
-                char == 0x27 || // '
-                char == 0x2A || // *
-                char == 0x2B || // +
-                char == 0x2D || // -
-                char == 0x2E || // .
-                char == 0x5E || // ^
-                char == 0x5F || // _
-                char == 0x60 || // `
-                char == 0x7C || // |
-                char == 0x7E)) { // ~
+              (char >= 0x41 && char <= 0x5A) || // A-Z
+              (char >= 0x61 && char <= 0x7A) || // a-z
+              char == 0x21 || // !
+              char == 0x23 || // #
+              char == 0x24 || // $
+              char == 0x25 || // %
+              char == 0x26 || // &
+              char == 0x27 || // '
+              char == 0x2A || // *
+              char == 0x2B || // +
+              char == 0x2D || // -
+              char == 0x2E || // .
+              char == 0x5E || // ^
+              char == 0x5F || // _
+              char == 0x60 || // `
+              char == 0x7C || // |
+              char == 0x7E)) {
+            // ~
             return false;
           }
         }
@@ -327,9 +329,9 @@ class StringValidators {
     } else {
       // Loose validation: allow DEL (\x07) and other control characters
       // Just disallow \r\n\0
-      return !value.contains('\r') && 
-             !value.contains('\n') && 
-             !value.contains('\x00');
+      return !value.contains('\r') &&
+          !value.contains('\n') &&
+          !value.contains('\x00');
     }
   }
 
@@ -340,19 +342,18 @@ class StringValidators {
       for (int i = 0; i < value.length; i++) {
         final char = value.codeUnitAt(i);
         // Allow VCHAR (0x21-0x7E), SP (0x20), HTAB (0x09), and obs-text (0x80-0xFF)
-        if (!((char >= 0x20 && char <= 0x7E) || 
-              char == 0x09 || 
-              (char >= 0x80 && char <= 0xFF))) {
+        if (!((char >= 0x20 && char <= 0x7E) ||
+            char == 0x09 ||
+            (char >= 0x80 && char <= 0xFF))) {
           return false;
         }
       }
       return true;
     } else {
       // Loose validation: just disallow \r\n\0
-      return !value.contains('\r') && 
-             !value.contains('\n') && 
-             !value.contains('\x00');
+      return !value.contains('\r') &&
+          !value.contains('\n') &&
+          !value.contains('\x00');
     }
   }
-
 }
