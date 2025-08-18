@@ -1320,7 +1320,14 @@ class EvaluatorBuilder {
     // Find incompatible rule types
     for (final ruleType in presentRuleTypes) {
       if (ruleType != expectedRuleType) {
-        // If we don't recognize the expected rule type, skip validation
+        // For message fields that aren't recognized WKTs, but have scalar-type rules applied,
+        // this is a type mismatch that should cause a compilation error
+        if (expectedRuleType == null && (field.type == PbFieldType.OM || field.type == PbFieldType.PM)) {
+          // This is a message field with scalar rules - compilation error
+          throw CompilationError('mismatched rule type and field type');
+        }
+        
+        // If we don't recognize the expected rule type for non-message fields, skip validation
         // This happens with field types we haven't mapped yet
         if (expectedRuleType == null) {
           return; // Skip validation for unrecognized field types
