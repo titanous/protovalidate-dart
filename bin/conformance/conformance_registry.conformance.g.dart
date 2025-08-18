@@ -7,6 +7,9 @@
 
 import 'package:protobuf/protobuf.dart';
 import 'package:protovalidate/src/gen/google/protobuf/any.pb.dart';
+import 'package:protovalidate/src/gen/google/protobuf/timestamp.pb.dart';
+import 'package:protovalidate/src/gen/google/protobuf/duration.pb.dart';
+import 'package:protovalidate/src/gen/google/protobuf/wrappers.pb.dart';
 
 // Conformance test message imports
 import 'package:protovalidate/src/gen/buf/validate/conformance/cases/bool.pb.dart';
@@ -894,16 +897,55 @@ GeneratedMessage? unpackAnyWithRegistry(Any any, TypeRegistry registry) {
   if (typeUrl.isEmpty) return null;
 
   final typeName = typeUrl.split('/').last;
+
+  // First try to lookup in the provided registry
   final builderInfo = registry.lookup(typeName);
+  GeneratedMessage? message;
 
-  if (builderInfo == null) return null;
-  if (builderInfo.createEmptyInstance == null) return null;
+  if (builderInfo != null && builderInfo.createEmptyInstance != null) {
+    message = builderInfo.createEmptyInstance!();
+  } else {
+    // Fallback: handle well-known types that might not be in the registry
+    message = _createWellKnownType(typeName);
+  }
 
-  final message = builderInfo.createEmptyInstance!();
+  if (message == null) return null;
 
   // Check if the type matches
   if (!any.canUnpackInto(message)) return null;
 
   // Unpack the message
   return any.unpackInto(message);
+}
+
+/// Create instances of well-known types
+GeneratedMessage? _createWellKnownType(String typeName) {
+  switch (typeName) {
+    case 'google.protobuf.Any':
+      return Any();
+    case 'google.protobuf.Timestamp':
+      return Timestamp();
+    case 'google.protobuf.Duration':
+      return Duration();
+    case 'google.protobuf.BoolValue':
+      return BoolValue();
+    case 'google.protobuf.StringValue':
+      return StringValue();
+    case 'google.protobuf.Int32Value':
+      return Int32Value();
+    case 'google.protobuf.Int64Value':
+      return Int64Value();
+    case 'google.protobuf.UInt32Value':
+      return UInt32Value();
+    case 'google.protobuf.UInt64Value':
+      return UInt64Value();
+    case 'google.protobuf.FloatValue':
+      return FloatValue();
+    case 'google.protobuf.DoubleValue':
+      return DoubleValue();
+    case 'google.protobuf.BytesValue':
+      return BytesValue();
+    default:
+      return null;
+  }
 }

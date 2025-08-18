@@ -164,38 +164,68 @@ class TimestampEvaluator implements Evaluator {
       }
     }
 
-    // Handle lt/lte/gt/gte rules with combined rule IDs
-    // Check for combined constraints first
-    final hasGteCond =
-        rules.hasGte() && timestampNanos < _timestampToNanos(rules.gte);
-    final hasLteCond =
-        rules.hasLte() && timestampNanos > _timestampToNanos(rules.lte);
-    final hasGtCond =
-        rules.hasGt() && timestampNanos <= _timestampToNanos(rules.gt);
-    final hasLtCond =
-        rules.hasLt() && timestampNanos >= _timestampToNanos(rules.lt);
-
-    // Handle combined constraint rule IDs
-    if (hasGteCond && rules.hasLte()) {
-      cursor.violate(
-        message: '',
-        constraintId: 'timestamp.gte_lte',
-        rulePath: RulePathBuilder.timestampConstraint('gte'),
-      );
-      return; // Don't check individual constraints
+    // Handle combined gte/lte constraints first
+    if (rules.hasGte() && rules.hasLte()) {
+      final gteNanos = _timestampToNanos(rules.gte);
+      final lteNanos = _timestampToNanos(rules.lte);
+      
+      if (lteNanos < gteNanos) {
+        // Exclusive range: lte < gte, value must be outside [lte, gte]
+        // Invalid if: lte < value < gte
+        if (lteNanos < timestampNanos && timestampNanos < gteNanos) {
+          cursor.violate(
+            message: '',
+            constraintId: 'timestamp.gte_lte_exclusive',
+            rulePath: RulePathBuilder.timestampConstraint('gte'),
+          );
+          return;
+        }
+      } else {
+        // Normal range: lte >= gte, check individual violations
+        // Invalid if: value < gte OR value > lte
+        if (timestampNanos < gteNanos || timestampNanos > lteNanos) {
+          cursor.violate(
+            message: '',
+            constraintId: 'timestamp.gte_lte',
+            rulePath: RulePathBuilder.timestampConstraint('gte'),
+          );
+          return;
+        }
+      }
     }
 
-    if (hasGtCond && rules.hasLt()) {
-      cursor.violate(
-        message: '',
-        constraintId: 'timestamp.gt_lt',
-        rulePath: RulePathBuilder.timestampConstraint('gt'),
-      );
-      return; // Don't check individual constraints
+    // Handle combined gt/lt constraints
+    if (rules.hasGt() && rules.hasLt()) {
+      final gtNanos = _timestampToNanos(rules.gt);
+      final ltNanos = _timestampToNanos(rules.lt);
+      
+      if (ltNanos < gtNanos) {
+        // Exclusive range: lt < gt, value must be outside [lt, gt]
+        // Invalid if: lt <= value <= gt
+        if (ltNanos <= timestampNanos && timestampNanos <= gtNanos) {
+          cursor.violate(
+            message: '',
+            constraintId: 'timestamp.gt_lt_exclusive',
+            rulePath: RulePathBuilder.timestampConstraint('gt'),
+          );
+          return;
+        }
+      } else {
+        // Normal range: lt >= gt, check individual violations  
+        // Invalid if: value <= gt OR value >= lt
+        if (timestampNanos <= gtNanos || timestampNanos >= ltNanos) {
+          cursor.violate(
+            message: '',
+            constraintId: 'timestamp.gt_lt',
+            rulePath: RulePathBuilder.timestampConstraint('gt'),
+          );
+          return;
+        }
+      }
     }
 
-    // Handle individual constraints
-    if (hasLtCond) {
+    // Handle individual constraints (only if not part of combined constraints)
+    if (rules.hasLt() && !rules.hasGt() && timestampNanos >= _timestampToNanos(rules.lt)) {
       cursor.violate(
         message: '',
         constraintId: 'timestamp.lt',
@@ -203,7 +233,7 @@ class TimestampEvaluator implements Evaluator {
       );
     }
 
-    if (hasLteCond) {
+    if (rules.hasLte() && !rules.hasGte() && timestampNanos > _timestampToNanos(rules.lte)) {
       cursor.violate(
         message: '',
         constraintId: 'timestamp.lte',
@@ -211,7 +241,7 @@ class TimestampEvaluator implements Evaluator {
       );
     }
 
-    if (hasGtCond) {
+    if (rules.hasGt() && !rules.hasLt() && timestampNanos <= _timestampToNanos(rules.gt)) {
       cursor.violate(
         message: '',
         constraintId: 'timestamp.gt',
@@ -219,7 +249,7 @@ class TimestampEvaluator implements Evaluator {
       );
     }
 
-    if (hasGteCond) {
+    if (rules.hasGte() && !rules.hasLte() && timestampNanos < _timestampToNanos(rules.gte)) {
       cursor.violate(
         message: '',
         constraintId: 'timestamp.gte',
