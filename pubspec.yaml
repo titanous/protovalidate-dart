@@ -13,7 +13,7 @@ dependencies:
   cel:
     git:
       url: https://github.com/titanous/cel-dart
-      ref: fbcc62d6fc0fafd42317a5289e5ebe857c57f812
+      ref: acfc4c11c316d85776e06868ffb444d69877f2cc
 
 dev_dependencies:
   lints: ^6.0.0
@@ -29,11 +29,12 @@ dev_dependencies:
 
 dependency_overrides:
   protobuf:
-    path: ../protobuf.dart/protobuf
-  cel:
-    path: ../cel-dart
+    git:
+      url: https://github.com/titanous/protobuf.dart
+      ref: db641f76cc3d698341dd99cfc329fedc66226237
+      path: protobuf
   protoc_plugin:
     git:
       url: https://github.com/titanous/protobuf.dart
-      ref: efb8b3d70edf6619a4873fd9785e724c91720f09
+      ref: db641f76cc3d698341dd99cfc329fedc66226237
       path: protoc_plugin

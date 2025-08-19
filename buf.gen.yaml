@@ -4,7 +4,7 @@ inputs:
   - module: buf.build/bufbuild/protovalidate:v0.14.0
   - module: buf.build/bufbuild/protovalidate-testing:v0.14.0
 plugins:
-  - local: ["/Users/titanous/Developer/protovalidate-dart/protobuf.dart/protoc_plugin/bin/protoc_plugin"]
+  - local: ["dart", "run", "protoc_plugin"]
     opt: default_api_level=API_LEVEL_HYBRID
     out: lib/src/gen
     include_imports: true
